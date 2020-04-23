@@ -1,6 +1,5 @@
 <template>
     <div id="container">
-        <div class="width">{{ windowWidth }}</div>
         <!-- header -->
         <div class="header">
             <hr>
@@ -13,20 +12,16 @@
         <!-- form -->
         <div class="form">
           <!-- input email -->
-          <div>
-            <div class="input-container">
-              <font-awesome-icon icon="envelope" class="icon-form" />
-              <input type="text" id="email" placeholder="example@gmail.com" autocomplete="off">
-            </div>
+          <div class="input-container">
+            <font-awesome-icon icon="envelope" class="icon-form" />
+            <input type="text" id="email" placeholder="example@gmail.com" autocomplete="off">
           </div>
           <!-- input email -->
 
           <!-- input password -->
-          <div>
-            <div class="input-container">
-              <font-awesome-icon icon="lock" class="icon-form" />
-              <input type="password" id="password" placeholder="********" autocomplete="off">
-            </div>
+          <div class="input-container">
+            <font-awesome-icon icon="lock" class="icon-form" />
+            <input type="password" id="password" placeholder="********" autocomplete="off">
           </div>
           <!-- input password -->
 
@@ -53,15 +48,7 @@
     min-height: 100vh;
     background-image: url('../assets/bg-linear-md.svg');
     background-repeat: repeat-x;
-    background-attachment: fixed;
-    padding: 2rem 1.125rem;
-
-    .width {
-      display: block;
-      text-align: center;
-      color: #FFF;
-      padding-top: 1rem;
-    }
+    padding: 4rem 1.75rem;
 
     .header {
       text-align: center;
@@ -84,52 +71,50 @@
       .slogan {
         padding: 0;
         font-weight: 500;
-        font-size: 1.125em;
+        font-size: 1.0625rem;
         margin: 0.5rem 0 0;
       }
     }
 
     .form {
-      overflow: hidden;
       margin-top: 1.5rem;
 
       .input-container {
-        display: inline-block;
         position: relative;
-        width: 100%;
         margin-bottom: 1.25rem;
-      }
 
-      .icon-form {
-        position: absolute;
-        color: #FFF;
-        left: 0;
-        top: 30%;
-        font-size: 1.0625em;
-      }
-
-      input {
-        background-color: transparent;
-        color: #FFF;
-        font-weight: 600;
-        outline: none;
-        border: 0;
-        width: 100%;
-        transition: .2s linear;
-        border-bottom: 0.1875rem solid rgba(255, 255, 255, 0.5);
-        padding: 0.875rem 0.875rem 0.875rem 2rem;
-        font-size: 0.875em;
-
-        &::placeholder {
-          color: rgba(255, 255, 255, 0.4);
+        .icon-form {
+          position: absolute;
+          color: #FFF;
+          left: 0;
+          top: 30%;
+          font-size: 1.0625em;
         }
 
-        &:focus {
-          border-bottom: 0.1875rem solid rgba(255, 255, 255, 1);
-        }
+        input {
+          background-color: transparent;
+          color: #FFF;
+          font-weight: 600;
+          outline: none;
+          box-sizing: border-box;
+          border: 0;
+          width: 100%;
+          transition: .2s linear;
+          border-bottom: 0.1875rem solid rgba(255, 255, 255, 0.5);
+          padding: 0.875rem 0.875rem 0.875rem 2rem;
+          font-size: 0.875em;
 
-        &:focus::placeholder {
-          color: rgba(255, 255, 255, 0.8);
+          &::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+          }
+
+          &:focus {
+            border-bottom: 0.1875rem solid rgba(255, 255, 255, 1);
+          }
+
+          &:focus::placeholder {
+            color: rgba(255, 255, 255, 0.8);
+          }
         }
       }
 
@@ -176,7 +161,7 @@
   // width 320px - 480px (Mobile)
   @media (min-width: 320px) and (max-width: 480px) {
     #container {
-      padding: 2.5rem 1.5rem;
+      padding: 3.5rem 3rem;
 
       .header {
           padding: 1.5rem 0;
@@ -190,7 +175,7 @@
         }
 
         .slogan {
-          font-size: 1.375em;
+          font-size: 1.1875em;
           margin: 0.5rem 0 0;
         }
       }
@@ -200,16 +185,16 @@
 
         .input-container {
           margin-bottom: 1.5rem;
-        }
 
-        .icon-form {
-          top: 27%;
-          font-size: 1.25em;
-        }
+          .icon-form {
+            top: 27%;
+            font-size: 1.25em;
+          }
 
-        input {
-          padding: 1rem 1rem 1rem 2.5rem;
-          font-size: 1em;
+          input {
+            padding: 1rem 1rem 1rem 2.5rem;
+            font-size: 1em;
+          }
         }
 
         .btn-login {
@@ -230,7 +215,7 @@
   // width 481px - 767px (Big Mobile / Tablet)
   @media (min-width: 481px) and (max-width: 767px) {
     #container {
-      padding: 3rem;
+      padding: 3rem 4rem;
 
       .header {
           padding: 2rem 0;
@@ -254,16 +239,16 @@
 
         .input-container {
           margin-bottom: 1rem;
-        }
 
-        .icon-form {
-          top: 27%;
-          font-size: 1.25em;
-        }
+          .icon-form {
+            top: 27%;
+            font-size: 1.25em;
+          }
 
-        input {
-          padding: 1rem 1rem 1rem 2.5rem;
-          font-size: 1em;
+          input {
+            padding: 1rem 1rem 1rem 2.5rem;
+            font-size: 1em;
+          }
         }
 
         .btn-login {
@@ -280,6 +265,114 @@
     }
   }
   // width 481px - 767px (Most Mobile / Tablet)
+
+  // width 768px - 1024px (Mini desktop / Tablet landscape)
+  @media (min-width: 768px) and (max-width: 1024px) {
+    #container {
+      padding: 2rem 10rem;
+
+      .header {
+        padding: 2.5rem 0;
+
+        hr {
+          display: none;
+        }
+
+        .brand {
+          font-size: 4em;
+        }
+
+        .slogan {
+          font-size: 2em;
+          margin: 0.75rem 0 0;
+        }
+      }
+
+      .form {
+        margin-top: 3rem;
+
+        .input-container {
+          margin-bottom: 1.5rem;
+
+          .icon-form {
+            top: 27%;
+            font-size: 1.5em;
+          }
+
+          input {
+            padding: 1rem 1rem 1rem 3.25rem;
+            font-size: 1.25em;
+          }
+        }
+
+        .btn-login {
+          margin-top: 0.625rem;
+          padding: 1.125rem;
+          font-size: 1.125em;
+        }
+      }
+
+      .register-link {
+        margin-top: 1rem;
+        font-size: 1.125em;
+      }
+    }
+  }
+  // width 768px - 1024px (Mini desktop / Tablet landscape)
+
+  // width 1025px (Desktop)
+  @media (min-width: 1025px) {
+    #container {
+      padding: 2rem 20.75rem;
+
+      .header {
+        padding: 2.5rem 0;
+
+        hr {
+          display: none;
+        }
+
+        .brand {
+          font-size: 4em;
+        }
+
+        .slogan {
+          font-size: 2em;
+          margin: 0.75rem 0 0;
+        }
+      }
+
+      .form {
+        margin-top: 3.25rem;
+
+        .input-container {
+          margin-bottom: 1.75rem;
+
+          .icon-form {
+            top: 27%;
+            font-size: 1.5em;
+          }
+
+          input {
+            padding: 1rem 1rem 1rem 3.75rem;
+            font-size: 1.25em;
+          }
+        }
+
+        .btn-login {
+          margin-top: 0.625rem;
+          padding: 1.125rem;
+          font-size: 1.125em;
+        }
+      }
+
+      .register-link {
+        margin-top: 1rem;
+        font-size: 1.125em;
+      }
+    }
+  }
+  // width 1025px (Desktop)
 
 </style>
 
