@@ -46,7 +46,7 @@
     font-family: 'Roboto';
     max-width: 100%;
     min-height: 100vh;
-    background-image: url('../assets/bg-linear-md.svg');
+    background-image: url('../assets/background/bg-linear-lg.svg');
     background-repeat: repeat-x;
     padding: 4rem 1.75rem;
 
