@@ -127,6 +127,10 @@
       <!-- list training -->
     </div>
     <!-- end content -->
+
+    <!-- menu bar -->
+    <MenuBar></MenuBar>
+    <!-- end menu bar -->
   </div>
 </template>
 
@@ -141,14 +145,20 @@
       background-color: #F2F2F2;
 
       .width {
+        display: none;
         text-align: center;
         padding: 1rem;
+        margin-top: 3rem;
       }
 
       .head {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
         max-width: 100%;
         color: #FFF;
         background-color: #0ABDE3;
@@ -178,12 +188,16 @@
       }
 
       .content {
-        margin-top: 0.5rem;
+        margin-top: 4.4375rem;
 
         .training {
           display: flex;
           max-width: 100%;
           margin-bottom: 0.5rem;
+
+          &:last-child {
+            margin-bottom: 3.875rem;
+          }
 
           .left {
             display: flex;
@@ -250,7 +264,13 @@
 </style>
 
 <script>
+import MenuBar from '../components/MenuBar.vue';
+
 export default {
+
+  components: {
+    MenuBar,
+  },
 
   data() {
     return {
