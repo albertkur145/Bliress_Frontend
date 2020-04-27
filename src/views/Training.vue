@@ -136,33 +136,199 @@
 
 <style lang="scss" scoped>
 
+  // global css
+  #container {
+    font-family: 'Roboto';
+    max-width: 100%;
+    min-height: 100vh;
+    background-color: #F2F2F2;
+
+    .width {
+      display: none;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+    }
+
+    .head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      max-width: 100%;
+      color: #FFF;
+      background-color: #0ABDE3;
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+
+      .text {
+        font-size: 1.125em;
+      }
+
+      .add {
+        font-weight: 600;
+        background-color: #36B5DD;
+        cursor: pointer;
+        transition: background-color .2s ease-out,
+                    border .1s linear;
+        border: 0.125rem solid #00A2D4;
+        border-radius: 5rem;
+        padding: 0rem 0.3125rem;
+        font-size: 1.125em;
+
+        &:hover {
+          background-color: #22AAD6;
+          border: 0.125rem solid #0293C0;
+        }
+      }
+    }
+
+    .content {
+      margin-top: 3.375rem;
+
+      .training {
+        display: flex;
+        max-width: 100%;
+        margin-bottom: 0.25rem;
+
+        &:last-child {
+          margin-bottom: 2.9375rem;
+        }
+
+        .left {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          box-sizing: border-box;
+          background-image: url('../assets/background/bg-linear-xs.svg');
+          background-size: cover;
+          background-repeat: no-repeat;
+          padding: 0;
+          min-width: 50%;
+          max-width: 50%;
+
+          span {
+            font-weight: 900;
+            font-style: italic;
+            color: #FFF;
+            font-size: 1.5em;
+          }
+        }
+
+        .right {
+          background-color: #FFF;
+          box-sizing: border-box;
+          border-left: 0.1875rem dashed #35AEE2;
+          padding: 1.75rem 0.25rem 1rem;
+          min-width: 50%;
+          max-width: 50%;
+
+          .txt {
+            text-align: center;
+            color: #444;
+            font-weight: 400;
+            font-size: 1em;
+          }
+
+          .date {
+            text-align: center;
+            font-weight: 500;
+            color: #333;
+            font-weight: 500;
+            font-size: 1.0625em;
+            margin-top: 0.875rem;
+          }
+
+          .icon-see {
+            text-align: right;
+            color: #0085FF;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 1.25rem;
+            font-size: 0.8125em;
+
+            p {
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+  // global css
+
+  // width 320px - 480px (Mobile)
+  @media (min-width: 320px) and (max-width: 480px) {
+    #container {
+
+      .head {
+        padding: 0.875rem 1.25rem;
+
+        .text {
+          font-size: 1.1875em;
+        }
+
+        .add {
+          padding: 0 0.375rem;
+          font-size: 1.1875em;
+        }
+      }
+
+      .content {
+        margin-top: 3.8125rem;
+
+        .training {
+          margin-bottom: 0.375rem;
+
+          &:last-child {
+            margin-bottom: 3.0625rem;
+          }
+
+          .left {
+            min-width: 50%;
+            max-width: 50%;
+            padding: 1rem 1.5rem;
+
+            span {
+              font-size: 1.4375em;
+            }
+          }
+
+          .right {
+            border-left: 0.1875rem dashed #35AEE2;
+            padding: 2rem 0.5rem 1.25rem;
+            min-width: 50%;
+            max-width: 50%;
+
+            .txt {
+              font-size: 1em;
+            }
+
+            .date {
+              font-size: 1.0625em;
+              margin-top: 0.875rem;
+            }
+
+            .icon-see {
+              margin-top: 1.5rem;
+              margin-right: 0.25rem;
+              font-size: 0.875em;
+            }
+          }
+        }
+      }
+    }
+  }
+  // width 320px - 480px (Mobile)
+
   // width 481px - 767px (Big Mobile / Tablet)
   @media (min-width: 481px) and (max-width: 767px) {
     #container {
-      font-family: 'Roboto';
-      max-width: 100%;
-      min-height: 100vh;
-      background-color: #F2F2F2;
-
-      .width {
-        display: none;
-        text-align: center;
-        padding: 1rem;
-        margin-top: 3rem;
-      }
 
       .head {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        max-width: 100%;
-        color: #FFF;
-        background-color: #0ABDE3;
-        font-weight: 600;
         padding: 1rem 1.5rem;
 
         .text {
@@ -170,20 +336,8 @@
         }
 
         .add {
-          font-weight: 600;
-          background-color: #36B5DD;
-          cursor: pointer;
-          transition: background-color .2s ease-out,
-                      border .1s linear;
-          border: 0.125rem solid #00A2D4;
-          border-radius: 1rem;
           padding: 0.0625rem 0.5rem;
           font-size: 1.375em;
-
-          &:hover {
-            background-color: #22AAD6;
-            border: 0.125rem solid #0293C0;
-          }
         }
       }
 
@@ -191,69 +345,41 @@
         margin-top: 4.4375rem;
 
         .training {
-          display: flex;
-          max-width: 100%;
           margin-bottom: 0.5rem;
 
           &:last-child {
-            margin-bottom: 3.875rem;
+            margin-bottom: 3.6875rem;
           }
 
           .left {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding: 1rem 1.5rem;
             min-width: 50%;
             max-width: 50%;
-            box-sizing: border-box;
-            background-image: url('../assets/background/bg-linear-xs.svg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            padding: 1rem 1.5rem;
 
             span {
-              font-weight: 900;
-              font-style: italic;
-              color: #FFF;
-              font-size: 2.5em;
+              font-size: 2em;
             }
           }
 
           .right {
-            min-width: 50%;
-            max-width: 50%;
-            background-color: #FFF;
-            box-sizing: border-box;
             border-left: 0.1875rem dashed #35AEE2;
             padding: 2.75rem 0.75rem 1.5rem;
+            min-width: 50%;
+            max-width: 50%;
 
             .txt {
-              text-align: center;
-              color: #444;
-              font-weight: 400;
-              font-size: 1.25em;
+              font-size: 1.1875em;
             }
 
             .date {
-              text-align: center;
-              font-weight: 500;
-              color: #333;
-              font-weight: 500;
-              font-size: 1.4375em;
+              font-size: 1.25em;
               margin-top: 0.75rem;
             }
 
             .icon-see {
-              text-align: right;
-              color: #0085FF;
-              font-weight: 500;
-              cursor: pointer;
               margin-top: 2rem;
+              margin-right: 0.4375rem;
               font-size: 1.125em;
-
-              p {
-                margin: 0;
-              }
             }
           }
         }
@@ -261,6 +387,145 @@
     }
   }
   // width 481px - 767px (Big Mobile / Tablet)
+
+  // width 768px - 1024px (Mini desktop / Tablet landscape)
+  @media (min-width: 768px) and (max-width: 1024px) {
+    #container {
+
+      .head {
+        padding: 1rem 1.5rem;
+
+        .text {
+          font-size: 1.5em;
+        }
+
+        .add {
+          padding: 0.125rem 0.5875rem;
+          font-size: 1.5em;
+        }
+      }
+
+      .content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        margin-top: 4.625rem;
+
+        .training {
+          margin-bottom: 0.3125rem;
+          width: 50%;
+          max-width: 50%;
+
+          &:last-child {
+            margin-bottom: 0.325rem;
+          }
+
+          .left {
+            padding: 1rem 1.5rem;
+            min-width: 50%;
+            max-width: 50%;
+
+            span {
+              font-size: 1.8125em;
+            }
+          }
+
+          .right {
+            border-left: 0.1875rem dashed #35AEE2;
+            padding: 3rem 0.75rem 1.5rem;
+            min-width: 50%;
+            max-width: 50%;
+
+            .txt {
+              font-size: 1em;
+            }
+
+            .date {
+              font-size: 1.0625em;
+              margin-top: 0.8125rem;
+            }
+
+            .icon-see {
+              margin-top: 2rem;
+              margin-right: 0.4375rem;
+              font-size: 0.875em;
+            }
+          }
+        }
+      }
+    }
+  }
+  // width 768px - 1024px (Mini desktop / Tablet landscape)
+
+  // width 1025px (Desktop)
+  @media (min-width: 1025px) {
+    #container {
+
+      .head {
+        padding: 1.25rem 1.75rem;
+
+        .text {
+          font-size: 1.75em;
+        }
+
+        .add {
+          padding: 0.25rem 0.75rem;
+          font-size: 1.75em;
+        }
+      }
+
+      .content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        margin-top: 5.6875rem;
+        margin-bottom: 4.125rem;
+
+        .training {
+          margin-bottom: 0.3125rem;
+          width: 50%;
+          max-width: 50%;
+
+          &:last-child {
+            margin-bottom: 0.325rem;
+          }
+
+          .left {
+            padding: 1rem 1.5rem;
+            min-width: 50%;
+            max-width: 50%;
+
+            span {
+              font-size: 2.25em;
+            }
+          }
+
+          .right {
+            border-left: 0.1875rem dashed #35AEE2;
+            padding: 3rem 0.75rem 1.75rem;
+            min-width: 50%;
+            max-width: 50%;
+
+            .txt {
+              font-size: 1.25em;
+            }
+
+            .date {
+              font-size: 1.4375em;
+              margin-top: 1rem;
+            }
+
+            .icon-see {
+              margin-top: 2.25rem;
+              margin-right: 0.75rem;
+              font-size: 1em;
+            }
+          }
+        }
+      }
+    }
+  }
+  // width 1025px (Desktop)
 </style>
 
 <script>
