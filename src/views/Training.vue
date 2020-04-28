@@ -1,6 +1,5 @@
 <template>
   <div id="container">
-    <div class="width">{{ windowWidth }}</div>
     <!-- head -->
     <div class="head">
       <div class="text">Training</div>
@@ -22,10 +21,10 @@
         <div class="right">
           <div class="txt">Diadakan pada : </div>
           <div class="date">15 September 2020</div>
-          <div class="icon-see">
+          <router-link to="/training/detail" class="icon-see">
             <font-awesome-icon icon="arrow-right"></font-awesome-icon>
             <p class="see">Lihat</p>
-          </div>
+          </router-link>
         </div>
         <!-- right -->
       </div>
@@ -41,10 +40,10 @@
         <div class="right">
           <div class="txt">Diadakan pada : </div>
           <div class="date">27 September 2020</div>
-          <div class="icon-see">
+          <router-link to="/training/detail" class="icon-see">
             <font-awesome-icon icon="arrow-right"></font-awesome-icon>
             <p class="see">Lihat</p>
-          </div>
+          </router-link>
         </div>
         <!-- right -->
       </div>
@@ -60,10 +59,10 @@
         <div class="right">
           <div class="txt">Diadakan pada : </div>
           <div class="date">09 Oktober 2020</div>
-          <div class="icon-see">
+          <router-link to="/training/detail" class="icon-see">
             <font-awesome-icon icon="arrow-right"></font-awesome-icon>
             <p class="see">Lihat</p>
-          </div>
+          </router-link>
         </div>
         <!-- right -->
       </div>
@@ -79,10 +78,10 @@
         <div class="right">
           <div class="txt">Diadakan pada : </div>
           <div class="date">18 Oktober 2020</div>
-          <div class="icon-see">
+          <router-link to="/training/detail" class="icon-see">
             <font-awesome-icon icon="arrow-right"></font-awesome-icon>
             <p class="see">Lihat</p>
-          </div>
+          </router-link>
         </div>
         <!-- right -->
       </div>
@@ -98,10 +97,10 @@
         <div class="right">
           <div class="txt">Diadakan pada : </div>
           <div class="date">30 Oktober 2020</div>
-          <div class="icon-see">
+          <router-link to="/training/detail" class="icon-see">
             <font-awesome-icon icon="arrow-right"></font-awesome-icon>
             <p class="see">Lihat</p>
-          </div>
+          </router-link>
         </div>
         <!-- right -->
       </div>
@@ -117,10 +116,10 @@
         <div class="right">
           <div class="txt">Diadakan pada : </div>
           <div class="date">10 November 2020</div>
-          <div class="icon-see">
+          <router-link to="/training/detail" class="icon-see">
             <font-awesome-icon icon="arrow-right"></font-awesome-icon>
             <p class="see">Lihat</p>
-          </div>
+          </router-link>
         </div>
         <!-- right -->
       </div>
@@ -142,13 +141,6 @@
     max-width: 100%;
     min-height: 100vh;
     background-color: #F2F2F2;
-
-    .width {
-      display: none;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 3rem;
-    }
 
     .head {
       display: flex;
@@ -243,12 +235,13 @@
           }
 
           .icon-see {
+            display: block;
             text-align: right;
             color: #0085FF;
             font-weight: 500;
-            cursor: pointer;
             margin-top: 1.25rem;
             font-size: 0.8125em;
+            text-decoration: none;
 
             p {
               margin: 0;

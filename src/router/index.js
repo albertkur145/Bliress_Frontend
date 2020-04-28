@@ -14,6 +14,11 @@ const routes = [
     name: 'Training',
     component: () => import('../views/Training.vue'),
   },
+  {
+    path: '/training/detail',
+    name: 'DetailTraining',
+    component: () => import('../views/DetailTraining.vue'),
+  },
 ];
 
 const router = new VueRouter({

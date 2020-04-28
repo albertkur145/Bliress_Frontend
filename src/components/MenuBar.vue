@@ -47,13 +47,12 @@
     .bar {
       width: 25%;
       text-align: center;
-      color: #666;
 
       .txt-bar {
         display: block;
         text-decoration: none;
-        color: #666;
         font-size: 0.6875em;
+        color: #777;
 
         .menu-icon {
           font-size: 0.875em;

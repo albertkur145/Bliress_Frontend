@@ -9,5 +9,6 @@
   body {
     margin: 0;
     padding: 0;
+    background-color: #F2F2F2;
   }
 </style>
