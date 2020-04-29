@@ -26,7 +26,7 @@
           <!-- input password -->
 
           <!-- btn login -->
-          <button class="btn-login">Masuk</button>
+          <button class="btn-login" @click="login">Masuk</button>
           <!-- btn login -->
         </div>
         <!-- end form -->
@@ -388,6 +388,9 @@ export default {
   methods: {
     getWindowWidth() {
       this.windowWidth = window.innerWidth;
+    },
+    login() {
+      this.$router.push({ name: 'Training' });
     },
   },
 

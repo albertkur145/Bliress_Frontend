@@ -131,7 +131,7 @@
       display: none;
       text-align: center;
       padding: 1rem;
-      margin-top: 3rem;
+      margin-top: 8rem;
     }
 
     .head {
@@ -333,6 +333,261 @@
     }
   }
   // width 320px - 480px (Mobile)
+
+  // width 481px - 767px (Big Mobile / Tablet)
+  @media (min-width: 481px) and (max-width: 767px) {
+    #container {
+
+      .head {
+        padding: 1.25rem 1.5rem;
+
+        .back {
+          top: 31%;
+          left: 3.5%;
+          font-size: 1.25em;
+        }
+
+        .text {
+          font-size: 1.375em;
+        }
+      }
+
+      .content {
+        max-width: 100%;
+
+        p {
+          margin: 0;
+        }
+
+        .rincian {
+          padding: 2.25rem 1.25rem;
+          margin-top: 4.25rem;
+
+          .txt {
+            font-size: 1.3125em;
+          }
+
+          .detail {
+            margin-top: 1.625rem;
+            font-size: 1.0625em;
+
+            .location {
+              margin-top: 0.5rem;
+            }
+
+            .start {
+              margin-top: 0.5rem;
+            }
+          }
+
+          .trainer {
+            font-size: 1.125em;
+            margin-top: 1.75rem;
+          }
+        }
+
+        .participants {
+          padding: 1.4375rem 1.375rem 2.5rem;
+          margin-top: 0.5rem;
+
+          .top {
+
+            .title {
+              font-size: 1.3125em;
+            }
+
+            .count {
+              font-size: 1.0625em;
+            }
+          }
+
+          .data {
+            margin-top: 1.75rem;
+
+            table {
+              width: 100%;
+
+              th, td {
+                padding: 1rem 1.25rem;
+                font-size: 1em;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  // width 481px - 767px (Big Mobile / Tablet)
+
+  // width 768px - 1024px (Mini desktop / Tablet landscape)
+  @media (min-width: 768px) and (max-width: 1024px) {
+    #container {
+
+      .head {
+        padding: 1.375rem 1.5rem;
+
+        .back {
+          top: 31%;
+          left: 3%;
+          font-size: 1.375em;
+        }
+
+        .text {
+          font-size: 1.4375em;
+        }
+      }
+
+      .content {
+        max-width: 100%;
+
+        p {
+          margin: 0;
+        }
+
+        .rincian {
+          padding: 2.375rem 1.375rem;
+          margin-top: 4.5rem;
+
+          .txt {
+            font-size: 1.4375em;
+          }
+
+          .detail {
+            margin-top: 1.6875rem;
+            font-size: 1.125em;
+
+            .location {
+              margin-top: 0.625rem;
+            }
+
+            .start {
+              margin-top: 0.625rem;
+            }
+          }
+
+          .trainer {
+            font-size: 1.1875em;
+            margin-top: 1.875rem;
+          }
+        }
+
+        .participants {
+          padding: 1.75rem 1.75rem 3rem;
+          margin-top: 0.5rem;
+
+          .top {
+
+            .title {
+              font-size: 1.375em;
+            }
+
+            .count {
+              font-size: 1.125em;
+            }
+          }
+
+          .data {
+            margin-top: 2rem;
+
+            table {
+              width: 100%;
+
+              th, td {
+                padding: 1.125rem 1.375rem;
+                font-size: 1.0625em;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  // width 768px - 1024px (Mini desktop / Tablet landscape)
+
+  // width 1025px (Desktop)
+  @media (min-width: 1025px) {
+    #container {
+
+      .head {
+        padding: 1.5rem;
+
+        .back {
+          top: 31%;
+          left: 2.5%;
+          font-size: 1.5em;
+        }
+
+        .text {
+          font-size: 1.625em;
+        }
+      }
+
+      .content {
+        max-width: 100%;
+
+        p {
+          margin: 0;
+        }
+
+        .rincian {
+          padding: 2.5rem 1.5rem;
+          margin-top: 5rem;
+
+          .txt {
+            font-size: 1.5em;
+          }
+
+          .detail {
+            margin-top: 1.75rem;
+            font-size: 1.1875em;
+
+            .location {
+              margin-top: 0.75rem;
+            }
+
+            .start {
+              margin-top: 0.75rem;
+            }
+          }
+
+          .trainer {
+            font-size: 1.25em;
+            margin-top: 2rem;
+          }
+        }
+
+        .participants {
+          padding: 2rem 2rem 4rem;
+          margin-top: 0.5rem;
+
+          .top {
+
+            .title {
+              font-size: 1.4375em;
+            }
+
+            .count {
+              font-size: 1.1875em;
+            }
+          }
+
+          .data {
+            margin-top: 2.25rem;
+
+            table {
+              width: 100%;
+
+              th, td {
+                padding: 1.25rem 1.4375rem;
+                font-size: 1.125em;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  // width 1025px (Desktop)
 
 </style>
 
