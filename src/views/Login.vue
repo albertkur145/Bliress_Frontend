@@ -1,42 +1,42 @@
 <template>
-    <div id="container">
-        <!-- header -->
-        <div class="header">
-            <hr>
-            <p class="brand">BLIRESS</p>
-            <p class="slogan">Blibli Employee Progress</p>
-            <hr>
-        </div>
-        <!-- end header -->
-
-        <!-- form -->
-        <div class="form">
-          <!-- input email -->
-          <div class="input-container">
-            <font-awesome-icon icon="envelope" class="icon-form" />
-            <input type="text" id="email" placeholder="example@gmail.com" autocomplete="off">
-          </div>
-          <!-- input email -->
-
-          <!-- input password -->
-          <div class="input-container">
-            <font-awesome-icon icon="lock" class="icon-form" />
-            <input type="password" id="password" placeholder="********" autocomplete="off">
-          </div>
-          <!-- input password -->
-
-          <!-- btn login -->
-          <button class="btn-login" @click="login">Masuk</button>
-          <!-- btn login -->
-        </div>
-        <!-- end form -->
-
-        <!-- register link -->
-        <div class="register-link">
-          <span>Belum punya akun?</span> <router-link to="/register">Daftar disini</router-link>
-        </div>
-        <!-- end register link -->
+  <div id="container">
+    <!-- header -->
+    <div class="header">
+      <hr>
+      <p class="brand">BLIRESS</p>
+      <p class="slogan">Blibli Employee Progress</p>
+      <hr>
     </div>
+    <!-- end header -->
+
+    <!-- form -->
+    <div class="form">
+      <!-- input email -->
+      <div class="input-container">
+        <font-awesome-icon icon="envelope" class="icon-form" />
+        <input type="text" id="email" placeholder="example@gmail.com" autocomplete="off">
+      </div>
+      <!-- input email -->
+
+      <!-- input password -->
+      <div class="input-container">
+        <font-awesome-icon icon="lock" class="icon-form" />
+        <input type="password" id="password" placeholder="********" autocomplete="off">
+      </div>
+      <!-- input password -->
+
+      <!-- btn login -->
+      <button class="btn-login" @click="login">Masuk</button>
+      <!-- btn login -->
+    </div>
+    <!-- end form -->
+
+    <!-- register link -->
+    <div class="register-link">
+      <span>Belum punya akun?</span> <router-link to="/register">Daftar disini</router-link>
+    </div>
+    <!-- end register link -->
+  </div>
 </template>
 
 <style lang="scss" scoped>

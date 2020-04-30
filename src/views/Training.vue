@@ -3,7 +3,7 @@
     <!-- head -->
     <div class="head">
       <div class="text">Training</div>
-      <div class="add">+</div>
+      <router-link to="/training/add" class="add">+</router-link>
     </div>
     <!-- end head -->
 
@@ -162,12 +162,13 @@
 
       .add {
         font-weight: 600;
+        color: #FFF;
         background-color: #36B5DD;
-        cursor: pointer;
         transition: background-color .2s ease-out,
                     border .1s linear;
         border: 0.125rem solid #00A2D4;
         border-radius: 5rem;
+        text-decoration: none;
         padding: 0rem 0.3125rem;
         font-size: 1.125em;
 

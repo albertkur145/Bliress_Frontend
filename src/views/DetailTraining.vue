@@ -1,6 +1,5 @@
 <template>
   <div id="container">
-    <div class="width">{{ windowWidth }}</div>
     <!-- head -->
     <div class="head">
       <router-link to="/training" class="back">
@@ -127,13 +126,6 @@
     min-height: 100vh;
     background-color: #F2F2F2;
 
-    .width {
-      display: none;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 8rem;
-    }
-
     .head {
       text-align: center;
       position: fixed;
@@ -170,7 +162,7 @@
         background-color: #FFF;
         text-align: center;
         padding: 1.75rem 1rem;
-        margin-top: 3.125rem;
+        margin-top: 1.9375rem;
 
         .txt {
           font-weight: 500;
@@ -276,7 +268,7 @@
 
         .rincian {
           padding: 2rem 1.125rem;
-          margin-top: 3.4375rem;
+          margin-top: 2.25rem;
 
           .txt {
             font-size: 1.125em;
@@ -361,7 +353,7 @@
 
         .rincian {
           padding: 2.25rem 1.25rem;
-          margin-top: 4.25rem;
+          margin-top: 3rem;
 
           .txt {
             font-size: 1.3125em;
@@ -446,7 +438,7 @@
 
         .rincian {
           padding: 2.375rem 1.375rem;
-          margin-top: 4.5rem;
+          margin-top: 3.25rem;
 
           .txt {
             font-size: 1.4375em;
@@ -531,7 +523,7 @@
 
         .rincian {
           padding: 2.5rem 1.5rem;
-          margin-top: 5rem;
+          margin-top: 3.75rem;
 
           .txt {
             font-size: 1.5em;
