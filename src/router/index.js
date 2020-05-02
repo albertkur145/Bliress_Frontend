@@ -24,6 +24,11 @@ const routes = [
     name: 'AddTraining',
     component: () => import('../views/AddTraining.vue'),
   },
+  {
+    path: '/akun',
+    name: 'Akun',
+    component: () => import('../views/Akun.vue'),
+  },
 ];
 
 const router = new VueRouter({

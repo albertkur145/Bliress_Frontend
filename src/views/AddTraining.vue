@@ -1,6 +1,5 @@
 <template>
   <div id="container">
-    <div class="width">{{ windowWidth }}</div>
     <!-- head -->
     <div class="head">
       <router-link to="/training" class="back">

@@ -22,7 +22,7 @@
     </div>
 
     <div class="bar">
-      <router-link to="/" class="txt-bar">
+      <router-link to="/akun" class="txt-bar">
         <font-awesome-icon icon="user" class="menu-icon"></font-awesome-icon>
         <span>Akun</span>
       </router-link>
