@@ -38,7 +38,7 @@
         <div class="form-group">
           <fieldset>
             <legend>Email</legend>
-            <p class="value email">albertkurniawanz220@gmail.com</p>
+            <p class="value email">albertkurzl45@gmail.com</p>
           </fieldset>
         </div>
 
@@ -74,7 +74,7 @@
 
       <!-- logout -->
       <div class="logout">
-        <p>keluar</p>
+        <p @click="logout">keluar</p>
       </div>
       <!-- logout -->
 
@@ -89,52 +89,170 @@
 
 <style lang="scss" scoped>
 
-  .width {
-    display: none;
-    text-align: center;
+  #container {
+    font-family: 'Roboto';
+    max-width: 100%;
+    min-height: 100vh;
+    background-color: #F2F2F2;
+
+    .width {
+      display: none;
+      text-align: center;
+      margin-top: 5rem;
+    }
+
+    .head {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      max-width: 100%;
+      color: #FFF;
+      background-color: #0ABDE3;
+      font-weight: 600;
+      text-align: center;
+      z-index: 1;
+      padding: 0.875rem 1rem;
+
+      .text {
+        font-size: 1.0625em;
+      }
+    }
+
+    .content {
+
+      p {
+        margin: 0;
+      }
+
+      .top-head {
+        display: flex;
+        align-items: center;
+        background-color: #FFF;
+        margin-top: 3rem;
+        padding: 1.25rem 0.625rem;
+
+        .left {
+          min-width: 25%;
+          max-width: 25%;
+          text-align: center;
+
+          .user-icon {
+            color: #0094FF;
+            font-size: 2.75em;
+          }
+        }
+
+        .right {
+          min-width: 75%;
+          max-width: 75%;
+          color: #333;
+          box-sizing: border-box;
+          padding: 0 0.25rem 0 0.5rem;
+
+          .name {
+            font-weight: 500;
+            font-size: 1.0625em;
+          }
+
+          .position {
+            font-weight: 400;
+            font-size: 0.875em;
+            margin-top: 0.1875rem;
+          }
+        }
+      }
+
+      .txt-profile-info {
+        font-weight: 600;
+        color: #00A3FF;
+        background-color: #FFF;
+        text-align: center;
+        margin-top: 0.375rem;
+        padding: 1rem 0;
+        font-size: 0.9375em;
+      }
+
+      .profile-info {
+        background-color: #FFF;
+        margin-top: 0.375rem;
+        padding: 0.625rem;
+
+        .form-group {
+          max-width: 100%;
+          overflow-x: auto;
+          margin-bottom: 1rem;
+
+          fieldset {
+            border: 0.0625rem solid #BBB;
+            border-radius: 0.5rem;
+            min-height: 2.75rem;
+
+            legend {
+              color: #777;
+              padding: 0 0.25rem;
+              font-size: 0.6875em;
+            }
+
+            .value {
+              color: #333;
+              box-sizing: border-box;
+              min-width: 100%;
+              max-width: 100%;
+              margin-top: 0.5rem;
+              padding: 0 0 0 0.75rem;
+              font-size: 0.875em;
+            }
+          }
+        }
+      }
+
+      .logout {
+        cursor: pointer;
+        background-color: #FFF;
+        text-align: center;
+        margin-top: 0.375rem;
+        padding: 1rem;
+        margin-bottom: 3.3125rem;
+
+        p {
+          text-transform: uppercase;
+          font-weight: 600;
+          color: #FF003D;
+          transition: color .2s linear;
+          font-size: 0.8125em
+        }
+
+        &:hover p {
+          color: #900404;
+        }
+      }
+    }
   }
 
   // width 320px - 480px (Mobile)
   @media (min-width: 320px) and (max-width: 480px) {
     #container {
-      font-family: 'Roboto';
-      max-width: 100%;
-      min-height: 100vh;
-      background-color: #F2F2F2;
 
       .head {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        max-width: 100%;
-        color: #FFF;
-        background-color: #0ABDE3;
-        font-weight: 600;
-        text-align: center;
-        z-index: 1;
-        padding: 1.125rem 1.25rem;
+        padding: 1.0625rem 1.25rem;
+
+        .text {
+          font-size: 1.125em;
+        }
       }
 
       .content {
 
-        p {
-          margin: 0;
-        }
-
         .top-head {
-          display: flex;
-          align-items: center;
-          background-color: #FFF;
           margin-top: 3.375rem;
-          padding: 1.5rem 1rem;
+          padding: 1.5rem;
 
           .left {
             min-width: 25%;
             max-width: 25%;
 
             .user-icon {
-              color: #0094FF;
               font-size: 3.5em;
             }
           }
@@ -142,17 +260,13 @@
           .right {
             min-width: 75%;
             max-width: 75%;
-            color: #333;
-            box-sizing: border-box;
-            padding: 0 0.5rem;
+            padding: 0 0.375rem 0 0.75rem;
 
             .name {
-              font-weight: 500;
               font-size: 1.25em;
             }
 
             .position {
-              font-weight: 400;
               font-size: 1em;
               margin-top: 0.25rem;
             }
@@ -160,40 +274,27 @@
         }
 
         .txt-profile-info {
-          font-weight: 600;
-          color: #00A3FF;
-          background-color: #FFF;
-          text-align: center;
           margin-top: 0.5rem;
           padding: 1.125rem 0;
+          font-size: 1.0625em;
         }
 
         .profile-info {
-          background-color: #FFF;
           margin-top: 0.5rem;
           padding: 1rem;
 
           .form-group {
-            max-width: 100%;
-            overflow-x: auto;
             margin-bottom: 1.25rem;
 
             fieldset {
-              border: 0.0625rem solid #BBB;
-              border-radius: 0.5rem;
               min-height: 2.875rem;
 
               legend {
-                color: #777;
                 padding: 0 0.375rem;
                 font-size: 0.8125em;
               }
 
               .value {
-                color: #333;
-                box-sizing: border-box;
-                min-width: 100%;
-                max-width: 100%;
                 margin-top: 0.375rem;
                 padding: 0 0 0 1rem;
                 font-size: 1em;
@@ -203,28 +304,278 @@
         }
 
         .logout {
-          cursor: pointer;
-          background-color: #FFF;
-          text-align: center;
           margin-top: 0.5rem;
           padding: 1.125rem;
           margin-bottom: 3.625rem;
 
           p {
-            text-transform: uppercase;
-            font-weight: 600;
-            color: #FF003D;
-            transition: color .2s linear;
-          }
-
-          &:hover p {
-            color: #900404;
+            font-size: 0.9375em
           }
         }
       }
     }
   }
   // width 320px - 480px (Mobile)
+
+  // width 481px - 767px (Big Mobile / Tablet)
+  @media (min-width: 481px) and (max-width: 767px) {
+    #container {
+
+      .head {
+        padding: 1.1875rem 1.5rem;
+
+        .text {
+          font-size: 1.25em;
+        }
+      }
+
+      .content {
+
+        .top-head {
+          margin-top: 3.75rem;
+          padding: 2rem 1.5rem;
+
+          .left {
+            min-width: 25%;
+            max-width: 25%;
+
+            .user-icon {
+              font-size: 4.25em;
+            }
+          }
+
+          .right {
+            min-width: 75%;
+            max-width: 75%;
+            padding: 0 0.5rem 0 1rem;
+
+            .name {
+              font-size: 1.5em;
+            }
+
+            .position {
+              font-size: 1.1875em;
+              margin-top: 0.375rem;
+            }
+          }
+        }
+
+        .txt-profile-info {
+          margin-top: 0.625rem;
+          padding: 1.25rem 0;
+          font-size: 1.1875em;
+        }
+
+        .profile-info {
+          margin-top: 0.625rem;
+          padding: 1.5rem;
+
+          .form-group {
+            margin-bottom: 1.5rem;
+
+            fieldset {
+              min-height: 3.25rem;
+
+              legend {
+                padding: 0 0.5rem;
+                font-size: 0.9375em;
+              }
+
+              .value {
+                margin-top: 0.4375rem;
+                padding: 0 0 0 1.5rem;
+                font-size: 1.125em;
+              }
+            }
+          }
+        }
+
+        .logout {
+          margin-top: 0.625rem;
+          padding: 1.25rem;
+          margin-bottom: 4.125rem;
+
+          p {
+            font-size: 1.0625em
+          }
+        }
+      }
+    }
+  }
+  // width 481px - 767px (Big Mobile / Tablet)
+
+  // width 768px - 1024px (Mini desktop / Tablet landscape)
+  @media (min-width: 768px) and (max-width: 1024px) {
+    #container {
+
+      .head {
+        padding: 1.25rem 1.75rem;
+
+        .text {
+          font-size: 1.4375em;
+        }
+      }
+
+      .content {
+
+        .top-head {
+          margin-top: 4.0625rem;
+          padding: 3rem;
+
+          .left {
+            min-width: 25%;
+            max-width: 25%;
+
+            .user-icon {
+              font-size: 5.75em;
+            }
+          }
+
+          .right {
+            min-width: 75%;
+            max-width: 75%;
+            padding: 0 0.5rem 0 0.1rem;
+
+            .name {
+              font-size: 2.125em;
+            }
+
+            .position {
+              font-size: 1.5em;
+              margin-top: 0.5rem;
+            }
+          }
+        }
+
+        .txt-profile-info {
+          margin-top: 0.75rem;
+          padding: 1.5rem 0;
+          font-size: 1.375em;
+        }
+
+        .profile-info {
+          margin-top: 0.75rem;
+          padding: 2.5rem 7.25rem;
+
+          .form-group {
+            margin-bottom: 2rem;
+
+            fieldset {
+              min-height: 3.5rem;
+
+              legend {
+                padding: 0 0.75rem;
+                font-size: 1em;
+              }
+
+              .value {
+                margin-top: 0.5rem;
+                padding: 0 0 0 2rem;
+                font-size: 1.25em;
+              }
+            }
+          }
+        }
+
+        .logout {
+          margin-top: 0.75rem;
+          padding: 1.5rem;
+          margin-bottom: 4.75rem;
+
+          p {
+            font-size: 1.1875em
+          }
+        }
+      }
+    }
+  }
+  // width 768px - 1024px (Mini desktop / Tablet landscape)
+
+  // width 1025px (Desktop)
+  @media (min-width: 1025px) {
+    #container {
+
+      .head {
+        padding: 1.625rem 1.875rem;
+
+        .text {
+          font-size: 1.6875em;
+        }
+      }
+
+      .content {
+
+        .top-head {
+          margin-top: 5.25rem;
+          padding: 3.5rem;
+
+          .left {
+            min-width: 25%;
+            max-width: 25%;
+
+            .user-icon {
+              font-size: 6.5em;
+            }
+          }
+
+          .right {
+            min-width: 75%;
+            max-width: 75%;
+            padding: 0 0.5rem 0 0.1rem;
+
+            .name {
+              font-size: 2.5em;
+            }
+
+            .position {
+              font-size: 1.75em;
+              margin-top: 0.625rem;
+            }
+          }
+        }
+
+        .txt-profile-info {
+          margin-top: 0.8125rem;
+          padding: 1.75rem 0;
+          font-size: 1.625em;
+        }
+
+        .profile-info {
+          margin-top: 0.8125rem;
+          padding: 3.25rem 7.75rem;
+
+          .form-group {
+            margin-bottom: 2.25rem;
+
+            fieldset {
+              min-height: 3.75rem;
+
+              legend {
+                padding: 0 0.875rem;
+                font-size: 1.125em;
+              }
+
+              .value {
+                margin-top: 0.4375rem;
+                padding: 0 0 0 2.5rem;
+                font-size: 1.375em;
+              }
+            }
+          }
+        }
+
+        .logout {
+          margin-top: 0.8125rem;
+          padding: 1.75rem;
+          margin-bottom: 5.375rem;
+
+          p {
+            font-size: 1.3125em
+          }
+        }
+      }
+    }
+  }
 
 </style>
 
@@ -246,6 +597,9 @@ export default {
   methods: {
     getWindowWidth() {
       this.windowWidth = window.innerWidth;
+    },
+    logout() {
+      this.$router.push({ name: 'Login' });
     },
   },
 

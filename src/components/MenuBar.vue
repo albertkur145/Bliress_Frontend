@@ -84,7 +84,7 @@
           font-size: 0.75em;
 
           .menu-icon {
-            font-size: 0.937rem;
+            font-size: 0.9375em;
           }
 
           span {
