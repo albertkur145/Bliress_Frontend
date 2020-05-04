@@ -1,6 +1,5 @@
 <template>
   <div id="container">
-    <div class="width">{{ windowWidth }}</div>
     <!-- head -->
     <div class="head">
       <div class="text">Akun</div>
@@ -94,12 +93,6 @@
     max-width: 100%;
     min-height: 100vh;
     background-color: #F2F2F2;
-
-    .width {
-      display: none;
-      text-align: center;
-      margin-top: 5rem;
-    }
 
     .head {
       position: fixed;

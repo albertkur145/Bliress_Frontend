@@ -15,14 +15,14 @@
     </div>
 
     <div class="bar">
-      <router-link to="/" class="txt-bar">
+      <router-link to="/notification" class="txt-bar">
         <font-awesome-icon icon="bell" class="menu-icon"></font-awesome-icon>
         <span>Notifikasi</span>
       </router-link>
     </div>
 
     <div class="bar">
-      <router-link to="/akun" class="txt-bar">
+      <router-link to="/account" class="txt-bar">
         <font-awesome-icon icon="user" class="menu-icon"></font-awesome-icon>
         <span>Akun</span>
       </router-link>
@@ -42,7 +42,7 @@
     max-width: 100%;
     background-color: #FFF;
     box-shadow: 0 -0.0625rem 0.375rem rgba(0, 0, 0, 0.3);
-    padding: 0.4375rem 0 0.25rem;
+    padding: 0.5rem 0 0.25rem;
 
     .bar {
       width: 25%;
@@ -55,12 +55,12 @@
         color: #777;
 
         .menu-icon {
-          font-size: 0.875em;
+          font-size: 1.0625em;
         }
 
         span {
           display: block;
-          margin-top: 0.3125rem;
+          margin-top: 0.375rem;
         }
 
         &.router-link-exact-active {
@@ -76,7 +76,7 @@
   @media (min-width: 320px) and (max-width: 480px) {
     #menu {
       box-shadow: 0 -0.0625rem 0.375rem rgba(0, 0, 0, 0.3);
-      padding: 0.5rem 0 0.3125rem;
+      padding: 0.625rem 0 0.3125rem;
 
       .bar {
 
@@ -84,11 +84,11 @@
           font-size: 0.75em;
 
           .menu-icon {
-            font-size: 0.9375em;
+            font-size: 1.1875em;
           }
 
           span {
-            margin-top: 0.25rem;
+            margin-top: 0.375rem;
           }
         }
       }

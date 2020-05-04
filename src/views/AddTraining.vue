@@ -121,12 +121,6 @@
     min-height: 100vh;
     background-color: #F2F2F2;
 
-    .width {
-      display: none;
-      margin-top: 5rem;
-      text-align: center;
-    }
-
     .head {
       display: flex;
       justify-content: space-between;

@@ -25,9 +25,14 @@ const routes = [
     component: () => import('../views/AddTraining.vue'),
   },
   {
-    path: '/akun',
-    name: 'Akun',
-    component: () => import('../views/Akun.vue'),
+    path: '/account',
+    name: 'Account',
+    component: () => import('../views/Account.vue'),
+  },
+  {
+    path: '/notification',
+    name: 'Notification',
+    component: () => import('../views/Notification.vue'),
   },
 ];
 

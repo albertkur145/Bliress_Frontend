@@ -188,7 +188,7 @@
         margin-bottom: 0.25rem;
 
         &:last-child {
-          margin-bottom: 2.9375rem;
+          margin-bottom: 3.125rem;
         }
 
         .left {
@@ -278,7 +278,7 @@
           margin-bottom: 0.375rem;
 
           &:last-child {
-            margin-bottom: 3.0625rem;
+            margin-bottom: 3.625rem;
           }
 
           .left {
