@@ -34,6 +34,11 @@ const routes = [
     name: 'Notification',
     component: () => import('../views/Notification.vue'),
   },
+  {
+    path: '/notification/add',
+    name: 'AddNotification',
+    component: () => import('../views/AddNotification.vue'),
+  },
 ];
 
 const router = new VueRouter({

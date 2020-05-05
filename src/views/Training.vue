@@ -161,6 +161,7 @@
       }
 
       .add {
+        display: block;
         font-weight: 600;
         color: #FFF;
         background-color: #36B5DD;
@@ -259,7 +260,7 @@
     #container {
 
       .head {
-        padding: 0.875rem 1.25rem;
+        padding: 1rem 1.25rem;
 
         .text {
           font-size: 1.1875em;
@@ -272,7 +273,7 @@
       }
 
       .content {
-        margin-top: 3.8125rem;
+        margin-top: 4.0625rem;
 
         .training {
           margin-bottom: 0.375rem;
@@ -323,7 +324,7 @@
     #container {
 
       .head {
-        padding: 1rem 1.5rem;
+        padding: 1.125rem 1.5rem;
 
         .text {
           font-size: 1.375em;
@@ -336,7 +337,7 @@
       }
 
       .content {
-        margin-top: 4.4375rem;
+        margin-top: 4.75rem;
 
         .training {
           margin-bottom: 0.5rem;
@@ -387,7 +388,7 @@
     #container {
 
       .head {
-        padding: 1rem 1.5rem;
+        padding: 1.125rem 1.5rem;
 
         .text {
           font-size: 1.5em;
@@ -403,7 +404,7 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
-        margin-top: 4.625rem;
+        margin-top: 4.875rem;
 
         .training {
           margin-bottom: 0.3125rem;
@@ -456,7 +457,7 @@
     #container {
 
       .head {
-        padding: 1.25rem 1.75rem;
+        padding: 1.375rem 1.75rem;
 
         .text {
           font-size: 1.75em;
@@ -472,7 +473,7 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
-        margin-top: 5.6875rem;
+        margin-top: 5.9375rem;
         margin-bottom: 4.125rem;
 
         .training {

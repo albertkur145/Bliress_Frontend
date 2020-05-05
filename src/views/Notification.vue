@@ -57,13 +57,14 @@
       color: #FFF;
       background-color: #0ABDE3;
       font-weight: 600;
-      padding: 0.75rem 1rem;
+      padding: 0.8125rem 1rem;
 
       .text {
         font-size: 1.125em;
       }
 
       .add {
+        display: block;
         font-weight: 600;
         color: #FFF;
         background-color: #36B5DD;
@@ -115,7 +116,7 @@
     #container {
 
       .head {
-        padding: 0.875rem 1.25rem;
+        padding: 0.9375rem 1.25rem;
 
         .text {
           font-size: 1.1875em;
@@ -158,7 +159,7 @@
     #container {
 
       .head {
-        padding: 1rem 1.5rem;
+        padding: 1.0625rem 1.5rem;
 
         .text {
           font-size: 1.375em;
@@ -201,7 +202,7 @@
     #container {
 
       .head {
-        padding: 1rem 1.5rem;
+        padding: 1.0625rem 1.5rem;
 
         .text {
           font-size: 1.5em;
@@ -215,7 +216,7 @@
 
       .content {
         padding: 2rem 12rem;
-        margin-top: 4.25rem;
+        margin-top: 4.0625rem;
         margin-bottom: 3rem;
 
         .notif {
@@ -244,7 +245,7 @@
     #container {
 
       .head {
-        padding: 1.25rem 1.75rem;
+        padding: 1.3125rem 1.75rem;
 
         .text {
           font-size: 1.75em;
@@ -258,7 +259,7 @@
 
       .content {
         padding: 2rem 20rem;
-        margin-top: 5.25rem;
+        margin-top: 4.9375rem;
         margin-bottom: 3rem;
 
         .notif {
