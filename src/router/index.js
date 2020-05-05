@@ -12,32 +12,27 @@ const routes = [
   {
     path: '/training',
     name: 'Training',
-    component: () => import('../views/Training.vue'),
+    component: () => import('../views/employee/Training.vue'),
   },
   {
     path: '/training/detail',
     name: 'DetailTraining',
-    component: () => import('../views/DetailTraining.vue'),
-  },
-  {
-    path: '/training/add',
-    name: 'AddTraining',
-    component: () => import('../views/AddTraining.vue'),
+    component: () => import('../views/employee/DetailTraining.vue'),
   },
   {
     path: '/account',
     name: 'Account',
-    component: () => import('../views/Account.vue'),
+    component: () => import('../views/employee/Account.vue'),
   },
   {
     path: '/notification',
     name: 'Notification',
-    component: () => import('../views/Notification.vue'),
+    component: () => import('../views/employee/Notification.vue'),
   },
   {
-    path: '/notification/add',
-    name: 'AddNotification',
-    component: () => import('../views/AddNotification.vue'),
+    path: '/test',
+    name: 'Test',
+    component: () => import('../views/employee/Test.vue'),
   },
 ];
 

@@ -3,7 +3,6 @@
     <!-- head -->
     <div class="head">
       <div class="text">Training</div>
-      <router-link to="/training/add" class="add">+</router-link>
     </div>
     <!-- end head -->
 
@@ -143,9 +142,7 @@
     background-color: #F2F2F2;
 
     .head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      text-align: center;
       position: fixed;
       top: 0;
       left: 0;
@@ -154,34 +151,15 @@
       color: #FFF;
       background-color: #0ABDE3;
       font-weight: 600;
-      padding: 0.75rem 1rem;
+      padding: 0.8125rem 1rem;
 
       .text {
         font-size: 1.125em;
       }
-
-      .add {
-        display: block;
-        font-weight: 600;
-        color: #FFF;
-        background-color: #36B5DD;
-        transition: background-color .2s ease-out,
-                    border .1s linear;
-        border: 0.125rem solid #00A2D4;
-        border-radius: 5rem;
-        text-decoration: none;
-        padding: 0rem 0.3125rem;
-        font-size: 1.125em;
-
-        &:hover {
-          background-color: #22AAD6;
-          border: 0.125rem solid #0293C0;
-        }
-      }
     }
 
     .content {
-      margin-top: 3.375rem;
+      margin-top: 3.25rem;
 
       .training {
         display: flex;
@@ -197,7 +175,7 @@
           justify-content: center;
           align-items: center;
           box-sizing: border-box;
-          background-image: url('../assets/background/bg-linear-xs.svg');
+          background-image: url('../../assets/background/bg-linear-xs.svg');
           background-size: cover;
           background-repeat: no-repeat;
           padding: 0;
@@ -260,20 +238,15 @@
     #container {
 
       .head {
-        padding: 1rem 1.25rem;
+        padding: 1.0625rem 1.25rem;
 
         .text {
-          font-size: 1.1875em;
-        }
-
-        .add {
-          padding: 0 0.375rem;
-          font-size: 1.1875em;
+          font-size: 1.125em;
         }
       }
 
       .content {
-        margin-top: 4.0625rem;
+        margin-top: 3.875rem;
 
         .training {
           margin-bottom: 0.375rem;
@@ -324,20 +297,15 @@
     #container {
 
       .head {
-        padding: 1.125rem 1.5rem;
+        padding: 1.1875rem 1.5rem;
 
         .text {
-          font-size: 1.375em;
-        }
-
-        .add {
-          padding: 0.0625rem 0.5rem;
-          font-size: 1.375em;
+          font-size: 1.25em;
         }
       }
 
       .content {
-        margin-top: 4.75rem;
+        margin-top: 4.375rem;
 
         .training {
           margin-bottom: 0.5rem;
@@ -388,15 +356,10 @@
     #container {
 
       .head {
-        padding: 1.125rem 1.5rem;
+        padding: 1.25rem 1.75rem;
 
         .text {
-          font-size: 1.5em;
-        }
-
-        .add {
-          padding: 0.125rem 0.5875rem;
-          font-size: 1.5em;
+          font-size: 1.4375em;
         }
       }
 
@@ -404,7 +367,7 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
-        margin-top: 4.875rem;
+        margin-top: 4.5875rem;
 
         .training {
           margin-bottom: 0.3125rem;
@@ -457,15 +420,10 @@
     #container {
 
       .head {
-        padding: 1.375rem 1.75rem;
+        padding: 1.625rem 1.875rem;
 
         .text {
-          font-size: 1.75em;
-        }
-
-        .add {
-          padding: 0.25rem 0.75rem;
-          font-size: 1.75em;
+          font-size: 1.6875em;
         }
       }
 
@@ -473,7 +431,7 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
-        margin-top: 5.9375rem;
+        margin-top: 5.625rem;
         margin-bottom: 4.125rem;
 
         .training {
@@ -524,7 +482,7 @@
 </style>
 
 <script>
-import MenuBar from '../components/MenuBar.vue';
+import MenuBar from '../../components/employee/MenuBar.vue';
 
 export default {
 

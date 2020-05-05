@@ -3,7 +3,6 @@
     <!-- head -->
     <div class="head">
       <div class="text">Notifikasi</div>
-      <router-link to="/notification/add" class="add">+</router-link>
     </div>
     <!-- end head -->
 
@@ -46,9 +45,7 @@
     background-color: #FFF;
 
     .head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      text-align: center;
       position: fixed;
       top: 0;
       left: 0;
@@ -57,29 +54,10 @@
       color: #FFF;
       background-color: #0ABDE3;
       font-weight: 600;
-      padding: 0.8125rem 1rem;
+      padding: 0.875rem 1rem;
 
       .text {
-        font-size: 1.125em;
-      }
-
-      .add {
-        display: block;
-        font-weight: 600;
-        color: #FFF;
-        background-color: #36B5DD;
-        transition: background-color .2s ease-out,
-                    border .1s linear;
-        border: 0.125rem solid #00A2D4;
-        border-radius: 5rem;
-        text-decoration: none;
-        padding: 0rem 0.3125rem;
-        font-size: 1.125em;
-
-        &:hover {
-          background-color: #22AAD6;
-          border: 0.125rem solid #0293C0;
-        }
+        font-size: 1.0625em;
       }
     }
 
@@ -116,15 +94,10 @@
     #container {
 
       .head {
-        padding: 0.9375rem 1.25rem;
+        padding: 1.0625rem 1.25rem;
 
         .text {
-          font-size: 1.1875em;
-        }
-
-        .add {
-          padding: 0 0.375rem;
-          font-size: 1.1875em;
+          font-size: 1.125em;
         }
       }
 
@@ -159,21 +132,16 @@
     #container {
 
       .head {
-        padding: 1.0625rem 1.5rem;
+        padding: 1.1875rem 1.5rem;
 
         .text {
-          font-size: 1.375em;
-        }
-
-        .add {
-          padding: 0.0625rem 0.5rem;
-          font-size: 1.375em;
+          font-size: 1.25em;
         }
       }
 
       .content {
         padding: 1.75rem 1.5rem;
-        margin-top: 4rem;
+        margin-top: 3.875rem;
         margin-bottom: 2rem;
 
         .notif {
@@ -202,15 +170,10 @@
     #container {
 
       .head {
-        padding: 1.0625rem 1.5rem;
+        padding: 1.25rem 1.75rem;
 
         .text {
-          font-size: 1.5em;
-        }
-
-        .add {
-          padding: 0.125rem 0.5875rem;
-          font-size: 1.5em;
+          font-size: 1.4375em;
         }
       }
 
@@ -245,15 +208,10 @@
     #container {
 
       .head {
-        padding: 1.3125rem 1.75rem;
+        padding: 1.625rem 1.875rem;
 
         .text {
-          font-size: 1.75em;
-        }
-
-        .add {
-          padding: 0.25rem 0.75rem;
-          font-size: 1.75em;
+          font-size: 1.6875em;
         }
       }
 
@@ -285,7 +243,7 @@
 </style>
 
 <script>
-import MenuBar from '../components/MenuBar.vue';
+import MenuBar from '../../components/employee/MenuBar.vue';
 
 export default {
 

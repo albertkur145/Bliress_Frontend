@@ -573,7 +573,7 @@
 </style>
 
 <script>
-import MenuBar from '../components/MenuBar.vue';
+import MenuBar from '../../components/employee/MenuBar.vue';
 
 export default {
 

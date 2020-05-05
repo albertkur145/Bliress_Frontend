@@ -8,7 +8,7 @@
     </div>
 
     <div class="bar">
-      <router-link to="/" class="txt-bar">
+      <router-link to="/test" class="txt-bar">
         <font-awesome-icon icon="clipboard" class="menu-icon"></font-awesome-icon>
         <span>Test</span>
       </router-link>
