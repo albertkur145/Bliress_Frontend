@@ -96,8 +96,8 @@
   }
   // width 320px - 480px (Mobile)
 
-  // width 481px - 767px (Big Mobile / Tablet)
-  @media (min-width: 481px) and (max-width: 767px) {
+  // width >= 481px (Big Mobile, Tablet, Desktop)
+  @media (min-width: 481px) {
     #menu {
       box-shadow: 0 -0.0625rem 0.375rem rgba(0, 0, 0, 0.3);
       padding: 0.625rem 0 0.375rem;
@@ -118,52 +118,52 @@
       }
     }
   }
-  // width 481px - 767px (Big Mobile / Tablet)
+  // width >= 481px (Big Mobile, Tablet, Desktop)
 
-  // width 768px - 1024px (Mini desktop / Tablet landscape)
-  @media (min-width: 768px) and (max-width: 1024px) {
-    #menu {
-      box-shadow: 0 -0.0625rem 0.375rem rgba(0, 0, 0, 0.3);
-      padding: 0.6875rem 0 0.4375rem;
+  // // width 768px - 1024px (Mini desktop / Tablet landscape)
+  // @media (min-width: 768px) and (max-width: 1024px) {
+  //   #menu {
+  //     box-shadow: 0 -0.0625rem 0.375rem rgba(0, 0, 0, 0.3);
+  //     padding: 0.6875rem 0 0.4375rem;
 
-      .bar {
+  //     .bar {
 
-        .txt-bar {
-          font-size: 0.9375em;
+  //       .txt-bar {
+  //         font-size: 0.9375em;
 
-          .menu-icon {
-            font-size: 1.125em;
-          }
+  //         .menu-icon {
+  //           font-size: 1.125em;
+  //         }
 
-          span {
-            margin-top: 0.375rem;
-          }
-        }
-      }
-    }
-  }
-  // width 768px - 1024px (Mini desktop / Tablet landscape)
+  //         span {
+  //           margin-top: 0.375rem;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+  // // width 768px - 1024px (Mini desktop / Tablet landscape)
 
-  // width 1025px (Desktop)
-  @media (min-width: 1025px) {
-    #menu {
-      box-shadow: 0 -0.0625rem 0.375rem rgba(0, 0, 0, 0.3);
-      padding: 0.75rem 0 0.5rem;
+  // // width 1025px (Desktop)
+  // @media (min-width: 1025px) {
+  //   #menu {
+  //     box-shadow: 0 -0.0625rem 0.375rem rgba(0, 0, 0, 0.3);
+  //     padding: 0.75rem 0 0.5rem;
 
-      .bar {
+  //     .bar {
 
-        .txt-bar {
-          font-size: 1em;
+  //       .txt-bar {
+  //         font-size: 1em;
 
-          .menu-icon {
-            font-size: 1.1875em;
-          }
+  //         .menu-icon {
+  //           font-size: 1.1875em;
+  //         }
 
-          span {
-            margin-top: 0.4375rem;
-          }
-        }
-      }
-    }
-  }
+  //         span {
+  //           margin-top: 0.4375rem;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 </style>

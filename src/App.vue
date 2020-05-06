@@ -11,4 +11,13 @@
     padding: 0;
     background-color: #F2F2F2;
   }
+
+  // width >= 481px (Big Mobile, Tablet, Desktop)
+  @media (min-width: 481px) {
+    #app {
+      width: 466px;
+      margin: 0 auto;
+    }
+  }
+  // width >= 481px (Big Mobile, Tablet, Desktop)
 </style>

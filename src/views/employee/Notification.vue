@@ -127,8 +127,8 @@
   }
   // width 320px - 480px (Mobile)
 
-  // width 481px - 767px (Big Mobile / Tablet)
-  @media (min-width: 481px) and (max-width: 767px) {
+  // width > 481px (Big Mobile, Tablet, Desktop)
+  @media (min-width: 481px) {
     #container {
 
       .head {
@@ -163,82 +163,83 @@
       }
     }
   }
-  // width 481px - 767px (Big Mobile / Tablet)
+  // width > 481px (Big Mobile, Tablet, Desktop)
 
-  // width 768px - 1024px (Mini desktop / Tablet landscape)
-  @media (min-width: 768px) and (max-width: 1024px) {
-    #container {
+  // // width 768px - 1024px (Mini desktop / Tablet landscape)
+  // @media (min-width: 768px) and (max-width: 1024px) {
+  //   #container {
 
-      .head {
-        padding: 1.25rem 1.75rem;
+  //     .head {
+  //       padding: 1.25rem 1.75rem;
 
-        .text {
-          font-size: 1.4375em;
-        }
-      }
+  //       .text {
+  //         font-size: 1.4375em;
+  //       }
+  //     }
 
-      .content {
-        padding: 2rem 12rem;
-        margin-top: 4.0625rem;
-        margin-bottom: 3rem;
+  //     .content {
+  //       padding: 2rem 12rem;
+  //       margin-top: 4.0625rem;
+  //       margin-bottom: 3rem;
 
-        .notif {
-          margin-bottom: 2rem;
+  //       .notif {
+  //         margin-bottom: 2rem;
 
-          .title {
-            font-size: 1.375em;
-          }
+  //         .title {
+  //           font-size: 1.375em;
+  //         }
 
-          .message {
-            margin-top: 1.125rem;
-            font-size: 1.125em;
-          }
+  //         .message {
+  //           margin-top: 1.125rem;
+  //           font-size: 1.125em;
+  //         }
 
-          hr {
-            margin-top: 2rem;
-          }
-        }
-      }
-    }
-  }
-  // width 768px - 1024px (Mini desktop / Tablet landscape)
+  //         hr {
+  //           margin-top: 2rem;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+  // // width 768px - 1024px (Mini desktop / Tablet landscape)
 
-  // width 1025px (Desktop)
-  @media (min-width: 1025px) {
-    #container {
+  // // width 1025px (Desktop)
+  // @media (min-width: 1025px) {
+  //   #container {
 
-      .head {
-        padding: 1.625rem 1.875rem;
+  //     .head {
+  //       padding: 1.625rem 1.875rem;
 
-        .text {
-          font-size: 1.6875em;
-        }
-      }
+  //       .text {
+  //         font-size: 1.6875em;
+  //       }
+  //     }
 
-      .content {
-        padding: 2rem 20rem;
-        margin-top: 4.9375rem;
-        margin-bottom: 3rem;
+  //     .content {
+  //       padding: 2rem 20rem;
+  //       margin-top: 4.9375rem;
+  //       margin-bottom: 3rem;
 
-        .notif {
-          margin-bottom: 2.25rem;
+  //       .notif {
+  //         margin-bottom: 2.25rem;
 
-          .title {
-            font-size: 1.4375em;
-          }
+  //         .title {
+  //           font-size: 1.4375em;
+  //         }
 
-          .message {
-            margin-top: 1.25rem;
-            font-size: 1.1875em;
-          }
+  //         .message {
+  //           margin-top: 1.25rem;
+  //           font-size: 1.1875em;
+  //         }
 
-          hr {
-            margin-top: 2.1875rem;
-          }
-        }
-      }
-    }
-  }
+  //         hr {
+  //           margin-top: 2.1875rem;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+  // // width 1025px (Desktop)
 
 </style>
 

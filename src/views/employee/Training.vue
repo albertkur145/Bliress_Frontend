@@ -292,8 +292,8 @@
   }
   // width 320px - 480px (Mobile)
 
-  // width 481px - 767px (Big Mobile / Tablet)
-  @media (min-width: 481px) and (max-width: 767px) {
+  // width >= 481px (Big Mobile, Tablet, Desktop)
+  @media (min-width: 481px) {
     #container {
 
       .head {
@@ -349,136 +349,136 @@
       }
     }
   }
-  // width 481px - 767px (Big Mobile / Tablet)
+  // width >= 481px (Big Mobile, Tablet, Desktop)
 
-  // width 768px - 1024px (Mini desktop / Tablet landscape)
-  @media (min-width: 768px) and (max-width: 1024px) {
-    #container {
+  // // width 768px - 1024px (Mini desktop / Tablet landscape)
+  // @media (min-width: 768px) and (max-width: 1024px) {
+  //   #container {
 
-      .head {
-        padding: 1.25rem 1.75rem;
+  //     .head {
+  //       padding: 1.25rem 1.75rem;
 
-        .text {
-          font-size: 1.4375em;
-        }
-      }
+  //       .text {
+  //         font-size: 1.4375em;
+  //       }
+  //     }
 
-      .content {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-evenly;
-        margin-top: 4.5875rem;
+  //     .content {
+  //       display: flex;
+  //       flex-wrap: wrap;
+  //       justify-content: space-evenly;
+  //       margin-top: 4.5875rem;
 
-        .training {
-          margin-bottom: 0.3125rem;
-          width: 50%;
-          max-width: 50%;
+  //       .training {
+  //         margin-bottom: 0.3125rem;
+  //         width: 50%;
+  //         max-width: 50%;
 
-          &:last-child {
-            margin-bottom: 0.325rem;
-          }
+  //         &:last-child {
+  //           margin-bottom: 0.325rem;
+  //         }
 
-          .left {
-            padding: 1rem 1.5rem;
-            min-width: 50%;
-            max-width: 50%;
+  //         .left {
+  //           padding: 1rem 1.5rem;
+  //           min-width: 50%;
+  //           max-width: 50%;
 
-            span {
-              font-size: 1.8125em;
-            }
-          }
+  //           span {
+  //             font-size: 1.8125em;
+  //           }
+  //         }
 
-          .right {
-            border-left: 0.1875rem dashed #35AEE2;
-            padding: 3rem 0.75rem 1.5rem;
-            min-width: 50%;
-            max-width: 50%;
+  //         .right {
+  //           border-left: 0.1875rem dashed #35AEE2;
+  //           padding: 3rem 0.75rem 1.5rem;
+  //           min-width: 50%;
+  //           max-width: 50%;
 
-            .txt {
-              font-size: 1em;
-            }
+  //           .txt {
+  //             font-size: 1em;
+  //           }
 
-            .date {
-              font-size: 1.0625em;
-              margin-top: 0.8125rem;
-            }
+  //           .date {
+  //             font-size: 1.0625em;
+  //             margin-top: 0.8125rem;
+  //           }
 
-            .icon-see {
-              margin-top: 2rem;
-              margin-right: 0.4375rem;
-              font-size: 0.875em;
-            }
-          }
-        }
-      }
-    }
-  }
-  // width 768px - 1024px (Mini desktop / Tablet landscape)
+  //           .icon-see {
+  //             margin-top: 2rem;
+  //             margin-right: 0.4375rem;
+  //             font-size: 0.875em;
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+  // // width 768px - 1024px (Mini desktop / Tablet landscape)
 
-  // width 1025px (Desktop)
-  @media (min-width: 1025px) {
-    #container {
+  // // width 1025px (Desktop)
+  // @media (min-width: 1025px) {
+  //   #container {
 
-      .head {
-        padding: 1.625rem 1.875rem;
+  //     .head {
+  //       padding: 1.625rem 1.875rem;
 
-        .text {
-          font-size: 1.6875em;
-        }
-      }
+  //       .text {
+  //         font-size: 1.6875em;
+  //       }
+  //     }
 
-      .content {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-evenly;
-        margin-top: 5.625rem;
-        margin-bottom: 4.125rem;
+  //     .content {
+  //       display: flex;
+  //       flex-wrap: wrap;
+  //       justify-content: space-evenly;
+  //       margin-top: 5.625rem;
+  //       margin-bottom: 4.125rem;
 
-        .training {
-          margin-bottom: 0.3125rem;
-          width: 50%;
-          max-width: 50%;
+  //       .training {
+  //         margin-bottom: 0.3125rem;
+  //         width: 50%;
+  //         max-width: 50%;
 
-          &:last-child {
-            margin-bottom: 0.325rem;
-          }
+  //         &:last-child {
+  //           margin-bottom: 0.325rem;
+  //         }
 
-          .left {
-            padding: 1rem 1.5rem;
-            min-width: 50%;
-            max-width: 50%;
+  //         .left {
+  //           padding: 1rem 1.5rem;
+  //           min-width: 50%;
+  //           max-width: 50%;
 
-            span {
-              font-size: 2.25em;
-            }
-          }
+  //           span {
+  //             font-size: 2.25em;
+  //           }
+  //         }
 
-          .right {
-            border-left: 0.1875rem dashed #35AEE2;
-            padding: 3rem 0.75rem 1.75rem;
-            min-width: 50%;
-            max-width: 50%;
+  //         .right {
+  //           border-left: 0.1875rem dashed #35AEE2;
+  //           padding: 3rem 0.75rem 1.75rem;
+  //           min-width: 50%;
+  //           max-width: 50%;
 
-            .txt {
-              font-size: 1.25em;
-            }
+  //           .txt {
+  //             font-size: 1.25em;
+  //           }
 
-            .date {
-              font-size: 1.4375em;
-              margin-top: 1rem;
-            }
+  //           .date {
+  //             font-size: 1.4375em;
+  //             margin-top: 1rem;
+  //           }
 
-            .icon-see {
-              margin-top: 2.25rem;
-              margin-right: 0.75rem;
-              font-size: 1em;
-            }
-          }
-        }
-      }
-    }
-  }
-  // width 1025px (Desktop)
+  //           .icon-see {
+  //             margin-top: 2.25rem;
+  //             margin-right: 0.75rem;
+  //             font-size: 1em;
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+  // // width 1025px (Desktop)
 </style>
 
 <script>
