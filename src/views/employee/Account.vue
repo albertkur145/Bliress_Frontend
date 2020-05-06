@@ -29,6 +29,13 @@
       <div class="profile-info">
         <div class="form-group">
           <fieldset>
+            <legend>Batch</legend>
+            <p class="value batch">2</p>
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <fieldset>
             <legend>Nama lengkap</legend>
             <p class="value name">Albert Kurniawan</p>
           </fieldset>
@@ -91,7 +98,6 @@
   #container {
     font-family: 'Roboto';
     max-width: 100%;
-    min-height: 100vh;
     background-color: #F2F2F2;
 
     .head {

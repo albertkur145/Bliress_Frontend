@@ -23,11 +23,6 @@
         <div class="message">{{ message }}</div>
         <hr>
       </div>
-      <div class="notif">
-        <div class="title">Reminder - Training</div>
-        <div class="message">{{ message }}</div>
-        <hr>
-      </div>
     </div>
     <!-- end content -->
 
