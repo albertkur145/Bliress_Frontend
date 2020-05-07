@@ -12,105 +12,105 @@
       <!-- list training test -->
       <div class="tests">
         <!-- training test -->
-        <div class="training-test">
+        <router-link to="/test/detail/1" class="training-test">
           <div class="img-test">
             <img src="../../assets/images/test1.png">
           </div>
 
           <div class="info">
             <p class="txt-training">Training 1</p>
-            <p class="available">Closed</p>
-          </div>
-
-          <div class="show">
-            <font-awesome-icon icon="arrow-right"></font-awesome-icon>
-          </div>
-        </div>
-        <!-- training test -->
-
-        <!-- training test -->
-        <div class="training-test">
-          <div class="img-test">
-            <img src="../../assets/images/test2.png">
-          </div>
-
-          <div class="info">
-            <p class="txt-training">Training 2</p>
-            <p class="available">Closed</p>
-          </div>
-
-          <div class="show">
-            <font-awesome-icon icon="arrow-right"></font-awesome-icon>
-          </div>
-        </div>
-        <!-- training test -->
-
-        <!-- training test -->
-        <div class="training-test">
-          <div class="img-test">
-            <img src="../../assets/images/test3.png">
-          </div>
-
-          <div class="info">
-            <p class="txt-training">Training 3</p>
             <p class="available">Available</p>
           </div>
 
           <div class="show">
             <font-awesome-icon icon="arrow-right"></font-awesome-icon>
           </div>
-        </div>
+        </router-link>
         <!-- training test -->
 
         <!-- training test -->
-        <div class="training-test">
+        <router-link to="/test/detail/2" class="training-test">
+          <div class="img-test">
+            <img src="../../assets/images/test2.png">
+          </div>
+
+          <div class="info">
+            <p class="txt-training">Training 2</p>
+            <p class="available">Available</p>
+          </div>
+
+          <div class="show">
+            <font-awesome-icon icon="arrow-right"></font-awesome-icon>
+          </div>
+        </router-link>
+        <!-- training test -->
+
+        <!-- training test -->
+        <router-link to="/test/detail/3" class="training-test">
+          <div class="img-test">
+            <img src="../../assets/images/test3.png">
+          </div>
+
+          <div class="info">
+            <p class="txt-training">Training 3</p>
+            <p class="available">Closed</p>
+          </div>
+
+          <div class="show">
+            <font-awesome-icon icon="arrow-right"></font-awesome-icon>
+          </div>
+        </router-link>
+        <!-- training test -->
+
+        <!-- training test -->
+        <router-link to="/test/detail/4" class="training-test">
           <div class="img-test">
             <img src="../../assets/images/test4.png">
           </div>
 
           <div class="info">
             <p class="txt-training">Training 4</p>
-            <p class="available">Waiting</p>
+            <p class="available">Closed</p>
           </div>
 
           <div class="show">
             <font-awesome-icon icon="arrow-right"></font-awesome-icon>
           </div>
-        </div>
+        </router-link>
         <!-- training test -->
 
         <!-- training test -->
-        <div class="training-test">
+        <router-link to="/test/detail/5" class="training-test">
           <div class="img-test">
             <img src="../../assets/images/test5.png">
           </div>
 
           <div class="info">
             <p class="txt-training">Training 5</p>
-            <p class="available">Waiting</p>
+            <p class="available">Closed</p>
           </div>
 
           <div class="show">
             <font-awesome-icon icon="arrow-right"></font-awesome-icon>
           </div>
-        </div>
+        </router-link>
         <!-- training test -->
 
         <!-- training test -->
-        <div class="training-test">
+        <router-link to="/test/detail/6" class="training-test">
           <div class="img-test">
             <img src="../../assets/images/test6.png">
           </div>
 
           <div class="info">
             <p class="txt-training">Training 6</p>
-            <p class="available">Waiting</p>
+            <p class="available">Closed</p>
           </div>
 
           <div class="show">
             <font-awesome-icon icon="arrow-right"></font-awesome-icon>
           </div>
-        </div>
+        </router-link>
         <!-- training test -->
       </div>
       <!-- list training test -->
@@ -160,6 +160,7 @@
           align-items: center;
           box-sizing: border-box;
           background-color: #FFF;
+          text-decoration: none;
           width: 100%;
           border-radius: 1rem;
           cursor: pointer;
