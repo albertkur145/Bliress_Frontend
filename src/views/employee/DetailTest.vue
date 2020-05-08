@@ -30,7 +30,7 @@
           <div class="txt date-available">Tersedia pada 15 September 2020</div>
           <div class="txt date-closed">Ditutup pada 18 September 2020</div>
           <div class="txt time">Batas waktu: 45 menit</div>
-          <button class="btn-start">Start !</button>
+          <button class="btn-start" @click="redirectToQuestion">Start !</button>
         </div>
         <!-- test -->
 
@@ -40,7 +40,7 @@
           <div class="txt date-available">Tersedia pada 20 September 2020</div>
           <div class="txt date-closed">Ditutup pada 22 September 2020</div>
           <div class="txt time">Batas waktu: 60 menit</div>
-          <button class="btn-start">Start !</button>
+          <button class="btn-start" @click="redirectToQuestion">Start !</button>
         </div>
         <!-- test -->
 
@@ -289,6 +289,9 @@ export default {
   methods: {
     getWindowWidth() {
       this.windowWidth = window.innerWidth;
+    },
+    redirectToQuestion() {
+      this.$router.push({ name: 'Question', params: { material: '14', id: '1' } });
     },
   },
 
