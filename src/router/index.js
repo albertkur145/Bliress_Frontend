@@ -44,6 +44,11 @@ const routes = [
     name: 'Question',
     component: () => import('../views/employee/Question.vue'),
   },
+  {
+    path: '/qrcodereader',
+    name: 'QRCodeReader',
+    component: () => import('../views/employee/QRCodeReader.vue'),
+  },
 ];
 
 const router = new VueRouter({

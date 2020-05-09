@@ -5,7 +5,12 @@
       <router-link to="/training" class="back">
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
       </router-link>
+
       <div class="text">Training</div>
+
+      <router-link to="/qrcodereader" class="qr-code-reader">
+        <font-awesome-icon icon="qrcode"></font-awesome-icon>
+      </router-link>
     </div>
     <!-- end head -->
 
@@ -148,6 +153,14 @@
       .text {
         font-size: 1.125em;
       }
+
+      .qr-code-reader {
+        position: absolute;
+        color: #FFF;
+        top: 31%;
+        right: 5%;
+        font-size: 1.0625em;
+      }
     }
 
     .content {
@@ -256,6 +269,12 @@
         .text {
           font-size: 1.125em;
         }
+
+        .qr-code-reader {
+          top: 31%;
+          right: 5%;
+          font-size: 1.0625em;
+        }
       }
 
       .content {
@@ -340,6 +359,12 @@
 
         .text {
           font-size: 1.25em;
+        }
+
+        .qr-code-reader {
+          top: 31%;
+          right: 3.5%;
+          font-size: 1.1875em;
         }
       }
 
