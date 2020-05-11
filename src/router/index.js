@@ -49,6 +49,11 @@ const routes = [
     name: 'QRCodeReader',
     component: () => import('../views/employee/QRCodeReader.vue'),
   },
+  {
+    path: '/admin/batch',
+    name: 'AdminBatch',
+    component: () => import('../views/admin/Batch.vue'),
+  },
 ];
 
 const router = new VueRouter({
