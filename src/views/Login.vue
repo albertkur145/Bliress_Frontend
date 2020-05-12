@@ -282,7 +282,7 @@ export default {
       this.windowWidth = window.innerWidth;
     },
     login() {
-      this.$router.push({ name: 'Training' });
+      this.$router.push({ name: 'AdminBatch' });
     },
   },
 

@@ -11,47 +11,47 @@
     <div class="content">
       <!-- list of batch -->
       <div class="batch-list">
-        <router-link to="/" class="batch">
+        <router-link to="/admin/batch/detail/1" class="batch">
           <div class="txt">Batch 1</div>
           <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
         </router-link>
 
-        <router-link to="/" class="batch">
+        <router-link to="/admin/batch/detail/2" class="batch">
           <div class="txt">Batch 2</div>
           <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
         </router-link>
 
-        <router-link to="/" class="batch">
+        <router-link to="/admin/batch/detail/3" class="batch">
           <div class="txt">Batch 3</div>
           <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
         </router-link>
 
-        <router-link to="/" class="batch">
+        <router-link to="/admin/batch/detail/4" class="batch">
           <div class="txt">Batch 4</div>
           <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
         </router-link>
 
-        <router-link to="/" class="batch">
+        <router-link to="/admin/batch/detail/5" class="batch">
           <div class="txt">Batch 5</div>
           <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
         </router-link>
 
-        <router-link to="/" class="batch">
+        <router-link to="/admin/batch/detail/6" class="batch">
           <div class="txt">Batch 6</div>
           <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
         </router-link>
 
-        <router-link to="/" class="batch">
+        <router-link to="/admin/batch/detail/7" class="batch">
           <div class="txt">Batch 7</div>
           <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
         </router-link>
 
-        <router-link to="/" class="batch">
+        <router-link to="/admin/batch/detail/8" class="batch">
           <div class="txt">Batch 8</div>
           <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
         </router-link>
 
-        <router-link to="/" class="batch">
+        <router-link to="/admin/batch/detail/9" class="batch">
           <div class="txt">Batch 9</div>
           <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
         </router-link>

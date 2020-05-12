@@ -54,6 +54,11 @@ const routes = [
     name: 'AdminBatch',
     component: () => import('../views/admin/Batch.vue'),
   },
+  {
+    path: '/admin/batch/detail/:id',
+    name: 'AdminDetailBatch',
+    component: () => import('../views/admin/DetailBatch.vue'),
+  },
 ];
 
 const router = new VueRouter({
