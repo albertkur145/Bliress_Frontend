@@ -3,7 +3,9 @@
     <!-- head -->
     <div class="head">
       <div class="text">Batch</div>
-      <font-awesome-icon icon="plus-circle" class="icon-plus"></font-awesome-icon>
+      <router-link to="/">
+        <font-awesome-icon icon="plus-circle" class="icon-plus"></font-awesome-icon>
+      </router-link>
     </div>
     <!-- end head -->
 
@@ -11,47 +13,47 @@
     <div class="content">
       <!-- list of batch -->
       <div class="batch-list">
-        <router-link to="/admin/batch/detail/1" class="batch">
+        <router-link to="/admin/batch/1" class="batch">
           <div class="txt">Batch 1</div>
           <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
         </router-link>
 
-        <router-link to="/admin/batch/detail/2" class="batch">
+        <router-link to="/admin/batch/2" class="batch">
           <div class="txt">Batch 2</div>
           <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
         </router-link>
 
-        <router-link to="/admin/batch/detail/3" class="batch">
+        <router-link to="/admin/batch/3" class="batch">
           <div class="txt">Batch 3</div>
           <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
         </router-link>
 
-        <router-link to="/admin/batch/detail/4" class="batch">
+        <router-link to="/admin/batch/4" class="batch">
           <div class="txt">Batch 4</div>
           <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
         </router-link>
 
-        <router-link to="/admin/batch/detail/5" class="batch">
+        <router-link to="/admin/batch/5" class="batch">
           <div class="txt">Batch 5</div>
           <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
         </router-link>
 
-        <router-link to="/admin/batch/detail/6" class="batch">
+        <router-link to="/admin/batch/6" class="batch">
           <div class="txt">Batch 6</div>
           <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
         </router-link>
 
-        <router-link to="/admin/batch/detail/7" class="batch">
+        <router-link to="/admin/batch/7" class="batch">
           <div class="txt">Batch 7</div>
           <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
         </router-link>
 
-        <router-link to="/admin/batch/detail/8" class="batch">
+        <router-link to="/admin/batch/8" class="batch">
           <div class="txt">Batch 8</div>
           <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
         </router-link>
 
-        <router-link to="/admin/batch/detail/9" class="batch">
+        <router-link to="/admin/batch/9" class="batch">
           <div class="txt">Batch 9</div>
           <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
         </router-link>
@@ -95,7 +97,7 @@
       }
 
       .icon-plus {
-        cursor: pointer;
+        color: #FFF;
         font-size: 1.1875em;
       }
     }

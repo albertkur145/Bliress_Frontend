@@ -2,7 +2,7 @@
   <div id="container">
     <!-- head -->
     <div class="head">
-      <router-link to="/admin/batch" class="back">
+      <router-link class="back" :to="{ name: 'AdminBatch' }">
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
         <span class="text">Batch {{ id }}</span>
       </router-link>
@@ -17,7 +17,9 @@
       <div class="training">
         <div class="top">
           <span class="txt">Training</span>
-          <router-link to="/admin/batch" class="see">Lihat</router-link>
+          <router-link :to="{ name: 'AdminTraining', params: { id: id } }" class="see">
+            Lihat
+          </router-link>
         </div>
 
         <div class="list">
@@ -40,7 +42,9 @@
       <div class="employee">
         <div class="top">
           <span class="txt">Pegawai</span>
-          <router-link to="/admin/batch" class="see">Lihat</router-link>
+          <router-link :to="{ name: 'AdminTraining', params: { id: id } }" class="see">
+            Lihat
+          </router-link>
         </div>
 
         <div class="table">
@@ -122,6 +126,7 @@
       padding: 0.875rem 1rem;
 
       .back {
+        cursor: pointer;
         text-decoration: none;
         color: #FFF;
         font-size: 1.0625em;
@@ -453,6 +458,7 @@ export default {
   created() {
     this.id = this.$route.params.id;
   },
+
 };
 
 </script>

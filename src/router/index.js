@@ -45,19 +45,19 @@ const routes = [
     component: () => import('../views/employee/Question.vue'),
   },
   {
-    path: '/qrcodereader',
-    name: 'QRCodeReader',
-    component: () => import('../views/employee/QRCodeReader.vue'),
-  },
-  {
     path: '/admin/batch',
     name: 'AdminBatch',
     component: () => import('../views/admin/Batch.vue'),
   },
   {
-    path: '/admin/batch/detail/:id',
+    path: '/admin/batch/:id',
     name: 'AdminDetailBatch',
     component: () => import('../views/admin/DetailBatch.vue'),
+  },
+  {
+    path: '/admin/batch/:id/training',
+    name: 'AdminTraining',
+    component: () => import('../views/admin/Training.vue'),
   },
 ];
 
