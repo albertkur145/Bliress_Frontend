@@ -174,7 +174,7 @@
           justify-content: center;
           align-items: center;
           box-sizing: border-box;
-          background-image: url('../../assets/background/bg-linear-xs.svg');
+          background-image: url('../../../assets/background/bg-linear-xs.svg');
           background-size: cover;
           background-repeat: no-repeat;
           padding: 0;

@@ -12,57 +12,57 @@ const routes = [
   {
     path: '/training',
     name: 'Training',
-    component: () => import('../views/employee/Training.vue'),
+    component: () => import('../views/employee/training/Training.vue'),
   },
   {
     path: '/training/detail',
     name: 'DetailTraining',
-    component: () => import('../views/employee/DetailTraining.vue'),
+    component: () => import('../views/employee/training/DetailTraining.vue'),
   },
   {
     path: '/account',
     name: 'Account',
-    component: () => import('../views/employee/Account.vue'),
+    component: () => import('../views/employee/account/Account.vue'),
   },
   {
     path: '/notification',
     name: 'Notification',
-    component: () => import('../views/employee/Notification.vue'),
+    component: () => import('../views/employee/notification/Notification.vue'),
   },
   {
     path: '/test',
     name: 'Test',
-    component: () => import('../views/employee/Test.vue'),
+    component: () => import('../views/employee/test/Test.vue'),
   },
   {
     path: '/test/detail/:id',
     name: 'DetailTest',
-    component: () => import('../views/employee/DetailTest.vue'),
+    component: () => import('../views/employee/test/DetailTest.vue'),
   },
   {
     path: '/test/:material/question/:id',
     name: 'Question',
-    component: () => import('../views/employee/Question.vue'),
+    component: () => import('../views/employee/test/Question.vue'),
   },
   {
     path: '/admin/batch',
     name: 'AdminBatch',
-    component: () => import('../views/admin/Batch.vue'),
+    component: () => import('../views/admin/batch/Batch.vue'),
   },
   {
     path: '/admin/batch/:id',
     name: 'AdminDetailBatch',
-    component: () => import('../views/admin/DetailBatch.vue'),
+    component: () => import('../views/admin/batch/DetailBatch.vue'),
   },
   {
     path: '/admin/batch/:id/training',
     name: 'AdminTraining',
-    component: () => import('../views/admin/Training.vue'),
+    component: () => import('../views/admin/batch/Training.vue'),
   },
   {
     path: '/admin/batch/:id/training/add',
     name: 'AdminAddTraining',
-    component: () => import('../views/admin/AddTraining.vue'),
+    component: () => import('../views/admin/batch/AddTraining.vue'),
   },
 ];
 
