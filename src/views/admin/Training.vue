@@ -7,7 +7,7 @@
         <span class="text">Training</span>
       </router-link>
 
-      <router-link to="/admin/batch/detail/training/add">
+      <router-link :to="{ name: 'AdminAddTraining', params: { id: id } }">
         <font-awesome-icon icon="plus-circle" class="icon-plus"></font-awesome-icon>
       </router-link>
     </div>
@@ -36,7 +36,7 @@
 
           <div class="action">
             <div>
-              <font-awesome-icon icon="pen" class="edit-icon"></font-awesome-icon>
+              <font-awesome-icon icon="pen" class="edit-icon" @click="redirectAddTraining"></font-awesome-icon>
               <font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon>
             </div>
           </div>
@@ -58,7 +58,7 @@
 
           <div class="action">
             <div>
-              <font-awesome-icon icon="pen" class="edit-icon"></font-awesome-icon>
+              <font-awesome-icon icon="pen" class="edit-icon" @click="redirectAddTraining"></font-awesome-icon>
               <font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon>
             </div>
           </div>
@@ -80,7 +80,7 @@
 
           <div class="action">
             <div>
-              <font-awesome-icon icon="pen" class="edit-icon"></font-awesome-icon>
+              <font-awesome-icon icon="pen" class="edit-icon" @click="redirectAddTraining"></font-awesome-icon>
               <font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon>
             </div>
           </div>
@@ -102,7 +102,7 @@
 
           <div class="action">
             <div>
-              <font-awesome-icon icon="pen" class="edit-icon"></font-awesome-icon>
+              <font-awesome-icon icon="pen" class="edit-icon" @click="redirectAddTraining"></font-awesome-icon>
               <font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon>
             </div>
           </div>
@@ -124,7 +124,7 @@
 
           <div class="action">
             <div>
-              <font-awesome-icon icon="pen" class="edit-icon"></font-awesome-icon>
+              <font-awesome-icon icon="pen" class="edit-icon" @click="redirectAddTraining"></font-awesome-icon>
               <font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon>
             </div>
           </div>
@@ -146,7 +146,7 @@
 
           <div class="action">
             <div>
-              <font-awesome-icon icon="pen" class="edit-icon"></font-awesome-icon>
+              <font-awesome-icon icon="pen" class="edit-icon" @click="redirectAddTraining"></font-awesome-icon>
               <font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon>
             </div>
           </div>
@@ -196,7 +196,7 @@
 
       .icon-plus {
         color: #FFF;
-        font-size: 1.1875em;
+        font-size: 1.125em;
       }
     }
 
@@ -492,6 +492,12 @@ export default {
     return {
       id: '',
     };
+  },
+
+  methods: {
+    redirectAddTraining() {
+      this.$router.push({ name: 'AdminAddTraining', params: { id: this.id } });
+    },
   },
 
   created() {

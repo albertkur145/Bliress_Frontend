@@ -59,6 +59,11 @@ const routes = [
     name: 'AdminTraining',
     component: () => import('../views/admin/Training.vue'),
   },
+  {
+    path: '/admin/batch/:id/training/add',
+    name: 'AdminAddTraining',
+    component: () => import('../views/admin/AddTraining.vue'),
+  },
 ];
 
 const router = new VueRouter({

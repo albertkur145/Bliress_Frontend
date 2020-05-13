@@ -98,7 +98,7 @@
 
       .icon-plus {
         color: #FFF;
-        font-size: 1.1875em;
+        font-size: 1.125em;
       }
     }
 
