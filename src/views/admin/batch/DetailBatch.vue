@@ -42,7 +42,7 @@
       <div class="employee">
         <div class="top">
           <span class="txt">Pegawai</span>
-          <router-link :to="{ name: 'AdminTraining', params: { id: id } }" class="see">
+          <router-link :to="{ name: 'AdminEmployee', params: { id: id } }" class="see">
             Lihat
           </router-link>
         </div>
