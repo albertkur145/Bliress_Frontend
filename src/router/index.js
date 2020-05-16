@@ -60,6 +60,11 @@ const routes = [
     component: () => import('../views/admin/batch/Training.vue'),
   },
   {
+    path: '/admin/batch/:id/training/:training/attendance',
+    name: 'AdminAttendance',
+    component: () => import('../views/admin/batch/Attendance.vue'),
+  },
+  {
     path: '/admin/batch/:id/training/add',
     name: 'AdminAddTraining',
     component: () => import('../views/admin/batch/AddTraining.vue'),

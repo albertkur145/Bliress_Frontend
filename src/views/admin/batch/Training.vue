@@ -32,6 +32,7 @@
             <p class="time">08.00 - 16.00 WIB</p>
             <p class="trainer">Trainer: Rudi Santoso</p>
             <p class="location">di Gedung Serbaguna, Ruang 315 C Sarana Jaya</p>
+            <button class="btn-attendance" @click="redirectAttendance(1)">Absensi</button>
           </div>
 
           <div class="action">
@@ -54,6 +55,7 @@
             <p class="time">12.00 - 15.00 WIB</p>
             <p class="trainer">Trainer: Alvin Wijaya</p>
             <p class="location">di Gedung Ropoko, Ruang 54 Sarana Jaya</p>
+            <button class="btn-attendance" @click="redirectAttendance(2)">Absensi</button>
           </div>
 
           <div class="action">
@@ -76,6 +78,7 @@
             <p class="time">09.00 - 13.00 WIB</p>
             <p class="trainer">Trainer: Angelia Yoh</p>
             <p class="location">di Hotel British, Lt. 42 Ruang Anggrek</p>
+            <button class="btn-attendance" @click="redirectAttendance(3)">Absensi</button>
           </div>
 
           <div class="action">
@@ -98,6 +101,7 @@
             <p class="time">16.00 - 20.00 WIB</p>
             <p class="trainer">Trainer: Yuli Permata</p>
             <p class="location">di Gedung Serbaguna, R. 315 C Sarana Jaya</p>
+            <button class="btn-attendance" @click="redirectAttendance(4)">Absensi</button>
           </div>
 
           <div class="action">
@@ -120,6 +124,7 @@
             <p class="time">07.00 - 18.00 WIB</p>
             <p class="trainer">Trainer: Randika</p>
             <p class="location">di Hotel Aston, Lt. 24 Meeting Room 5</p>
+            <button class="btn-attendance" @click="redirectAttendance(5)">Absensi</button>
           </div>
 
           <div class="action">
@@ -142,6 +147,7 @@
             <p class="time">09.00 - 15.00 WIB</p>
             <p class="trainer">Trainer: Simon Keyli</p>
             <p class="location">di Gedung Ropoko, Ruang 54 Sarana Jaya</p>
+            <button class="btn-attendance" @click="redirectAttendance(6)">Absensi</button>
           </div>
 
           <div class="action">
@@ -273,6 +279,26 @@
               margin-top: 1.5rem;
               font-size: 0.8125em;
             }
+
+            .btn-attendance {
+              font-family: 'Roboto';
+              min-width: 100%;
+              max-width: 100%;
+              background-color: rgba(112, 111, 211, 0.95);
+              color: #FFF;
+              cursor: pointer;
+              outline: none;
+              border: 0;
+              border-radius: 50rem;
+              transition: background-color .2s ease-out;
+              margin-top: 1rem;
+              padding: 0.625rem;
+              font-size: 0.8125em;
+
+              &:hover {
+                background-color: rgba(112, 111, 211, 1);
+              }
+            }
           }
 
           .action {
@@ -371,6 +397,11 @@
               .location {
                 font-size: 0.9375em;
               }
+
+              .btn-attendance {
+                padding: 0.6875rem;
+                font-size: 0.875em;
+              }
             }
 
             .action {
@@ -456,6 +487,11 @@
               .location {
                 font-size: 1em;
               }
+
+              .btn-attendance {
+                padding: 0.75rem;
+                font-size: 0.9375em;
+              }
             }
 
             .action {
@@ -497,6 +533,15 @@ export default {
   methods: {
     redirectAddTraining() {
       this.$router.push({ name: 'AdminAddTraining', params: { id: this.id } });
+    },
+    redirectAttendance(training) {
+      this.$router.push({
+        name: 'AdminAttendance',
+        params: {
+          id: this.id,
+          training,
+        },
+      });
     },
   },
 
