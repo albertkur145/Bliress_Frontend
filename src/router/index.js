@@ -79,6 +79,11 @@ const routes = [
     name: 'AdminAddEmployee',
     component: () => import('../views/admin/batch/AddEmployee.vue'),
   },
+  {
+    path: '/admin/test',
+    name: 'AdminTest',
+    component: () => import('../views/admin/test/Test.vue'),
+  },
 ];
 
 const router = new VueRouter({
