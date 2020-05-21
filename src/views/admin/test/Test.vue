@@ -11,317 +11,15 @@
 
       <!-- batch -->
       <div class="batch-list">
-        <div class="batch batch-1">
-          <div class="general" @click="showDetailTraining('batch-1')">
-            <div class="txt">Batch 1</div>
+        <div :class="'batch batch-' + batch.batch" v-for="(batch, index) in batchList" :key="index">
+          <div class="general" @click="showDetailTraining(`batch-${batch.batch}`)">
+            <div class="txt">Batch {{ batch.batch }}</div>
             <font-awesome-icon icon="chevron-down" class="chev-icon"></font-awesome-icon>
           </div>
 
           <div class="detail">
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 1
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 2
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 3
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 4
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 5
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 6
-              </router-link>
-            </div>
-          </div>
-        </div>
-
-        <div class="batch batch-2">
-          <div class="general" @click="showDetailTraining('batch-2')">
-            <div class="txt">Batch 2</div>
-            <font-awesome-icon icon="chevron-down" class="chev-icon"></font-awesome-icon>
-          </div>
-
-          <div class="detail">
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 1
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 2
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 3
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 4
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 5
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 6
-              </router-link>
-            </div>
-          </div>
-        </div>
-
-        <div class="batch batch-3">
-          <div class="general" @click="showDetailTraining('batch-3')">
-            <div class="txt">Batch 3</div>
-            <font-awesome-icon icon="chevron-down" class="chev-icon"></font-awesome-icon>
-          </div>
-
-          <div class="detail">
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 1
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 2
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 3
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 4
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 5
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 6
-              </router-link>
-            </div>
-          </div>
-        </div>
-
-        <div class="batch batch-4">
-          <div class="general" @click="showDetailTraining('batch-4')">
-            <div class="txt">Batch 4</div>
-            <font-awesome-icon icon="chevron-down" class="chev-icon"></font-awesome-icon>
-          </div>
-
-          <div class="detail">
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 1
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 2
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 3
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 4
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 5
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 6
-              </router-link>
-            </div>
-          </div>
-        </div>
-
-        <div class="batch batch-5">
-          <div class="general" @click="showDetailTraining('batch-5')">
-            <div class="txt">Batch 5</div>
-            <font-awesome-icon icon="chevron-down" class="chev-icon"></font-awesome-icon>
-          </div>
-
-          <div class="detail">
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 1
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 2
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 3
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 4
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 5
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 6
-              </router-link>
-            </div>
-          </div>
-        </div>
-
-        <div class="batch batch-6">
-          <div class="general" @click="showDetailTraining('batch-6')">
-            <div class="txt">Batch 6</div>
-            <font-awesome-icon icon="chevron-down" class="chev-icon"></font-awesome-icon>
-          </div>
-
-          <div class="detail">
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 1
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 2
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 3
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 4
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 5
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 6
-              </router-link>
-            </div>
-          </div>
-        </div>
-
-        <div class="batch batch-7">
-          <div class="general" @click="showDetailTraining('batch-7')">
-            <div class="txt">Batch 7</div>
-            <font-awesome-icon icon="chevron-down" class="chev-icon"></font-awesome-icon>
-          </div>
-
-          <div class="detail">
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 1
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 2
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 3
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 4
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 5
-              </router-link>
-            </div>
-
-            <div class="training">
-              <router-link class="txt" :to="{ name:'AdminDetailTest' }">
-                Training 6
-              </router-link>
+            <div class="training" v-for="(training, index) in batch.training" :key="index" @click="redirectToDetail(batch.batch, training)">
+              <span class="txt">Training {{ training }}</span>
             </div>
           </div>
         </div>
@@ -406,18 +104,15 @@
           .detail {
             display: none;
             background-color: #FFF;
+            transition: height .5s ease-in-out;
 
             .training {
-              display: flex;
-              justify-content: space-between;
-              text-align: center;
               cursor: pointer;
               border-bottom: 0.0625rem solid #DDD;
               padding: 0.8125rem 1rem;
 
               .txt {
                 color: #333;
-                text-decoration: none;
                 font-size: 0.8125em;
               }
             }
@@ -541,6 +236,49 @@ export default {
     MenuBar,
   },
 
+  data() {
+    return {
+      batchList: [
+        {
+          batch: '1',
+          training: ['1', '2', '3', '4', '5', '6'],
+        },
+        {
+          batch: '2',
+          training: ['1', '2', '3', '4', '5', '6'],
+        },
+        {
+          batch: '3',
+          training: ['1', '2', '3', '4', '5', '6'],
+        },
+        {
+          batch: '4',
+          training: ['1', '2', '3', '4', '5', '6'],
+        },
+        {
+          batch: '5',
+          training: ['1', '2', '3', '4', '5', '6'],
+        },
+        {
+          batch: '6',
+          training: ['1', '2', '3', '4', '5', '6'],
+        },
+        {
+          batch: '7',
+          training: ['1', '2', '3', '4', '5', '6'],
+        },
+        {
+          batch: '8',
+          training: ['1', '2', '3', '4', '5', '6'],
+        },
+        {
+          batch: '9',
+          training: ['1', '2', '3', '4', '5', '6'],
+        },
+      ],
+    };
+  },
+
   methods: {
     showDetailTraining(el) {
       const target = document.querySelector(`.${el}`);
@@ -551,6 +289,15 @@ export default {
       general.classList.toggle('general-active');
       chevIcon.classList.toggle('chev-icon-rotate');
       detail.classList.toggle('display-block');
+    },
+    redirectToDetail(batch, training) {
+      this.$router.push({
+        name: 'AdminDetailTest',
+        params: {
+          batch,
+          training,
+        },
+      });
     },
   },
 

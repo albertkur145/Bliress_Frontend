@@ -84,6 +84,11 @@ const routes = [
     name: 'AdminTest',
     component: () => import('../views/admin/test/Test.vue'),
   },
+  {
+    path: '/admin/test/batch/:batch/training/:training',
+    name: 'AdminDetailTest',
+    component: () => import('../views/admin/test/DetailTest.vue'),
+  },
 ];
 
 const router = new VueRouter({
