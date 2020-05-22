@@ -140,6 +140,7 @@
     background-color: #F2F2F2;
 
     .head {
+      box-sizing: border-box;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -268,6 +269,8 @@
     #container {
 
       .head {
+        max-width: 481px;
+        margin: 0 auto;
         padding: 1.1875rem 1.5rem;
 
         .back {

@@ -106,6 +106,8 @@
   // width >= 481px (Big Mobile, Tablet, Desktop)
   @media (min-width: 481px) {
     #menu {
+      max-width: 481px;
+      margin: 0 auto;
       box-shadow: 0 -0.0625rem 0.375rem rgba(0, 0, 0, 0.3);
       padding: 0.625rem 0 0.375rem;
 

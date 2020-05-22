@@ -89,6 +89,16 @@ const routes = [
     name: 'AdminDetailTest',
     component: () => import('../views/admin/test/DetailTest.vue'),
   },
+  {
+    path: '/admin/test/batch/:batch/training/:training/material/:material',
+    name: 'AdminReviewTest',
+    component: () => import('../views/admin/test/ReviewTest.vue'),
+  },
+  {
+    path: '/admin/test/batch/:batch/training/:training/material/:material/addtest',
+    name: 'AdminAddTest',
+    component: () => import('../views/admin/test/AddTest.vue'),
+  },
 ];
 
 const router = new VueRouter({

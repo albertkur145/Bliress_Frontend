@@ -26,15 +26,15 @@
           <div class="information">
             <div class="left">
               <p class="material-name">{{ value.name }}</p>
-              <p class="available-date"><span>(Open)</span> {{ value.date_available }}</p>
-              <p class="expired-date"><span>(Closed)</span> {{ value.date_closed }}</p>
-              <p class="time-limit">Limit: {{ value.limit_time }}</p>
+              <p class="available-date"><span>(Dibuka)</span> {{ value.date_available }}</p>
+              <p class="expired-date"><span>(Ditutup)</span> {{ value.date_closed }}</p>
+              <p class="time-limit">Batas: {{ value.limit_time }}</p>
             </div>
 
             <div class="right">
               <div>
-                <font-awesome-icon icon="pen" class="edit-icon"></font-awesome-icon>
-                <font-awesome-icon icon="times" class="delete-icon"></font-awesome-icon>
+                <font-awesome-icon icon="pen" class="edit-icon" @click="redirectToAddTest(index)"></font-awesome-icon>
+                <font-awesome-icon icon="eye" class="see-icon"></font-awesome-icon>
               </div>
             </div>
           </div>
@@ -58,6 +58,7 @@
     background-color: #F2F2F2;
 
     .head {
+      box-sizing: border-box;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -180,11 +181,11 @@
               font-size: 0.875em;
             }
 
-            .delete-icon {
-              color: #D63031;
+            .see-icon {
+              color: #2980B9;
               cursor: pointer;
               margin-left: 0.3125rem;
-              font-size: 1.125em;
+              font-size: 1.0625em;
             }
           }
 
@@ -268,7 +269,7 @@
                 font-size: 1em;
               }
 
-              .delete-icon {
+              .see-icon {
                 font-size: 1.25em;
               }
             }
@@ -288,6 +289,8 @@
     #container {
 
       .head {
+        max-width: 481px;
+        margin: 0 auto;
         padding: 1.1875rem 1.5rem;
 
         .back {
@@ -352,7 +355,7 @@
                 font-size: 1.0625em;
               }
 
-              .delete-icon {
+              .see-icon {
                 font-size: 1.3125em;
               }
             }
@@ -404,6 +407,19 @@ export default {
         },
       ],
     };
+  },
+
+  methods: {
+    redirectToAddTest(id) {
+      this.$router.push({
+        name: 'AdminAddTest',
+        params: {
+          batch: this.paramBatch,
+          training: this.paramTraining,
+          material: id,
+        },
+      });
+    },
   },
 
   created() {

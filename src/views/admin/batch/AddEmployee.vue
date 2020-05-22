@@ -147,6 +147,7 @@
     background-color: #FFF;
 
     .head {
+      box-sizing: border-box;
       position: fixed;
       z-index: 1;
       top: 0;
@@ -224,6 +225,7 @@
         }
 
         input {
+          box-sizing: border-box;
           font-family: 'Roboto';
           color: #444;
           outline: none;
@@ -408,6 +410,8 @@
     #container {
 
       .head {
+        max-width: 481px;
+        margin: 0 auto;
 
         .space-between {
           padding: 1.1875rem 1.5rem;

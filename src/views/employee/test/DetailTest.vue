@@ -80,6 +80,7 @@
     background-color: #F2F2F2;
 
     .head {
+      box-sizing: border-box;
       text-align: center;
       position: fixed;
       top: 0;
@@ -224,6 +225,8 @@
     #container {
 
       .head {
+        max-width: 481px;
+        margin: 0 auto;
         padding: 1.1875rem 1.5rem;
 
         .back {

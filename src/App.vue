@@ -15,7 +15,7 @@
   // width >= 481px (Big Mobile, Tablet, Desktop)
   @media (min-width: 481px) {
     #app {
-      width: 466px;
+      width: 481px;
       margin: 0 auto;
     }
   }
