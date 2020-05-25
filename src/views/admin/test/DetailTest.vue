@@ -34,7 +34,7 @@
             <div class="right">
               <div>
                 <font-awesome-icon icon="pen" class="edit-icon" @click="redirectToAddTest(index)"></font-awesome-icon>
-                <font-awesome-icon icon="eye" class="see-icon"></font-awesome-icon>
+                <font-awesome-icon icon="eye" class="see-icon" @click="redirectReviewTest(index)"></font-awesome-icon>
               </div>
             </div>
           </div>
@@ -413,6 +413,16 @@ export default {
     redirectToAddTest(id) {
       this.$router.push({
         name: 'AdminAddTest',
+        params: {
+          batch: this.paramBatch,
+          training: this.paramTraining,
+          material: id,
+        },
+      });
+    },
+    redirectReviewTest(id) {
+      this.$router.push({
+        name: 'AdminReviewTest',
         params: {
           batch: this.paramBatch,
           training: this.paramTraining,

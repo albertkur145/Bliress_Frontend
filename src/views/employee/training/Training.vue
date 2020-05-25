@@ -151,6 +151,7 @@
       color: #FFF;
       background-color: #0ABDE3;
       font-weight: 600;
+      z-index: 1;
       padding: 0.8125rem 1rem;
 
       .text {
