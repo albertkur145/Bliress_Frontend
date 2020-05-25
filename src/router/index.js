@@ -99,6 +99,16 @@ const routes = [
     name: 'AdminAddTest',
     component: () => import('../views/admin/test/AddTest.vue'),
   },
+  {
+    path: '/admin/notification',
+    name: 'AdminNotification',
+    component: () => import('../views/admin/notification/Notification.vue'),
+  },
+  {
+    path: '/admin/notification/add',
+    name: 'AdminAddNotification',
+    component: () => import('../views/admin/notification/AddNotification.vue'),
+  },
 ];
 
 const router = new VueRouter({

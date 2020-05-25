@@ -410,7 +410,7 @@
     #container {
 
       .head {
-        max-width: 481px;
+        max-width: 476px;
         margin: 0 auto;
 
         .space-between {

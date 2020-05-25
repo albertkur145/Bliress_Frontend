@@ -95,6 +95,7 @@
 
 <style lang="scss" scoped>
 
+  // global css
   #container {
     font-family: 'Roboto';
     max-width: 100%;
@@ -229,6 +230,7 @@
       }
     }
   }
+  // global css
 
   // width 320px - 480px (Mobile)
   @media (min-width: 320px) and (max-width: 480px) {
@@ -322,7 +324,7 @@
     #container {
 
       .head {
-        max-width: 481px;
+        max-width: 476px;
         margin: 0 auto;
         padding: 1.1875rem 1.5rem;
 
