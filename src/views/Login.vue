@@ -30,12 +30,6 @@
       <!-- btn login -->
     </div>
     <!-- end form -->
-
-    <!-- register link -->
-    <div class="register-link">
-      <span>Belum punya akun?</span> <router-link to="/register">Daftar disini</router-link>
-    </div>
-    <!-- end register link -->
   </div>
 </template>
 
@@ -139,22 +133,6 @@
         }
       }
     }
-
-    .register-link {
-      color: #FFF;
-      font-weight: 500;
-      margin-top: 0.75rem;
-      font-size: 0.8125em;
-
-      a {
-        color: #FFF;
-        transition: color .1s linear;
-
-        &:hover {
-          color: blueviolet;
-        }
-      }
-    }
   }
   // global css
 
@@ -202,11 +180,6 @@
           padding: 0.75rem;
           font-size: 0.9375em;
         }
-      }
-
-      .register-link {
-        margin-top: 0.875rem;
-        font-size: 0.875em;
       }
     }
   }
@@ -256,11 +229,6 @@
           padding: 1rem;
           font-size: 1em;
         }
-      }
-
-      .register-link {
-        margin-top: 1rem;
-        font-size: 1em;
       }
     }
   }

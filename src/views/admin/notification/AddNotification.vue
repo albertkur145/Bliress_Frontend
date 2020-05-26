@@ -124,7 +124,7 @@
             -webkit-appearance: none;
             color: #333;
             top: 0.4375rem;
-            width: 97%;
+            width: 100%;
             padding: 0.125rem 1rem 0 1.5rem;
             font-size: 0.875em;
           }
@@ -193,7 +193,6 @@
 
             .input-text {
               top: 0.4375rem;
-              width: 97%;
               padding: 0.125rem 1.25rem 0 2rem;
               font-size: 0.9375em;
             }
@@ -221,7 +220,7 @@
     #container {
 
       .head {
-        max-width: 476px;
+        max-width: 466px;
         margin: 0 auto;
         padding: 1.1875rem 1.5rem;
 
@@ -244,7 +243,6 @@
 
         .form-group {
           margin-bottom: 1.75rem;
-          max-width: 100%;
 
           fieldset {
             min-height: 3.5rem;
@@ -258,7 +256,6 @@
               top: 0.4375rem;
               padding: 0.375rem 1.25rem 0 2.25rem;
               font-size: 1.0625em;
-              width: 97%;
             }
 
             &.text-area {

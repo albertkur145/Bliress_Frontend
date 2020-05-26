@@ -109,6 +109,11 @@ const routes = [
     name: 'AdminAddNotification',
     component: () => import('../views/admin/notification/AddNotification.vue'),
   },
+  {
+    path: '/admin/employee',
+    name: 'AdminEmployee',
+    component: () => import('../views/admin/employee/Employee.vue'),
+  },
 ];
 
 const router = new VueRouter({

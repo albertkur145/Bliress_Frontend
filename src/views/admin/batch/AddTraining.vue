@@ -15,7 +15,7 @@
       <div class="form-group">
         <fieldset>
           <legend>Training ke</legend>
-          <select class="input-text">
+          <select class="input-text" id="training-input">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -29,21 +29,21 @@
       <div class="form-group">
         <fieldset>
           <legend>Tanggal</legend>
-          <input type="date" class="input-text" value="2020-01-01">
+          <input type="date" class="input-text" value="2020-01-01" id="date-input">
         </fieldset>
       </div>
 
       <div class="form-group">
         <fieldset class="text-area">
           <legend>Lokasi</legend>
-          <textarea class="input-area"></textarea>
+          <textarea class="input-area" id="location-input"></textarea>
         </fieldset>
       </div>
 
       <div class="form-group">
         <fieldset>
           <legend>Jam mulai</legend>
-          <select class="input-text">
+          <select class="input-text" id="timestart-input">
             <option value="06:00 WIB">06:00 WIB</option>
             <option value="07:00 WIB">07:00 WIB</option>
             <option value="08:00 WIB">08:00 WIB</option>
@@ -70,7 +70,7 @@
       <div class="form-group">
         <fieldset>
           <legend>Jam selesai</legend>
-          <select class="input-text">
+          <select class="input-text" id="timefinish-input">
             <option value="06:00 WIB">06:00 WIB</option>
             <option value="07:00 WIB">07:00 WIB</option>
             <option value="08:00 WIB">08:00 WIB</option>
@@ -97,7 +97,7 @@
       <div class="form-group">
         <fieldset>
           <legend>Trainer</legend>
-          <select class="input-text">
+          <select class="input-text" id="trainer-input">
             <option value="Andi Law">Andi Law</option>
             <option value="Rudi Hartono">Rudi Hartono</option>
             <option value="Heryanto Surya">Heryanto Surya</option>
@@ -107,6 +107,19 @@
           </select>
         </fieldset>
       </div>
+
+      <div class="form-group">
+        <fieldset>
+          <legend>Judul materi</legend>
+          <input type="text" class="input-text" id="material-input">
+        </fieldset>
+      </div>
+
+      <label for="file-input" class="upload-file">
+        <input type="file" id="file-input" @change="onFileChange">
+        <span class="upload-custom">Upload file</span>
+        <span class="file-name">{{ fileName }}</span>
+      </label>
     </div>
     <!-- end content -->
   </div>
@@ -188,7 +201,7 @@
             top: 0.4375rem;
             left: 0;
             bottom: 0;
-            width: 97%;
+            width: 100%;
             border: 0;
             outline: none;
             -webkit-appearance: none;
@@ -228,6 +241,32 @@
           }
         }
       }
+
+      .upload-file {
+        display: flex;
+        align-items: center;
+
+        input {
+          position: absolute;
+          opacity: 0;
+        }
+
+        .upload-custom {
+          text-transform: uppercase;
+          border: 0.0625rem dashed #218C74;
+          color: #218C74;
+          text-align: center;
+          border-radius: 0.75rem;
+          padding: 0.625rem 0.875rem;
+          font-size: 0.6875em;
+        }
+
+        .file-name {
+          color: #4B4B4B;
+          margin-left: 0.75rem;
+          font-size: 0.8125em;
+        }
+      }
     }
   }
   // global css
@@ -257,7 +296,6 @@
         padding: 1.5rem 1.25rem;
 
         .form-group {
-          max-width: 100%;
           margin-bottom: 1.5rem;
 
           fieldset {
@@ -272,7 +310,6 @@
               top: 0.4375rem;
               padding: 0.125rem 1.25rem 0 2rem;
               font-size: 0.9375em;
-              width: 97%;
 
               &[type=date] {
                 padding: 0.125rem 1.25rem 0 1.8125rem;
@@ -292,6 +329,18 @@
             }
           }
         }
+
+        .upload-file {
+
+          .upload-custom {
+            padding: 0.6875rem 0.9375rem;
+            font-size: 0.8125em;
+          }
+
+          .file-name {
+            font-size: 0.875em;
+          }
+        }
       }
     }
   }
@@ -302,7 +351,7 @@
     #container {
 
       .head {
-        max-width: 476px;
+        max-width: 466px;
         margin: 0 auto;
         padding: 1.1875rem 1.5rem;
 
@@ -325,7 +374,6 @@
 
         .form-group {
           margin-bottom: 1.75rem;
-          max-width: 100%;
 
           fieldset {
             min-height: 3.5rem;
@@ -339,7 +387,6 @@
               top: 0.4375rem;
               padding: 0.375rem 1.25rem 0 2.25rem;
               font-size: 1.0625em;
-              width: 97%;
 
               &[type=date] {
                 padding: 0.125rem 1.25rem 0 2.25rem;
@@ -359,6 +406,18 @@
             }
           }
         }
+
+        .upload-file {
+
+          .upload-custom {
+            padding: 0.75rem 1rem;
+            font-size: 0.875em;
+          }
+
+          .file-name {
+            font-size: 0.9375em;
+          }
+        }
       }
     }
   }
@@ -372,7 +431,14 @@ export default {
   data() {
     return {
       id: '',
+      fileName: '',
     };
+  },
+
+  methods: {
+    onFileChange(e) {
+      this.fileName = e.target.files[0].name;
+    },
   },
 
   created() {

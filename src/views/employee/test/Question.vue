@@ -231,7 +231,7 @@
     #container {
 
       .head {
-        max-width: 476px;
+        max-width: 466px;
         margin: 0 auto;
         padding: 1.1875rem 1.5rem;
 
