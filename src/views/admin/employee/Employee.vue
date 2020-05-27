@@ -4,7 +4,7 @@
     <!-- head -->
     <div class="head">
       <div class="text">Pegawai</div>
-      <router-link :to="{ name: 'AdminAddEmployee' }">
+      <router-link :to="{ name: 'AdminCreateEmployee' }">
         <font-awesome-icon icon="plus-circle" class="icon-plus"></font-awesome-icon>
       </router-link>
     </div>

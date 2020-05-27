@@ -111,8 +111,18 @@ const routes = [
   },
   {
     path: '/admin/employee',
-    name: 'AdminEmployee',
+    name: 'AdminMenuEmployee',
     component: () => import('../views/admin/employee/Employee.vue'),
+  },
+  {
+    path: '/admin/employee/create',
+    name: 'AdminCreateEmployee',
+    component: () => import('../views/admin/employee/CreateEmployee.vue'),
+  },
+  {
+    path: '/admin/employee/create/:id',
+    name: 'AdminCreateEmployee',
+    component: () => import('../views/admin/employee/CreateEmployee.vue'),
   },
 ];
 

@@ -4,7 +4,7 @@
     <div class="head">
       <router-link :to="{ name: 'AdminNotification' }" class="back">
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
-        <span class="text">Tambah Notifikasi</span>
+        <span class="text">Tambah</span>
       </router-link>
       <div class="save">Simpan</div>
     </div>

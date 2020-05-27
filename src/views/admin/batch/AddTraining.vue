@@ -307,7 +307,6 @@
             }
 
             .input-text {
-              top: 0.4375rem;
               padding: 0.125rem 1.25rem 0 2rem;
               font-size: 0.9375em;
 
@@ -384,7 +383,6 @@
             }
 
             .input-text {
-              top: 0.4375rem;
               padding: 0.375rem 1.25rem 0 2.25rem;
               font-size: 1.0625em;
 
