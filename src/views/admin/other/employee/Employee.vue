@@ -3,7 +3,11 @@
 
     <!-- head -->
     <div class="head">
-      <div class="text">Pegawai</div>
+      <router-link :to="{ name: 'AdminOther' }" class="back">
+        <font-awesome-icon icon="arrow-left"></font-awesome-icon>
+        <span class="text">Pegawai</span>
+      </router-link>
+
       <router-link :to="{ name: 'AdminCreateEmployee' }">
         <font-awesome-icon icon="plus-circle" class="icon-plus"></font-awesome-icon>
       </router-link>
@@ -46,8 +50,6 @@
     </div>
     <!-- end content -->
 
-    <MenuBar></MenuBar>
-
   </div>
 </template>
 
@@ -70,15 +72,19 @@
       left: 0;
       right: 0;
       max-width: 100%;
-      color: #FFF;
       background-color: #0ABDE3;
       font-weight: 600;
-      text-align: center;
       z-index: 1;
       padding: 0.875rem 1rem;
 
-      .text {
+      .back {
+        color: #FFF;
+        text-decoration: none;
         font-size: 1.0625em;
+
+        .text {
+          margin-left: 0.5rem;
+        }
       }
 
       .icon-plus {
@@ -89,7 +95,6 @@
 
     .content {
       margin-top: 3rem;
-      padding-bottom: 4rem;
 
       .search {
         max-width: 100%;
@@ -160,18 +165,21 @@
       .head {
         padding: 1.0625rem 1.25rem;
 
-        .text {
+        .back {
           font-size: 1.125em;
+
+          .text {
+            margin-left: 0.75rem;
+          }
         }
 
         .icon-plus {
-          font-size: 1.25em;
+          font-size: 1.1875em;
         }
       }
 
       .content {
         margin-top: 3.375rem;
-        padding-bottom: 4.375rem;
 
         .search {
           padding: 2rem 1.25rem 0.5rem;
@@ -222,8 +230,12 @@
         margin: 0 auto;
         padding: 1.1875rem 1.5rem;
 
-        .text {
+        .back {
           font-size: 1.25em;
+
+          .text {
+            margin-left: 0.75rem;
+          }
         }
 
         .icon-plus {
@@ -233,7 +245,6 @@
 
       .content {
         margin-top: 3.75rem;
-        padding-bottom: 4.75rem;
 
         .search {
           padding: 2.5rem 1.5rem 0.75rem;
@@ -279,13 +290,7 @@
 
 <script>
 
-import MenuBar from '@/components/admin/MenuBar.vue';
-
 export default {
-
-  components: {
-    MenuBar,
-  },
 
   data() {
     return {

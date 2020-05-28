@@ -22,9 +22,9 @@
     </div>
 
     <div class="bar">
-      <router-link to="/admin/employee" class="txt-bar">
-        <font-awesome-icon icon="user-tie" class="menu-icon"></font-awesome-icon>
-        <span>Pegawai</span>
+      <router-link to="/admin/other" class="txt-bar">
+        <font-awesome-icon icon="ellipsis-h" class="menu-icon"></font-awesome-icon>
+        <span>Lainnya</span>
       </router-link>
     </div>
 

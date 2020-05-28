@@ -110,19 +110,24 @@ const routes = [
     component: () => import('../views/admin/notification/AddNotification.vue'),
   },
   {
+    path: '/admin/other',
+    name: 'AdminOther',
+    component: () => import('../views/admin/other/Other.vue'),
+  },
+  {
     path: '/admin/employee',
     name: 'AdminMenuEmployee',
-    component: () => import('../views/admin/employee/Employee.vue'),
+    component: () => import('../views/admin/other/employee/Employee.vue'),
   },
   {
     path: '/admin/employee/create',
     name: 'AdminCreateEmployee',
-    component: () => import('../views/admin/employee/CreateEmployee.vue'),
+    component: () => import('../views/admin/other/employee/CreateEmployee.vue'),
   },
   {
     path: '/admin/employee/create/:id',
     name: 'AdminCreateEmployee',
-    component: () => import('../views/admin/employee/CreateEmployee.vue'),
+    component: () => import('../views/admin/other/employee/CreateEmployee.vue'),
   },
 ];
 
