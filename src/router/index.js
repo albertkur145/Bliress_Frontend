@@ -129,6 +129,20 @@ const routes = [
     name: 'AdminCreateEmployee',
     component: () => import('../views/admin/other/employee/CreateEmployee.vue'),
   },
+  {
+    path: '/admin/trainer',
+    name: 'AdminTrainer',
+    component: () => import('../views/admin/other/trainer/Trainer.vue'),
+  },
+  {
+    path: '/admin/trainer/create',
+    name: 'AdminCreateTrainer',
+    component: () => import('../views/admin/other/trainer/CreateTrainer.vue'),
+  }, {
+    path: '/admin/trainer/create/:id',
+    name: 'AdminCreateTrainer',
+    component: () => import('../views/admin/other/trainer/CreateTrainer.vue'),
+  },
 ];
 
 const router = new VueRouter({

@@ -3,7 +3,7 @@
 
     <!-- head -->
     <div class="head">
-      <router-link :to="{ name: 'AdminMenuEmployee' }" class="back">
+      <router-link :to="{ name: 'AdminTrainer' }" class="back">
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
         <span class="text">{{ title }}</span>
       </router-link>
@@ -38,32 +38,8 @@
 
         <div class="form-group">
           <fieldset>
-            <legend>Nomor HP</legend>
-            <input type="number" class="input-text">
-          </fieldset>
-        </div>
-
-        <div class="form-group">
-          <fieldset>
-            <legend>Jabatan</legend>
+            <legend>Divisi</legend>
             <input type="text" class="input-text">
-          </fieldset>
-        </div>
-
-        <div class="form-group">
-          <fieldset>
-            <legend>Tanggal lahir</legend>
-            <input type="date" value="2020-01-01" class="input-text">
-          </fieldset>
-        </div>
-
-        <div class="form-group">
-          <fieldset>
-            <legend>Jenis kelamin</legend>
-            <select class="input-text">
-              <option value="Pria">Pria</option>
-              <option value="Wanita">Wanita</option>
-            </select>
           </fieldset>
         </div>
       </div>
