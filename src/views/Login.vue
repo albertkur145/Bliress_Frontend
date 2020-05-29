@@ -30,6 +30,9 @@
       <!-- btn login -->
     </div>
     <!-- end form -->
+
+    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
+    <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
 
@@ -132,6 +135,10 @@
           border: 0.125rem solid #007EB5;
         }
       }
+    }
+
+    .display-flex {
+      display: flex;
     }
   }
   // global css
@@ -237,26 +244,30 @@
 </style>
 
 <script>
+
+import AnimationLoader from '@/components/AnimationLoader.vue';
+import PopupMessage from '@/components/PopupMessage.vue';
+
 export default {
+
+  components: {
+    PopupMessage,
+    AnimationLoader,
+  },
 
   data() {
     return {
-      windowWidth: window.innerWidth,
+      animationLoaderDisplay: false,
+      popupMessageDisplay: false,
     };
   },
 
   methods: {
-    getWindowWidth() {
-      this.windowWidth = window.innerWidth;
-    },
     login() {
       this.$router.push({ name: 'AdminBatch' });
     },
   },
 
-  created() {
-    window.addEventListener('resize', this.getWindowWidth);
-  },
-
 };
+
 </script>

@@ -30,6 +30,8 @@
     <!-- end content -->
 
     <MenuBar></MenuBar>
+    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
+    <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
 
@@ -124,6 +126,10 @@
           }
         }
       }
+    }
+
+    .display-flex {
+      display: flex;
     }
   }
   // global css
@@ -231,12 +237,17 @@
 </style>
 
 <script>
+
 import MenuBar from '@/components/admin/MenuBar.vue';
+import AnimationLoader from '@/components/AnimationLoader.vue';
+import PopupMessage from '@/components/PopupMessage.vue';
 
 export default {
 
   components: {
     MenuBar,
+    AnimationLoader,
+    PopupMessage,
   },
 
   data() {
@@ -279,6 +290,8 @@ export default {
           training: ['1', '2', '3', '4', '5', '6'],
         },
       ],
+      animationLoaderDisplay: false,
+      popupMessageDisplay: false,
     };
   },
 

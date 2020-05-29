@@ -27,6 +27,8 @@
     <!-- end content -->
 
     <MenuBar></MenuBar>
+    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
+    <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
 
@@ -82,6 +84,10 @@
           margin-top: 1.375rem;
         }
       }
+    }
+
+    .display-flex {
+      display: flex;
     }
   }
   // global css
@@ -167,30 +173,27 @@
 </style>
 
 <script>
+
 import MenuBar from '@/components/employee/MenuBar.vue';
+import AnimationLoader from '@/components/AnimationLoader.vue';
+import PopupMessage from '@/components/PopupMessage.vue';
 
 export default {
 
   components: {
     MenuBar,
+    AnimationLoader,
+    PopupMessage,
   },
 
   data() {
     return {
-      windowWidth: window.innerWidth,
       message: 'Haloo Albert, ingat lho 2 minggu lagi kamu ada training 1 di Wisma Rahayu. Tepatnya pada tanggal 15 September 2020. Untuk lebih detailnya, cek jadwal di halaman training ya!',
+      animationLoaderDisplay: false,
+      popupMessageDisplay: false,
     };
   },
 
-  methods: {
-    getWindowWidth() {
-      this.windowWidth = window.innerWidth;
-    },
-  },
-
-  created() {
-    window.addEventListener('resize', this.getWindowWidth);
-  },
-
 };
+
 </script>

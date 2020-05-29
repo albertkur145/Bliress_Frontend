@@ -62,8 +62,8 @@
     </div>
     <!-- end content -->
 
-    <PopupMessage></PopupMessage>
-    <AnimationLoader></AnimationLoader>
+    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
+    <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
     <MenuBar></MenuBar>
   </div>
 </template>
@@ -140,6 +140,10 @@
           }
         }
       }
+    }
+
+    .display-flex {
+      display: flex;
     }
   }
   // global css
@@ -241,6 +245,13 @@ export default {
     MenuBar,
     AnimationLoader,
     PopupMessage,
+  },
+
+  data() {
+    return {
+      animationLoaderDisplay: false,
+      popupMessageDisplay: false,
+    };
   },
 
 };

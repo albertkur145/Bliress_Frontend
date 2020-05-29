@@ -31,6 +31,9 @@
     </div>
     <!-- end content -->
 
+    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
+    <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
+
   </div>
 </template>
 
@@ -154,6 +157,10 @@
           }
         }
       }
+    }
+
+    .display-flex {
+      display: flex;
     }
   }
   // global css
@@ -302,7 +309,15 @@
 
 <script>
 
+import AnimationLoader from '@/components/AnimationLoader.vue';
+import PopupMessage from '@/components/PopupMessage.vue';
+
 export default {
+
+  components: {
+    AnimationLoader,
+    PopupMessage,
+  },
 
   data() {
     return {
@@ -442,6 +457,8 @@ export default {
           ],
         },
       ],
+      animationLoaderDisplay: false,
+      popupMessageDisplay: false,
     };
   },
 

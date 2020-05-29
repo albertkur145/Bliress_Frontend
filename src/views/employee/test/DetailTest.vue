@@ -68,6 +68,9 @@
 
     </div>
     <!-- end content -->
+
+    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
+    <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
 
@@ -162,6 +165,10 @@
           }
         }
       }
+    }
+
+    .display-flex {
+      display: flex;
     }
   }
   // global css
@@ -281,28 +288,35 @@
 </style>
 
 <script>
+
+import AnimationLoader from '@/components/AnimationLoader.vue';
+import PopupMessage from '@/components/PopupMessage.vue';
+
 export default {
+
+  components: {
+    AnimationLoader,
+    PopupMessage,
+  },
 
   data() {
     return {
-      windowWidth: window.innerWidth,
       id: '',
+      animationLoaderDisplay: false,
+      popupMessageDisplay: false,
     };
   },
 
   methods: {
-    getWindowWidth() {
-      this.windowWidth = window.innerWidth;
-    },
     redirectToQuestion() {
       this.$router.push({ name: 'Question', params: { material: '14', id: '1' } });
     },
   },
 
   created() {
-    window.addEventListener('resize', this.getWindowWidth);
     this.id = this.$route.params.id;
   },
 
 };
+
 </script>

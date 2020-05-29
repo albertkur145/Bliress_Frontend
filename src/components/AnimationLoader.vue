@@ -1,7 +1,7 @@
 <template>
   <!-- animation loader -->
   <div class="animation-loader">
-    <img src="@/assets/gif/animation loader.gif">
+    <img src="@/assets/gif/loading-box.gif">
   </div>
   <!-- animation loader -->
 </template>
@@ -19,20 +19,30 @@
     bottom: 0;
     left: 0;
     z-index: 100;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.95);
 
     img {
-      width: 50%;
+      width: 7rem;
     }
   }
   // global css
+
+  // width 320px - 480px (Mobile)
+  @media (min-width: 320px) and (max-width: 480px) {
+    .animation-loader {
+
+      img {
+        width: 8rem;
+      }
+    }
+  }
 
   // width > 481px (Big Mobile, Tablet, Desktop)
   @media (min-width: 481px) {
     .animation-loader {
 
       img {
-        width: 40%;
+        width: 9rem;
       }
     }
   }
