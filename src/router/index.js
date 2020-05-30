@@ -138,10 +138,16 @@ const routes = [
     path: '/admin/trainer/create',
     name: 'AdminCreateTrainer',
     component: () => import('../views/admin/other/trainer/CreateTrainer.vue'),
-  }, {
+  },
+  {
     path: '/admin/trainer/create/:id',
     name: 'AdminCreateTrainer',
     component: () => import('../views/admin/other/trainer/CreateTrainer.vue'),
+  },
+  {
+    path: '/trainer/training',
+    name: 'TrainerTraining',
+    component: () => import('../views/trainer/training/Training.vue'),
   },
 ];
 

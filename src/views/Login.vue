@@ -264,7 +264,7 @@ export default {
 
   methods: {
     login() {
-      this.$router.push({ name: 'AdminBatch' });
+      this.$router.push({ name: 'TrainerTraining' });
     },
   },
 
