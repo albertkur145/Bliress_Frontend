@@ -152,10 +152,10 @@
       background-color: #0ABDE3;
       font-weight: 600;
       z-index: 1;
-      padding: 0.8125rem 1rem;
+      padding: 0.875rem 1rem;
 
       .text {
-        font-size: 1.125em;
+        font-size: 1.0625em;
       }
     }
 

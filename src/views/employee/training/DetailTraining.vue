@@ -42,7 +42,7 @@
             <thead>
               <th>No</th>
               <th>Nama</th>
-              <th>Jabatan</th>
+              <th>Divisi</th>
             </thead>
 
             <tbody>
@@ -145,25 +145,25 @@
       background-color: #0ABDE3;
       font-weight: 600;
       z-index: 1;
-      padding: 0.8125rem 1rem;
+      padding: 0.875rem 1rem;
 
       .back {
         position: absolute;
         color: #FFF;
         top: 31%;
-        left: 5%;
+        left: 0.9375rem;
         font-size: 1.0625em;
       }
 
       .text {
-        font-size: 1.125em;
+        font-size: 1.0625em;
       }
 
       .qr-code-reader {
         position: absolute;
         color: #FFF;
         top: 31%;
-        right: 5%;
+        right: 0.9375rem;
         font-size: 1.0625em;
       }
     }
@@ -270,8 +270,7 @@
         padding: 1.0625rem 1.25rem;
 
         .back {
-          top: 31%;
-          left: 5%;
+          left: 1.0625rem;
           font-size: 1.0625em;
         }
 
@@ -280,8 +279,7 @@
         }
 
         .qr-code-reader {
-          top: 31%;
-          right: 5%;
+          right: 1.0625rem;
           font-size: 1.0625em;
         }
       }
@@ -356,9 +354,8 @@
         padding: 1.1875rem 1.5rem;
 
         .back {
-          top: 31%;
-          left: 3.5%;
-          font-size: 1.1875em;
+          left: 1.25rem;
+          font-size: 1.125em;
         }
 
         .text {
@@ -366,9 +363,8 @@
         }
 
         .qr-code-reader {
-          top: 31%;
-          right: 3.5%;
-          font-size: 1.1875em;
+          right: 1.25rem;
+          font-size: 1.125em;
         }
       }
 

@@ -94,18 +94,18 @@
       background-color: #0ABDE3;
       font-weight: 600;
       z-index: 1;
-      padding: 0.8125rem 1rem;
+      padding: 0.875rem 1rem;
 
       .back {
         position: absolute;
         color: #FFF;
         top: 31%;
-        left: 5%;
+        left: 0.9375rem;
         font-size: 1.0625em;
       }
 
       .text {
-        font-size: 1.125em;
+        font-size: 1.0625em;
       }
     }
 
@@ -181,8 +181,7 @@
         padding: 1.0625rem 1.25rem;
 
         .back {
-          top: 31%;
-          left: 5%;
+          left: 1.0625rem;
           font-size: 1.0625em;
         }
 
@@ -238,9 +237,8 @@
         padding: 1.1875rem 1.5rem;
 
         .back {
-          top: 31%;
-          left: 3.5%;
-          font-size: 1.1875em;
+          left: 1.25rem;
+          font-size: 1.125em;
         }
 
         .text {
