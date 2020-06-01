@@ -18,6 +18,31 @@
     <!-- content -->
     <div class="content">
 
+      <!-- material list -->
+      <div class="material-list">
+        <div class="top">
+          <div class="title">List materi</div>
+          <div class="add"><font-awesome-icon icon="pen" class="icon-plus"></font-awesome-icon></div>
+        </div>
+
+        <div class="data">
+          <table>
+            <thead>
+              <th></th>
+              <th></th>
+            </thead>
+
+            <tbody>
+              <tr v-for="(value) in materials" :key="value.id">
+                <td>{{ value.name }}</td>
+                <td><font-awesome-icon icon="times" class="times-icon"></font-awesome-icon></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- material list -->
+
       <div class="txt-batch">Batch {{ paramBatch }}</div>
 
       <!-- participants -->
@@ -100,11 +125,63 @@
     .content {
       margin-top: 3rem;
 
+      .material-list {
+        background-color: #FFF;
+        padding: 1.25rem 1rem;
+
+        .top {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .title {
+            font-weight: 500;
+            color: #2C3E50;
+            font-size: 1em;
+          }
+
+          .add {
+            color: #16A085;
+            font-size: 0.8125em;
+          }
+        }
+
+        .data {
+          max-width: 100%;
+          overflow-x: auto;
+
+          table {
+            text-align: left;
+            border-collapse: collapse;
+            width: 100%;
+
+            th, td {
+              color: #333;
+              border-bottom: 0.0625rem solid #CCC;
+              padding: 0.625rem;
+              font-size: 0.875em;
+            }
+
+            td:last-child,
+            th:last-child {
+              text-align: right;
+            }
+
+            .times-icon {
+              cursor: pointer;
+              color: #E74C3C;
+              font-size: 1em;
+            }
+          }
+        }
+      }
+
       .txt-batch {
         background-color: #FFF;
         text-align: center;
         color: #1B9CFC;
         font-weight: 500;
+        margin-top: 0.5rem;
         padding: 1.25rem;
         font-size: 1.0625em;
       }
@@ -194,6 +271,36 @@
       .content {
         margin-top: 3.375rem;
 
+        .material-list {
+          padding: 1.5rem 1.25rem;
+
+          .top {
+
+            .title {
+              font-size: 1.0625em;
+            }
+
+            .add {
+              font-size: 0.875em;
+            }
+          }
+
+          .data {
+
+            table {
+
+              th, td {
+                padding: 0.75rem;
+                font-size: 0.9375em;
+              }
+
+              .times-icon {
+                font-size: 1.0625em;
+              }
+            }
+          }
+        }
+
         .txt-batch {
           padding: 1.5rem;
           font-size: 1.125em;
@@ -265,6 +372,36 @@
       .content {
         margin-top: 3.75rem;
 
+        .material-list {
+          padding: 1.75rem 1.5rem;
+
+          .top {
+
+            .title {
+              font-size: 1.125em;
+            }
+
+            .add {
+              font-size: 0.9375em;
+            }
+          }
+
+          .data {
+
+            table {
+
+              th, td {
+                padding: 0.8125rem;
+                font-size: 1em;
+              }
+
+              .times-icon {
+                font-size: 1.125em;
+              }
+            }
+          }
+        }
+
         .txt-batch {
           padding: 1.75rem;
           font-size: 1.1875em;
@@ -319,6 +456,16 @@ export default {
     return {
       paramBatch: '',
       paramTraining: '',
+      materials: [
+        {
+          id: '1',
+          name: 'Think Win Win',
+        },
+        {
+          id: '2',
+          name: 'Time Management',
+        },
+      ],
       employees: [
         {
           id: 'BLI-1153AD',
