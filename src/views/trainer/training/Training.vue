@@ -10,12 +10,13 @@
     <!-- content -->
     <div class="content">
       <div class="training-list">
-        <div class="training" v-for="(value, index) in trainingList" :key="index">
+        <div class="training" v-for="(value, index) in trainingList" :key="index" @click="redirectToDetail(value.training, value.batch)">
           <div class="left">
             <p class="txt-batch">Batch {{ value.batch }}</p>
             <p class="txt-training">Training {{ value.training }}</p>
             <p class="date">{{ value.date }}</p>
             <p class="time">{{ value.time }}</p>
+            <p class="location">{{ value.location }}</p>
           </div>
 
           <div class="right">
@@ -68,10 +69,10 @@
         .training {
           display: flex;
           align-items: center;
-          background-image: linear-gradient(to bottom, #52bb88, #52be89, #51c08b, #51c38c, #50c68d);
-          color: #FFF;
+          background-color: rgba(0, 184, 148, 0.2);
+          color: #444;
           cursor: pointer;
-          border-radius: 0.5rem;
+          border-radius: 0.75rem;
           margin-bottom: 0.5rem;
           padding: 1rem 1.125rem;
 
@@ -102,12 +103,18 @@
               margin-top: 0.25rem;
               font-size: 0.8125em;
             }
+
+            .location {
+              margin-top: 2rem;
+              font-size: 0.8125em;
+            }
           }
 
           .right {
             min-width: 5%;
             max-width: 5%;
             text-align: right;
+            margin-left: 0.25rem;
             font-size: 1em;
           }
         }
@@ -154,6 +161,10 @@
               }
 
               .time {
+                font-size: 0.875em;
+              }
+
+              .location {
                 font-size: 0.875em;
               }
             }
@@ -210,6 +221,10 @@
               .time {
                 font-size: 1em;
               }
+
+              .location {
+                font-size: 1em;
+              }
             }
 
             .right {
@@ -242,39 +257,57 @@ export default {
           training: '1',
           date: '12 September 2020',
           time: '08.00 WIB - 15.00 WIB',
+          location: 'di Gedung Serbaguna Basement 1 R.52, Sarana Jaya',
         },
         {
           batch: '1',
           training: '5',
           date: '24 September 2020',
           time: '12.00 WIB - 18.00 WIB',
+          location: 'di Gedung Serbaguna Basement 1 R.44, Sarana Jaya',
         },
         {
           batch: '2',
           training: '3',
           date: '08 Oktober 2020',
           time: '09.00 WIB - 18.00 WIB',
+          location: 'di Gedung Serbaguna Basement 1 R.23, Sarana Jaya',
         },
         {
           batch: '3',
           training: '1',
           date: '12 Oktober 2020',
           time: '12.00 WIB - 15.00 WIB',
+          location: 'di Hotel Grand Tjokro Lt 40 R. Melati, Bogor',
         },
         {
           batch: '3',
           training: '5',
           date: '15 Desember 2020',
           time: '08.00 WIB - 16.00 WIB',
+          location: 'di Gedung Serbaguna Basement 1 R.11, Sarana Jaya',
         },
         {
           batch: '2',
           training: '6',
           date: '18 Desember 2020',
           time: '12.00 WIB - 18.00 WIB',
+          location: 'di Gedung Serbaguna Basement 1 R.10, Sarana Jaya',
         },
       ],
     };
+  },
+
+  methods: {
+    redirectToDetail(training, batch) {
+      this.$router.push({
+        name: 'TrainerDetailTraining',
+        params: {
+          training,
+          batch,
+        },
+      });
+    },
   },
 
 };

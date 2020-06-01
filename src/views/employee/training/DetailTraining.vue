@@ -219,7 +219,7 @@
           align-items: center;
 
           .title {
-            font-weight: 600;
+            font-weight: 500;
             color: #333;
             font-size: 1.0625em;
           }
@@ -287,11 +287,6 @@
       }
 
       .content {
-        max-width: 100%;
-
-        p {
-          margin: 0;
-        }
 
         .rincian {
           padding: 2rem 1.125rem;
@@ -322,12 +317,11 @@
 
         .participants {
           padding: 1.25rem 1.125rem 2rem;
-          margin-top: 0.5rem;
 
           .top {
 
             .title {
-              font-size: 1.25em;
+              font-size: 1.125em;
             }
 
             .count {
@@ -339,7 +333,6 @@
             margin-top: 1.5rem;
 
             table {
-              width: 100%;
 
               th, td {
                 padding: 0.8125rem 1rem;
@@ -380,11 +373,6 @@
       }
 
       .content {
-        max-width: 100%;
-
-        p {
-          margin: 0;
-        }
 
         .rincian {
           padding: 2.25rem 1.25rem;
@@ -415,12 +403,11 @@
 
         .participants {
           padding: 1.4375rem 1.375rem 2.5rem;
-          margin-top: 0.5rem;
 
           .top {
 
             .title {
-              font-size: 1.3125em;
+              font-size: 1.25em;
             }
 
             .count {
@@ -432,7 +419,6 @@
             margin-top: 1.75rem;
 
             table {
-              width: 100%;
 
               th, td {
                 padding: 1rem 1.25rem;

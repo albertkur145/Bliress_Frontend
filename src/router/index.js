@@ -149,6 +149,11 @@ const routes = [
     name: 'TrainerTraining',
     component: () => import('../views/trainer/training/Training.vue'),
   },
+  {
+    path: '/trainer/training/:training/batch/:batch',
+    name: 'TrainerDetailTraining',
+    component: () => import('../views/trainer/training/DetailTraining.vue'),
+  },
 ];
 
 const router = new VueRouter({
