@@ -22,7 +22,7 @@
       <div class="material-list">
         <div class="top">
           <div class="title">List materi</div>
-          <div class="add"><font-awesome-icon icon="pen" class="icon-plus"></font-awesome-icon></div>
+          <div class="add" @click="redirectToUpload"><font-awesome-icon icon="pen" class="icon-plus"></font-awesome-icon></div>
         </div>
 
         <div class="data">
@@ -141,6 +141,7 @@
           }
 
           .add {
+            cursor: pointer;
             color: #16A085;
             font-size: 0.8125em;
           }
@@ -544,6 +545,18 @@ export default {
         },
       ],
     };
+  },
+
+  methods: {
+    redirectToUpload() {
+      this.$router.push({
+        name: 'TrainerUploadMaterial',
+        params: {
+          training: this.paramTraining,
+          batch: this.paramBatch,
+        },
+      });
+    },
   },
 
   created() {

@@ -154,13 +154,40 @@ const routes = [
     name: 'TrainerDetailTraining',
     component: () => import('../views/trainer/training/DetailTraining.vue'),
   },
+  {
+    path: '/trainer/training/:training/batch/:batch/upload',
+    name: 'TrainerUploadMaterial',
+    component: () => import('../views/trainer/training/UploadMaterial.vue'),
+  },
+  {
+    path: '/trainer/test',
+    name: 'TrainerTest',
+    component: () => import('../views/trainer/test/Test.vue'),
+  },
+  {
+    path: '/trainer/test/batch/:batch/training/:training',
+    name: 'TrainerDetailTest',
+    component: () => import('../views/trainer/test/DetailTest.vue'),
+  },
+  {
+    path: '/trainer/test/batch/:batch/training/:training/material/:material',
+    name: 'TrainerReviewTest',
+    component: () => import('../views/trainer/test/ReviewTest.vue'),
+  }, {
+    path: '/trainer/test/batch/:batch/training/:training/material/:material/addtest',
+    name: 'TrainerAddTest',
+    component: () => import('../views/trainer/test/AddTest.vue'),
+  },
 ];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
-  scrollBehavior() {
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    }
     return { x: 0, y: 0 };
   },
 });
