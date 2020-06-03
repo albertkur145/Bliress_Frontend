@@ -50,32 +50,32 @@ const routes = [
     component: () => import('../views/admin/batch/Batch.vue'),
   },
   {
-    path: '/admin/batch/:id',
+    path: '/admin/batch/:batch',
     name: 'AdminDetailBatch',
     component: () => import('../views/admin/batch/DetailBatch.vue'),
   },
   {
-    path: '/admin/batch/:id/training',
+    path: '/admin/batch/:batch/training',
     name: 'AdminTraining',
     component: () => import('../views/admin/batch/Training.vue'),
   },
   {
-    path: '/admin/batch/:id/training/:training/attendance',
+    path: '/admin/batch/:batch/training/:training/attendance',
     name: 'AdminAttendance',
     component: () => import('../views/admin/batch/Attendance.vue'),
   },
   {
-    path: '/admin/batch/:id/training/add',
+    path: '/admin/batch/:batch/training/add',
     name: 'AdminAddTraining',
     component: () => import('../views/admin/batch/AddTraining.vue'),
   },
   {
-    path: '/admin/batch/:id/employee',
+    path: '/admin/batch/:batch/employee',
     name: 'AdminEmployee',
     component: () => import('../views/admin/batch/Employee.vue'),
   },
   {
-    path: '/admin/batch/:id/employee/add',
+    path: '/admin/batch/:batch/employee/add',
     name: 'AdminAddEmployee',
     component: () => import('../views/admin/batch/AddEmployee.vue'),
   },
@@ -173,10 +173,16 @@ const routes = [
     path: '/trainer/test/batch/:batch/training/:training/material/:material',
     name: 'TrainerReviewTest',
     component: () => import('../views/trainer/test/ReviewTest.vue'),
-  }, {
+  },
+  {
     path: '/trainer/test/batch/:batch/training/:training/material/:material/addtest',
     name: 'TrainerAddTest',
     component: () => import('../views/trainer/test/AddTest.vue'),
+  },
+  {
+    path: '/trainer/notification',
+    name: 'TrainerNotification',
+    component: () => import('../views/trainer/notification/Notification.vue'),
   },
 ];
 

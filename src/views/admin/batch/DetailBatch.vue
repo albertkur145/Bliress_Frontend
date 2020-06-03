@@ -17,7 +17,7 @@
       <div class="training">
         <div class="top">
           <span class="txt">Training</span>
-          <router-link :to="{ name: 'AdminTraining', params: { id: id } }" class="see">
+          <router-link :to="{ name: 'AdminTraining', params: { batch: id } }" class="see">
             Lihat
           </router-link>
         </div>
@@ -42,7 +42,7 @@
       <div class="employee">
         <div class="top">
           <span class="txt">Pegawai</span>
-          <router-link :to="{ name: 'AdminEmployee', params: { id: id } }" class="see">
+          <router-link :to="{ name: 'AdminEmployee', params: { batch: id } }" class="see">
             Lihat
           </router-link>
         </div>
@@ -468,7 +468,7 @@ export default {
   },
 
   created() {
-    this.id = this.$route.params.id;
+    this.id = this.$route.params.batch;
   },
 
 };

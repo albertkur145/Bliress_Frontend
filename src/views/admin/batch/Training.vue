@@ -2,12 +2,12 @@
   <div id="container">
     <!-- head -->
     <div class="head">
-      <router-link :to="{ name: 'AdminDetailBatch', params: { id: id } }" class="back">
+      <router-link :to="{ name: 'AdminDetailBatch', params: { batch: id } }" class="back">
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
         <span class="text">Training</span>
       </router-link>
 
-      <router-link :to="{ name: 'AdminAddTraining', params: { id: id } }">
+      <router-link :to="{ name: 'AdminAddTraining', params: { batch: id } }">
         <font-awesome-icon icon="plus-circle" class="icon-plus"></font-awesome-icon>
       </router-link>
     </div>
@@ -22,144 +22,34 @@
 
       <!-- list of training -->
       <div class="training-list">
-        <div class="training">
-          <div class="num">
-            <span class="txt">1</span>
-          </div>
+        <div v-for="(value, index) in trainingList" :key="index">
+          <div class="training">
+            <div class="num">
+              <span class="txt">{{ value.training }}</span>
+            </div>
 
-          <div class="info">
-            <p class="date">18 September 2020</p>
-            <p class="time">08.00 - 16.00 WIB</p>
-            <p class="trainer">Trainer: Rudi Santoso</p>
-            <p class="location">di Gedung Serbaguna, Ruang 315 C Sarana Jaya</p>
-            <button class="btn-attendance" @click="redirectAttendance(1)">Absensi</button>
-          </div>
+            <div class="info">
+              <p class="date">{{ value.date }}</p>
+              <p class="time">{{ value.timeStart }} - {{ value.timeFinish }} WIB</p>
+              <p class="trainer">Trainer: {{ value.trainer }}</p>
+              <p class="location">{{ value.location }}</p>
+              <div class="btn-material" @click="redirectMaterial(value.training)">
+                <span>Material</span>
+                <font-awesome-icon icon="chevron-right" class="material-icon"></font-awesome-icon>
+              </div>
+              <button class="btn-attendance" @click="redirectAttendance(value.training)">Absensi</button>
+            </div>
 
-          <div class="action">
-            <div>
-              <font-awesome-icon icon="pen" class="edit-icon" @click="redirectAddTraining"></font-awesome-icon>
-              <font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon>
+            <div class="action">
+              <div>
+                <font-awesome-icon icon="pen" class="edit-icon" @click="redirectAddTraining"></font-awesome-icon>
+                <font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon>
+              </div>
             </div>
           </div>
+
+          <div class="line"><hr></div>
         </div>
-
-        <div class="line"><hr></div>
-
-        <div class="training">
-          <div class="num">
-            <span class="txt">2</span>
-          </div>
-
-          <div class="info">
-            <p class="date">27 September 2020</p>
-            <p class="time">12.00 - 15.00 WIB</p>
-            <p class="trainer">Trainer: Alvin Wijaya</p>
-            <p class="location">di Gedung Ropoko, Ruang 54 Sarana Jaya</p>
-            <button class="btn-attendance" @click="redirectAttendance(2)">Absensi</button>
-          </div>
-
-          <div class="action">
-            <div>
-              <font-awesome-icon icon="pen" class="edit-icon" @click="redirectAddTraining"></font-awesome-icon>
-              <font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon>
-            </div>
-          </div>
-        </div>
-
-        <div class="line"><hr></div>
-
-        <div class="training">
-          <div class="num">
-            <span class="txt">3</span>
-          </div>
-
-          <div class="info">
-            <p class="date">08 Oktober 2020</p>
-            <p class="time">09.00 - 13.00 WIB</p>
-            <p class="trainer">Trainer: Angelia Yoh</p>
-            <p class="location">di Hotel British, Lt. 42 Ruang Anggrek</p>
-            <button class="btn-attendance" @click="redirectAttendance(3)">Absensi</button>
-          </div>
-
-          <div class="action">
-            <div>
-              <font-awesome-icon icon="pen" class="edit-icon" @click="redirectAddTraining"></font-awesome-icon>
-              <font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon>
-            </div>
-          </div>
-        </div>
-
-        <div class="line"><hr></div>
-
-        <div class="training">
-          <div class="num">
-            <span class="txt">4</span>
-          </div>
-
-          <div class="info">
-            <p class="date">17 Oktober 2020</p>
-            <p class="time">16.00 - 20.00 WIB</p>
-            <p class="trainer">Trainer: Yuli Permata</p>
-            <p class="location">di Gedung Serbaguna, R. 315 C Sarana Jaya</p>
-            <button class="btn-attendance" @click="redirectAttendance(4)">Absensi</button>
-          </div>
-
-          <div class="action">
-            <div>
-              <font-awesome-icon icon="pen" class="edit-icon" @click="redirectAddTraining"></font-awesome-icon>
-              <font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon>
-            </div>
-          </div>
-        </div>
-
-        <div class="line"><hr></div>
-
-        <div class="training">
-          <div class="num">
-            <span class="txt">5</span>
-          </div>
-
-          <div class="info">
-            <p class="date">10 November 2020</p>
-            <p class="time">07.00 - 18.00 WIB</p>
-            <p class="trainer">Trainer: Randika</p>
-            <p class="location">di Hotel Aston, Lt. 24 Meeting Room 5</p>
-            <button class="btn-attendance" @click="redirectAttendance(5)">Absensi</button>
-          </div>
-
-          <div class="action">
-            <div>
-              <font-awesome-icon icon="pen" class="edit-icon" @click="redirectAddTraining"></font-awesome-icon>
-              <font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon>
-            </div>
-          </div>
-        </div>
-
-        <div class="line"><hr></div>
-
-        <div class="training">
-          <div class="num">
-            <span class="txt">6</span>
-          </div>
-
-          <div class="info">
-            <p class="date">05 Desember 2020</p>
-            <p class="time">09.00 - 15.00 WIB</p>
-            <p class="trainer">Trainer: Simon Keyli</p>
-            <p class="location">di Gedung Ropoko, Ruang 54 Sarana Jaya</p>
-            <button class="btn-attendance" @click="redirectAttendance(6)">Absensi</button>
-          </div>
-
-          <div class="action">
-            <div>
-              <font-awesome-icon icon="pen" class="edit-icon" @click="redirectAddTraining"></font-awesome-icon>
-              <font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon>
-            </div>
-          </div>
-        </div>
-
-        <div class="line"><hr></div>
-
       </div>
       <!-- list of training -->
 
@@ -284,6 +174,35 @@
               font-size: 0.8125em;
             }
 
+            .btn-material {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              min-width: 100%;
+              max-width: 100%;
+              cursor: pointer;
+              border-top: 0.0625rem solid #DEE5FF;
+              border-bottom: 0.0625rem solid #DEE5FF;
+              color: #273C75;
+              transition: border .2s ease-out;
+              padding: 0.75rem;
+              margin-top: 0.8125rem;
+
+              span {
+                font-weight: 500;
+                font-size: 0.8125em;
+              }
+
+              .material-icon {
+                font-size: 0.6875em;
+              }
+
+              &:hover {
+                border-top: 0.0625rem solid #BAC9FF;
+                border-bottom: 0.0625rem solid #BAC9FF;
+              }
+            }
+
             .btn-attendance {
               font-family: 'Roboto';
               min-width: 100%;
@@ -295,7 +214,7 @@
               border: 0;
               border-radius: 50rem;
               transition: background-color .2s ease-out;
-              margin-top: 1rem;
+              margin-top: 1.5rem;
               padding: 0.625rem;
               font-size: 0.8125em;
 
@@ -406,6 +325,18 @@
                 font-size: 0.9375em;
               }
 
+              .btn-material {
+                padding: 0.875rem;
+
+                span {
+                  font-size: 0.875em;
+                }
+
+                .material-icon {
+                  font-size: 0.75em;
+                }
+              }
+
               .btn-attendance {
                 padding: 0.6875rem;
                 font-size: 0.875em;
@@ -498,6 +429,18 @@
                 font-size: 1em;
               }
 
+              .btn-material {
+                padding: 1rem;
+
+                span {
+                  font-size: 0.9375em;
+                }
+
+                .material-icon {
+                  font-size: 0.8125em;
+                }
+              }
+
               .btn-attendance {
                 padding: 0.75rem;
                 font-size: 0.9375em;
@@ -547,18 +490,69 @@ export default {
       id: '',
       animationLoaderDisplay: false,
       popupMessageDisplay: false,
+      trainingList: [
+        {
+          training: '1',
+          date: '18 September 2020',
+          timeStart: '08.00',
+          timeFinish: '16.00',
+          trainer: 'Rudi Santoso',
+          location: 'di Gedung Serbaguna, Ruang 315 C Sarana Jaya',
+        },
+        {
+          training: '2',
+          date: '27 September 2020',
+          timeStart: '12.00',
+          timeFinish: '15.00',
+          trainer: 'Alvin Wijaya',
+          location: 'di Gedung Ropoko, Ruang 54 Sarana Jaya',
+        },
+        {
+          training: '3',
+          date: '08 Oktober 2020',
+          timeStart: '09.00',
+          timeFinish: '13.00',
+          trainer: 'Angelia Yoh',
+          location: 'di Hotel British, Lt. 42 Ruang Anggrek',
+        },
+        {
+          training: '4',
+          date: '17 Oktober 2020',
+          timeStart: '16.00',
+          timeFinish: '20.00',
+          trainer: 'Yuli Permata',
+          location: 'di Gedung Serbaguna, R. 315 C Sarana Jaya',
+        },
+        {
+          training: '5',
+          date: '10 November 2020',
+          timeStart: '07.00',
+          timeFinish: '18.00',
+          trainer: 'Randika',
+          location: 'di Hotel Aston, Lt. 24 Meeting Room 5',
+        },
+      ],
     };
   },
 
   methods: {
     redirectAddTraining() {
-      this.$router.push({ name: 'AdminAddTraining', params: { id: this.id } });
+      this.$router.push({ name: 'AdminAddTraining', params: { batch: this.id } });
     },
     redirectAttendance(training) {
       this.$router.push({
         name: 'AdminAttendance',
         params: {
-          id: this.id,
+          batch: this.id,
+          training,
+        },
+      });
+    },
+    redirectMaterial(training) {
+      this.$router.push({
+        name: 'AdminMaterialsTraining',
+        params: {
+          batch: this.id,
           training,
         },
       });
@@ -566,7 +560,7 @@ export default {
   },
 
   created() {
-    this.id = this.$route.params.id;
+    this.id = this.$route.params.batch;
   },
 
 };

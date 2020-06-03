@@ -27,6 +27,11 @@
         </div>
 
         <p class="trainer">Trainer: Rudi Santoso</p>
+
+        <div class="materials">
+          <p class="material-link"><a href="http://localhost:88/Think-Win-Win.pdf">Think Win Win</a></p>
+          <p class="material-link"><a href="http://localhost:88/Think-Win-Win.pdf">Time Management</a></p>
+        </div>
       </div>
       <!-- rincian -->
 
@@ -206,6 +211,22 @@
           font-size: 0.9375em;
           margin-top: 1.25rem;
         }
+
+        .materials {
+          margin-top: 1.5rem;
+
+          .material-link {
+            font-size: 0.8125em;
+            margin-top: 0.75rem;
+
+            a {
+              color: #3742FA;
+              border-bottom: 0.0625rem solid #3742FA;
+              text-decoration: none;
+              padding-bottom: 0.125rem;
+            }
+          }
+        }
       }
 
       .participants {
@@ -311,6 +332,13 @@
             font-size: 1em;
             margin-top: 1.25rem;
           }
+
+          .materials {
+
+            .material-link {
+              font-size: 0.875em;
+            }
+          }
         }
 
         .participants {
@@ -394,6 +422,13 @@
           .trainer {
             font-size: 1.125em;
             margin-top: 1.75rem;
+          }
+
+          .materials {
+
+            .material-link {
+              font-size: 0.9375em;
+            }
           }
         }
 

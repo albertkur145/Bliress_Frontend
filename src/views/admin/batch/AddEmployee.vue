@@ -4,7 +4,7 @@
     <!-- head -->
     <div class="head">
       <div class="space-between">
-        <router-link :to="{ name: 'AdminEmployee', params: { id: id } }" class="back">
+        <router-link :to="{ name: 'AdminEmployee', params: { batch: id } }" class="back">
           <font-awesome-icon icon="arrow-left"></font-awesome-icon>
           <span class="text">Tambah</span>
         </router-link>
@@ -539,7 +539,7 @@ export default {
   },
 
   created() {
-    this.id = this.$route.params.id;
+    this.id = this.$route.params.batch;
   },
 
   updated() {

@@ -3,12 +3,12 @@
 
     <!-- head -->
     <div class="head">
-      <router-link :to="{ name: 'AdminTraining', params: { id: id } }" class="back">
+      <router-link :to="{ name: 'AdminTraining', params: { batch: id } }" class="back">
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
         <span class="text">Absensi</span>
       </router-link>
 
-      <router-link :to="{ name: 'AdminTraining', params: { id: id } }">
+      <router-link :to="{ name: 'AdminTraining', params: { batch: id } }">
         <font-awesome-icon icon="qrcode" class="icon-qrcode"></font-awesome-icon>
       </router-link>
     </div>
@@ -356,7 +356,7 @@ export default {
   },
 
   created() {
-    this.id = this.$route.params.id;
+    this.id = this.$route.params.batch;
     this.training = this.$route.params.training;
   },
 
