@@ -1,43 +1,36 @@
 <template>
   <div id="container">
+
     <!-- head -->
     <div class="head">
-      <router-link to="/test/detail/1" class="back">
+      <router-link :to="`/test/${this.paramTraining}`" class="back">
         <font-awesome-icon icon="sign-out-alt"></font-awesome-icon>
       </router-link>
-      <div class="text">Soal 1</div>
+      <div class="text">Test</div>
     </div>
     <!-- end head -->
 
     <!-- content -->
     <div class="content">
-      <div class="question">
-        <!-- text question -->
-        <div class="txt-question">{{ question }}</div>
-        <!-- text quesion -->
 
-        <!-- choice question -->
-        <div class="form-group">
-          <fieldset>
-            <legend>Jawaban</legend>
-            <select class="input-text">
-              <option value="">-</option>
-              <option value="a">Gaya gerak jemu</option>
-              <option value="b">Posisi yang tetap</option>
-              <option value="c">Tidak memihak pada siapapun</option>
-              <option value="d">Semua salah</option>
-            </select>
-          </fieldset>
+      <!-- questions -->
+      <div class="preview">
+        <div class="question" v-for="(value, index) in questions" :key="index">
+          <div class="question-text">{{ value.questionText }}</div>
+          <div class="choices-list">
+            <label class="radio" v-for="(choice, key) in value.choices" :key="key">
+              <input type="radio" :value="choice.choice" :name="`choice-${index}`"><span></span>
+              <div class="answer">{{ choice.answer }}</div>
+            </label>
+          </div>
         </div>
-        <!-- choice question -->
 
-        <!-- action -->
-        <div class="action">
-          <font-awesome-icon icon="chevron-left" class="back"></font-awesome-icon>
-          <font-awesome-icon icon="chevron-right" class="next"></font-awesome-icon>
+        <div class="btn-submit">
+          <button>Submit</button>
         </div>
-        <!-- action -->
       </div>
+      <!-- questions -->
+
     </div>
     <!-- end content -->
 
@@ -64,94 +57,114 @@
       background-color: #0ABDE3;
       font-weight: 600;
       z-index: 1;
-      padding: 0.8125rem 1rem;
+      padding: 0.875rem 1rem;
 
       .back {
         position: absolute;
         color: #FFF;
         transform: rotate(180deg);
-        top: 31%;
-        left: 5%;
+        top: 0.875rem;
+        left: 1rem;
         font-size: 1.0625em;
       }
 
       .text {
-        font-size: 1.125em;
+        font-size: 1.0625em;
       }
     }
 
     .content {
-      margin-top: 2.875rem;
-      padding: 1rem;
+      margin-top: 3rem;
 
-      .question {
-        background-color: #FFF;
-        color: #444;
-        border-radius: 0.5rem;
-        padding: 0.875rem 1.125rem 4rem;
+      .preview {
+        padding: 1.5rem 1rem;
 
-        .txt-question {
-          font-size: 0.875em;
-          line-height: 1.375rem;
-        }
+        .question {
+          background-color: #FFF;
+          border-radius: 0.375rem;
+          padding: 0.75rem;
+          margin-bottom: 0.75rem;
 
-        .form-group {
-          max-width: 100%;
-          margin-top: 1.75rem;
+          .question-text {
+            color: #444;
+            font-size: 0.9375em;
+          }
 
-          fieldset {
-            border: 0.0625rem solid #AAA;
-            border-radius: 0.5rem;
-            position: relative;
-            max-width: 100%;
-            min-height: 2.5rem;
+          .choices-list {
+            margin-top: 1.25rem;
 
-            legend {
-              color: #777;
-              padding: 0 0.25rem;
-              font-size: 0.75em;
-            }
+            .radio {
+              display: flex;
+              margin-bottom: 0.75rem;
 
-            .input-text {
-              position: absolute;
-              box-sizing: border-box;
-              background-color: transparent;
-              left: 0;
-              bottom: 0;
-              width: 100%;
-              border: 0;
-              outline: none;
-              color: #444;
-              -webkit-appearance: none;
-              top: 0.5rem;
-              padding: 0.0625rem 0.875rem 0 1.375rem;
-              font-size: 0.8125em;
+              input[type=radio] {
+                position: absolute;
+                opacity: 0;
+                width: 0;
+                height: 0;
+
+                &:checked + span  {
+                  background-color: #3498db;
+                }
+
+                &:checked + span::after  {
+                  display: block;
+                }
+              }
+
+              span {
+                position: relative;
+                display: inline-block;
+                background-color: #DDD;
+                border-radius: 10rem;
+                width: 1.0625rem;
+                height: 1.0625rem;
+                margin-top: 0.0625rem;
+
+                &::after {
+                  content: "";
+                  position: absolute;
+                  display: none;
+                  background-color: #FFF;
+                  border-radius: 10rem;
+                  top: 0.375rem;
+                  left: 0.375rem;
+                  width: 0.3125rem;
+                  height: 0.3125rem;
+                }
+              }
+
+              .answer {
+                color: #666;
+                min-width: 85%;
+                max-width: 85%;
+                margin-left: 0.75rem;
+                line-height: 1.125rem;
+                font-size: 0.875em;
+              }
             }
           }
         }
 
-        .action {
-          position: relative;
-          color: #FFF;
-          margin-top: 3rem;
-          font-size: 1.0625em;
+        .btn-submit {
+          text-align: right;
 
-          .back {
-            position: absolute;
-            border-radius: 5rem;
-            background-color: #A1A1A1;
+          button {
+            border: 0;
+            outline: none;
+            color: #FFF;
+            background-color: #1DD1A1;
+            font-weight: 600;
+            border-radius: 0.3125rem;
             cursor: pointer;
-            padding: 0.5875rem 0.75rem;
-            left: 0.25rem;
-          }
+            transition: background-color .2s ease-out;
+            margin-top: 0.5rem;
+            font-size: 0.75em;
+            padding: 0.8125rem 1.0625rem;
 
-          .next {
-            position: absolute;
-            border-radius: 5rem;
-            background-color: #00D77C;
-            cursor: pointer;
-            padding: 0.5875rem 0.75rem;
-            right: 0.25rem;
+            &:hover {
+              background-color: #10AC84;
+            }
           }
         }
       }
@@ -167,9 +180,9 @@
         padding: 1.0625rem 1.25rem;
 
         .back {
-          top: 31%;
-          left: 5%;
-          font-size: 1.0625em;
+          top: 1.0625rem;
+          left: 1.25rem;
+          font-size: 1.125em;
         }
 
         .text {
@@ -178,46 +191,51 @@
       }
 
       .content {
-        margin-top: 3.3125rem;
-        padding: 1.0625rem 1.25rem;
+        margin-top: 3.375rem;
 
-        .question {
-          padding: 1rem 1.25rem 5rem;
+        .preview {
+          padding: 1.75rem 1.25rem;
 
-          .txt-question {
-            font-size: 0.9375em;
-          }
+          .question {
+            padding: 1rem;
+            margin-bottom: 1rem;
 
-          .form-group {
-            margin-top: 1.75rem;
+            .question-text {
+              font-size: 1em;
+            }
 
-            fieldset {
-              min-height: 2.75rem;
+            .choices-list {
+              margin-top: 1.5rem;
 
-              legend {
-                padding: 0 0.3125rem;
-                font-size: 0.8125em;
-              }
+              .radio {
+                margin-bottom: 1rem;
 
-              .input-text {
-                top: 0.4375rem;
-                width: 97%;
-                padding: 0.125rem 1rem 0 1.5rem;
-                font-size: 0.875em;
+                span {
+                  width: 1.125rem;
+                  height: 1.125rem;
+                  margin-top: 0.125rem;
+
+                  &::after {
+                    top: 0.375rem;
+                    left: 0.375rem;
+                    width: 0.375rem;
+                    height: 0.375rem;
+                  }
+                }
+
+                .answer {
+                  line-height: 1.25rem;
+                  font-size: 0.9375em;
+                }
               }
             }
           }
 
-          .action {
-            margin-top: 3.5rem;
-            font-size: 1.25em;
+          .btn-submit {
 
-            .back {
-              padding: 0.625rem 0.875rem;
-            }
-
-            .next {
-              padding: 0.625rem 0.875rem;
+            button {
+              font-size: 0.8125em;
+              padding: 0.875rem 1.125rem;
             }
           }
         }
@@ -236,9 +254,9 @@
         padding: 1.1875rem 1.5rem;
 
         .back {
-          top: 31%;
-          left: 3.5%;
-          font-size: 1.1875em;
+          top: 1.1875rem;
+          left: 1.5rem;
+          font-size: 1.25em;
         }
 
         .text {
@@ -248,45 +266,50 @@
 
       .content {
         margin-top: 3.75rem;
-        padding: 1.5rem 1.25rem;
 
-        .question {
-          padding: 1.25rem 1.5rem 5.5rem;
+        .preview {
+          padding: 2rem 1.5rem;
 
-          .txt-question {
-            font-size: 1em;
-          }
+          .question {
+            padding: 1.25rem;
+            margin-bottom: 1.25rem;
 
-          .form-group {
-            margin-top: 2.25rem;
+            .question-text {
+              font-size: 1.0625em;
+            }
 
-            fieldset {
-              min-height: 3rem;
+            .choices-list {
+              margin-top: 1.75rem;
 
-              legend {
-                padding: 0 0.375rem;
-                font-size: 0.875em;
-              }
+              .radio {
+                margin-bottom: 1.25rem;
 
-              .input-text {
-                top: 0.4375rem;
-                width: 100%;
-                padding: 0.25rem 1.25rem 0 2rem;
-                font-size: 0.9375em;
+                span {
+                  width: 1.3125rem;
+                  height: 1.3125rem;
+                  margin-top: 0.0625rem;
+
+                  &::after {
+                    top: 0.4375rem;
+                    left: 0.4375rem;
+                    width: 0.4375rem;
+                    height: 0.4375rem;
+                  }
+                }
+
+                .answer {
+                  line-height: 1.375rem;
+                  font-size: 1em;
+                }
               }
             }
           }
 
-          .action {
-            margin-top: 4.25rem;
-            font-size: 1.375em;
+          .btn-submit {
 
-            .back {
-              padding: 0.75rem 1rem;
-            }
-
-            .next {
-              padding: 0.75rem 1rem;
+            button {
+              font-size: 0.875em;
+              padding: 0.9375rem 1.1875rem;
             }
           }
         }
@@ -302,19 +325,147 @@ export default {
 
   data() {
     return {
-      windowWidth: window.innerWidth,
-      question: 'Dalam penjelasan materi time management, pemateri menyampaikan adanya permasalahan yang timbul akibat terikat akan daya saing. Akibatnya, harga pasar menjadi menaik tinggi yang menyebabkan kerugian pada perusahaan. Dalam hal ini diperlukan adanya gaya relatif. Apa yang Anda ketahui dengan gaya relatif pada topik ini?',
+      paramTraining: '',
+      paramMaterial: '',
+      materialList: [
+        {
+          name: 'Private Victory',
+          date_available: '12 September 2020',
+          date_closed: '13 September 2020',
+          limit_time: '20 menit',
+        },
+        {
+          name: 'Emotional Banking',
+          date_available: '-',
+          date_closed: '-',
+          limit_time: '-',
+        },
+        {
+          name: 'Think Win Win',
+          date_available: '20 September 2020',
+          date_closed: '22 September 2020',
+          limit_time: '60 menit',
+        },
+        {
+          name: 'Time Management',
+          date_available: '23 September 2020',
+          date_closed: '26 September 2020',
+          limit_time: '60 menit',
+        },
+      ],
+      questions: [
+        {
+          questionText: 'Semua mahasiswa Perguruan Tinggi memiliki Nomor Induk Mahasiswa. Budi seorang mahasiswa. Jadi,',
+          choices: [
+            {
+              choice: '1',
+              answer: 'Budi mungkin memiliki nomor induk mahasiswa.',
+            },
+            {
+              choice: '2',
+              answer: 'Belum tentu Budi memiliki nomor induk mahasiswa.',
+            },
+            {
+              choice: '3',
+              answer: 'Budi memiliki nomor induk mahasiswa.',
+            },
+            {
+              choice: '4',
+              answer: 'Budi tidak memiliki nomor induk mahasiswa.',
+            },
+          ],
+        },
+        {
+          questionText: 'Sebagian pedagang pecel lele mengeluhkan harga cabe naik. Pak Rudi seorang pedagang pecel lele.',
+          choices: [
+            {
+              choice: '1',
+              answer: 'Pak Rudi pasti mengeluhkan harga cabe naik.',
+            },
+            {
+              choice: '2',
+              answer: 'Pak Rudi tidak mengeluhkan harga cabe naik.',
+            },
+            {
+              choice: '3',
+              answer: 'Harga cabe bukanlah keluhan Pak Rudi.',
+            },
+            {
+              choice: '4',
+              answer: 'Pak Rudi mungkin ikut mengeluhkan harga cabe naik.',
+            },
+          ],
+        },
+        {
+          questionText: 'Semua pemain sepakbola yang berkebangsaan Itali berwajah tampan. David Beckham adalah pemain sepakbola berkebangsaan Inggris.',
+          choices: [
+            {
+              choice: '1',
+              answer: 'David Beckham bukanlah pemain sepakbola yang tampan.',
+            },
+            {
+              choice: '2',
+              answer: 'David Beckham adalah pemain sepakbola yang tampan.',
+            },
+            {
+              choice: '3',
+              answer: 'Meskipun bukan berkebangsaan Italia, David Beckham pasti berwajah tampan.',
+            },
+            {
+              choice: '4',
+              answer: 'Tidak dapat ditarik kesimpulan.',
+            },
+          ],
+        },
+        {
+          questionText: 'Sebagian orang yang berminat menjadi pejabat hanya menginginkan harta dan tahta. Budi tidak berminat menjadi pejabat.',
+          choices: [
+            {
+              choice: '1',
+              answer: 'Budi tidak menginginkan harta dan tahta.',
+            },
+            {
+              choice: '2',
+              answer: 'Tahta bukanlah keinginan Budi, tapi harta mungkin ya.',
+            },
+            {
+              choice: '3',
+              answer: 'Budi menginginkan tahta tapi tidak berminat menjadi pejabat.',
+            },
+            {
+              choice: '4',
+              answer: 'Tidak dapat ditarik kesimpulan.',
+            },
+          ],
+        },
+        {
+          questionText: 'Coklat yang dibungkus dalam kemasan menarik sangat laris terjual. Coklat Jago dibungkus dalam kemasan berwarna merah menyala. Menurut anak-anak, warna merah menyala sangatlah menarik.',
+          choices: [
+            {
+              choice: '1',
+              answer: 'Coklat Jago kurang laris terjual di kalangan anak-anak.',
+            },
+            {
+              choice: '2',
+              answer: 'Coklat Jago tidak laku terjual di kalangan orang dewasa.',
+            },
+            {
+              choice: '3',
+              answer: 'Coklat Jago laris terjual.',
+            },
+            {
+              choice: '4',
+              answer: 'Coklat Jago laris terjual di kalangan anak-anak.',
+            },
+          ],
+        },
+      ],
     };
   },
 
-  methods: {
-    getWindowWidth() {
-      this.windowWidth = window.innerWidth;
-    },
-  },
-
   created() {
-    window.addEventListener('resize', this.getWindowWidth);
+    this.paramTraining = this.$route.params.training;
+    this.paramMaterial = this.$route.params.material;
   },
 
 };

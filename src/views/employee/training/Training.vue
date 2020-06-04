@@ -20,7 +20,7 @@
         <div class="right">
           <div class="txt">Diadakan pada : </div>
           <div class="date">15 September 2020</div>
-          <router-link to="/training/detail" class="icon-see">
+          <router-link to="/training/1" class="icon-see">
             <font-awesome-icon icon="arrow-right"></font-awesome-icon>
             <p class="see">Lihat</p>
           </router-link>
@@ -39,7 +39,7 @@
         <div class="right">
           <div class="txt">Diadakan pada : </div>
           <div class="date">27 September 2020</div>
-          <router-link to="/training/detail" class="icon-see">
+          <router-link to="/training/2" class="icon-see">
             <font-awesome-icon icon="arrow-right"></font-awesome-icon>
             <p class="see">Lihat</p>
           </router-link>
@@ -58,7 +58,7 @@
         <div class="right">
           <div class="txt">Diadakan pada : </div>
           <div class="date">09 Oktober 2020</div>
-          <router-link to="/training/detail" class="icon-see">
+          <router-link to="/training/3" class="icon-see">
             <font-awesome-icon icon="arrow-right"></font-awesome-icon>
             <p class="see">Lihat</p>
           </router-link>
@@ -77,7 +77,7 @@
         <div class="right">
           <div class="txt">Diadakan pada : </div>
           <div class="date">18 Oktober 2020</div>
-          <router-link to="/training/detail" class="icon-see">
+          <router-link to="/training/4" class="icon-see">
             <font-awesome-icon icon="arrow-right"></font-awesome-icon>
             <p class="see">Lihat</p>
           </router-link>
@@ -96,7 +96,7 @@
         <div class="right">
           <div class="txt">Diadakan pada : </div>
           <div class="date">30 Oktober 2020</div>
-          <router-link to="/training/detail" class="icon-see">
+          <router-link to="/training/5" class="icon-see">
             <font-awesome-icon icon="arrow-right"></font-awesome-icon>
             <p class="see">Lihat</p>
           </router-link>
@@ -115,7 +115,7 @@
         <div class="right">
           <div class="txt">Diadakan pada : </div>
           <div class="date">10 November 2020</div>
-          <router-link to="/training/detail" class="icon-see">
+          <router-link to="/training/6" class="icon-see">
             <font-awesome-icon icon="arrow-right"></font-awesome-icon>
             <p class="see">Lihat</p>
           </router-link>

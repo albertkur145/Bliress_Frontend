@@ -15,7 +15,7 @@ const routes = [
     component: () => import('../views/employee/training/Training.vue'),
   },
   {
-    path: '/training/detail',
+    path: '/training/:training',
     name: 'DetailTraining',
     component: () => import('../views/employee/training/DetailTraining.vue'),
   },
@@ -35,12 +35,12 @@ const routes = [
     component: () => import('../views/employee/test/Test.vue'),
   },
   {
-    path: '/test/detail/:id',
+    path: '/test/:training',
     name: 'DetailTest',
     component: () => import('../views/employee/test/DetailTest.vue'),
   },
   {
-    path: '/test/:material/question/:id',
+    path: '/test/:training/material/:material',
     name: 'Question',
     component: () => import('../views/employee/test/Question.vue'),
   },

@@ -12,7 +12,7 @@
       <!-- list training test -->
       <div class="tests">
         <!-- training test -->
-        <router-link to="/test/detail/1" class="training-test">
+        <router-link to="/test/1" class="training-test">
           <div class="img-test">
             <img src="@/assets/images/test1.png">
           </div>
@@ -29,7 +29,7 @@
         <!-- training test -->
 
         <!-- training test -->
-        <router-link to="/test/detail/2" class="training-test">
+        <router-link to="/test/2" class="training-test">
           <div class="img-test">
             <img src="@/assets/images/test2.png">
           </div>
@@ -46,7 +46,7 @@
         <!-- training test -->
 
         <!-- training test -->
-        <router-link to="/test/detail/3" class="training-test">
+        <router-link to="/test/3" class="training-test">
           <div class="img-test">
             <img src="@/assets/images/test3.png">
           </div>
@@ -63,7 +63,7 @@
         <!-- training test -->
 
         <!-- training test -->
-        <router-link to="/test/detail/4" class="training-test">
+        <router-link to="/test/4" class="training-test">
           <div class="img-test">
             <img src="@/assets/images/test4.png">
           </div>
@@ -80,7 +80,7 @@
         <!-- training test -->
 
         <!-- training test -->
-        <router-link to="/test/detail/5" class="training-test">
+        <router-link to="/test/5" class="training-test">
           <div class="img-test">
             <img src="@/assets/images/test5.png">
           </div>
@@ -97,7 +97,7 @@
         <!-- training test -->
 
         <!-- training test -->
-        <router-link to="/test/detail/6" class="training-test">
+        <router-link to="/test/6" class="training-test">
           <div class="img-test">
             <img src="@/assets/images/test6.png">
           </div>

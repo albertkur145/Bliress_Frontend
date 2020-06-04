@@ -5,7 +5,7 @@
       <router-link to="/test" class="back">
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
       </router-link>
-      <div class="text">Training {{ id }}</div>
+      <div class="text">Training {{ paramTraining }}</div>
     </div>
     <!-- end head -->
 
@@ -301,7 +301,7 @@ export default {
 
   data() {
     return {
-      id: '',
+      paramTraining: '',
       animationLoaderDisplay: false,
       popupMessageDisplay: false,
     };
@@ -309,12 +309,18 @@ export default {
 
   methods: {
     redirectToQuestion() {
-      this.$router.push({ name: 'Question', params: { material: '14', id: '1' } });
+      this.$router.push({
+        name: 'Question',
+        params: {
+          training: this.paramTraining,
+          material: '1',
+        },
+      });
     },
   },
 
   created() {
-    this.id = this.$route.params.id;
+    this.paramTraining = this.$route.params.training;
   },
 
 };

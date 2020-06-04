@@ -6,7 +6,7 @@
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
       </router-link>
 
-      <div class="text">Training</div>
+      <div class="text">Training {{ paramTraining }}</div>
 
       <router-link to="/qrcodereader" class="qr-code-reader">
         <font-awesome-icon icon="qrcode"></font-awesome-icon>
@@ -483,9 +483,14 @@ export default {
 
   data() {
     return {
+      paramTraining: '',
       animationLoaderDisplay: false,
       popupMessageDisplay: false,
     };
+  },
+
+  created() {
+    this.paramTraining = this.$route.params.training;
   },
 
 };
