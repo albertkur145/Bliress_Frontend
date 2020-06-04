@@ -65,6 +65,16 @@ const routes = [
     component: () => import('../views/admin/batch/Attendance.vue'),
   },
   {
+    path: '/admin/batch/:batch/training/:training/material',
+    name: 'AdminMaterialTraining',
+    component: () => import('../views/admin/batch/MaterialList.vue'),
+  },
+  {
+    path: '/admin/batch/:batch/training/:training/material/upload',
+    name: 'AdminUploadMaterialTraining',
+    component: () => import('../views/admin/batch/UploadMaterial.vue'),
+  },
+  {
     path: '/admin/batch/:batch/training/add',
     name: 'AdminAddTraining',
     component: () => import('../views/admin/batch/AddTraining.vue'),

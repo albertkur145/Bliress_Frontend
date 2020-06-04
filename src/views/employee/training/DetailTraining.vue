@@ -155,8 +155,8 @@
       .back {
         position: absolute;
         color: #FFF;
-        top: 31%;
-        left: 0.9375rem;
+        top: 29%;
+        left: 1rem;
         font-size: 1.0625em;
       }
 
@@ -167,8 +167,8 @@
       .qr-code-reader {
         position: absolute;
         color: #FFF;
-        top: 31%;
-        right: 0.9375rem;
+        top: 29%;
+        right: 1rem;
         font-size: 1.0625em;
       }
     }
@@ -291,8 +291,9 @@
         padding: 1.0625rem 1.25rem;
 
         .back {
-          left: 1.0625rem;
-          font-size: 1.0625em;
+          top: 30.5%;
+          left: 1.25rem;
+          font-size: 1.125em;
         }
 
         .text {
@@ -300,8 +301,9 @@
         }
 
         .qr-code-reader {
-          right: 1.0625rem;
-          font-size: 1.0625em;
+          top: 30.5%;
+          right: 1.25rem;
+          font-size: 1.125em;
         }
       }
 
@@ -382,8 +384,9 @@
         padding: 1.1875rem 1.5rem;
 
         .back {
-          left: 1.25rem;
-          font-size: 1.125em;
+          top: 32%;
+          left: 1.5rem;
+          font-size: 1.25em;
         }
 
         .text {
@@ -391,8 +394,9 @@
         }
 
         .qr-code-reader {
-          right: 1.25rem;
-          font-size: 1.125em;
+          top: 32%;
+          right: 1.5rem;
+          font-size: 1.25em;
         }
       }
 

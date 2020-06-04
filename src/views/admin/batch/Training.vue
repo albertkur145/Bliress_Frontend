@@ -550,7 +550,7 @@ export default {
     },
     redirectMaterial(training) {
       this.$router.push({
-        name: 'AdminMaterialsTraining',
+        name: 'AdminMaterialTraining',
         params: {
           batch: this.id,
           training,
