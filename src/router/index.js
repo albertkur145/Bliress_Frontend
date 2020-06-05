@@ -20,6 +20,11 @@ const routes = [
     component: () => import('../views/employee/training/DetailTraining.vue'),
   },
   {
+    path: '/training/:training/attendance',
+    name: 'Attendance',
+    component: () => import('../views/employee/training/QrcodeScanner.vue'),
+  },
+  {
     path: '/account',
     name: 'Account',
     component: () => import('../views/employee/account/Account.vue'),

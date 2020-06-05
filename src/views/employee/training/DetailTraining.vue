@@ -8,7 +8,7 @@
 
       <div class="text">Training {{ paramTraining }}</div>
 
-      <router-link to="/qrcodereader" class="qr-code-reader">
+      <router-link :to="`/training/${paramTraining}/attendance`" class="qr-code-reader">
         <font-awesome-icon icon="qrcode"></font-awesome-icon>
       </router-link>
     </div>
