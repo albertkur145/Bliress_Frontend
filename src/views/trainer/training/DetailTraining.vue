@@ -9,7 +9,7 @@
 
       <div class="text">Training {{ paramTraining }}</div>
 
-      <router-link to="/trainer/training" class="qr-code-reader">
+      <router-link :to="redirectToQrcode" class="qr-code-reader">
         <font-awesome-icon icon="qrcode"></font-awesome-icon>
       </router-link>
     </div>
@@ -549,6 +549,18 @@ export default {
         },
       ],
     };
+  },
+
+  computed: {
+    redirectToQrcode() {
+      return {
+        name: 'TrainerQrcode',
+        params: {
+          training: this.paramTraining,
+          batch: this.paramBatch,
+        },
+      };
+    },
   },
 
   methods: {

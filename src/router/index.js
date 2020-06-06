@@ -70,6 +70,11 @@ const routes = [
     component: () => import('../views/admin/batch/Attendance.vue'),
   },
   {
+    path: '/admin/batch/:batch/training/:training/attendance/qrcode',
+    name: 'AdminQrcode',
+    component: () => import('../views/admin/batch/Qrcode.vue'),
+  },
+  {
     path: '/admin/batch/:batch/training/:training/material',
     name: 'AdminMaterialTraining',
     component: () => import('../views/admin/batch/MaterialList.vue'),
@@ -168,6 +173,11 @@ const routes = [
     path: '/trainer/training/:training/batch/:batch',
     name: 'TrainerDetailTraining',
     component: () => import('../views/trainer/training/DetailTraining.vue'),
+  },
+  {
+    path: '/trainer/training/:training/batch/:batch/qrcode',
+    name: 'TrainerQrcode',
+    component: () => import('../views/trainer/training/Qrcode.vue'),
   },
   {
     path: '/trainer/training/:training/batch/:batch/upload',

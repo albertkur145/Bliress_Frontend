@@ -8,7 +8,7 @@
         <span class="text">Absensi</span>
       </router-link>
 
-      <router-link :to="{ name: 'AdminTraining', params: { batch: id } }">
+      <router-link :to="redirectToQrcode">
         <font-awesome-icon icon="qrcode" class="icon-qrcode"></font-awesome-icon>
       </router-link>
     </div>
@@ -353,6 +353,18 @@ export default {
       animationLoaderDisplay: false,
       popupMessageDisplay: false,
     };
+  },
+
+  computed: {
+    redirectToQrcode() {
+      return {
+        name: 'AdminQrcode',
+        params: {
+          batch: this.id,
+          training: this.training,
+        },
+      };
+    },
   },
 
   created() {

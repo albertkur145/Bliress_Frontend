@@ -17,6 +17,7 @@
     "core-js": "^3.6.4",
     "epic-spinners": "^1.1.0",
     "nprogress": "^0.2.0",
+    "qrcode.vue": "^1.7.0",
     "serve-dist": "^1.0.11",
     "vue": "^2.6.11",
     "vue-no-ssr": "^1.1.1",
