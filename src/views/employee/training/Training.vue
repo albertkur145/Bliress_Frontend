@@ -9,113 +9,18 @@
     <!-- content -->
     <div class="content">
       <!-- list training -->
-      <div class="training">
+      <div class="training" v-for="(value) in trainingList.data" :key="value.id">
         <!-- left -->
         <div class="left">
-          <span>Training 1</span>
+          <span>Training {{ value.training }}</span>
         </div>
         <!-- left -->
 
         <!-- right -->
         <div class="right">
           <div class="txt">Diadakan pada : </div>
-          <div class="date">15 September 2020</div>
-          <router-link to="/training/1" class="icon-see">
-            <font-awesome-icon icon="arrow-right"></font-awesome-icon>
-            <p class="see">Lihat</p>
-          </router-link>
-        </div>
-        <!-- right -->
-      </div>
-
-      <div class="training">
-        <!-- left -->
-        <div class="left">
-          <span>Training 2</span>
-        </div>
-        <!-- left -->
-
-        <!-- right -->
-        <div class="right">
-          <div class="txt">Diadakan pada : </div>
-          <div class="date">27 September 2020</div>
-          <router-link to="/training/2" class="icon-see">
-            <font-awesome-icon icon="arrow-right"></font-awesome-icon>
-            <p class="see">Lihat</p>
-          </router-link>
-        </div>
-        <!-- right -->
-      </div>
-
-      <div class="training">
-        <!-- left -->
-        <div class="left">
-          <span>Training 3</span>
-        </div>
-        <!-- left -->
-
-        <!-- right -->
-        <div class="right">
-          <div class="txt">Diadakan pada : </div>
-          <div class="date">09 Oktober 2020</div>
-          <router-link to="/training/3" class="icon-see">
-            <font-awesome-icon icon="arrow-right"></font-awesome-icon>
-            <p class="see">Lihat</p>
-          </router-link>
-        </div>
-        <!-- right -->
-      </div>
-
-      <div class="training">
-        <!-- left -->
-        <div class="left">
-          <span>Training 4</span>
-        </div>
-        <!-- left -->
-
-        <!-- right -->
-        <div class="right">
-          <div class="txt">Diadakan pada : </div>
-          <div class="date">18 Oktober 2020</div>
-          <router-link to="/training/4" class="icon-see">
-            <font-awesome-icon icon="arrow-right"></font-awesome-icon>
-            <p class="see">Lihat</p>
-          </router-link>
-        </div>
-        <!-- right -->
-      </div>
-
-      <div class="training">
-        <!-- left -->
-        <div class="left">
-          <span>Training 5</span>
-        </div>
-        <!-- left -->
-
-        <!-- right -->
-        <div class="right">
-          <div class="txt">Diadakan pada : </div>
-          <div class="date">30 Oktober 2020</div>
-          <router-link to="/training/5" class="icon-see">
-            <font-awesome-icon icon="arrow-right"></font-awesome-icon>
-            <p class="see">Lihat</p>
-          </router-link>
-        </div>
-        <!-- right -->
-      </div>
-
-      <div class="training">
-        <!-- left -->
-        <div class="left">
-          <span>Training 6</span>
-        </div>
-        <!-- left -->
-
-        <!-- right -->
-        <div class="right">
-          <div class="txt">Diadakan pada : </div>
-          <div class="date">10 November 2020</div>
-          <router-link to="/training/6" class="icon-see">
+          <div class="date">{{ value.date }}</div>
+          <router-link :to="`training/${value.training}`" class="icon-see">
             <font-awesome-icon icon="arrow-right"></font-awesome-icon>
             <p class="see">Lihat</p>
           </router-link>
@@ -365,6 +270,7 @@
 import MenuBar from '@/components/employee/MenuBar.vue';
 import AnimationLoader from '@/components/AnimationLoader.vue';
 import PopupMessage from '@/components/PopupMessage.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
@@ -374,11 +280,27 @@ export default {
     PopupMessage,
   },
 
+  computed: {
+    ...mapGetters([
+      'trainingList',
+    ]),
+  },
+
   data() {
     return {
       animationLoaderDisplay: false,
       popupMessageDisplay: false,
     };
+  },
+
+  methods: {
+    ...mapActions([
+      'getTrainings',
+    ]),
+  },
+
+  created() {
+    this.getTrainings();
   },
 
 };
