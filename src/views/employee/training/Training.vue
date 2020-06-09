@@ -20,7 +20,7 @@
         <div class="right">
           <div class="txt">Diadakan pada : </div>
           <div class="date">{{ value.date }}</div>
-          <router-link :to="`training/${value.training}`" class="icon-see">
+          <router-link :to="{ name: 'DetailTraining', params: { training: value.training } }" class="icon-see">
             <font-awesome-icon icon="arrow-right"></font-awesome-icon>
             <p class="see">Lihat</p>
           </router-link>
@@ -280,12 +280,6 @@ export default {
     PopupMessage,
   },
 
-  computed: {
-    ...mapGetters([
-      'trainingList',
-    ]),
-  },
-
   data() {
     return {
       animationLoaderDisplay: false,
@@ -293,8 +287,14 @@ export default {
     };
   },
 
+  computed: {
+    ...mapGetters('employeeTraining', [
+      'trainingList',
+    ]),
+  },
+
   methods: {
-    ...mapActions([
+    ...mapActions('employeeTraining', [
       'getTrainings',
     ]),
   },

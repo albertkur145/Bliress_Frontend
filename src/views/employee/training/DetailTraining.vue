@@ -6,7 +6,7 @@
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
       </router-link>
 
-      <div class="text">Training {{ paramTraining }}</div>
+      <div class="text">Training {{ this.training.training }}</div>
 
       <router-link :to="`/training/${paramTraining}/attendance`" class="qr-code-reader">
         <font-awesome-icon icon="qrcode"></font-awesome-icon>
@@ -15,22 +15,21 @@
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" v-if="apiReady">
       <!-- rincian -->
       <div class="rincian">
         <p class="txt">Rincian</p>
 
         <div class="detail">
-          <p class="date">Dilaksanakan tanggal 15 September 2020</p>
-          <p class="location">di Gedung Serbaguna, R.3125 Block C</p>
-          <p class="start">Dimulai pada pkl 08.00 WIB - selesai</p>
+          <p class="date">Dilaksanakan tanggal {{ this.training.date }}</p>
+          <p class="location">{{ this.training.location }}</p>
+          <p class="start">Dimulai pada pkl {{ this.training.timeStart }} - {{ this.training.timeFinish }} WIB</p>
         </div>
 
-        <p class="trainer">Trainer: Rudi Santoso</p>
+        <p class="trainer">Trainer: {{ this.training.trainer }}</p>
 
-        <div class="materials">
-          <p class="material-link"><a href="http://localhost:88/Think-Win-Win.pdf">Think Win Win</a></p>
-          <p class="material-link"><a href="http://localhost:88/Think-Win-Win.pdf">Time Management</a></p>
+        <div class="materials" v-for="(value) in this.training.materials" :key="value.id">
+          <p class="material-link"><a :href="value.link" target="_blank">{{ value.name }}</a></p>
         </div>
       </div>
       <!-- rincian -->
@@ -39,7 +38,7 @@
       <div class="participants">
         <div class="top">
           <div class="title">Peserta</div>
-          <div class="count">86 orang</div>
+          <div class="count">{{ employees.total }} orang</div>
         </div>
 
         <div class="data">
@@ -51,70 +50,10 @@
             </thead>
 
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>Albert Kurniawan</td>
-                <td>Sales Manager</td>
-              </tr>
-
-              <tr>
-                <td>2</td>
-                <td>Rendi Orton</td>
-                <td>Sales Manager</td>
-              </tr>
-
-              <tr>
-                <td>3</td>
-                <td>Denny Laoli</td>
-                <td>Supervisor Bussiness</td>
-              </tr>
-
-              <tr>
-                <td>4</td>
-                <td>Irene Nike</td>
-                <td>Akuntan</td>
-              </tr>
-
-              <tr>
-                <td>5</td>
-                <td>Diana Pertama Sari</td>
-                <td>Akuntan</td>
-              </tr>
-
-              <tr>
-                <td>6</td>
-                <td>Desman Zega</td>
-                <td>Software Developer</td>
-              </tr>
-
-              <tr>
-                <td>7</td>
-                <td>Kevin Santoso</td>
-                <td>Software Developer</td>
-              </tr>
-
-              <tr>
-                <td>8</td>
-                <td>Simon</td>
-                <td>Software Developer</td>
-              </tr>
-
-              <tr>
-                <td>9</td>
-                <td>Niken Regina</td>
-                <td>Quality Control</td>
-              </tr>
-
-              <tr>
-                <td>10</td>
-                <td>Yemima Milenia</td>
-                <td>Quality Control</td>
-              </tr>
-
-              <tr>
-                <td>11</td>
-                <td>Nicholaus Putra</td>
-                <td>Quality Control</td>
+              <tr v-for="(value, index) in employees.employee" :key="value.id">
+                <td>{{ index + 1 }}</td>
+                <td>{{ value.name }}</td>
+                <td>{{ value.division }}</td>
               </tr>
             </tbody>
           </table>
@@ -217,9 +156,10 @@
 
           .material-link {
             font-size: 0.8125em;
-            margin-top: 0.75rem;
+            margin-bottom: -0.5rem;
 
             a {
+              margin: 0;
               color: #3742FA;
               border-bottom: 0.0625rem solid #3742FA;
               text-decoration: none;
@@ -473,6 +413,7 @@
 
 import AnimationLoader from '@/components/AnimationLoader.vue';
 import PopupMessage from '@/components/PopupMessage.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
@@ -486,11 +427,49 @@ export default {
       paramTraining: '',
       animationLoaderDisplay: false,
       popupMessageDisplay: false,
+      training: {},
+      employees: {},
+      apiReady: false,
     };
   },
 
-  created() {
+  computed: {
+    ...mapGetters('employeeTraining', {
+      response: 'trainingBy',
+    }),
+  },
+
+  methods: {
+    ...mapActions('employeeTraining', [
+      'getTrainingBy',
+    ]),
+  },
+
+  async created() {
+    // get params
     this.paramTraining = this.$route.params.training;
+
+    // show loader
+    this.animationLoaderDisplay = true;
+
+    // req api on vuex
+    await new Promise((resolve) => {
+      this.getTrainingBy({
+        params: {
+          employeeId: 1,
+          training: this.paramTraining,
+        },
+        resolve,
+      });
+    });
+
+    // req api finish then change status
+    this.apiReady = true;
+    this.animationLoaderDisplay = false;
+
+    // asignment split response data
+    this.training = this.response.data.training;
+    this.employees = this.response.data.employees;
   },
 
 };

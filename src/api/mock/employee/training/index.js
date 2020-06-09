@@ -11,5 +11,5 @@ const methods = {
 };
 
 routes.forEach((val) => {
-  mock[methods[val.method]](val.url, val.params).reply(val.status, val.response);
+  mock[methods[val.method]](val.url, { params: val.params }).reply(val.status, val.response);
 });
