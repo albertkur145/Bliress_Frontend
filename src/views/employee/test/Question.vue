@@ -15,11 +15,11 @@
 
       <!-- questions -->
       <div class="preview">
-        <div class="question" v-for="(value, index) in questions" :key="index">
+        <div class="question" v-for="(value) in questionList.data" :key="value.id">
           <div class="question-text">{{ value.questionText }}</div>
           <div class="choices-list">
-            <label class="radio" v-for="(choice, key) in value.choices" :key="key">
-              <input type="radio" :value="choice.choice" :name="`choice-${index}`"><span></span>
+            <label class="radio" v-for="(choice) in value.choices" :key="choice.choice">
+              <input type="radio" :value="choice.choice" :name="`choice-${value.id}`"><span></span>
               <div class="answer">{{ choice.answer }}</div>
             </label>
           </div>
@@ -33,6 +33,9 @@
 
     </div>
     <!-- end content -->
+
+    <PopupMessage :msg="popupMessage" :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
+    <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
 
   </div>
 </template>
@@ -168,6 +171,10 @@
           }
         }
       }
+    }
+
+    .display-flex {
+      display: flex;
     }
   }
   // global css
@@ -321,151 +328,76 @@
 </style>
 
 <script>
+
+import AnimationLoader from '@/components/AnimationLoader.vue';
+import PopupMessage from '@/components/PopupMessage.vue';
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
+
+  components: {
+    AnimationLoader,
+    PopupMessage,
+  },
 
   data() {
     return {
+      animationLoaderDisplay: false,
+      popupMessageDisplay: false,
+      popupMessage: '',
+      apiReady: '',
       paramTraining: '',
       paramMaterial: '',
-      materialList: [
-        {
-          name: 'Private Victory',
-          date_available: '12 September 2020',
-          date_closed: '13 September 2020',
-          limit_time: '20 menit',
-        },
-        {
-          name: 'Emotional Banking',
-          date_available: '-',
-          date_closed: '-',
-          limit_time: '-',
-        },
-        {
-          name: 'Think Win Win',
-          date_available: '20 September 2020',
-          date_closed: '22 September 2020',
-          limit_time: '60 menit',
-        },
-        {
-          name: 'Time Management',
-          date_available: '23 September 2020',
-          date_closed: '26 September 2020',
-          limit_time: '60 menit',
-        },
-      ],
-      questions: [
-        {
-          questionText: 'Semua mahasiswa Perguruan Tinggi memiliki Nomor Induk Mahasiswa. Budi seorang mahasiswa. Jadi,',
-          choices: [
-            {
-              choice: '1',
-              answer: 'Budi mungkin memiliki nomor induk mahasiswa.',
-            },
-            {
-              choice: '2',
-              answer: 'Belum tentu Budi memiliki nomor induk mahasiswa.',
-            },
-            {
-              choice: '3',
-              answer: 'Budi memiliki nomor induk mahasiswa.',
-            },
-            {
-              choice: '4',
-              answer: 'Budi tidak memiliki nomor induk mahasiswa.',
-            },
-          ],
-        },
-        {
-          questionText: 'Sebagian pedagang pecel lele mengeluhkan harga cabe naik. Pak Rudi seorang pedagang pecel lele.',
-          choices: [
-            {
-              choice: '1',
-              answer: 'Pak Rudi pasti mengeluhkan harga cabe naik.',
-            },
-            {
-              choice: '2',
-              answer: 'Pak Rudi tidak mengeluhkan harga cabe naik.',
-            },
-            {
-              choice: '3',
-              answer: 'Harga cabe bukanlah keluhan Pak Rudi.',
-            },
-            {
-              choice: '4',
-              answer: 'Pak Rudi mungkin ikut mengeluhkan harga cabe naik.',
-            },
-          ],
-        },
-        {
-          questionText: 'Semua pemain sepakbola yang berkebangsaan Itali berwajah tampan. David Beckham adalah pemain sepakbola berkebangsaan Inggris.',
-          choices: [
-            {
-              choice: '1',
-              answer: 'David Beckham bukanlah pemain sepakbola yang tampan.',
-            },
-            {
-              choice: '2',
-              answer: 'David Beckham adalah pemain sepakbola yang tampan.',
-            },
-            {
-              choice: '3',
-              answer: 'Meskipun bukan berkebangsaan Italia, David Beckham pasti berwajah tampan.',
-            },
-            {
-              choice: '4',
-              answer: 'Tidak dapat ditarik kesimpulan.',
-            },
-          ],
-        },
-        {
-          questionText: 'Sebagian orang yang berminat menjadi pejabat hanya menginginkan harta dan tahta. Budi tidak berminat menjadi pejabat.',
-          choices: [
-            {
-              choice: '1',
-              answer: 'Budi tidak menginginkan harta dan tahta.',
-            },
-            {
-              choice: '2',
-              answer: 'Tahta bukanlah keinginan Budi, tapi harta mungkin ya.',
-            },
-            {
-              choice: '3',
-              answer: 'Budi menginginkan tahta tapi tidak berminat menjadi pejabat.',
-            },
-            {
-              choice: '4',
-              answer: 'Tidak dapat ditarik kesimpulan.',
-            },
-          ],
-        },
-        {
-          questionText: 'Coklat yang dibungkus dalam kemasan menarik sangat laris terjual. Coklat Jago dibungkus dalam kemasan berwarna merah menyala. Menurut anak-anak, warna merah menyala sangatlah menarik.',
-          choices: [
-            {
-              choice: '1',
-              answer: 'Coklat Jago kurang laris terjual di kalangan anak-anak.',
-            },
-            {
-              choice: '2',
-              answer: 'Coklat Jago tidak laku terjual di kalangan orang dewasa.',
-            },
-            {
-              choice: '3',
-              answer: 'Coklat Jago laris terjual.',
-            },
-            {
-              choice: '4',
-              answer: 'Coklat Jago laris terjual di kalangan anak-anak.',
-            },
-          ],
-        },
-      ],
     };
   },
 
+  computed: {
+    ...mapGetters('employeeTest', [
+      'questionList',
+    ]),
+  },
+
+  methods: {
+    ...mapActions('employeeTest', [
+      'getQuestions',
+    ]),
+
+    async getAllQuestions() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getQuestions({
+          params: {
+            employeeId: 1,
+            training: '1',
+            materialId: 1,
+          },
+          resolve,
+        });
+      });
+
+      // hide loader
+      this.animationLoaderDisplay = false;
+
+      // show popup message if code response != 200
+      if (promise === 200) {
+        this.apiReady = true;
+      } else {
+        this.popupMessage = 'Koneksi error! Silahkan coba lagi';
+        this.popupMessageDisplay = true;
+      }
+    },
+  },
+
   created() {
+    // get params
     this.paramTraining = this.$route.params.training;
     this.paramMaterial = this.$route.params.material;
+
+    // req api
+    this.getAllQuestions();
   },
 
 };

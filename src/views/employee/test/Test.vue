@@ -7,104 +7,21 @@
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" v-if="apiReady">
 
       <!-- list training test -->
       <div class="tests">
         <!-- training test -->
-        <router-link to="/test/1" class="training-test">
+        <router-link v-for="(value) in testList.data"
+        :key="value.id" class="training-test"
+        :to="{ name: 'DetailTest', params: { training: value.training } }">
           <div class="img-test">
-            <img src="@/assets/images/test1.png">
+            <img :src="require(`@/assets/images/test${value.training}.png`)">
           </div>
 
           <div class="info">
-            <p class="txt-training">Training 1</p>
-            <p class="available">Available</p>
-          </div>
-
-          <div class="show">
-            <font-awesome-icon icon="arrow-right"></font-awesome-icon>
-          </div>
-        </router-link>
-        <!-- training test -->
-
-        <!-- training test -->
-        <router-link to="/test/2" class="training-test">
-          <div class="img-test">
-            <img src="@/assets/images/test2.png">
-          </div>
-
-          <div class="info">
-            <p class="txt-training">Training 2</p>
-            <p class="available">Available</p>
-          </div>
-
-          <div class="show">
-            <font-awesome-icon icon="arrow-right"></font-awesome-icon>
-          </div>
-        </router-link>
-        <!-- training test -->
-
-        <!-- training test -->
-        <router-link to="/test/3" class="training-test">
-          <div class="img-test">
-            <img src="@/assets/images/test3.png">
-          </div>
-
-          <div class="info">
-            <p class="txt-training">Training 3</p>
-            <p class="available">Closed</p>
-          </div>
-
-          <div class="show">
-            <font-awesome-icon icon="arrow-right"></font-awesome-icon>
-          </div>
-        </router-link>
-        <!-- training test -->
-
-        <!-- training test -->
-        <router-link to="/test/4" class="training-test">
-          <div class="img-test">
-            <img src="@/assets/images/test4.png">
-          </div>
-
-          <div class="info">
-            <p class="txt-training">Training 4</p>
-            <p class="available">Closed</p>
-          </div>
-
-          <div class="show">
-            <font-awesome-icon icon="arrow-right"></font-awesome-icon>
-          </div>
-        </router-link>
-        <!-- training test -->
-
-        <!-- training test -->
-        <router-link to="/test/5" class="training-test">
-          <div class="img-test">
-            <img src="@/assets/images/test5.png">
-          </div>
-
-          <div class="info">
-            <p class="txt-training">Training 5</p>
-            <p class="available">Closed</p>
-          </div>
-
-          <div class="show">
-            <font-awesome-icon icon="arrow-right"></font-awesome-icon>
-          </div>
-        </router-link>
-        <!-- training test -->
-
-        <!-- training test -->
-        <router-link to="/test/6" class="training-test">
-          <div class="img-test">
-            <img src="@/assets/images/test6.png">
-          </div>
-
-          <div class="info">
-            <p class="txt-training">Training 6</p>
-            <p class="available">Closed</p>
+            <p class="txt-training">Training {{ value.training }}</p>
+            <p class="available">{{ value.status }}</p>
           </div>
 
           <div class="show">
@@ -119,7 +36,7 @@
     <!-- end content  -->
 
     <MenuBar></MenuBar>
-    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
+    <PopupMessage :msg="popupMessage" :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
@@ -334,6 +251,7 @@
 import MenuBar from '@/components/employee/MenuBar.vue';
 import AnimationLoader from '@/components/AnimationLoader.vue';
 import PopupMessage from '@/components/PopupMessage.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
@@ -347,7 +265,52 @@ export default {
     return {
       animationLoaderDisplay: false,
       popupMessageDisplay: false,
+      popupMessage: '',
+      apiReady: false,
     };
+  },
+
+  computed: {
+    ...mapGetters('employeeTest', [
+      'testList',
+    ]),
+  },
+
+  methods: {
+    ...mapActions('employeeTest', [
+      'getTests',
+    ]),
+
+    async getAllTests() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getTests({
+          params: {
+            employeeId: 1,
+          },
+          resolve,
+        });
+      });
+
+      // hide loader
+      this.animationLoaderDisplay = false;
+
+      // show popup message if code response != 200
+      if (promise === 200) {
+        this.apiReady = true;
+      } else {
+        this.popupMessage = 'Koneksi error! Silahkan coba lagi';
+        this.popupMessageDisplay = true;
+      }
+    },
+  },
+
+  created() {
+    // req api
+    this.getAllTests();
   },
 
 };

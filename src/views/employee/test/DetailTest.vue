@@ -10,57 +10,18 @@
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" v-if="apiReady">
 
       <!-- list test of material -->
       <div class="materials">
         <!-- test -->
-        <div class="test">
-          <div class="material">Private Victory</div>
-          <div class="txt date-available">Tersedia pada 12 September 2020</div>
-          <div class="txt date-closed">Ditutup pada 13 September 2020</div>
-          <div class="txt time">Batas waktu: 20 menit</div>
-          <div class="score">Nilai: 40</div>
-        </div>
-        <!-- test -->
-
-        <!-- test -->
-        <div class="test">
-          <div class="material">Emotional Banking</div>
-          <div class="txt date-available">Tersedia pada 15 September 2020</div>
-          <div class="txt date-closed">Ditutup pada 18 September 2020</div>
-          <div class="txt time">Batas waktu: 45 menit</div>
-          <button class="btn-start" @click="redirectToQuestion">Start !</button>
-        </div>
-        <!-- test -->
-
-        <!-- test -->
-        <div class="test">
-          <div class="material">Think Win Win</div>
-          <div class="txt date-available">Tersedia pada 20 September 2020</div>
-          <div class="txt date-closed">Ditutup pada 22 September 2020</div>
-          <div class="txt time">Batas waktu: 60 menit</div>
-          <button class="btn-start" @click="redirectToQuestion">Start !</button>
-        </div>
-        <!-- test -->
-
-        <!-- test -->
-        <div class="test">
-          <div class="material">Time Management</div>
-          <div class="txt date-available">Tersedia pada 23 September 2020</div>
-          <div class="txt date-closed">Ditutup pada 26 September 2020</div>
-          <div class="txt time">Batas waktu: 60 menit</div>
-          <div class="score">Nilai: 100</div>
-        </div>
-        <!-- test -->
-
-        <!-- test -->
-        <div class="test">
-          <div class="material">Public Victory</div>
-          <div class="txt date-available">Tersedia pada 28 September 2020</div>
-          <div class="txt date-closed">Ditutup pada 30 September 2020</div>
-          <div class="txt time">Batas waktu: 30 menit</div>
-          <div class="score">Nilai: 60</div>
+        <div class="test" v-for="(value) in this.materialList.data" :key="value.id">
+          <div class="material">{{ value.material }}</div>
+          <div class="txt date-available">Tersedia pada {{ value.dateAvailable }}</div>
+          <div class="txt date-closed">Ditutup pada {{ value.dateClosed }}</div>
+          <div class="txt time">Batas waktu: {{ value.timeLimit }}</div>
+          <div v-if="value.status" class="score">Nilai: {{ value.score }}</div>
+          <button v-else class="btn-start" @click="redirectToQuestion">Start !</button>
         </div>
         <!-- test -->
       </div>
@@ -69,7 +30,7 @@
     </div>
     <!-- end content -->
 
-    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
+    <PopupMessage :msg="popupMessage" :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
@@ -291,6 +252,7 @@
 
 import AnimationLoader from '@/components/AnimationLoader.vue';
 import PopupMessage from '@/components/PopupMessage.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
@@ -301,13 +263,52 @@ export default {
 
   data() {
     return {
-      paramTraining: '',
       animationLoaderDisplay: false,
       popupMessageDisplay: false,
+      popupMessage: '',
+      apiReady: '',
+      paramTraining: '',
     };
   },
 
+  computed: {
+    ...mapGetters('employeeTest', [
+      'materialList',
+    ]),
+  },
+
   methods: {
+    ...mapActions('employeeTest', [
+      'getMaterials',
+    ]),
+
+    async getAllMaterials() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getMaterials({
+          params: {
+            employeeId: 1,
+            training: '1',
+          },
+          resolve,
+        });
+      });
+
+      // hide loader
+      this.animationLoaderDisplay = false;
+
+      // show popup message if code response != 200
+      if (promise === 200) {
+        this.apiReady = true;
+      } else {
+        this.popupMessage = 'Koneksi error! Silahkan coba lagi';
+        this.popupMessageDisplay = true;
+      }
+    },
+
     redirectToQuestion() {
       this.$router.push({
         name: 'Question',
@@ -320,7 +321,11 @@ export default {
   },
 
   created() {
+    // get params
     this.paramTraining = this.$route.params.training;
+
+    // req api
+    this.getAllMaterials();
   },
 
 };

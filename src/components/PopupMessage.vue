@@ -1,16 +1,16 @@
 <template>
   <!-- popup message -->
-  <div class="popup-message">
+  <div class="popup-message" v-if="isShow">
     <div class="contain">
-      <span class="message">This is default message system.</span>
+      <span class="message">{{ msg }}</span>
 
       <div>
-        <button class="btn-yes">
+        <button class="btn-yes" @click="hide()">
           <font-awesome-icon icon="check"></font-awesome-icon>
         </button>
       </div>
 
-      <font-awesome-icon icon="times" class="close"></font-awesome-icon>
+      <font-awesome-icon icon="times" class="close" @click="hide()"></font-awesome-icon>
     </div>
   </div>
   <!-- popup message -->
@@ -145,3 +145,27 @@
   // width > 481px (Big Mobile, Tablet, Desktop)
 
 </style>
+
+<script>
+
+export default {
+
+  props: [
+    'msg',
+  ],
+
+  data() {
+    return {
+      isShow: true,
+    };
+  },
+
+  methods: {
+    hide() {
+      this.isShow = false;
+    },
+  },
+
+};
+
+</script>

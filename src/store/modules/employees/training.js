@@ -1,7 +1,6 @@
 import axios from 'axios';
-import '@/api/mock/employee/training';
 
-const API = 'http://localhost:8080/api';
+const API = 'http://localhost:8123/api';
 
 const data = {
   trainings: {},
@@ -29,10 +28,20 @@ const mutations = {
 };
 
 const actions = {
-  getTrainings: ({ commit }) => {
-    axios
-      .get(`${API}/training`)
-      .then((res) => commit('setTrainings', res.data));
+  getTrainings: ({ commit }, payload) => {
+    axios({
+      method: 'get',
+      url: `${API}/training`,
+      params: payload.params,
+      responseType: 'json',
+    })
+      .then((res) => {
+        commit('setTrainings', res.data);
+        payload.resolve(res.data.code);
+      })
+      .catch(() => {
+        console.log('Error');
+      });
   },
 
   getTrainingBy: ({ commit }, payload) => {
@@ -44,7 +53,10 @@ const actions = {
     })
       .then((res) => {
         commit('setTrainingBy', res.data);
-        payload.resolve();
+        payload.resolve(res.data.code);
+      })
+      .catch(() => {
+        console.log('Error');
       });
   },
 };

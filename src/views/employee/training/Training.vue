@@ -7,7 +7,7 @@
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" v-if="apiReady">
       <!-- list training -->
       <div class="training" v-for="(value) in trainingList.data" :key="value.id">
         <!-- left -->
@@ -32,7 +32,7 @@
     <!-- end content -->
 
     <MenuBar></MenuBar>
-    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
+    <PopupMessage :msg="popupMessage" :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
@@ -284,6 +284,8 @@ export default {
     return {
       animationLoaderDisplay: false,
       popupMessageDisplay: false,
+      popupMessage: '',
+      apiReady: false,
     };
   },
 
@@ -297,10 +299,37 @@ export default {
     ...mapActions('employeeTraining', [
       'getTrainings',
     ]),
+
+    async getAllTraining() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getTrainings({
+          params: {
+            employeeId: 1,
+          },
+          resolve,
+        });
+      });
+
+      // req api finish then change status
+      this.animationLoaderDisplay = false;
+
+      // show popup message if code response != 200
+      if (promise === 200) {
+        this.apiReady = true;
+      } else {
+        this.popupMessage = 'Koneksi error! Silahkan coba lagi';
+        this.popupMessageDisplay = true;
+      }
+    },
   },
 
   created() {
-    this.getTrainings();
+    // req api
+    this.getAllTraining();
   },
 
 };

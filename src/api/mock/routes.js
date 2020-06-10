@@ -1,9 +1,12 @@
-const API = 'http://localhost:8080/api';
+const API = 'http://localhost:8123/api';
 
 export default [
   {
     url: `${API}/training`,
     method: 'GET',
+    params: {
+      employeeId: 1,
+    },
     status: 200,
     response: {
       code: 200,
@@ -41,11 +44,11 @@ export default [
   },
   {
     url: `${API}/training/detail`,
+    method: 'GET',
     params: {
       employeeId: 1,
       training: '1',
     },
-    method: 'GET',
     status: 200,
     response: {
       code: 200,
@@ -144,11 +147,11 @@ export default [
   },
   {
     url: `${API}/training/detail`,
+    method: 'GET',
     params: {
       employeeId: 1,
       training: '2',
     },
-    method: 'GET',
     status: 200,
     response: {
       code: 200,
@@ -232,11 +235,11 @@ export default [
   },
   {
     url: `${API}/training/detail`,
+    method: 'GET',
     params: {
       employeeId: 1,
       training: '3',
     },
-    method: 'GET',
     status: 200,
     response: {
       code: 200,
@@ -310,11 +313,11 @@ export default [
   },
   {
     url: `${API}/training/detail`,
+    method: 'GET',
     params: {
       employeeId: 1,
       training: '4',
     },
-    method: 'GET',
     status: 200,
     response: {
       code: 200,
@@ -388,11 +391,11 @@ export default [
   },
   {
     url: `${API}/training/detail`,
+    method: 'GET',
     params: {
       employeeId: 1,
       training: '5',
     },
-    method: 'GET',
     status: 200,
     response: {
       code: 200,
@@ -450,6 +453,210 @@ export default [
           ],
         },
       },
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/test`,
+    method: 'GET',
+    params: {
+      employeeId: 1,
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: [
+        {
+          id: 1,
+          training: '1',
+          status: 'Available',
+        },
+        {
+          id: 2,
+          training: '2',
+          status: 'Available',
+        },
+        {
+          id: 3,
+          training: '3',
+          status: 'Closed',
+        },
+        {
+          id: 4,
+          training: '4',
+          status: 'Closed',
+        },
+        {
+          id: 5,
+          training: '5',
+          status: 'Closed',
+        },
+      ],
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/test/materials`,
+    method: 'GET',
+    params: {
+      employeeId: 1,
+      training: '1',
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: [
+        {
+          id: 1,
+          material: 'Private Victory',
+          dateAvailable: '12 September 2020',
+          dateClosed: '14 September 2020',
+          timeLimit: '20 menit',
+          score: 0,
+          status: 0,
+        },
+        {
+          id: 2,
+          material: 'Public Victory',
+          dateAvailable: '17 September 2020',
+          dateClosed: '18 September 2020',
+          timeLimit: '30 menit',
+          score: 60,
+          status: 1,
+        },
+      ],
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/test/materials/question`,
+    method: 'GET',
+    params: {
+      employeeId: 1,
+      training: '1',
+      materialId: 1,
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: [
+        {
+          id: 1,
+          questionText: 'Sebagian pedagang pecel lele mengeluhkan harga cabe naik. Pak Rudi seorang pedagang pecel lele.',
+          choices: [
+            {
+              choice: '1',
+              answer: 'Pak Rudi pasti mengeluhkan harga cabe naik.',
+            },
+            {
+              choice: '2',
+              answer: 'Pak Rudi tidak mengeluhkan harga cabe naik.',
+            },
+            {
+              choice: '3',
+              answer: 'Harga cabe bukanlah keluhan Pak Rudi.',
+            },
+            {
+              choice: '4',
+              answer: 'Pak Rudi mungkin ikut mengeluhkan harga cabe naik.',
+            },
+          ],
+        },
+        {
+          id: 2,
+          questionText: 'Semua pemain sepakbola yang berkebangsaan Itali berwajah tampan. David Beckham adalah pemain sepakbola berkebangsaan Inggris.',
+          choices: [
+            {
+              choice: '1',
+              answer: 'David Beckham bukanlah pemain sepakbola yang tampan.',
+            },
+            {
+              choice: '2',
+              answer: 'David Beckham adalah pemain sepakbola yang tampan.',
+            },
+            {
+              choice: '3',
+              answer: 'Meskipun bukan berkebangsaan Italia, David Beckham pasti berwajah tampan.',
+            },
+            {
+              choice: '4',
+              answer: 'Tidak dapat ditarik kesimpulan.',
+            },
+          ],
+        },
+        {
+          id: 3,
+          questionText: 'Semua mahasiswa Perguruan Tinggi memiliki Nomor Induk Mahasiswa. Budi seorang mahasiswa. Jadi,',
+          choices: [
+            {
+              choice: '1',
+              answer: 'Budi mungkin memiliki nomor induk mahasiswa.',
+            },
+            {
+              choice: '2',
+              answer: 'Belum tentu Budi memiliki nomor induk mahasiswa.',
+            },
+            {
+              choice: '3',
+              answer: 'Budi memiliki nomor induk mahasiswa.',
+            },
+            {
+              choice: '4',
+              answer: 'Budi tidak memiliki nomor induk mahasiswa.',
+            },
+          ],
+        },
+        {
+          id: 4,
+          questionText: 'Sebagian orang yang berminat menjadi pejabat hanya menginginkan harta dan tahta. Budi tidak berminat menjadi pejabat.',
+          choices: [
+            {
+              choice: '1',
+              answer: 'Budi tidak menginginkan harta dan tahta.',
+            },
+            {
+              choice: '2',
+              answer: 'Tahta bukanlah keinginan Budi, tapi harta mungkin ya.',
+            },
+            {
+              choice: '3',
+              answer: 'Budi menginginkan tahta tapi tidak berminat menjadi pejabat.',
+            },
+            {
+              choice: '4',
+              answer: 'Tidak dapat ditarik kesimpulan.',
+            },
+          ],
+        },
+        {
+          id: 5,
+          questionText: 'Coklat yang dibungkus dalam kemasan menarik sangat laris terjual. Coklat Jago dibungkus dalam kemasan berwarna merah menyala. Menurut anak-anak, warna merah menyala sangatlah menarik.',
+          choices: [
+            {
+              choice: '1',
+              answer: 'Coklat Jago kurang laris terjual di kalangan anak-anak.',
+            },
+            {
+              choice: '2',
+              answer: 'Coklat Jago tidak laku terjual di kalangan orang dewasa.',
+            },
+            {
+              choice: '3',
+              answer: 'Coklat Jago laris terjual.',
+            },
+            {
+              choice: '4',
+              answer: 'Coklat Jago laris terjual di kalangan anak-anak.',
+            },
+          ],
+        },
+      ],
       paging: null,
       errors: null,
     },

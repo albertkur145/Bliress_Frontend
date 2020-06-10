@@ -64,7 +64,7 @@
     </div>
     <!-- end content -->
 
-    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
+    <PopupMessage :msg="popupMessage" :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
@@ -424,12 +424,13 @@ export default {
 
   data() {
     return {
-      paramTraining: '',
       animationLoaderDisplay: false,
       popupMessageDisplay: false,
+      popupMessage: '',
+      paramTraining: '',
+      apiReady: false,
       training: {},
       employees: {},
-      apiReady: false,
     };
   },
 
@@ -443,33 +444,46 @@ export default {
     ...mapActions('employeeTraining', [
       'getTrainingBy',
     ]),
+
+    async getTrainingByID() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api on vuex
+      const promise = await new Promise((resolve) => {
+        this.getTrainingBy({
+          params: {
+            employeeId: 1,
+            training: this.paramTraining,
+          },
+          resolve,
+        });
+      });
+
+      // req api finish then change status
+      this.animationLoaderDisplay = false;
+
+      // show popup message if code response != 200
+      if (promise === 200) {
+        this.apiReady = true;
+
+        // asignment split response data
+        this.training = this.response.data.training;
+        this.employees = this.response.data.employees;
+      } else {
+        // how popup message error
+        this.popupMessage = 'Koneksi error! Silahkan coba lagi';
+        this.popupMessageDisplay = true;
+      }
+    },
   },
 
-  async created() {
+  created() {
     // get params
     this.paramTraining = this.$route.params.training;
 
-    // show loader
-    this.animationLoaderDisplay = true;
-
-    // req api on vuex
-    await new Promise((resolve) => {
-      this.getTrainingBy({
-        params: {
-          employeeId: 1,
-          training: this.paramTraining,
-        },
-        resolve,
-      });
-    });
-
-    // req api finish then change status
-    this.apiReady = true;
-    this.animationLoaderDisplay = false;
-
-    // asignment split response data
-    this.training = this.response.data.training;
-    this.employees = this.response.data.employees;
+    // req api
+    this.getTrainingByID();
   },
 
 };
