@@ -3,7 +3,7 @@
 
     <!-- head -->
     <div class="head">
-      <router-link :to="`/test/${this.paramTraining}`" class="back">
+      <router-link :to="back" class="back">
         <font-awesome-icon icon="sign-out-alt"></font-awesome-icon>
       </router-link>
       <div class="text">Test</div>
@@ -26,7 +26,7 @@
         </div>
 
         <div class="btn-submit">
-          <button>Submit</button>
+          <button @click="submit">Submit</button>
         </div>
       </div>
       <!-- questions -->
@@ -34,7 +34,7 @@
     </div>
     <!-- end content -->
 
-    <PopupMessage :msg="popupMessage" :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
+    <PopupMessage :route="popupRoute" :msg="popupMessage" :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
 
   </div>
@@ -345,6 +345,7 @@ export default {
       animationLoaderDisplay: false,
       popupMessageDisplay: false,
       popupMessage: '',
+      popupRoute: { change: false },
       apiReady: '',
       paramTraining: '',
       paramMaterial: '',
@@ -355,11 +356,21 @@ export default {
     ...mapGetters('employeeTest', [
       'questionList',
     ]),
+
+    back() {
+      return {
+        name: 'DetailTest',
+        params: {
+          training: this.paramTraining,
+        },
+      };
+    },
   },
 
   methods: {
     ...mapActions('employeeTest', [
       'getQuestions',
+      'submitTest',
     ]),
 
     async getAllQuestions() {
@@ -388,6 +399,62 @@ export default {
         this.popupMessage = 'Koneksi error! Silahkan coba lagi';
         this.popupMessageDisplay = true;
       }
+    },
+
+    async submit() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.submitTest({
+          params: {
+            employeeId: 1,
+            materialId: 1,
+            training: '1',
+            question: [
+              {
+                id: 1,
+                choice: '2',
+              },
+              {
+                id: 2,
+                choice: '1',
+              },
+              {
+                id: 3,
+                choice: '4',
+              },
+              {
+                id: 4,
+                choice: '2',
+              },
+              {
+                id: 5,
+                choice: '3',
+              },
+            ],
+          },
+          resolve,
+        });
+      });
+
+      // hide loader
+      this.animationLoaderDisplay = false;
+
+      // show popup message if code response != 200
+      if (promise === 200) {
+        this.popupMessage = 'Semoga hasilnya memuaskan!';
+        this.popupMessageDisplay = true;
+      } else {
+        this.popupMessage = 'Koneksi error! Silahkan coba lagi';
+        this.popupMessageDisplay = true;
+      }
+
+      this.popupRoute = {
+        change: true,
+        name: this.back,
+      };
     },
   },
 

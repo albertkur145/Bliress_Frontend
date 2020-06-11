@@ -1,6 +1,7 @@
 import axios from 'axios';
+import config from '@/config';
 
-const API = 'http://localhost:8123/api';
+const { API } = config;
 
 const data = {
   trainings: {},
@@ -28,7 +29,7 @@ const mutations = {
 };
 
 const actions = {
-  getTrainings: ({ commit }, payload) => {
+  getTrainings({ commit }, payload) {
     axios({
       method: 'get',
       url: `${API}/training`,
@@ -44,7 +45,7 @@ const actions = {
       });
   },
 
-  getTrainingBy: ({ commit }, payload) => {
+  getTrainingBy({ commit }, payload) {
     axios({
       method: 'get',
       url: `${API}/training/detail`,

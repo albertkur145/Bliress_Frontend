@@ -152,6 +152,7 @@ export default {
 
   props: [
     'msg',
+    'route',
   ],
 
   data() {
@@ -163,6 +164,10 @@ export default {
   methods: {
     hide() {
       this.isShow = false;
+
+      if (this.route.change) {
+        this.$router.push(this.route.name);
+      }
     },
   },
 

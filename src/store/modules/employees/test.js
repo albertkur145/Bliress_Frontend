@@ -1,6 +1,7 @@
 import axios from 'axios';
+import config from '@/config';
 
-const API = 'http://localhost:8123/api';
+const { API } = config;
 
 const data = {
   tests: {},
@@ -37,7 +38,7 @@ const mutations = {
 };
 
 const actions = {
-  getTests: ({ commit }, payload) => {
+  getTests({ commit }, payload) {
     axios({
       method: 'get',
       url: `${API}/test`,
@@ -53,10 +54,10 @@ const actions = {
       });
   },
 
-  getMaterials: ({ commit }, payload) => {
+  getMaterials({ commit }, payload) {
     axios({
       method: 'get',
-      url: `${API}/test/materials`,
+      url: `${API}/test/material`,
       params: payload.params,
       responseType: 'json',
     })
@@ -69,15 +70,31 @@ const actions = {
       });
   },
 
-  getQuestions: ({ commit }, payload) => {
+  getQuestions({ commit }, payload) {
     axios({
       method: 'get',
-      url: `${API}/test/materials/question`,
+      url: `${API}/test/material/question`,
       params: payload.params,
       responseType: 'json',
     })
       .then((res) => {
         commit('setQuestions', res.data);
+        payload.resolve(res.data.code);
+      })
+      .catch(() => {
+        console.log('Error');
+      });
+  },
+
+  submitTest({ commit }, payload) {
+    axios({
+      method: 'post',
+      url: `${API}/test/material/question`,
+      data: payload.params,
+      responseType: 'json',
+    })
+      .then((res) => {
+        console.log(commit);
         payload.resolve(res.data.code);
       })
       .catch(() => {

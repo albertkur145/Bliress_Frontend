@@ -7,7 +7,7 @@
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" v-if="apiReady">
 
       <!-- top head -->
       <div class="top-head">
@@ -15,8 +15,8 @@
           <font-awesome-icon icon="user-circle" class="user-icon"></font-awesome-icon>
         </div>
         <div class="right">
-          <p class="name">Albert Kurniawan</p>
-          <p class="position">Software Developer</p>
+          <p class="name">{{ user.data.name }}</p>
+          <p class="position">{{ user.data.division }}</p>
         </div>
       </div>
       <!-- top head -->
@@ -30,49 +30,49 @@
         <div class="form-group">
           <fieldset>
             <legend>Batch</legend>
-            <p class="value batch">2</p>
+            <p class="value">{{ user.data.batch }}</p>
           </fieldset>
         </div>
 
         <div class="form-group">
           <fieldset>
             <legend>Nama lengkap</legend>
-            <p class="value name">Albert Kurniawan</p>
+            <p class="value">{{ user.data.name }}</p>
           </fieldset>
         </div>
 
         <div class="form-group">
           <fieldset>
             <legend>Email</legend>
-            <p class="value email">albertkurzl45@gmail.com</p>
+            <p class="value">{{ user.data.email }}</p>
           </fieldset>
         </div>
 
         <div class="form-group">
           <fieldset>
             <legend>Nomor HP</legend>
-            <p class="value number">081935542205</p>
+            <p class="value">{{ user.data.phoneNumber }}</p>
           </fieldset>
         </div>
 
         <div class="form-group">
           <fieldset>
-            <legend>Jabatan</legend>
-            <p class="value position">Software Developer</p>
+            <legend>Divisi</legend>
+            <p class="value">{{ user.data.division }}</p>
           </fieldset>
         </div>
 
         <div class="form-group">
           <fieldset>
             <legend>Tanggal lahir</legend>
-            <p class="value birthdate">12/08/1990</p>
+            <p class="value">{{ user.data.birthdate }}</p>
           </fieldset>
         </div>
 
         <div class="form-group">
           <fieldset>
             <legend>Jenis kelamin</legend>
-            <p class="value gender">Pria</p>
+            <p class="value">{{ user.data.gender }}</p>
           </fieldset>
         </div>
       </div>
@@ -88,7 +88,7 @@
     <!-- end content -->
 
     <MenuBar></MenuBar>
-    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
+    <PopupMessage :route="popupRoute" :msg="popupMessage" :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
@@ -419,6 +419,7 @@
 import MenuBar from '@/components/employee/MenuBar.vue';
 import AnimationLoader from '@/components/AnimationLoader.vue';
 import PopupMessage from '@/components/PopupMessage.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
@@ -432,13 +433,57 @@ export default {
     return {
       animationLoaderDisplay: false,
       popupMessageDisplay: false,
+      popupMessage: '',
+      popupRoute: { change: false },
+      apiReady: '',
     };
   },
 
+  computed: {
+    ...mapGetters('employeeEmployee', [
+      'user',
+    ]),
+  },
+
   methods: {
+    ...mapActions('employeeEmployee', [
+      'getUser',
+    ]),
+
+    async getUserAccount() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getUser({
+          params: {
+            employeeId: 1,
+          },
+          resolve,
+        });
+      });
+
+      // hide loader
+      this.animationLoaderDisplay = false;
+
+      // show popup message if code response != 200
+      if (promise === 200) {
+        this.apiReady = true;
+      } else {
+        this.popupMessage = 'Koneksi error! Silahkan coba lagi';
+        this.popupMessageDisplay = true;
+      }
+    },
+
     logout() {
       this.$router.push({ name: 'Login' });
     },
+  },
+
+  created() {
+    // req api
+    this.getUserAccount();
   },
 
 };

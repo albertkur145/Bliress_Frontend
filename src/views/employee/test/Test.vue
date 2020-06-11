@@ -36,7 +36,7 @@
     <!-- end content  -->
 
     <MenuBar></MenuBar>
-    <PopupMessage :msg="popupMessage" :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
+    <PopupMessage :route="popupRoute" :msg="popupMessage" :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
@@ -266,6 +266,7 @@ export default {
       animationLoaderDisplay: false,
       popupMessageDisplay: false,
       popupMessage: '',
+      popupRoute: { change: false },
       apiReady: false,
     };
   },

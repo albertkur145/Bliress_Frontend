@@ -5,7 +5,9 @@ export default [
     url: `${API}/training`,
     method: 'GET',
     params: {
-      employeeId: 1,
+      params: {
+        employeeId: 1,
+      },
     },
     status: 200,
     response: {
@@ -46,8 +48,10 @@ export default [
     url: `${API}/training/detail`,
     method: 'GET',
     params: {
-      employeeId: 1,
-      training: '1',
+      params: {
+        employeeId: 1,
+        training: '1',
+      },
     },
     status: 200,
     response: {
@@ -149,8 +153,10 @@ export default [
     url: `${API}/training/detail`,
     method: 'GET',
     params: {
-      employeeId: 1,
-      training: '2',
+      params: {
+        employeeId: 1,
+        training: '2',
+      },
     },
     status: 200,
     response: {
@@ -237,8 +243,10 @@ export default [
     url: `${API}/training/detail`,
     method: 'GET',
     params: {
-      employeeId: 1,
-      training: '3',
+      params: {
+        employeeId: 1,
+        training: '3',
+      },
     },
     status: 200,
     response: {
@@ -315,8 +323,10 @@ export default [
     url: `${API}/training/detail`,
     method: 'GET',
     params: {
-      employeeId: 1,
-      training: '4',
+      params: {
+        employeeId: 1,
+        training: '4',
+      },
     },
     status: 200,
     response: {
@@ -393,8 +403,10 @@ export default [
     url: `${API}/training/detail`,
     method: 'GET',
     params: {
-      employeeId: 1,
-      training: '5',
+      params: {
+        employeeId: 1,
+        training: '5',
+      },
     },
     status: 200,
     response: {
@@ -461,7 +473,9 @@ export default [
     url: `${API}/test`,
     method: 'GET',
     params: {
-      employeeId: 1,
+      params: {
+        employeeId: 1,
+      },
     },
     status: 200,
     response: {
@@ -499,11 +513,13 @@ export default [
     },
   },
   {
-    url: `${API}/test/materials`,
+    url: `${API}/test/material`,
     method: 'GET',
     params: {
-      employeeId: 1,
-      training: '1',
+      params: {
+        employeeId: 1,
+        training: '1',
+      },
     },
     status: 200,
     response: {
@@ -534,12 +550,14 @@ export default [
     },
   },
   {
-    url: `${API}/test/materials/question`,
+    url: `${API}/test/material/question`,
     method: 'GET',
     params: {
-      employeeId: 1,
-      training: '1',
-      materialId: 1,
+      params: {
+        employeeId: 1,
+        training: '1',
+        materialId: 1,
+      },
     },
     status: 200,
     response: {
@@ -657,6 +675,100 @@ export default [
           ],
         },
       ],
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/test/material/question`,
+    method: 'POST',
+    params: {
+      employeeId: 1,
+      materialId: 1,
+      training: '1',
+      question: [
+        {
+          id: 1,
+          choice: '2',
+        },
+        {
+          id: 2,
+          choice: '1',
+        },
+        {
+          id: 3,
+          choice: '4',
+        },
+        {
+          id: 4,
+          choice: '2',
+        },
+        {
+          id: 5,
+          choice: '3',
+        },
+      ],
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: null,
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/notification`,
+    method: 'GET',
+    params: {
+      params: {
+        employeeId: 1,
+      },
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: [
+        {
+          id: 1,
+          title: 'Reminder - Training',
+          message: 'Haloo Albert, ingat lho 1 minggu lagi kamu ada training perdanamu di Gedung Serbaguna Sarana Jaya. Tepatnya pada tanggal 15 September 2020 pkl 08.00 WIB. Untuk lebih detailnya, cek jadwal di halaman training ya!',
+        },
+        {
+          id: 2,
+          title: 'PENGUMUMAN',
+          message: 'Dalam mengikuti training 2, diharapkan setiap peserta training membawa kebutuhan masing-masing seperti alat tulis, laptop, ataupun peralatan mandi lainnya. Terimakasih.',
+        },
+      ],
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/employee`,
+    method: 'GET',
+    params: {
+      params: {
+        employeeId: 1,
+      },
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: {
+        id: 1,
+        cardId: 'BLI-22D9D6',
+        batch: '2',
+        name: 'Albert Kurniawan',
+        email: 'albertkur@gmail.com',
+        phoneNumber: '081995561257',
+        division: 'Software Developer',
+        birthdate: '21/08/1995',
+        gender: 'Pria',
+      },
       paging: null,
       errors: null,
     },
