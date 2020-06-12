@@ -79,8 +79,8 @@
       <!-- profile info data -->
 
       <!-- logout -->
-      <div class="logout">
-        <p @click="logout">keluar</p>
+      <div class="logout" @click="logout">
+        <p>keluar</p>
       </div>
       <!-- logout -->
 
@@ -88,7 +88,6 @@
     <!-- end content -->
 
     <MenuBar></MenuBar>
-    <PopupMessage :route="popupRoute" :msg="popupMessage" :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
@@ -418,7 +417,6 @@
 
 import MenuBar from '@/components/employee/MenuBar.vue';
 import AnimationLoader from '@/components/AnimationLoader.vue';
-import PopupMessage from '@/components/PopupMessage.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
@@ -426,15 +424,11 @@ export default {
   components: {
     MenuBar,
     AnimationLoader,
-    PopupMessage,
   },
 
   data() {
     return {
       animationLoaderDisplay: false,
-      popupMessageDisplay: false,
-      popupMessage: '',
-      popupRoute: { change: false },
       apiReady: '',
     };
   },
@@ -467,21 +461,24 @@ export default {
       // hide loader
       this.animationLoaderDisplay = false;
 
-      // show popup message if code response != 200
       if (promise === 200) {
         this.apiReady = true;
       } else {
-        this.popupMessage = 'Koneksi error! Silahkan coba lagi';
-        this.popupMessageDisplay = true;
+        // show popup error
+        this.$func.popupLostConnection();
       }
     },
 
     logout() {
+      this.$cookies.remove('user');
       this.$router.push({ name: 'Login' });
     },
   },
 
   created() {
+    // check user auth
+    this.$func.userAuth('Employee');
+
     // req api
     this.getUserAccount();
   },

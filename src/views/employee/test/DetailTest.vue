@@ -30,7 +30,6 @@
     </div>
     <!-- end content -->
 
-    <PopupMessage :route="popupRoute" :msg="popupMessage" :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
@@ -251,22 +250,17 @@
 <script>
 
 import AnimationLoader from '@/components/AnimationLoader.vue';
-import PopupMessage from '@/components/PopupMessage.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
   components: {
     AnimationLoader,
-    PopupMessage,
   },
 
   data() {
     return {
       animationLoaderDisplay: false,
-      popupMessageDisplay: false,
-      popupMessage: '',
-      popupRoute: { change: false },
       apiReady: '',
       paramTraining: '',
     };
@@ -305,8 +299,8 @@ export default {
       if (promise === 200) {
         this.apiReady = true;
       } else {
-        this.popupMessage = 'Koneksi error! Silahkan coba lagi';
-        this.popupMessageDisplay = true;
+        // show popup error
+        this.$func.popupLostConnection();
       }
     },
 
@@ -322,6 +316,9 @@ export default {
   },
 
   created() {
+    // check user auth
+    this.$func.userAuth('Employee');
+
     // get params
     this.paramTraining = this.$route.params.training;
 

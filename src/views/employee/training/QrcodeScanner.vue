@@ -193,6 +193,10 @@ export default {
   },
 
   created() {
+    // check user auth
+    this.$func.userAuth('Employee');
+
+    // get params
     this.paramTraining = this.$route.params.training;
   },
 

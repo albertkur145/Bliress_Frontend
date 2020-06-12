@@ -14,24 +14,23 @@
       <!-- input email -->
       <div class="input-container">
         <font-awesome-icon icon="envelope" class="icon-form" />
-        <input type="text" id="email" placeholder="example@gmail.com" autocomplete="off">
+        <input @keyup.enter="loginUser" type="text" v-model="form.email" placeholder="example@gmail.com" autocomplete="off">
       </div>
       <!-- input email -->
 
       <!-- input password -->
       <div class="input-container">
         <font-awesome-icon icon="lock" class="icon-form" />
-        <input type="password" id="password" placeholder="********" autocomplete="off">
+        <input @keyup.enter="loginUser" type="password" v-model="form.password" placeholder="********" autocomplete="off">
       </div>
       <!-- input password -->
 
       <!-- btn login -->
-      <button class="btn-login" @click="login">Masuk</button>
+      <button class="btn-login" @click="loginUser">Masuk</button>
       <!-- btn login -->
     </div>
     <!-- end form -->
 
-    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
@@ -246,26 +245,81 @@
 <script>
 
 import AnimationLoader from '@/components/AnimationLoader.vue';
-import PopupMessage from '@/components/PopupMessage.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
   components: {
-    PopupMessage,
     AnimationLoader,
   },
 
   data() {
     return {
       animationLoaderDisplay: false,
-      popupMessageDisplay: false,
+      form: {
+        email: '',
+        password: '',
+      },
     };
   },
 
+  computed: {
+    ...mapGetters('login', [
+      'user',
+    ]),
+  },
+
   methods: {
-    login() {
-      this.$router.push({ name: 'Training' });
+    ...mapActions('login', [
+      'login',
+    ]),
+
+    async loginUser() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.login({
+          params: {
+            email: this.form.email,
+            password: this.form.password,
+          },
+          resolve,
+        });
+      });
+
+      // hide loader
+      this.animationLoaderDisplay = false;
+
+      // set cookies if successfull
+      if (promise === 200) {
+        // set cookies
+        this.$cookies.set('user', this.user.data, '3h');
+
+        // navigate route role
+        let name = '';
+        if (this.user.data.role === 'Employee') {
+          name = 'Training';
+        } else if (this.user.data.role === 'Admin') {
+          name = 'AdminBatch';
+        } else if (this.user.data.role === 'Trainer') {
+          name = 'TrainerTraining';
+        }
+
+        // show popup success
+        this.$func.popupSuccessfull('Berhasil login', 5000, { name });
+      } else {
+        // show popup error
+        this.$func.popupError('Email / password salah', 5000);
+      }
     },
+  },
+
+  created() {
+    if (this.$cookies.get('user')) {
+      this.$func.popupLogoutFirst();
+    }
   },
 
 };

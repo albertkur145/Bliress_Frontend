@@ -3,9 +3,9 @@
 
     <!-- head -->
     <div class="head">
-      <router-link :to="back" class="back">
+      <span class="back" @click="confirmOut">
         <font-awesome-icon icon="sign-out-alt"></font-awesome-icon>
-      </router-link>
+      </span>
       <div class="text">Test</div>
     </div>
     <!-- end head -->
@@ -26,7 +26,7 @@
         </div>
 
         <div class="btn-submit">
-          <button @click="submit">Submit</button>
+          <button @click="confirmSubmit">Submit</button>
         </div>
       </div>
       <!-- questions -->
@@ -34,7 +34,6 @@
     </div>
     <!-- end content -->
 
-    <PopupMessage :route="popupRoute" :msg="popupMessage" :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
 
   </div>
@@ -65,6 +64,7 @@
       .back {
         position: absolute;
         color: #FFF;
+        cursor: pointer;
         transform: rotate(180deg);
         top: 0.875rem;
         left: 1rem;
@@ -330,22 +330,17 @@
 <script>
 
 import AnimationLoader from '@/components/AnimationLoader.vue';
-import PopupMessage from '@/components/PopupMessage.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
   components: {
     AnimationLoader,
-    PopupMessage,
   },
 
   data() {
     return {
       animationLoaderDisplay: false,
-      popupMessageDisplay: false,
-      popupMessage: '',
-      popupRoute: { change: false },
       apiReady: '',
       paramTraining: '',
       paramMaterial: '',
@@ -396,9 +391,31 @@ export default {
       if (promise === 200) {
         this.apiReady = true;
       } else {
-        this.popupMessage = 'Koneksi error! Silahkan coba lagi';
-        this.popupMessageDisplay = true;
+        // show popup error
+        this.$func.popupLostConnection();
       }
+    },
+
+    confirmOut() {
+      this.$func.popupConfirmDialog(
+        'Lho, sudah menyerah?',
+        'Test ini menentukan tingkat pemahaman kamu!',
+      ).then((result) => {
+        if (result.value) {
+          this.submit();
+        }
+      });
+    },
+
+    confirmSubmit() {
+      this.$func.popupConfirmDialog(
+        'Apakah kamu yakin?',
+        'Test ini menentukan tingkat pemahaman kamu!',
+      ).then((result) => {
+        if (result.value) {
+          this.submit();
+        }
+      });
     },
 
     async submit() {
@@ -442,23 +459,19 @@ export default {
       // hide loader
       this.animationLoaderDisplay = false;
 
-      // show popup message if code response != 200
+      // show popup
       if (promise === 200) {
-        this.popupMessage = 'Semoga hasilnya memuaskan!';
-        this.popupMessageDisplay = true;
+        this.$func.popupSuccessfull('Berhasil submit test', 5000, this.back);
       } else {
-        this.popupMessage = 'Koneksi error! Silahkan coba lagi';
-        this.popupMessageDisplay = true;
+        this.$func.popupLostConnection();
       }
-
-      this.popupRoute = {
-        change: true,
-        name: this.back,
-      };
     },
   },
 
   created() {
+    // check user auth
+    this.$func.userAuth('Employee');
+
     // get params
     this.paramTraining = this.$route.params.training;
     this.paramMaterial = this.$route.params.material;

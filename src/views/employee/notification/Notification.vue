@@ -17,7 +17,6 @@
     <!-- end content -->
 
     <MenuBar></MenuBar>
-    <PopupMessage :route="popupRoute" :msg="popupMessage" :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
@@ -166,7 +165,6 @@
 
 import MenuBar from '@/components/employee/MenuBar.vue';
 import AnimationLoader from '@/components/AnimationLoader.vue';
-import PopupMessage from '@/components/PopupMessage.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
@@ -174,16 +172,11 @@ export default {
   components: {
     MenuBar,
     AnimationLoader,
-    PopupMessage,
   },
 
   data() {
     return {
-      message: 'Haloo Albert, ingat lho 2 minggu lagi kamu ada training 1 di Wisma Rahayu. Tepatnya pada tanggal 15 September 2020. Untuk lebih detailnya, cek jadwal di halaman training ya!',
       animationLoaderDisplay: false,
-      popupMessageDisplay: false,
-      popupMessage: '',
-      popupRoute: { change: false },
       apiReady: false,
     };
   },
@@ -216,17 +209,19 @@ export default {
       // hide loader
       this.animationLoaderDisplay = false;
 
-      // show popup message if code response != 200
       if (promise === 200) {
         this.apiReady = true;
       } else {
-        this.popupMessage = 'Koneksi error! Silahkan coba lagi';
-        this.popupMessageDisplay = true;
+        // show popup error
+        this.$func.popupLostConnection();
       }
     },
   },
 
   created() {
+    // check user auth
+    this.$func.userAuth('Employee');
+
     // req api
     this.getAllNotifications();
   },

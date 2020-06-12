@@ -1,6 +1,6 @@
 <template>
   <!-- popup message -->
-  <div class="popup-message" v-if="isShow">
+  <div class="popup-message" v-if="route.show">
     <div class="contain">
       <span class="message">{{ msg }}</span>
 
@@ -155,16 +155,9 @@ export default {
     'route',
   ],
 
-  data() {
-    return {
-      isShow: true,
-    };
-  },
-
   methods: {
     hide() {
-      this.isShow = false;
-
+      this.route.show = false;
       if (this.route.change) {
         this.$router.push(this.route.name);
       }

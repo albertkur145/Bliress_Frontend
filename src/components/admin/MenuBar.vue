@@ -28,11 +28,11 @@
       </router-link>
     </div>
 
-    <div class="bar">
-      <router-link to="/" class="txt-bar">
+    <div class="bar" @click="logout">
+      <div class="txt-bar" style="cursor: pointer;">
         <font-awesome-icon icon="sign-out-alt" class="menu-icon"></font-awesome-icon>
         <span>Keluar</span>
-      </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -128,3 +128,18 @@
     }
   }
 </style>
+
+<script>
+
+export default {
+
+  methods: {
+    logout() {
+      this.$cookies.remove('user');
+      this.$router.push({ name: 'Login' });
+    },
+  },
+
+};
+
+</script>

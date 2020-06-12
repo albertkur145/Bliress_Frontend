@@ -2,6 +2,51 @@ const API = 'http://localhost:8123/api';
 
 export default [
   {
+    url: `${API}/login`,
+    method: 'POST',
+    params: {
+      email: 'albertkur@gmail.com',
+      password: '123',
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: {
+        id: 1,
+        batch: '2',
+        name: 'Albert Kurniawan',
+        email: 'albertkur@gmail.com',
+        phoneNumber: '081375589622',
+        division: 'Software Developer',
+        birthdate: '19/02/2020',
+        gender: 'Pria',
+        role: 'Employee',
+      },
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/login`,
+    method: 'POST',
+    params: {
+      email: 'admin',
+      password: 'admin',
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: {
+        id: 1,
+        role: 'Admin',
+      },
+      paging: null,
+      errors: null,
+    },
+  },
+  {
     url: `${API}/training`,
     method: 'GET',
     params: {
