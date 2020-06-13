@@ -2,27 +2,27 @@
   <div id="container">
     <!-- head -->
     <div class="head">
-      <router-link :to="{ name: 'AdminDetailBatch', params: { batch: id } }" class="back">
+      <router-link :to="{ name: 'AdminDetailBatch', params: { batch: paramBatch } }" class="back">
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
         <span class="text">Training</span>
       </router-link>
 
-      <router-link :to="{ name: 'AdminAddTraining', params: { batch: id } }">
+      <router-link :to="{ name: 'AdminAddTraining', params: { batch: paramBatch } }">
         <font-awesome-icon icon="plus-circle" class="icon-plus"></font-awesome-icon>
       </router-link>
     </div>
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" v-if="apiReady">
 
       <!-- title -->
-      <div class="title">Batch {{ id }}</div>
+      <div class="title">Batch {{ paramBatch }}</div>
       <!-- title -->
 
       <!-- list of training -->
       <div class="training-list">
-        <div v-for="(value, index) in trainingList" :key="index">
+        <div v-for="(value) in trainingList.data.training" :key="value.id">
           <div class="training">
             <div class="num">
               <span class="txt">{{ value.training }}</span>
@@ -56,7 +56,6 @@
     </div>
     <!-- end content -->
 
-    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
@@ -476,83 +475,76 @@
 <script>
 
 import AnimationLoader from '@/components/AnimationLoader.vue';
-import PopupMessage from '@/components/PopupMessage.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
   components: {
     AnimationLoader,
-    PopupMessage,
   },
 
   data() {
     return {
-      id: '',
+      paramBatch: '',
       animationLoaderDisplay: false,
-      popupMessageDisplay: false,
-      trainingList: [
-        {
-          training: '1',
-          date: '18 September 2020',
-          timeStart: '08.00',
-          timeFinish: '16.00',
-          trainer: 'Rudi Santoso',
-          location: 'di Gedung Serbaguna, Ruang 315 C Sarana Jaya',
-        },
-        {
-          training: '2',
-          date: '27 September 2020',
-          timeStart: '12.00',
-          timeFinish: '15.00',
-          trainer: 'Alvin Wijaya',
-          location: 'di Gedung Ropoko, Ruang 54 Sarana Jaya',
-        },
-        {
-          training: '3',
-          date: '08 Oktober 2020',
-          timeStart: '09.00',
-          timeFinish: '13.00',
-          trainer: 'Angelia Yoh',
-          location: 'di Hotel British, Lt. 42 Ruang Anggrek',
-        },
-        {
-          training: '4',
-          date: '17 Oktober 2020',
-          timeStart: '16.00',
-          timeFinish: '20.00',
-          trainer: 'Yuli Permata',
-          location: 'di Gedung Serbaguna, R. 315 C Sarana Jaya',
-        },
-        {
-          training: '5',
-          date: '10 November 2020',
-          timeStart: '07.00',
-          timeFinish: '18.00',
-          trainer: 'Randika',
-          location: 'di Hotel Aston, Lt. 24 Meeting Room 5',
-        },
-      ],
+      apiReady: false,
     };
   },
 
+  computed: {
+    ...mapGetters('adminTraining', [
+      'trainingList',
+    ]),
+  },
+
   methods: {
-    redirectAddTraining() {
-      this.$router.push({ name: 'AdminAddTraining', params: { batch: this.id } });
+    ...mapActions('adminTraining', [
+      'getTrainings',
+    ]),
+
+    async getAllTraining() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getTrainings({
+          params: {
+            batch: this.paramBatch,
+          },
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.apiReady = true;
+      } else {
+        this.$func.popupLostConnection();
+      }
     },
+
+    redirectAddTraining() {
+      this.$router.push({ name: 'AdminAddTraining', params: { batch: this.paramBatch } });
+    },
+
     redirectAttendance(training) {
       this.$router.push({
         name: 'AdminAttendance',
         params: {
-          batch: this.id,
+          batch: this.paramBatch,
           training,
         },
       });
     },
+
     redirectMaterial(training) {
       this.$router.push({
         name: 'AdminMaterialTraining',
         params: {
-          batch: this.id,
+          batch: this.paramBatch,
           training,
         },
       });
@@ -560,7 +552,14 @@ export default {
   },
 
   created() {
-    this.id = this.$route.params.batch;
+    // check user auth
+    this.$func.userAuth('Admin');
+
+    // get params
+    this.paramBatch = this.$route.params.batch;
+
+    // req api
+    this.getAllTraining();
   },
 
 };

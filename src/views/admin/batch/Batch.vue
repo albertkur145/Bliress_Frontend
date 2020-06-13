@@ -3,58 +3,18 @@
     <!-- head -->
     <div class="head">
       <div class="text">Batch</div>
-      <router-link to="/">
-        <font-awesome-icon icon="plus-circle" class="icon-plus"></font-awesome-icon>
-      </router-link>
+      <font-awesome-icon @click="inputDialog" icon="plus-circle" class="icon-plus"></font-awesome-icon>
     </div>
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" v-if="apiReady">
       <!-- list of batch -->
       <div class="batch-list">
-        <router-link to="/admin/batch/1" class="batch">
-          <div class="txt">Batch 1</div>
-          <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
-        </router-link>
-
-        <router-link to="/admin/batch/2" class="batch">
-          <div class="txt">Batch 2</div>
-          <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
-        </router-link>
-
-        <router-link to="/admin/batch/3" class="batch">
-          <div class="txt">Batch 3</div>
-          <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
-        </router-link>
-
-        <router-link to="/admin/batch/4" class="batch">
-          <div class="txt">Batch 4</div>
-          <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
-        </router-link>
-
-        <router-link to="/admin/batch/5" class="batch">
-          <div class="txt">Batch 5</div>
-          <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
-        </router-link>
-
-        <router-link to="/admin/batch/6" class="batch">
-          <div class="txt">Batch 6</div>
-          <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
-        </router-link>
-
-        <router-link to="/admin/batch/7" class="batch">
-          <div class="txt">Batch 7</div>
-          <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
-        </router-link>
-
-        <router-link to="/admin/batch/8" class="batch">
-          <div class="txt">Batch 8</div>
-          <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
-        </router-link>
-
-        <router-link to="/admin/batch/9" class="batch">
-          <div class="txt">Batch 9</div>
+        <router-link v-for="(value) in batchList.data" :key="value.id"
+        :to="{ name: 'AdminDetailBatch', params: { batch: value.batch } }"
+        class="batch">
+          <div class="txt">Batch {{ value.batch }}</div>
           <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
         </router-link>
       </div>
@@ -62,7 +22,6 @@
     </div>
     <!-- end content -->
 
-    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
     <MenuBar></MenuBar>
   </div>
@@ -98,6 +57,7 @@
       }
 
       .icon-plus {
+        cursor: pointer;
         color: #FFF;
         font-size: 1.125em;
       }
@@ -237,21 +197,102 @@
 <script>
 import MenuBar from '@/components/admin/MenuBar.vue';
 import AnimationLoader from '@/components/AnimationLoader.vue';
-import PopupMessage from '@/components/PopupMessage.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
   components: {
     MenuBar,
     AnimationLoader,
-    PopupMessage,
   },
 
   data() {
     return {
       animationLoaderDisplay: false,
-      popupMessageDisplay: false,
+      apiReady: false,
     };
+  },
+
+  computed: {
+    ...mapGetters('adminBatch', [
+      'batchList',
+    ]),
+  },
+
+  methods: {
+    ...mapActions('adminBatch', [
+      'getBatch',
+      'postBatch',
+    ]),
+
+    async getAllBatch() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getBatch({
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.apiReady = true;
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+
+    inputDialog() {
+      this.$swal.fire({
+        input: 'number',
+        inputPlaceholder: 'Batch berapa?',
+        backdrop: false,
+        allowEscapeKey: false,
+        showCloseButton: true,
+      }).then((result) => {
+        if (result.value > 0) {
+          this.addBatch(result.value);
+        } else {
+          this.$func.popupError('Inputan berupa angka!', 5000);
+        }
+      });
+    },
+
+    async addBatch(value) {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.postBatch({
+          params: {
+            batch: value,
+          },
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.$func.popupSuccessfull('Berhasil tambah batch baru', 5000, { name: 'AdminBatch' });
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+  },
+
+  created() {
+    // check user auth
+    this.$func.userAuth('Admin');
+
+    // req api
+    this.getAllBatch();
   },
 
 };

@@ -4,35 +4,29 @@
     <div class="head">
       <router-link class="back" :to="{ name: 'AdminBatch' }">
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
-        <span class="text">Batch {{ id }}</span>
+        <span class="text">Batch {{ paramBatch }}</span>
       </router-link>
       <div class="delete">Hapus</div>
     </div>
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" v-if="apiReady">
 
       <!-- training list -->
       <div class="training">
         <div class="top">
           <span class="txt">Training</span>
-          <router-link :to="{ name: 'AdminTraining', params: { batch: id } }" class="see">
+          <router-link :to="{ name: 'AdminTraining', params: { batch: paramBatch } }" class="see">
             Lihat
           </router-link>
         </div>
 
         <div class="list">
-          <div class="train">
-            <p class="title">Training 1</p>
-            <p class="date">15 September 2020</p>
-            <p class="time">08.00 - 16.00 WIB</p>
-          </div>
-
-          <div class="train">
-            <p class="title">Training 2</p>
-            <p class="date">04 Oktober 2020</p>
-            <p class="time">10.00 - 18.00 WIB</p>
+          <div class="train" v-for="(value) in filteredTraining" :key="value.id">
+            <p class="title">Training {{ value.training }}</p>
+            <p class="date">{{ value.date }}</p>
+            <p class="time">{{ value.timeStart }} - {{ value.timeFinish }} WIB</p>
           </div>
         </div>
       </div>
@@ -42,7 +36,7 @@
       <div class="employee">
         <div class="top">
           <span class="txt">Pegawai</span>
-          <router-link :to="{ name: 'AdminEmployee', params: { batch: id } }" class="see">
+          <router-link :to="{ name: 'AdminEmployee', params: { batch: paramBatch } }" class="see">
             Lihat
           </router-link>
         </div>
@@ -55,39 +49,9 @@
             </thead>
 
             <tbody>
-              <tr>
-                <td>BLI-1153AD</td>
-                <td>Albert Kurniawan</td>
-              </tr>
-
-              <tr>
-                <td>BLI-1953OP</td>
-                <td>Simon Samosir</td>
-              </tr>
-
-              <tr>
-                <td>BLI-D885A1</td>
-                <td>Maudy Hana</td>
-              </tr>
-
-              <tr>
-                <td>BLI-B95AAC</td>
-                <td>Angelia Yohana</td>
-              </tr>
-
-              <tr>
-                <td>BLI-15A9DS</td>
-                <td>Rio Martin</td>
-              </tr>
-
-              <tr>
-                <td>BLI-HG9563</td>
-                <td>Maria Rosaria</td>
-              </tr>
-
-              <tr>
-                <td>BLI-PO956E</td>
-                <td>Julio Cesar</td>
+              <tr v-for="(value) in filteredEmployee" :key="value.id">
+                <td>{{ value.cardId }}</td>
+                <td>{{ value.name }}</td>
               </tr>
             </tbody>
           </table>
@@ -98,7 +62,6 @@
     </div>
     <!-- end content -->
 
-    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
@@ -450,25 +413,81 @@
 <script>
 
 import AnimationLoader from '@/components/AnimationLoader.vue';
-import PopupMessage from '@/components/PopupMessage.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
   components: {
     AnimationLoader,
-    PopupMessage,
   },
 
   data() {
     return {
-      id: '',
+      paramBatch: '',
       animationLoaderDisplay: false,
-      popupMessageDisplay: false,
+      apiReady: false,
+      training: [],
+      employee: [],
     };
   },
 
+  computed: {
+    ...mapGetters('adminBatch', [
+      'batchBy',
+    ]),
+
+    filteredTraining() {
+      return this.training.slice(0, 2);
+    },
+
+    filteredEmployee() {
+      return this.employee.slice(0, 5);
+    },
+  },
+
+  methods: {
+    ...mapActions('adminBatch', [
+      'getBatchBy',
+    ]),
+
+    async getDetailByBatch() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getBatchBy({
+          params: {
+            batch: this.paramBatch,
+          },
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.apiReady = true;
+
+        // assignment split response data
+        this.training = this.batchBy.data.training;
+        this.employee = this.batchBy.data.employee;
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+  },
+
   created() {
-    this.id = this.$route.params.batch;
+    // check user auth
+    this.$func.userAuth('Admin');
+
+    // get params
+    this.paramBatch = this.$route.params.batch;
+
+    // req api
+    this.getDetailByBatch();
   },
 
 };

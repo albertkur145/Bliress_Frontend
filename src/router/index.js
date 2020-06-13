@@ -92,6 +92,11 @@ const routes = [
     component: () => import('../views/admin/batch/AddTraining.vue'),
   },
   {
+    path: '/admin/batch/:batch/training/add/:training',
+    name: 'AdminAddTraining',
+    component: () => import('../views/admin/batch/AddTraining.vue'),
+  },
+  {
     path: '/admin/batch/:batch/employee',
     name: 'AdminEmployee',
     component: () => import('../views/admin/batch/Employee.vue'),

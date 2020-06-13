@@ -312,11 +312,9 @@ export default {
       // req api finish then change status
       this.animationLoaderDisplay = false;
 
-      // show popup message if code response != 200
       if (promise === 200) {
         this.apiReady = true;
       } else {
-        // show popup error
         this.$func.popupLostConnection();
       }
     },

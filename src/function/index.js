@@ -17,6 +17,7 @@ export default {
       icon: 'success',
       timer,
       backdrop: false,
+      allowEscapeKey: false,
       timerProgressBar: true,
       showCloseButton: true,
     }).then(() => {
@@ -41,6 +42,7 @@ export default {
       icon: 'error',
       timer,
       backdrop: false,
+      allowEscapeKey: false,
       showCloseButton: true,
     });
   },
@@ -80,6 +82,7 @@ export default {
       text,
       icon: 'warning',
       backdrop: false,
+      allowEscapeKey: false,
       showCloseButton: true,
       showCancelButton: true,
       confirmButtonColor: '#45AAF2',

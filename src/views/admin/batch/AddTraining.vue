@@ -2,11 +2,11 @@
   <div id="container">
     <!-- head -->
     <div class="head">
-      <router-link :to="{ name: 'AdminTraining', params: { batch: id } }" class="back">
+      <router-link :to="back" class="back">
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
         <span class="text">Tambah</span>
       </router-link>
-      <div class="save">Simpan</div>
+      <div class="save" @click="validateForm">Simpan</div>
     </div>
     <!-- end head -->
 
@@ -15,13 +15,12 @@
       <div class="form-group">
         <fieldset>
           <legend>Training ke</legend>
-          <select class="input-text">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
+          <select class="input-text" v-model="form.training">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
           </select>
         </fieldset>
       </div>
@@ -29,40 +28,40 @@
       <div class="form-group">
         <fieldset>
           <legend>Tanggal</legend>
-          <input type="date" class="input-text" value="2020-01-01">
+          <input :formatter="format" type="date" class="input-text" v-model="form.date">
         </fieldset>
       </div>
 
       <div class="form-group">
         <fieldset class="text-area">
           <legend>Lokasi</legend>
-          <textarea class="input-area"></textarea>
+          <textarea class="input-area" v-model="form.location"></textarea>
         </fieldset>
       </div>
 
       <div class="form-group">
         <fieldset>
           <legend>Jam mulai</legend>
-          <select class="input-text">
-            <option value="06:00 WIB">06:00 WIB</option>
-            <option value="07:00 WIB">07:00 WIB</option>
-            <option value="08:00 WIB">08:00 WIB</option>
-            <option value="09:00 WIB">09:00 WIB</option>
-            <option value="10:00 WIB">10:00 WIB</option>
-            <option value="11:00 WIB">11:00 WIB</option>
-            <option value="12:00 WIB">12:00 WIB</option>
-            <option value="13:00 WIB">13:00 WIB</option>
-            <option value="14:00 WIB">14:00 WIB</option>
-            <option value="15:00 WIB">15:00 WIB</option>
-            <option value="16:00 WIB">16:00 WIB</option>
-            <option value="17:00 WIB">17:00 WIB</option>
-            <option value="18:00 WIB">18:00 WIB</option>
-            <option value="19:00 WIB">19:00 WIB</option>
-            <option value="20:00 WIB">20:00 WIB</option>
-            <option value="21:00 WIB">21:00 WIB</option>
-            <option value="22:00 WIB">22:00 WIB</option>
-            <option value="23:00 WIB">23:00 WIB</option>
-            <option value="24:00 WIB">24:00 WIB</option>
+          <select class="input-text" v-model="form.timeStart">
+            <option value="06:00">06:00 WIB</option>
+            <option value="07:00">07:00 WIB</option>
+            <option value="08:00">08:00 WIB</option>
+            <option value="09:00">09:00 WIB</option>
+            <option value="10:00">10:00 WIB</option>
+            <option value="11:00">11:00 WIB</option>
+            <option value="12:00">12:00 WIB</option>
+            <option value="13:00">13:00 WIB</option>
+            <option value="14:00">14:00 WIB</option>
+            <option value="15:00">15:00 WIB</option>
+            <option value="16:00">16:00 WIB</option>
+            <option value="17:00">17:00 WIB</option>
+            <option value="18:00">18:00 WIB</option>
+            <option value="19:00">19:00 WIB</option>
+            <option value="20:00">20:00 WIB</option>
+            <option value="21:00">21:00 WIB</option>
+            <option value="22:00">22:00 WIB</option>
+            <option value="23:00">23:00 WIB</option>
+            <option value="24:00">24:00 WIB</option>
           </select>
         </fieldset>
       </div>
@@ -70,26 +69,26 @@
       <div class="form-group">
         <fieldset>
           <legend>Jam selesai</legend>
-          <select class="input-text">
-            <option value="06:00 WIB">06:00 WIB</option>
-            <option value="07:00 WIB">07:00 WIB</option>
-            <option value="08:00 WIB">08:00 WIB</option>
-            <option value="09:00 WIB">09:00 WIB</option>
-            <option value="10:00 WIB">10:00 WIB</option>
-            <option value="11:00 WIB">11:00 WIB</option>
-            <option value="12:00 WIB">12:00 WIB</option>
-            <option value="13:00 WIB">13:00 WIB</option>
-            <option value="14:00 WIB">14:00 WIB</option>
-            <option value="15:00 WIB">15:00 WIB</option>
-            <option value="16:00 WIB">16:00 WIB</option>
-            <option value="17:00 WIB">17:00 WIB</option>
-            <option value="18:00 WIB">18:00 WIB</option>
-            <option value="19:00 WIB">19:00 WIB</option>
-            <option value="20:00 WIB">20:00 WIB</option>
-            <option value="21:00 WIB">21:00 WIB</option>
-            <option value="22:00 WIB">22:00 WIB</option>
-            <option value="23:00 WIB">23:00 WIB</option>
-            <option value="24:00 WIB">24:00 WIB</option>
+          <select class="input-text" v-model="form.timeFinish">
+            <option value="06:00">06:00 WIB</option>
+            <option value="07:00">07:00 WIB</option>
+            <option value="08:00">08:00 WIB</option>
+            <option value="09:00">09:00 WIB</option>
+            <option value="10:00">10:00 WIB</option>
+            <option value="11:00">11:00 WIB</option>
+            <option value="12:00">12:00 WIB</option>
+            <option value="13:00">13:00 WIB</option>
+            <option value="14:00">14:00 WIB</option>
+            <option value="15:00">15:00 WIB</option>
+            <option value="16:00">16:00 WIB</option>
+            <option value="17:00">17:00 WIB</option>
+            <option value="18:00">18:00 WIB</option>
+            <option value="19:00">19:00 WIB</option>
+            <option value="20:00">20:00 WIB</option>
+            <option value="21:00">21:00 WIB</option>
+            <option value="22:00">22:00 WIB</option>
+            <option value="23:00">23:00 WIB</option>
+            <option value="24:00">24:00 WIB</option>
           </select>
         </fieldset>
       </div>
@@ -97,20 +96,19 @@
       <div class="form-group">
         <fieldset>
           <legend>Trainer</legend>
-          <select class="input-text">
-            <option value="Andi Law">Andi Law</option>
-            <option value="Rudi Hartono">Rudi Hartono</option>
-            <option value="Heryanto Surya">Heryanto Surya</option>
-            <option value="Chelsea">Chelsea</option>
-            <option value="Martin Sutanto">Martin Sutanto</option>
-            <option value="Joe Taslim">Joe Taslim</option>
+          <select class="input-text" v-model="form.trainerId">
+            <option value=1>Andi Law</option>
+            <option value=2>Rudi Hartono</option>
+            <option value=3>Heryanto Surya</option>
+            <option value=4>Chelsea</option>
+            <option value=5>Martin Sutanto</option>
+            <option value=6>Joe Taslim</option>
           </select>
         </fieldset>
       </div>
     </div>
     <!-- end content -->
 
-    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
@@ -370,25 +368,88 @@
 <script>
 
 import AnimationLoader from '@/components/AnimationLoader.vue';
-import PopupMessage from '@/components/PopupMessage.vue';
+import { mapActions } from 'vuex';
 
 export default {
 
   components: {
     AnimationLoader,
-    PopupMessage,
   },
 
   data() {
     return {
-      id: '',
+      paramBatch: '',
       animationLoaderDisplay: false,
-      popupMessageDisplay: false,
+      form: {
+        batch: '',
+        training: '1',
+        date: '2020-01-01',
+        location: '',
+        timeStart: '06:00',
+        timeFinish: '06:00',
+        trainerId: 1,
+      },
     };
   },
 
+  computed: {
+    back() {
+      return {
+        name: 'AdminTraining',
+        params: {
+          batch: this.paramBatch,
+        },
+      };
+    },
+  },
+
+  methods: {
+    ...mapActions('adminTraining', [
+      'postTraining',
+    ]),
+
+    format() {
+      return this.form.date.format('YYYY-MM-DD');
+    },
+
+    validateForm() {
+      if (this.form.location.length === 0) {
+        this.$func.popupError('Form tidak lengkap!', 0);
+      } else {
+        this.form.batch = this.paramBatch;
+        this.addTraining();
+      }
+    },
+
+    async addTraining() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.postTraining({
+          params: this.form,
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.$func.popupSuccessfull('Berhasil simpan data', 5000, this.back);
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+  },
+
   created() {
-    this.id = this.$route.params.batch;
+    // check user auth
+    this.$func.userAuth('Admin');
+
+    // get params
+    this.paramBatch = this.$route.params.batch;
   },
 
 };
