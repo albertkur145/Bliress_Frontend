@@ -40,8 +40,8 @@ const actions = {
         commit('setTrainings', res.data);
         payload.resolve(res.data.code);
       })
-      .catch(() => {
-        console.log('Error');
+      .catch((err) => {
+        console.log(err);
       });
   },
 
@@ -56,8 +56,8 @@ const actions = {
         commit('setTrainingBy', res.data);
         payload.resolve(res.data.code);
       })
-      .catch(() => {
-        console.log('Error');
+      .catch((err) => {
+        console.log(err);
       });
   },
 };

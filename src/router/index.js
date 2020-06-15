@@ -92,8 +92,8 @@ const routes = [
     component: () => import('../views/admin/batch/AddTraining.vue'),
   },
   {
-    path: '/admin/batch/:batch/training/add/:training',
-    name: 'AdminAddTraining',
+    path: '/admin/batch/:batch/training/:training',
+    name: 'AdminChangeTraining',
     component: () => import('../views/admin/batch/AddTraining.vue'),
   },
   {

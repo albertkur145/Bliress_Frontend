@@ -3,7 +3,7 @@
 
     <!-- head -->
     <div class="head">
-      <router-link :to="{ name: 'AdminTraining', params: { batch: id } }" class="back">
+      <router-link :to="{ name: 'AdminTraining', params: { batch: paramBatch } }" class="back">
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
         <span class="text">Absensi</span>
       </router-link>
@@ -15,10 +15,10 @@
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" v-if="apiReady">
 
       <!-- title -->
-      <div class="title">Training {{ training }}</div>
+      <div class="title">Training {{ paramTraining }}</div>
       <!-- title -->
 
       <!-- list of employee -->
@@ -31,94 +31,13 @@
           </thead>
 
           <tbody>
-            <tr>
-              <td>BLI-1153AD</td>
-              <td>Albert Kurniawan</td>
-              <td><font-awesome-icon icon="check" class="check-icon"></font-awesome-icon></td>
-            </tr>
-
-            <tr>
-              <td>BLI-1953OP</td>
-              <td>Simon Samosir</td>
-              <td><font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon></td>
-            </tr>
-
-            <tr>
-              <td>BLI-D885A1</td>
-              <td>Maudy Hana</td>
-              <td><font-awesome-icon icon="check" class="check-icon"></font-awesome-icon></td>
-            </tr>
-
-            <tr>
-              <td>BLI-B95AAC</td>
-              <td>Angelia Yohana</td>
-              <td><font-awesome-icon icon="check" class="check-icon"></font-awesome-icon></td>
-            </tr>
-
-            <tr>
-              <td>BLI-15A9DS</td>
-              <td>Rio Martin</td>
-              <td><font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon></td>
-            </tr>
-
-            <tr>
-              <td>BLI-HG9563</td>
-              <td>Maria Rosaria</td>
-              <td><font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon></td>
-            </tr>
-
-            <tr>
-              <td>BLI-PO956E</td>
-              <td>Spencer Lonhou</td>
-              <td><font-awesome-icon icon="check" class="check-icon"></font-awesome-icon></td>
-            </tr>
-
-            <tr>
-              <td>BLI-D89ADC</td>
-              <td>Roni Simanjuntak</td>
-              <td><font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon></td>
-            </tr>
-
-            <tr>
-              <td>BLI-55D23A</td>
-              <td>Julio Cesar</td>
-              <td><font-awesome-icon icon="check" class="check-icon"></font-awesome-icon></td>
-            </tr>
-
-            <tr>
-              <td>BLI-PE7SL6</td>
-              <td>Fifin Andriani</td>
-              <td><font-awesome-icon icon="check" class="check-icon"></font-awesome-icon></td>
-            </tr>
-
-            <tr>
-              <td>BLI-S6DD92</td>
-              <td>Kimmy</td>
-              <td><font-awesome-icon icon="check" class="check-icon"></font-awesome-icon></td>
-            </tr>
-
-            <tr>
-              <td>BLI-I7AALS</td>
-              <td>Andi Wijaya</td>
-              <td><font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon></td>
-            </tr>
-
-            <tr>
-              <td>BLI-N8UDOP</td>
-              <td>Lorencia Agnes</td>
-              <td><font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon></td>
-            </tr>
-
-            <tr>
-              <td>BLI-L5SSPA</td>
-              <td>Algi Nosi</td>
-              <td><font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon></td>
-            </tr>
-
-            <tr>
-              <td>BLI-K96DS1</td>
-              <td>Jessica Natalia</td>
-              <td><font-awesome-icon icon="check" class="check-icon"></font-awesome-icon></td>
+            <tr v-for="(value) in attendanceList.data.employee" :key="value.id">
+              <td>{{ value.cardId }}</td>
+              <td>{{ value.name }}</td>
+              <td>
+                <font-awesome-icon v-if="value.status" icon="check" class="check-icon"></font-awesome-icon>
+                <font-awesome-icon v-else icon="times" class="remove-icon"></font-awesome-icon>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -128,9 +47,7 @@
     </div>
     <!-- end content -->
 
-    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
-
   </div>
 </template>
 
@@ -337,39 +254,80 @@
 <script>
 
 import AnimationLoader from '@/components/AnimationLoader.vue';
-import PopupMessage from '@/components/PopupMessage.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
   components: {
     AnimationLoader,
-    PopupMessage,
   },
 
   data() {
     return {
-      id: '',
-      training: '',
+      paramBatch: '',
+      paramTraining: '',
+      apiReady: false,
       animationLoaderDisplay: false,
-      popupMessageDisplay: false,
     };
   },
 
   computed: {
+    ...mapGetters('adminTraining', [
+      'attendanceList',
+    ]),
+
     redirectToQrcode() {
       return {
         name: 'AdminQrcode',
         params: {
-          batch: this.id,
-          training: this.training,
+          batch: this.paramBatch,
+          training: this.paramTraining,
         },
       };
     },
   },
 
+  methods: {
+    ...mapActions('adminTraining', [
+      'getAttendance',
+    ]),
+
+    async getAllAttendance() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getAttendance({
+          params: {
+            batch: this.paramBatch,
+            training: this.paramTraining,
+          },
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.apiReady = true;
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+  },
+
   created() {
-    this.id = this.$route.params.batch;
-    this.training = this.$route.params.training;
+    // check user auth
+    this.$func.userAuth('Admin');
+
+    // get params
+    this.paramBatch = this.$route.params.batch;
+    this.paramTraining = this.$route.params.training;
+
+    // req api
+    this.getAllAttendance();
   },
 
 };

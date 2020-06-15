@@ -1289,4 +1289,317 @@ export default [
       errors: null,
     },
   },
+  {
+    url: `${API}/admin/batch/training/detail`,
+    method: 'GET',
+    params: {
+      params: {
+        batch: '1',
+        training: '1',
+      },
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: {
+        id: 1,
+        training: '1',
+        date: '2020-09-15',
+        timeStart: '08:00',
+        timeFinish: '16:00',
+        trainerId: 1,
+        location: 'di Gedung Serbaguna, Ruang 315 C Sarana Jaya',
+        materials: [
+          {
+            id: 1,
+            name: 'Think Win Win',
+            link: 'https://www.google.co.id',
+          }, {
+            id: 2,
+            name: 'Time Management',
+            link: 'https://www.google.co.id',
+          },
+        ],
+      },
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/admin/batch/training`,
+    method: 'PUT',
+    params: {
+      batch: '1',
+      training: '1',
+      date: '2020-09-15',
+      location: 'di Gedung Serbaguna, Ruang 315 C Sarana Jaya',
+      timeStart: '08:00',
+      timeFinish: '16:00',
+      trainerId: 1,
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: null,
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/admin/batch/training`,
+    method: 'DELETE',
+    params: {
+      params: {
+        batch: '1',
+        training: '1',
+      },
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: null,
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/admin/batch/training/attendance`,
+    method: 'GET',
+    params: {
+      params: {
+        batch: '1',
+        training: '1',
+      },
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: {
+        batch: {
+          id: 1,
+          batch: '1',
+        },
+        employee: [
+          {
+            id: 1,
+            cardId: 'BLI-1154AD',
+            name: 'Albert Kurniawan',
+            status: 1,
+          },
+          {
+            id: 2,
+            cardId: 'BLI-1953OP',
+            name: 'Muhammad Taufan Okka',
+            status: 1,
+          },
+          {
+            id: 3,
+            cardId: 'BLI-D885A1',
+            name: 'Simon Samosir',
+            status: 0,
+          },
+          {
+            id: 4,
+            cardId: 'BLI-AA5S96',
+            name: 'Felix Alvin',
+            status: 1,
+          },
+          {
+            id: 5,
+            cardId: 'BLI-6OE33S',
+            name: 'Tari Swaswati',
+            status: 1,
+          },
+          {
+            id: 6,
+            cardId: 'BLI-0H553N',
+            name: 'Esra Targian',
+            status: 0,
+          },
+          {
+            id: 7,
+            cardId: 'BLI-225A3S',
+            name: 'Timotius Nugroho',
+            status: 0,
+          },
+          {
+            id: 8,
+            cardId: 'BLI-A8D956',
+            name: 'Lia Ernita',
+            status: 1,
+          },
+          {
+            id: 9,
+            cardId: 'BLI-P9D6EE',
+            name: 'Devayani Dinda',
+            status: 0,
+          },
+          {
+            id: 10,
+            cardId: 'BLI-KE5DS3',
+            name: 'Kelvin',
+            status: 0,
+          },
+          {
+            id: 11,
+            cardId: 'BLI-D805A1',
+            name: 'Maudy Hana',
+            status: 1,
+          },
+          {
+            id: 12,
+            cardId: 'BLI-B95AAC',
+            name: 'Angelia Yohana',
+            status: 1,
+          },
+          {
+            id: 13,
+            cardId: 'BLI-15A9DS',
+            name: 'Rio Martin',
+            status: 0,
+          },
+          {
+            id: 14,
+            cardId: 'BLI-HG9563',
+            name: 'Maria Rosaria',
+            status: 0,
+          },
+          {
+            id: 15,
+            cardId: 'BLI-PO956E',
+            name: 'Spencer Lonhou',
+            status: 1,
+          },
+          {
+            id: 16,
+            cardId: 'BLI-D89ADC',
+            name: 'Roni Simanjuntak',
+            status: 1,
+          },
+          {
+            id: 17,
+            cardId: 'BLI-55D23A',
+            name: 'Julio Cesar',
+            status: 1,
+          },
+          {
+            id: 18,
+            cardId: 'BLI-PE7SL6',
+            name: 'Fifin Andriani',
+            status: 1,
+          },
+          {
+            id: 19,
+            cardId: 'BLI-S6DD92',
+            name: 'Kimmy',
+            status: 0,
+          },
+          {
+            id: 20,
+            cardId: 'BLI-I7AALS',
+            name: 'Andi Wijaya',
+            status: 1,
+          },
+          {
+            id: 21,
+            cardId: 'BLI-N8UDOP',
+            name: 'Lorencia Agnes',
+            status: 0,
+          },
+          {
+            id: 22,
+            cardId: 'BLI-L5SSPA',
+            name: 'Algi Nosi',
+            status: 0,
+          },
+          {
+            id: 23,
+            cardId: 'BLI-K96DS1',
+            name: 'Jessica Natalia',
+            status: 1,
+          },
+        ],
+      },
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/admin/material`,
+    method: 'GET',
+    params: {
+      params: {
+        batch: '1',
+        training: '1',
+      },
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: [
+        {
+          id: 1,
+          name: 'Think Win Win',
+        },
+        {
+          id: 2,
+          name: 'Time Management',
+        },
+        {
+          id: 3,
+          name: 'Public Victory',
+        },
+        {
+          id: 4,
+          name: '7 Habbits',
+        },
+      ],
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/admin/material`,
+    method: 'DELETE',
+    params: {
+      params: {
+        batch: '1',
+        training: '1',
+        materialId: 1,
+      },
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: null,
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/admin/material`,
+    method: 'POST',
+    params: {
+      batch: '1',
+      training: '1',
+      material: {
+        name: 'Time Management',
+        file: 'time.pptx',
+      },
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: null,
+      paging: null,
+      errors: null,
+    },
+  },
 ];

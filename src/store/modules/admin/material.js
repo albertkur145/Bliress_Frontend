@@ -4,39 +4,31 @@ import config from '@/config';
 const { API } = config;
 
 const data = {
-  batchs: {},
-  batchBy: {},
+  materials: {},
 };
 
 const getters = {
-  batchList(state) {
-    return state.batchs;
-  },
-
-  batchBy(state) {
-    return state.batchBy;
+  materialList(state) {
+    return state.materials;
   },
 };
 
 const mutations = {
-  setBatch(state, value) {
-    state.batchs = value;
-  },
-
-  setBatchBy(state, value) {
-    state.batchBy = value;
+  setMaterials(state, value) {
+    state.materials = value;
   },
 };
 
 const actions = {
-  getBatch({ commit }, payload) {
+  getMaterials({ commit }, payload) {
     axios({
       method: 'get',
-      url: `${API}/admin/batch`,
+      url: `${API}/admin/material`,
+      params: payload.params,
       responseType: 'json',
     })
       .then((res) => {
-        commit('setBatch', res.data);
+        commit('setMaterials', res.data);
         payload.resolve(res.data.code);
       })
       .catch((err) => {
@@ -44,11 +36,11 @@ const actions = {
       });
   },
 
-  postBatch({ commit }, payload) {
+  deleteMaterial({ commit }, payload) {
     axios({
-      method: 'post',
-      url: `${API}/admin/batch`,
-      data: payload.params,
+      method: 'delete',
+      url: `${API}/admin/material`,
+      params: payload.params,
       responseType: 'json',
     })
       .then((res) => {
@@ -60,15 +52,15 @@ const actions = {
       });
   },
 
-  getBatchBy({ commit }, payload) {
+  postMaterial({ commit }, payload) {
     axios({
-      method: 'get',
-      url: `${API}/admin/batch/detail`,
-      params: payload.params,
+      method: 'post',
+      url: `${API}/admin/material`,
+      data: payload.params,
       responseType: 'json',
     })
       .then((res) => {
-        commit('setBatchBy', res.data);
+        console.log(commit);
         payload.resolve(res.data.code);
       })
       .catch((err) => {

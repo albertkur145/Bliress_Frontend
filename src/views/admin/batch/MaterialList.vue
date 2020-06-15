@@ -3,7 +3,7 @@
 
     <!-- head -->
     <div class="head">
-      <router-link :to="{ name: 'AdminTraining', params: { batch: id } }" class="back">
+      <router-link :to="{ name: 'AdminTraining', params: { batch: paramBatch } }" class="back">
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
       </router-link>
 
@@ -16,7 +16,7 @@
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" v-if="apiReady">
 
       <!-- material list -->
       <div class="material-list">
@@ -28,9 +28,9 @@
             </thead>
 
             <tbody>
-              <tr v-for="(value) in materials" :key="value.id">
+              <tr v-for="(value) in materialList.data" :key="value.id">
                 <td>{{ value.name }}</td>
-                <td><font-awesome-icon icon="times" class="times-icon"></font-awesome-icon></td>
+                <td><font-awesome-icon icon="times" class="times-icon" @click="confirmDelete(value.id)"></font-awesome-icon></td>
               </tr>
             </tbody>
           </table>
@@ -41,6 +41,7 @@
     </div>
     <!-- end content -->
 
+    <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
 
@@ -122,6 +123,10 @@
           }
         }
       }
+    }
+
+    .display-flex {
+      display: flex;
     }
   }
   // global css
@@ -232,48 +237,119 @@
 
 <script>
 
+import AnimationLoader from '@/components/AnimationLoader.vue';
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
+
+  components: {
+    AnimationLoader,
+  },
 
   data() {
     return {
-      id: '',
+      paramBatch: '',
       paramTraining: '',
-      materials: [
-        {
-          id: '1',
-          name: 'Think Win Win',
-        },
-        {
-          id: '2',
-          name: 'Time Management',
-        },
-        {
-          id: '3',
-          name: 'Private Victory',
-        },
-        {
-          id: '4',
-          name: '7 Habbits',
-        },
-      ],
+      animationLoaderDisplay: false,
+      apiReady: false,
     };
   },
 
   computed: {
+    ...mapGetters('adminMaterial', [
+      'materialList',
+    ]),
+
     redirectUploadMaterial() {
       return {
         name: 'AdminUploadMaterialTraining',
         params: {
-          batch: this.id,
+          batch: this.paramBatch,
           training: this.paramTraining,
         },
       };
     },
   },
 
+  methods: {
+    ...mapActions('adminMaterial', [
+      'getMaterials',
+      'deleteMaterial',
+    ]),
+
+    async getAllMaterial() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getMaterials({
+          params: {
+            batch: this.paramBatch,
+            training: this.paramTraining,
+          },
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.apiReady = true;
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+
+    confirmDelete(materialId) {
+      this.$func.popupConfirmDialog(
+        'Kamu yakin?',
+        'Data yang dihapus tidak dapat kembali lagi',
+      ).then((res) => {
+        if (res.value) {
+          this.deleteData(materialId);
+        }
+      });
+    },
+
+    async deleteData(materialId) {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.deleteMaterial({
+          params: {
+            batch: this.paramBatch,
+            training: this.paramTraining,
+            materialId,
+          },
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.$func.popupSuccessfull('Berhasil hapus data', 5000, null);
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+  },
+
   created() {
-    this.id = this.$route.params.batch;
+    // check user auth
+    this.$func.userAuth('Admin');
+
+    // get params
+    this.paramBatch = this.$route.params.batch;
     this.paramTraining = this.$route.params.training;
+
+    // req api
+    this.getAllMaterial();
   },
 
 };

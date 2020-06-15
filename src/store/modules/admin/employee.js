@@ -30,8 +30,8 @@ const actions = {
         commit('setEmployees', res.data);
         payload.resolve(res.data.code);
       })
-      .catch(() => {
-        console.log('Error');
+      .catch((err) => {
+        console.log(err);
       });
   },
 };

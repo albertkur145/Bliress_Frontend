@@ -33,17 +33,17 @@
               <p class="time">{{ value.timeStart }} - {{ value.timeFinish }} WIB</p>
               <p class="trainer">Trainer: {{ value.trainer }}</p>
               <p class="location">{{ value.location }}</p>
-              <div class="btn-material" @click="redirectMaterial(value.training)">
+              <div class="btn-material" @click="redirectMaterial(`${value.training}`)">
                 <span>Material</span>
                 <font-awesome-icon icon="chevron-right" class="material-icon"></font-awesome-icon>
               </div>
-              <button class="btn-attendance" @click="redirectAttendance(value.training)">Absensi</button>
+              <button class="btn-attendance" @click="redirectAttendance(`${value.training}`)">Absensi</button>
             </div>
 
             <div class="action">
               <div>
-                <font-awesome-icon icon="pen" class="edit-icon" @click="redirectAddTraining"></font-awesome-icon>
-                <font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon>
+                <font-awesome-icon icon="pen" class="edit-icon" @click="redirectChangeTraining(`${value.training}`)"></font-awesome-icon>
+                <font-awesome-icon icon="times" class="remove-icon" @click="confirmDelete(`${value.training}`)"></font-awesome-icon>
               </div>
             </div>
           </div>
@@ -500,6 +500,7 @@ export default {
   methods: {
     ...mapActions('adminTraining', [
       'getTrainings',
+      'deleteTraining',
     ]),
 
     async getAllTraining() {
@@ -526,8 +527,50 @@ export default {
       }
     },
 
-    redirectAddTraining() {
-      this.$router.push({ name: 'AdminAddTraining', params: { batch: this.paramBatch } });
+    confirmDelete(training) {
+      this.$func.popupConfirmDialog(
+        'Kamu yakin?',
+        'Data yang dihapus tidak dapat kembali lagi',
+      ).then((res) => {
+        if (res.value) {
+          this.deleteData(training);
+        }
+      });
+    },
+
+    async deleteData(training) {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.deleteTraining({
+          params: {
+            batch: this.paramBatch,
+            training,
+          },
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.$func.popupSuccessfull('Berhasil hapus data', 5000, null);
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+
+    redirectChangeTraining(training) {
+      this.$router.push({
+        name: 'AdminChangeTraining',
+        params: {
+          batch: this.paramBatch,
+          training,
+        },
+      });
     },
 
     redirectAttendance(training) {

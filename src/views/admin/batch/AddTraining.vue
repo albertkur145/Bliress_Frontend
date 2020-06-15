@@ -4,7 +4,7 @@
     <div class="head">
       <router-link :to="back" class="back">
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
-        <span class="text">Tambah</span>
+        <span class="text">{{ title }}</span>
       </router-link>
       <div class="save" @click="validateForm">Simpan</div>
     </div>
@@ -15,7 +15,11 @@
       <div class="form-group">
         <fieldset>
           <legend>Training ke</legend>
-          <select class="input-text" v-model="form.training">
+          <select
+          :class="{ 'fieldset-disabled': inputDisabled }"
+          class="input-text"
+          v-model="form.training"
+          :disabled="inputDisabled">
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -28,7 +32,7 @@
       <div class="form-group">
         <fieldset>
           <legend>Tanggal</legend>
-          <input :formatter="format" type="date" class="input-text" v-model="form.date">
+          <input type="date" class="input-text" v-model="form.date">
         </fieldset>
       </div>
 
@@ -228,6 +232,10 @@
             font-size: 0.875em;
           }
         }
+
+        .fieldset-disabled:hover {
+          cursor: no-drop;
+        }
       }
     }
 
@@ -368,7 +376,7 @@
 <script>
 
 import AnimationLoader from '@/components/AnimationLoader.vue';
-import { mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
@@ -378,8 +386,11 @@ export default {
 
   data() {
     return {
+      title: 'Tambah',
       paramBatch: '',
+      paramTraining: '',
       animationLoaderDisplay: false,
+      inputDisabled: false,
       form: {
         batch: '',
         training: '1',
@@ -393,6 +404,10 @@ export default {
   },
 
   computed: {
+    ...mapGetters('adminTraining', [
+      'training',
+    ]),
+
     back() {
       return {
         name: 'AdminTraining',
@@ -406,28 +421,31 @@ export default {
   methods: {
     ...mapActions('adminTraining', [
       'postTraining',
+      'putTraining',
+      'getTrainingBy',
     ]),
-
-    format() {
-      return this.form.date.format('YYYY-MM-DD');
-    },
 
     validateForm() {
       if (this.form.location.length === 0) {
         this.$func.popupError('Form tidak lengkap!', 0);
       } else {
         this.form.batch = this.paramBatch;
-        this.addTraining();
+
+        if (!this.paramTraining) {
+          this.reqApi(this.postTraining);
+        } else {
+          this.reqApi(this.putTraining);
+        }
       }
     },
 
-    async addTraining() {
+    async reqApi(action) {
       // show loader
       this.animationLoaderDisplay = true;
 
       // req api
       const promise = await new Promise((resolve) => {
-        this.postTraining({
+        action({
           params: this.form,
           resolve,
         });
@@ -442,6 +460,45 @@ export default {
         this.$func.popupLostConnection();
       }
     },
+
+    async getTraininyByTraining() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getTrainingBy({
+          params: {
+            batch: this.paramBatch,
+            training: this.paramTraining,
+          },
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.setForm();
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+
+    setForm() {
+      const training = this.training.data;
+
+      this.form = {
+        batch: this.paramBatch,
+        training: training.training,
+        date: training.date,
+        location: training.location,
+        timeStart: training.timeStart,
+        timeFinish: training.timeFinish,
+        trainerId: training.trainerId,
+      };
+    },
   },
 
   created() {
@@ -450,6 +507,14 @@ export default {
 
     // get params
     this.paramBatch = this.$route.params.batch;
+    if (this.$route.params.training) {
+      this.paramTraining = this.$route.params.training;
+      this.title = 'Ubah';
+      this.inputDisabled = true;
+
+      // req api
+      this.getTraininyByTraining();
+    }
   },
 
 };

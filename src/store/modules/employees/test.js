@@ -49,8 +49,8 @@ const actions = {
         commit('setTests', res.data);
         payload.resolve(res.data.code);
       })
-      .catch(() => {
-        console.log('Error');
+      .catch((err) => {
+        console.log(err);
       });
   },
 
@@ -65,8 +65,8 @@ const actions = {
         commit('setMaterials', res.data);
         payload.resolve(res.data.code);
       })
-      .catch(() => {
-        console.log('Error');
+      .catch((err) => {
+        console.log(err);
       });
   },
 
@@ -81,8 +81,8 @@ const actions = {
         commit('setQuestions', res.data);
         payload.resolve(res.data.code);
       })
-      .catch(() => {
-        console.log('Error');
+      .catch((err) => {
+        console.log(err);
       });
   },
 
@@ -97,8 +97,8 @@ const actions = {
         console.log(commit);
         payload.resolve(res.data.code);
       })
-      .catch(() => {
-        console.log('Error');
+      .catch((err) => {
+        console.log(err);
       });
   },
 };

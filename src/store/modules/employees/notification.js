@@ -31,8 +31,8 @@ const actions = {
         commit('setNotifications', res.data);
         payload.resolve(res.data.code);
       })
-      .catch(() => {
-        console.log('Error');
+      .catch((err) => {
+        console.log(err);
       });
   },
 };

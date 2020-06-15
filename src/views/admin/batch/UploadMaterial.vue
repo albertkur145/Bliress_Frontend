@@ -7,13 +7,20 @@
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
         <span class="text">Tambah</span>
       </router-link>
-      <div class="save">Simpan</div>
+      <div class="save" @click="validateForm">Simpan</div>
     </div>
     <!-- end head -->
 
     <!-- content -->
     <div class="content">
       <div class="form">
+        <div class="form-group">
+          <fieldset>
+            <legend>Judul materi</legend>
+            <input type="text" class="input-text" v-model="form.name">
+          </fieldset>
+        </div>
+
         <label for="file-input" class="upload-file">
           <input type="file" id="file-input" @change="onFileChange">
           <span class="upload-custom">Upload file</span>
@@ -23,6 +30,7 @@
     </div>
     <!-- end content -->
 
+    <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
 
@@ -80,6 +88,41 @@
       .form {
         padding: 1rem;
 
+        .form-group {
+          max-width: 100%;
+          margin-bottom: 1.25rem;
+
+          fieldset {
+            border: 0.0625rem solid #AAA;
+            border-radius: 0.5rem;
+            position: relative;
+            max-width: 100%;
+            min-height: 2.75rem;
+
+            legend {
+              color: #777;
+              padding: 0 0.3125rem;
+              font-size: 0.8125em;
+            }
+
+            .input-text {
+              position: absolute;
+              box-sizing: border-box;
+              background-color: transparent;
+              top: 0.4375rem;
+              left: 0;
+              bottom: 0;
+              width: 100%;
+              border: 0;
+              outline: none;
+              -webkit-appearance: none;
+              color: #333;
+              padding: 0.125rem 1rem 0 1.5rem;
+              font-size: 0.875em;
+            }
+          }
+        }
+
         .upload-file {
           display: flex;
           align-items: center;
@@ -106,6 +149,10 @@
           }
         }
       }
+    }
+
+    .display-flex {
+      display: flex;
     }
   }
   // global css
@@ -135,6 +182,24 @@
 
         .form {
           padding: 1.25rem;
+
+          .form-group {
+            margin-bottom: 1.5rem;
+
+            fieldset {
+              min-height: 3rem;
+
+              legend {
+                padding: 0 0.375rem;
+                font-size: 0.875em;
+              }
+
+              .input-text {
+                padding: 0.125rem 1.25rem 0 2rem;
+                font-size: 0.9375em;
+              }
+            }
+          }
 
           .upload-file {
 
@@ -181,6 +246,24 @@
         .form {
           padding: 1.5rem;
 
+          .form-group {
+            margin-bottom: 1.75rem;
+
+            fieldset {
+              min-height: 3.5rem;
+
+              legend {
+                padding: 0 0.5rem;
+                font-size: 0.9375em;
+              }
+
+              .input-text {
+                padding: 0.375rem 1.25rem 0 2.25rem;
+                font-size: 1.0625em;
+              }
+            }
+          }
+
           .upload-file {
 
             .upload-custom {
@@ -202,13 +285,25 @@
 
 <script>
 
+import AnimationLoader from '@/components/AnimationLoader.vue';
+import { mapActions } from 'vuex';
+
 export default {
+
+  components: {
+    AnimationLoader,
+  },
 
   data() {
     return {
-      id: '',
+      animationLoaderDisplay: false,
+      paramBatch: '',
       paramTraining: '',
       fileName: '',
+      form: {
+        name: '',
+        file: '',
+      },
     };
   },
 
@@ -217,7 +312,7 @@ export default {
       return {
         name: 'AdminMaterialTraining',
         params: {
-          batch: this.id,
+          batch: this.paramBatch,
           training: this.paramTraining,
         },
       };
@@ -225,13 +320,56 @@ export default {
   },
 
   methods: {
+    ...mapActions('adminMaterial', [
+      'postMaterial',
+    ]),
+
     onFileChange(e) {
       this.fileName = e.target.files[0].name;
+      this.form.file = 'time.pptx';
+    },
+
+    validateForm() {
+      if (this.form.name && this.form.file) {
+        this.addMaterial();
+      } else {
+        this.$func.popupError('Form tidak lengkap!', 0);
+      }
+    },
+
+    async addMaterial() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.postMaterial({
+          params: {
+            batch: this.paramBatch,
+            training: this.paramTraining,
+            material: this.form,
+          },
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.$func.popupSuccessfull('Berhasil simpan data', 5000, this.back);
+      } else {
+        this.$func.popupLostConnection();
+      }
     },
   },
 
   created() {
-    this.id = this.$route.params.batch;
+    // check user auth
+    this.$func.userAuth('Admin');
+
+    // get params
+    this.paramBatch = this.$route.params.batch;
     this.paramTraining = this.$route.params.training;
   },
 
