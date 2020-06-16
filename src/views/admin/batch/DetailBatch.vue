@@ -6,7 +6,7 @@
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
         <span class="text">Batch {{ paramBatch }}</span>
       </router-link>
-      <div class="delete">Hapus</div>
+      <div class="delete" @click="confirmDialog">Hapus</div>
     </div>
     <!-- end head -->
 
@@ -448,7 +448,43 @@ export default {
   methods: {
     ...mapActions('adminBatch', [
       'getBatchBy',
+      'deleteBatch',
     ]),
+
+    confirmDialog() {
+      this.$func.popupConfirmDialog(
+        'Kamu yakin?',
+        'Semua atribut yang berhubungan akan ikut terhapus',
+      ).then((res) => {
+        if (res.value) {
+          this.delete();
+        }
+      });
+    },
+
+    async delete() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.deleteBatch({
+          params: {
+            batch: this.paramBatch,
+          },
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.$func.popupSuccessfull('Sukses hapus data', 5000, { name: 'AdminBatch' });
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
 
     async getDetailByBatch() {
       // show loader

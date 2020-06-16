@@ -127,6 +127,11 @@ const routes = [
     component: () => import('../views/admin/test/AddTest.vue'),
   },
   {
+    path: '/admin/test/batch/:batch/training/:training/material/:material/changetest',
+    name: 'AdminChangeTest',
+    component: () => import('../views/admin/test/AddTest.vue'),
+  },
+  {
     path: '/admin/notification',
     name: 'AdminNotification',
     component: () => import('../views/admin/notification/Notification.vue'),

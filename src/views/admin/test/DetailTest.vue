@@ -11,7 +11,7 @@
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" v-if="apiReady">
 
       <!-- top -->
       <div class="top">
@@ -22,19 +22,19 @@
 
       <!-- list of material -->
       <div class="materials">
-        <div class="material" v-for="(value, index) in materialList" :key="index">
+        <div class="material" v-for="(value) in materialTestList.data.material" :key="value.id">
           <div class="information">
             <div class="left">
               <p class="material-name">{{ value.name }}</p>
-              <p class="available-date"><span>(Dibuka)</span> {{ value.date_available }}</p>
-              <p class="expired-date"><span>(Ditutup)</span> {{ value.date_closed }}</p>
-              <p class="time-limit">Batas: {{ value.limit_time }}</p>
+              <p class="available-date"><span>(Dibuka)</span> {{ value.available }}</p>
+              <p class="expired-date"><span>(Ditutup)</span> {{ value.closed }}</p>
+              <p class="time-limit">Batas: {{ value.timeLimit }} <span v-if="value.timeLimit !== '-'">menit</span></p>
             </div>
 
             <div class="right">
               <div>
-                <font-awesome-icon icon="pen" class="edit-icon" @click="redirectToAddTest(index)"></font-awesome-icon>
-                <font-awesome-icon icon="eye" class="see-icon" @click="redirectReviewTest(index)"></font-awesome-icon>
+                <font-awesome-icon icon="pen" class="edit-icon" @click="redirectToAddTest(value.id, `${value.available}`)"></font-awesome-icon>
+                <font-awesome-icon icon="eye" class="see-icon" @click="redirectReviewTest(value.id)"></font-awesome-icon>
               </div>
             </div>
           </div>
@@ -47,7 +47,6 @@
     </div>
     <!-- end content -->
 
-    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
@@ -382,61 +381,81 @@
 <script>
 
 import AnimationLoader from '@/components/AnimationLoader.vue';
-import PopupMessage from '@/components/PopupMessage.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
   components: {
     AnimationLoader,
-    PopupMessage,
   },
 
   data() {
     return {
       paramBatch: '',
       paramTraining: '',
-      materialList: [
-        {
-          name: 'Private Victory',
-          date_available: '12 September 2020',
-          date_closed: '13 September 2020',
-          limit_time: '20 menit',
-        },
-        {
-          name: 'Emotional Banking',
-          date_available: '-',
-          date_closed: '-',
-          limit_time: '-',
-        },
-        {
-          name: 'Think Win Win',
-          date_available: '20 September 2020',
-          date_closed: '22 September 2020',
-          limit_time: '60 menit',
-        },
-        {
-          name: 'Time Management',
-          date_available: '23 September 2020',
-          date_closed: '26 September 2020',
-          limit_time: '60 menit',
-        },
-      ],
+      apiReady: false,
       animationLoaderDisplay: false,
-      popupMessageDisplay: false,
     };
   },
 
+  computed: {
+    ...mapGetters('adminTest', [
+      'materialTestList',
+    ]),
+  },
+
   methods: {
-    redirectToAddTest(id) {
-      this.$router.push({
-        name: 'AdminAddTest',
-        params: {
-          batch: this.paramBatch,
-          training: this.paramTraining,
-          material: id,
-        },
+    ...mapActions('adminTest', [
+      'getMaterialsTest',
+    ]),
+
+    async getAllMaterialTest() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getMaterialsTest({
+          params: {
+            batch: this.paramBatch,
+            training: this.paramTraining,
+          },
+          resolve,
+        });
       });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.apiReady = true;
+      } else {
+        this.$func.popupLostConnection();
+      }
     },
+
+    redirectToAddTest(id, available) {
+      if (available === '-') {
+        this.$router.push({
+          name: 'AdminAddTest',
+          params: {
+            batch: this.paramBatch,
+            training: this.paramTraining,
+            material: id,
+          },
+        });
+      } else {
+        this.$router.push({
+          name: 'AdminChangeTest',
+          params: {
+            batch: this.paramBatch,
+            training: this.paramTraining,
+            material: id,
+          },
+        });
+      }
+    },
+
     redirectReviewTest(id) {
       this.$router.push({
         name: 'AdminReviewTest',
@@ -450,8 +469,15 @@ export default {
   },
 
   created() {
+    // check user auth
+    this.$func.userAuth('Admin');
+
+    // get params
     this.paramBatch = this.$route.params.batch;
     this.paramTraining = this.$route.params.training;
+
+    // req api
+    this.getAllMaterialTest();
   },
 
 };

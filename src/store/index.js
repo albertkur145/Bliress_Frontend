@@ -10,6 +10,7 @@ import adminBatch from './modules/admin/batch';
 import adminEmployee from './modules/admin/employee';
 import adminTraining from './modules/admin/training';
 import adminMaterial from './modules/admin/material';
+import adminTest from './modules/admin/test';
 
 Vue.use(Vuex);
 
@@ -24,5 +25,6 @@ export default new Vuex.Store({
     adminEmployee,
     adminTraining,
     adminMaterial,
+    adminTest,
   },
 });

@@ -4,48 +4,40 @@ import config from '@/config';
 const { API } = config;
 
 const data = {
-  batchs: {},
-  batchBy: {},
-  batchTrainings: {},
+  materialsTest: {},
+  test: {},
 };
 
 const getters = {
-  batchList(state) {
-    return state.batchs;
+  materialTestList(state) {
+    return state.materialsTest;
   },
 
-  batchBy(state) {
-    return state.batchBy;
-  },
-
-  batchTrainingList(state) {
-    return state.batchTrainings;
+  questionTest(state) {
+    return state.test;
   },
 };
 
 const mutations = {
-  setBatch(state, value) {
-    state.batchs = value;
+  setMaterialTest(state, value) {
+    state.materialsTest = value;
   },
 
-  setBatchBy(state, value) {
-    state.batchBy = value;
-  },
-
-  setBatchTraining(state, value) {
-    state.batchTrainings = value;
+  setTest(state, value) {
+    state.test = value;
   },
 };
 
 const actions = {
-  getBatch({ commit }, payload) {
+  getMaterialsTest({ commit }, payload) {
     axios({
       method: 'get',
-      url: `${API}/admin/batch`,
+      url: `${API}/admin/test`,
+      params: payload.params,
       responseType: 'json',
     })
       .then((res) => {
-        commit('setBatch', res.data);
+        commit('setMaterialTest', res.data);
         payload.resolve(res.data.code);
       })
       .catch((err) => {
@@ -53,14 +45,15 @@ const actions = {
       });
   },
 
-  getBatchTraining({ commit }, payload) {
+  getTest({ commit }, payload) {
     axios({
       method: 'get',
-      url: `${API}/admin/batchtraining`,
+      url: `${API}/admin/test/preview`,
+      params: payload.params,
       responseType: 'json',
     })
       .then((res) => {
-        commit('setBatchTraining', res.data);
+        commit('setTest', res.data);
         payload.resolve(res.data.code);
       })
       .catch((err) => {
@@ -68,10 +61,10 @@ const actions = {
       });
   },
 
-  postBatch({ commit }, payload) {
+  postTest({ commit }, payload) {
     axios({
       method: 'post',
-      url: `${API}/admin/batch`,
+      url: `${API}/admin/test`,
       data: payload.params,
       responseType: 'json',
     })
@@ -84,27 +77,11 @@ const actions = {
       });
   },
 
-  getBatchBy({ commit }, payload) {
+  putTest({ commit }, payload) {
     axios({
-      method: 'get',
-      url: `${API}/admin/batch/detail`,
-      params: payload.params,
-      responseType: 'json',
-    })
-      .then((res) => {
-        commit('setBatchBy', res.data);
-        payload.resolve(res.data.code);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
-
-  deleteBatch({ commit }, payload) {
-    axios({
-      method: 'delete',
-      url: `${API}/admin/batch`,
-      params: payload.params,
+      method: 'put',
+      url: `${API}/admin/test`,
+      data: payload.params,
       responseType: 'json',
     })
       .then((res) => {

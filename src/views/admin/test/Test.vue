@@ -7,19 +7,21 @@
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" v-if="apiReady">
 
       <!-- batch -->
       <div class="batch-list">
-        <div :class="'batch batch-' + batch.batch" v-for="(batch, index) in batchList" :key="index">
+        <div :class="'batch batch-' + batch.batch" v-for="(batch) in batchTrainingList.data" :key="batch.id">
           <div class="general" @click="showDetailTraining(`batch-${batch.batch}`)">
             <div class="txt">Batch {{ batch.batch }}</div>
             <font-awesome-icon icon="chevron-down" class="chev-icon"></font-awesome-icon>
           </div>
 
           <div class="detail">
-            <div class="training" v-for="(training, index) in batch.training" :key="index" @click="redirectToDetail(batch.batch, training)">
-              <span class="txt">Training {{ training }}</span>
+            <div class="training" v-for="(training) in batch.training"
+            :key="training.id"
+            @click="redirectToDetail(batch.batch, training.training)">
+              <span class="txt">Training {{ training.training }}</span>
             </div>
           </div>
         </div>
@@ -30,7 +32,6 @@
     <!-- end content -->
 
     <MenuBar></MenuBar>
-    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
@@ -240,62 +241,54 @@
 
 import MenuBar from '@/components/admin/MenuBar.vue';
 import AnimationLoader from '@/components/AnimationLoader.vue';
-import PopupMessage from '@/components/PopupMessage.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
   components: {
     MenuBar,
     AnimationLoader,
-    PopupMessage,
   },
 
   data() {
     return {
-      batchList: [
-        {
-          batch: '1',
-          training: ['1', '2', '3', '4', '5', '6'],
-        },
-        {
-          batch: '2',
-          training: ['1', '2', '3', '4', '5', '6'],
-        },
-        {
-          batch: '3',
-          training: ['1', '2', '3', '4', '5', '6'],
-        },
-        {
-          batch: '4',
-          training: ['1', '2', '3', '4', '5', '6'],
-        },
-        {
-          batch: '5',
-          training: ['1', '2', '3', '4', '5', '6'],
-        },
-        {
-          batch: '6',
-          training: ['1', '2', '3', '4', '5', '6'],
-        },
-        {
-          batch: '7',
-          training: ['1', '2', '3', '4', '5', '6'],
-        },
-        {
-          batch: '8',
-          training: ['1', '2', '3', '4', '5', '6'],
-        },
-        {
-          batch: '9',
-          training: ['1', '2', '3', '4', '5', '6'],
-        },
-      ],
       animationLoaderDisplay: false,
-      popupMessageDisplay: false,
+      apiReady: false,
     };
   },
 
+  computed: {
+    ...mapGetters('adminBatch', [
+      'batchTrainingList',
+    ]),
+  },
+
   methods: {
+    ...mapActions('adminBatch', [
+      'getBatchTraining',
+    ]),
+
+    async getAllBatchTraining() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getBatchTraining({
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.apiReady = true;
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+
     showDetailTraining(el) {
       const target = document.querySelector(`.${el}`);
       const general = target.querySelector('.general');
@@ -306,6 +299,7 @@ export default {
       chevIcon.classList.toggle('chev-icon-rotate');
       detail.classList.toggle('display-block');
     },
+
     redirectToDetail(batch, training) {
       this.$router.push({
         name: 'AdminDetailTest',
@@ -315,6 +309,14 @@ export default {
         },
       });
     },
+  },
+
+  created() {
+    // check user auth
+    this.$func.userAuth('Admin');
+
+    // req api
+    this.getAllBatchTraining();
   },
 
 };
