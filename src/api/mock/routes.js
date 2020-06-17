@@ -1811,7 +1811,7 @@ export default [
         training: '1',
         available: '2020-01-15',
         closed: '2020-01-18',
-        timeLimit: '20',
+        timeLimit: 20,
         material: {
           id: 1,
           name: 'Think Win Win',
@@ -1974,7 +1974,7 @@ export default [
         available: '2020-01-15',
         closed: '2020-01-18',
         timeLimit: 20,
-        question: [
+        questions: [
           {
             questionText: 'Semua mahasiswa Perguruan Tinggi memiliki Nomor Induk Mahasiswa. Budi seorang mahasiswa. Jadi,',
             choices: [
@@ -2061,7 +2061,7 @@ export default [
                 answer: 'Tidak dapat ditarik kesimpulan.',
               },
             ],
-            correctAnswer: '4',
+            correctAnswer: '1',
           },
           {
             questionText: 'Coklat yang dibungkus dalam kemasan menarik sangat laris terjual. Coklat Jago dibungkus dalam kemasan berwarna merah menyala. Menurut anak-anak, warna merah menyala sangatlah menarik.',
@@ -2108,7 +2108,7 @@ export default [
         available: '2020-01-15',
         closed: '2020-01-18',
         timeLimit: 20,
-        question: [
+        questions: [
           {
             questionText: 'Semua mahasiswa Perguruan Tinggi memiliki Nomor Induk Mahasiswa. Budi seorang mahasiswa. Jadi,',
             choices: [
@@ -2195,7 +2195,7 @@ export default [
                 answer: 'Tidak dapat ditarik kesimpulan.',
               },
             ],
-            correctAnswer: '4',
+            correctAnswer: '1',
           },
           {
             questionText: 'Coklat yang dibungkus dalam kemasan menarik sangat laris terjual. Coklat Jago dibungkus dalam kemasan berwarna merah menyala. Menurut anak-anak, warna merah menyala sangatlah menarik.',

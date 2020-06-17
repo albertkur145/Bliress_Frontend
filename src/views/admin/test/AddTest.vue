@@ -53,9 +53,10 @@
               <textarea class="input-area" v-model="form.questions[n-1].choices[i-1].answer"></textarea>
               <label class="radio">
                 <input type="radio"
-                :value="i"
+                :value="`${i}`"
                 :name="`question-${n}`"
-                :checked="`${i}` === form.questions[n-1].correctAnswer ? true : false">
+                :checked="`${i}` === form.questions[n-1].correctAnswer ? true : false"
+                v-model="form.questions[n-1].correctAnswer">
                 <span></span>
               </label>
             </fieldset>
@@ -582,20 +583,22 @@ export default {
 
     save() {
       if (this.validateForm()) {
-        this.form.timeLimit = parseInt(this.form.timeLimit, 10);
         if (this.material.questions !== null) {
-          this.addTest();
+          this.reqApi(this.putTest);
+        } else {
+          this.form.timeLimit = parseInt(this.form.timeLimit, 10);
+          this.reqApi(this.postTest);
         }
       }
     },
 
-    async addTest() {
+    async reqApi(action) {
       // show loader
       this.animationLoaderDisplay = true;
 
       // req api
       const promise = await new Promise((resolve) => {
-        this.putTest({
+        action({
           params: {
             batch: this.paramBatch,
             training: this.paramTraining,
