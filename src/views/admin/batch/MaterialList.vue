@@ -285,7 +285,7 @@ export default {
       const promise = await new Promise((resolve) => {
         this.getMaterials({
           params: {
-            batch: this.paramBatch,
+            batchId: this.paramBatch,
             training: this.paramTraining,
           },
           resolve,
@@ -321,7 +321,7 @@ export default {
       const promise = await new Promise((resolve) => {
         this.deleteMaterial({
           params: {
-            batch: this.paramBatch,
+            batchId: this.paramBatch,
             training: this.paramTraining,
             materialId,
           },
@@ -345,7 +345,7 @@ export default {
     this.$func.userAuth('Admin');
 
     // get params
-    this.paramBatch = this.$route.params.batch;
+    this.paramBatch = parseInt(this.$route.params.batch);
     this.paramTraining = this.$route.params.training;
 
     // req api

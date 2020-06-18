@@ -6,7 +6,7 @@
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
         <span class="text">Test</span>
       </router-link>
-      <div class="txt-batch">Batch {{ paramBatch }}</div>
+      <div class="txt-batch">{{ batch.batch }} {{ batch.year }}</div>
     </div>
     <!-- end head -->
 
@@ -22,7 +22,7 @@
 
       <!-- list of material -->
       <div class="materials">
-        <div class="material" v-for="(value) in materialTestList.data.material" :key="value.id">
+        <div class="material" v-for="(value) in material" :key="value.id">
           <div class="information">
             <div class="left">
               <p class="material-name">{{ value.name }}</p>
@@ -395,6 +395,8 @@ export default {
       paramTraining: '',
       apiReady: false,
       animationLoaderDisplay: false,
+      batch: {},
+      material: [],
     };
   },
 
@@ -417,7 +419,7 @@ export default {
       const promise = await new Promise((resolve) => {
         this.getMaterialsTest({
           params: {
-            batch: this.paramBatch,
+            batchId: this.paramBatch,
             training: this.paramTraining,
           },
           resolve,
@@ -429,6 +431,10 @@ export default {
 
       if (promise === 200) {
         this.apiReady = true;
+
+        // assignment split data
+        this.batch = this.materialTestList.data.batch;
+        this.material = this.materialTestList.data.material;
       } else {
         this.$func.popupLostConnection();
       }
@@ -460,7 +466,7 @@ export default {
       this.$router.push({
         name: 'AdminReviewTest',
         params: {
-          batch: this.paramBatch,
+          batchId: this.paramBatch,
           training: this.paramTraining,
           material: id,
         },
@@ -473,7 +479,7 @@ export default {
     this.$func.userAuth('Admin');
 
     // get params
-    this.paramBatch = this.$route.params.batch;
+    this.paramBatch = parseInt(this.$route.params.batch, 10);
     this.paramTraining = this.$route.params.training;
 
     // req api

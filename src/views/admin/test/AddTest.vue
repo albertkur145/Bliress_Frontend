@@ -521,7 +521,7 @@ export default {
       const promise = await new Promise((resolve) => {
         this.getTest({
           params: {
-            batch: this.paramBatch,
+            batchId: this.paramBatch,
             training: this.paramTraining,
             materialId: this.paramMaterial,
           },
@@ -600,7 +600,7 @@ export default {
       const promise = await new Promise((resolve) => {
         action({
           params: {
-            batch: this.paramBatch,
+            batchId: this.paramBatch,
             training: this.paramTraining,
             materialId: this.paramMaterial,
             test: this.form,
@@ -663,7 +663,7 @@ export default {
     this.$func.userAuth('Admin');
 
     // get params
-    this.paramBatch = this.$route.params.batch;
+    this.paramBatch = parseInt(this.$route.params.batch, 10);
     this.paramTraining = this.$route.params.training;
     this.paramMaterial = parseInt(this.$route.params.material, 10);
 

@@ -4,7 +4,7 @@
     <div class="head">
       <router-link class="back" :to="{ name: 'AdminBatch' }">
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
-        <span class="text">Batch {{ paramBatch }}</span>
+        <span class="text">{{ batch.batch }} {{ batch.year }}</span>
       </router-link>
       <div class="delete" @click="confirmDialog">Hapus</div>
     </div>
@@ -426,6 +426,7 @@ export default {
       paramBatch: '',
       animationLoaderDisplay: false,
       apiReady: false,
+      batch: {},
       training: [],
       employee: [],
     };
@@ -470,7 +471,7 @@ export default {
       const promise = await new Promise((resolve) => {
         this.deleteBatch({
           params: {
-            batch: this.paramBatch,
+            batchId: this.paramBatch,
           },
           resolve,
         });
@@ -494,7 +495,7 @@ export default {
       const promise = await new Promise((resolve) => {
         this.getBatchBy({
           params: {
-            batch: this.paramBatch,
+            batchId: this.paramBatch,
           },
           resolve,
         });
@@ -507,6 +508,7 @@ export default {
         this.apiReady = true;
 
         // assignment split response data
+        this.batch = this.batchBy.data.batch;
         this.training = this.batchBy.data.training;
         this.employee = this.batchBy.data.employee;
       } else {
@@ -520,7 +522,7 @@ export default {
     this.$func.userAuth('Admin');
 
     // get params
-    this.paramBatch = this.$route.params.batch;
+    this.paramBatch = parseInt(this.$route.params.batch, 10);
 
     // req api
     this.getDetailByBatch();

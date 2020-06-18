@@ -4,30 +4,31 @@ import config from '@/config';
 const { API } = config;
 
 const data = {
-  employees: {},
+  employeesBatch: {},
 };
 
 const getters = {
-  employeeList(state) {
-    return state.employees;
+  batchEmployeeList(state) {
+    return state.employeesBatch;
   },
 };
 
 const mutations = {
-  setEmployees(state, value) {
-    state.employees = value;
+  setEmployeesBatch(state, value) {
+    state.employeesBatch = value;
   },
 };
 
 const actions = {
-  getEmployees({ commit }, payload) {
+  getEmployeesBatch({ commit }, payload) {
     axios({
       method: 'get',
-      url: `${API}/admin/employee`,
+      url: `${API}/admin/batch/employee`,
+      params: payload.params,
       responseType: 'json',
     })
       .then((res) => {
-        commit('setEmployees', res.data);
+        commit('setEmployeesBatch', res.data);
         payload.resolve(res.data.code);
       })
       .catch((err) => {

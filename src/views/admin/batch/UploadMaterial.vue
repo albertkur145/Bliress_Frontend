@@ -345,7 +345,7 @@ export default {
       const promise = await new Promise((resolve) => {
         this.postMaterial({
           params: {
-            batch: this.paramBatch,
+            batchId: this.paramBatch,
             training: this.paramTraining,
             material: this.form,
           },
@@ -369,7 +369,7 @@ export default {
     this.$func.userAuth('Admin');
 
     // get params
-    this.paramBatch = this.$route.params.batch;
+    this.paramBatch = parseInt(this.$route.params.batch, 10);
     this.paramTraining = this.$route.params.training;
   },
 

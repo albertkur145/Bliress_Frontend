@@ -13,14 +13,14 @@
       <div class="batch-list">
         <div :class="'batch batch-' + batch.batch" v-for="(batch) in batchTrainingList.data" :key="batch.id">
           <div class="general" @click="showDetailTraining(`batch-${batch.batch}`)">
-            <div class="txt">Batch {{ batch.batch }}</div>
+            <div class="txt">{{ batch.batch }} ({{ batch.year }})</div>
             <font-awesome-icon icon="chevron-down" class="chev-icon"></font-awesome-icon>
           </div>
 
           <div class="detail">
             <div class="training" v-for="(training) in batch.training"
             :key="training.id"
-            @click="redirectToDetail(batch.batch, training.training)">
+            @click="redirectToDetail(batch.id, `${training.training}`)">
               <span class="txt">Training {{ training.training }}</span>
             </div>
           </div>
@@ -300,11 +300,11 @@ export default {
       detail.classList.toggle('display-block');
     },
 
-    redirectToDetail(batch, training) {
+    redirectToDetail(batchId, training) {
       this.$router.push({
         name: 'AdminDetailTest',
         params: {
-          batch,
+          batch: batchId,
           training,
         },
       });

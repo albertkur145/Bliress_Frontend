@@ -18,7 +18,10 @@
     <div class="content" v-if="apiReady">
 
       <!-- title -->
-      <div class="title">Batch {{ paramBatch }}</div>
+      <div class="title">
+        <div class="txt-batch">(Batch)</div>
+        <div class="batch">{{ batch.batch }} {{ batch.year }}</div>
+      </div>
       <!-- title -->
 
       <!-- list of employee -->
@@ -31,7 +34,7 @@
           </thead>
 
           <tbody>
-            <tr v-for="(value) in employeeList.data" :key="value.id">
+            <tr v-for="(value) in employee" :key="value.id">
               <td>{{ value.cardId }}</td>
               <td>{{ value.name }}</td>
               <!-- <td><font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon></td> -->
@@ -92,12 +95,21 @@
       margin-top: 3rem;
 
       .title {
-        color: #0984E3;
         text-align: center;
-        font-weight: 500;
         background-color: #FFF;
         padding: 1.5rem 1rem;
-        font-size: 1.0625em;
+
+        .txt-batch {
+          color: #ACACAC;
+          font-size: 0.875em;
+        }
+
+        .batch {
+          color: #0984E3;
+          font-weight: 500;
+          margin-top: 0.375rem;
+          font-size: 1.0625em;
+        }
       }
 
       .table {
@@ -164,7 +176,14 @@
 
         .title {
           padding: 1.75rem 1.25rem;
-          font-size: 1.25em;
+
+          .txt-batch {
+            font-size: 1em;
+          }
+
+          .batch {
+            font-size: 1.25em;
+          }
         }
 
         .table {
@@ -213,7 +232,14 @@
 
         .title {
           padding: 2rem 1.5rem;
-          font-size: 1.375em;
+
+          .txt-batch {
+            font-size: 1.125em;
+          }
+
+          .batch {
+            font-size: 1.375em;
+          }
         }
 
         .table {
@@ -253,18 +279,20 @@ export default {
       paramBatch: '',
       animationLoaderDisplay: false,
       apiReady: false,
+      batch: {},
+      employee: [],
     };
   },
 
   computed: {
     ...mapGetters('adminEmployee', [
-      'employeeList',
+      'batchEmployeeList',
     ]),
   },
 
   methods: {
     ...mapActions('adminEmployee', [
-      'getEmployees',
+      'getEmployeesBatch',
     ]),
 
     async getAllEmployees() {
@@ -273,7 +301,10 @@ export default {
 
       // req api
       const promise = await new Promise((resolve) => {
-        this.getEmployees({
+        this.getEmployeesBatch({
+          params: {
+            batchId: this.paramBatch,
+          },
           resolve,
         });
       });
@@ -283,6 +314,10 @@ export default {
 
       if (promise === 200) {
         this.apiReady = true;
+
+        // assignment split data
+        this.batch = this.batchEmployeeList.data.batch;
+        this.employee = this.batchEmployeeList.data.employee;
       } else {
         this.$func.popupLostConnection();
       }
@@ -294,7 +329,7 @@ export default {
     this.$func.userAuth('Admin');
 
     // get params
-    this.paramBatch = this.$route.params.batch;
+    this.paramBatch = parseInt(this.$route.params.batch, 10);
 
     // req api
     this.getAllEmployees();

@@ -392,7 +392,7 @@ export default {
       animationLoaderDisplay: false,
       inputDisabled: false,
       form: {
-        batch: '',
+        batchId: null,
         training: '1',
         date: '2020-01-01',
         location: '',
@@ -429,7 +429,7 @@ export default {
       if (this.form.location.length === 0) {
         this.$func.popupError('Form tidak lengkap!', 0);
       } else {
-        this.form.batch = this.paramBatch;
+        this.form.batchId = 202006;
 
         if (!this.paramTraining) {
           this.reqApi(this.postTraining);
@@ -469,7 +469,7 @@ export default {
       const promise = await new Promise((resolve) => {
         this.getTrainingBy({
           params: {
-            batch: this.paramBatch,
+            batchId: this.paramBatch,
             training: this.paramTraining,
           },
           resolve,
@@ -490,7 +490,7 @@ export default {
       const training = this.training.data;
 
       this.form = {
-        batch: this.paramBatch,
+        batchId: this.paramBatch,
         training: training.training,
         date: training.date,
         location: training.location,
@@ -506,7 +506,7 @@ export default {
     this.$func.userAuth('Admin');
 
     // get params
-    this.paramBatch = this.$route.params.batch;
+    this.paramBatch = parseInt(this.$route.params.batch, 10);
     if (this.$route.params.training) {
       this.paramTraining = this.$route.params.training;
       this.title = 'Ubah';

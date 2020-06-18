@@ -14,13 +14,6 @@ export default [
       status: 'OK',
       data: {
         id: 1,
-        batch: '2',
-        name: 'Albert Kurniawan',
-        email: 'albertkur@gmail.com',
-        phoneNumber: '081375589622',
-        division: 'Software Developer',
-        birthdate: '19/02/2020',
-        gender: 'Pria',
         role: 'Employee',
       },
       paging: null,
@@ -827,20 +820,24 @@ export default [
       status: 'OK',
       data: [
         {
-          id: 1,
-          batch: '1',
+          id: 202006,
+          batch: 'Juni',
+          year: 2020,
         },
         {
-          id: 2,
-          batch: '2',
+          id: 202009,
+          batch: 'September',
+          year: 2020,
         },
         {
-          id: 3,
-          batch: '3',
+          id: 202101,
+          batch: 'Januari',
+          year: 2021,
         },
         {
-          id: 4,
-          batch: '4',
+          id: 202103,
+          batch: 'Maret',
+          year: 2021,
         },
       ],
       paging: null,
@@ -856,8 +853,9 @@ export default [
       status: 'OK',
       data: [
         {
-          id: 1,
-          batch: '1',
+          id: 202006,
+          batch: 'Juni',
+          year: 2020,
           training: [
             {
               id: 1,
@@ -882,8 +880,9 @@ export default [
           ],
         },
         {
-          id: 2,
-          batch: '2',
+          id: 202008,
+          batch: 'September',
+          year: 2020,
           training: [
             {
               id: 1,
@@ -908,8 +907,9 @@ export default [
           ],
         },
         {
-          id: 3,
-          batch: '3',
+          id: 202012,
+          batch: 'Januari',
+          year: 2021,
           training: [
             {
               id: 1,
@@ -934,8 +934,9 @@ export default [
           ],
         },
         {
-          id: 4,
-          batch: '4',
+          id: 202101,
+          batch: 'Maret',
+          year: 2021,
           training: [
             {
               id: 1,
@@ -969,7 +970,7 @@ export default [
     method: 'DELETE',
     params: {
       params: {
-        batch: '1',
+        batchId: 202006,
       },
     },
     status: 200,
@@ -985,7 +986,8 @@ export default [
     url: `${API}/admin/batch`,
     method: 'POST',
     params: {
-      batch: '1',
+      batch: 9,
+      year: 2020,
     },
     status: 200,
     response: {
@@ -1001,7 +1003,7 @@ export default [
     method: 'GET',
     params: {
       params: {
-        batch: '1',
+        batchId: 202006,
       },
     },
     status: 200,
@@ -1010,8 +1012,9 @@ export default [
       status: 'OK',
       data: {
         batch: {
-          id: 1,
-          batch: '1',
+          id: 202006,
+          batch: 'Juni',
+          year: 2020,
         },
         training: [
           {
@@ -1173,129 +1176,141 @@ export default [
     },
   },
   {
-    url: `${API}/admin/employee`,
+    url: `${API}/admin/batch/employee`,
     method: 'GET',
+    params: {
+      params: {
+        batchId: 202006,
+      },
+    },
     status: 200,
     response: {
       code: 200,
       status: 'OK',
-      data: [
-        {
-          id: 1,
-          cardId: 'BLI-1154AD',
-          name: 'Albert Kurniawan',
+      data: {
+        batch: {
+          id: 202006,
+          batch: 'Juni',
+          year: 2020,
         },
-        {
-          id: 2,
-          cardId: 'BLI-1953OP',
-          name: 'Muhammad Taufan Okka',
-        },
-        {
-          id: 3,
-          cardId: 'BLI-D885A1',
-          name: 'Simon Samosir',
-        },
-        {
-          id: 4,
-          cardId: 'BLI-AA5S96',
-          name: 'Felix Alvin',
-        },
-        {
-          id: 5,
-          cardId: 'BLI-6OE33S',
-          name: 'Tari Swaswati',
-        },
-        {
-          id: 6,
-          cardId: 'BLI-0H553N',
-          name: 'Esra Targian',
-        },
-        {
-          id: 7,
-          cardId: 'BLI-225A3S',
-          name: 'Timotius Nugroho',
-        },
-        {
-          id: 8,
-          cardId: 'BLI-A8D956',
-          name: 'Lia Ernita',
-        },
-        {
-          id: 9,
-          cardId: 'BLI-P9D6EE',
-          name: 'Devayani Dinda',
-        },
-        {
-          id: 10,
-          cardId: 'BLI-KE5DS3',
-          name: 'Kelvin',
-        },
-        {
-          id: 11,
-          cardId: 'BLI-D805A1',
-          name: 'Maudy Hana',
-        },
-        {
-          id: 12,
-          cardId: 'BLI-B95AAC',
-          name: 'Angelia Yohana',
-        },
-        {
-          id: 13,
-          cardId: 'BLI-15A9DS',
-          name: 'Rio Martin',
-        },
-        {
-          id: 14,
-          cardId: 'BLI-HG9563',
-          name: 'Maria Rosaria',
-        },
-        {
-          id: 15,
-          cardId: 'BLI-PO956E',
-          name: 'Spencer Lonhou',
-        },
-        {
-          id: 16,
-          cardId: 'BLI-D89ADC',
-          name: 'Roni Simanjuntak',
-        },
-        {
-          id: 17,
-          cardId: 'BLI-55D23A',
-          name: 'Julio Cesar',
-        },
-        {
-          id: 18,
-          cardId: 'BLI-PE7SL6',
-          name: 'Fifin Andriani',
-        },
-        {
-          id: 19,
-          cardId: 'BLI-S6DD92',
-          name: 'Kimmy',
-        },
-        {
-          id: 20,
-          cardId: 'BLI-I7AALS',
-          name: 'Andi Wijaya',
-        },
-        {
-          id: 21,
-          cardId: 'BLI-N8UDOP',
-          name: 'Lorencia Agnes',
-        },
-        {
-          id: 22,
-          cardId: 'BLI-L5SSPA',
-          name: 'Algi Nosi',
-        },
-        {
-          id: 23,
-          cardId: 'BLI-K96DS1',
-          name: 'Jessica Natalia',
-        },
-      ],
+        employee: [
+          {
+            id: 1,
+            cardId: 'BLI-1154AD',
+            name: 'Albert Kurniawan',
+          },
+          {
+            id: 2,
+            cardId: 'BLI-1953OP',
+            name: 'Muhammad Taufan Okka',
+          },
+          {
+            id: 3,
+            cardId: 'BLI-D885A1',
+            name: 'Simon Samosir',
+          },
+          {
+            id: 4,
+            cardId: 'BLI-AA5S96',
+            name: 'Felix Alvin',
+          },
+          {
+            id: 5,
+            cardId: 'BLI-6OE33S',
+            name: 'Tari Swaswati',
+          },
+          {
+            id: 6,
+            cardId: 'BLI-0H553N',
+            name: 'Esra Targian',
+          },
+          {
+            id: 7,
+            cardId: 'BLI-225A3S',
+            name: 'Timotius Nugroho',
+          },
+          {
+            id: 8,
+            cardId: 'BLI-A8D956',
+            name: 'Lia Ernita',
+          },
+          {
+            id: 9,
+            cardId: 'BLI-P9D6EE',
+            name: 'Devayani Dinda',
+          },
+          {
+            id: 10,
+            cardId: 'BLI-KE5DS3',
+            name: 'Kelvin',
+          },
+          {
+            id: 11,
+            cardId: 'BLI-D805A1',
+            name: 'Maudy Hana',
+          },
+          {
+            id: 12,
+            cardId: 'BLI-B95AAC',
+            name: 'Angelia Yohana',
+          },
+          {
+            id: 13,
+            cardId: 'BLI-15A9DS',
+            name: 'Rio Martin',
+          },
+          {
+            id: 14,
+            cardId: 'BLI-HG9563',
+            name: 'Maria Rosaria',
+          },
+          {
+            id: 15,
+            cardId: 'BLI-PO956E',
+            name: 'Spencer Lonhou',
+          },
+          {
+            id: 16,
+            cardId: 'BLI-D89ADC',
+            name: 'Roni Simanjuntak',
+          },
+          {
+            id: 17,
+            cardId: 'BLI-55D23A',
+            name: 'Julio Cesar',
+          },
+          {
+            id: 18,
+            cardId: 'BLI-PE7SL6',
+            name: 'Fifin Andriani',
+          },
+          {
+            id: 19,
+            cardId: 'BLI-S6DD92',
+            name: 'Kimmy',
+          },
+          {
+            id: 20,
+            cardId: 'BLI-I7AALS',
+            name: 'Andi Wijaya',
+          },
+          {
+            id: 21,
+            cardId: 'BLI-N8UDOP',
+            name: 'Lorencia Agnes',
+          },
+          {
+            id: 22,
+            cardId: 'BLI-L5SSPA',
+            name: 'Algi Nosi',
+          },
+          {
+            id: 23,
+            cardId: 'BLI-K96DS1',
+            name: 'Jessica Natalia',
+          },
+        ],
+      },
       paging: null,
       errors: null,
     },
@@ -1305,7 +1320,7 @@ export default [
     method: 'GET',
     params: {
       params: {
-        batch: '1',
+        batchId: 202006,
       },
     },
     status: 200,
@@ -1314,8 +1329,9 @@ export default [
       status: 'OK',
       data: {
         batch: {
-          id: 1,
-          batch: '1',
+          id: 202006,
+          batch: 'Juni',
+          year: 2020,
         },
         training: [
           {
@@ -1418,7 +1434,7 @@ export default [
     url: `${API}/admin/batch/training`,
     method: 'POST',
     params: {
-      batch: '1',
+      batchId: 202006,
       training: '1',
       date: '2020-01-25',
       location: 'di Gedung Maybara, Lt 3 Ruang 215',
@@ -1440,7 +1456,7 @@ export default [
     method: 'GET',
     params: {
       params: {
-        batch: '1',
+        batchId: 202006,
         training: '1',
       },
     },
@@ -1476,7 +1492,7 @@ export default [
     url: `${API}/admin/batch/training`,
     method: 'PUT',
     params: {
-      batch: '1',
+      batchId: 202006,
       training: '1',
       date: '2020-09-15',
       location: 'di Gedung Serbaguna, Ruang 315 C Sarana Jaya',
@@ -1498,7 +1514,7 @@ export default [
     method: 'DELETE',
     params: {
       params: {
-        batch: '1',
+        batchId: 202006,
         training: '1',
       },
     },
@@ -1516,7 +1532,7 @@ export default [
     method: 'GET',
     params: {
       params: {
-        batch: '1',
+        batchId: 202006,
         training: '1',
       },
     },
@@ -1526,8 +1542,9 @@ export default [
       status: 'OK',
       data: {
         batch: {
-          id: 1,
-          batch: '1',
+          id: 202006,
+          batch: 'Juni',
+          year: 2020,
         },
         employee: [
           {
@@ -1679,7 +1696,7 @@ export default [
     method: 'GET',
     params: {
       params: {
-        batch: '1',
+        batchId: 202006,
         training: '1',
       },
     },
@@ -1714,7 +1731,7 @@ export default [
     method: 'DELETE',
     params: {
       params: {
-        batch: '1',
+        batchId: 202006,
         training: '1',
         materialId: 1,
       },
@@ -1732,7 +1749,7 @@ export default [
     url: `${API}/admin/material`,
     method: 'POST',
     params: {
-      batch: '1',
+      batchId: 202006,
       training: '1',
       material: {
         name: 'Time Management',
@@ -1753,7 +1770,7 @@ export default [
     method: 'GET',
     params: {
       params: {
-        batch: '1',
+        batchId: 202006,
         training: '1',
       },
     },
@@ -1762,7 +1779,11 @@ export default [
       code: 200,
       status: 'OK',
       data: {
-        batch: '1',
+        batch: {
+          id: 202006,
+          batch: 'Juni',
+          year: 2020,
+        },
         training: '1',
         material: [
           {
@@ -1797,7 +1818,7 @@ export default [
     method: 'GET',
     params: {
       params: {
-        batch: '1',
+        batchId: 202006,
         training: '1',
         materialId: 1,
       },
@@ -1807,8 +1828,6 @@ export default [
       code: 200,
       status: 'OK',
       data: {
-        batch: '1',
-        training: '1',
         available: '2020-01-15',
         closed: '2020-01-18',
         timeLimit: 20,
@@ -1938,7 +1957,7 @@ export default [
     method: 'GET',
     params: {
       params: {
-        batch: '1',
+        batchId: 202006,
         training: '1',
         materialId: 3,
       },
@@ -1967,7 +1986,7 @@ export default [
     url: `${API}/admin/test`,
     method: 'POST',
     params: {
-      batch: '1',
+      batchId: 202006,
       training: '1',
       materialId: 3,
       test: {
@@ -2101,7 +2120,7 @@ export default [
     url: `${API}/admin/test`,
     method: 'PUT',
     params: {
-      batch: '1',
+      batchId: 202006,
       training: '1',
       materialId: 1,
       test: {

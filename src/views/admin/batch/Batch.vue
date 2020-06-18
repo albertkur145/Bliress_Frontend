@@ -12,9 +12,12 @@
       <!-- list of batch -->
       <div class="batch-list">
         <router-link v-for="(value) in batchList.data" :key="value.id"
-        :to="{ name: 'AdminDetailBatch', params: { batch: value.batch } }"
+        :to="{ name: 'AdminDetailBatch', params: { batch: value.id } }"
         class="batch">
-          <div class="txt">Batch {{ value.batch }}</div>
+          <div>
+            <div class="txt">{{ value.batch }}</div>
+            <div class="year">{{ value.year }}</div>
+          </div>
           <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
         </router-link>
       </div>
@@ -82,10 +85,16 @@
           padding: 1.1875rem 1.375rem;
 
           .txt {
-            color: #444;
+            color: #1E90FF;
             transition: color .1s linear;
             font-weight: 500;
             font-size: 0.9375em;
+          }
+
+          .year {
+            color: #57606F;
+            margin-top: 0.3125rem;
+            font-size: 0.875em;
           }
 
           .right-icon {
@@ -94,9 +103,8 @@
             font-size: 1em;
           }
 
-          &:hover > .txt,
           &:hover > .right-icon {
-            color: #0ABDE3;
+            color: #1E90FF;
           }
         }
       }
@@ -137,6 +145,10 @@
 
             .txt {
               font-size: 1.0625em;
+            }
+
+            .year {
+              font-size: 0.9375em;
             }
 
             .right-icon {
@@ -180,6 +192,10 @@
 
             .txt {
               font-size: 1.125em;
+            }
+
+            .year {
+              font-size: 1.0625em;
             }
 
             .right-icon {
@@ -247,17 +263,44 @@ export default {
     },
 
     inputDialog() {
-      this.$swal.fire({
-        input: 'number',
-        inputPlaceholder: 'Batch berapa?',
+      this.$swal.mixin({
+        confirmButtonText: 'Next',
         backdrop: false,
         allowEscapeKey: false,
         showCloseButton: true,
-      }).then((result) => {
-        if (result.value > 0) {
+        progressSteps: ['1', '2'],
+      }).queue([
+        {
+          input: 'select',
+          inputPlaceholder: 'Pilih batch',
+          inputOptions: {
+            1: 'Januari',
+            2: 'Februari',
+            3: 'Maret',
+            4: 'April',
+            5: 'Mei',
+            6: 'Juni',
+            7: 'Juli',
+            8: 'Agustus',
+            9: 'September',
+            10: 'Oktober',
+            11: 'November',
+            12: 'Desember',
+          },
+        },
+        {
+          input: 'select',
+          inputPlaceholder: 'Pilih tahun',
+          inputOptions: {
+            2020: '2020',
+            2021: '2021',
+          },
+        },
+      ]).then((result) => {
+        if (result.value[0].length > 0 && result.value[1].length > 0) {
           this.addBatch(result.value);
         } else {
-          this.$func.popupError('Inputan berupa angka!', 5000);
+          this.$func.popupError('Form tidak lengkap!', 5000);
         }
       });
     },
@@ -270,7 +313,8 @@ export default {
       const promise = await new Promise((resolve) => {
         this.postBatch({
           params: {
-            batch: value,
+            batch: parseInt(value[0], 10),
+            year: parseInt(value[1], 10),
           },
           resolve,
         });
