@@ -4,49 +4,55 @@ import config from '@/config';
 const { API } = config;
 
 const data = {
-  employeesBatch: {},
-  employees: {},
-  employee: {},
+  trainers: {},
+  trainer: {},
 };
 
 const getters = {
-  batchEmployeeList(state) {
-    return state.employeesBatch;
+  trainerList(state) {
+    return state.trainers;
   },
 
-  employeeList(state) {
-    return state.employees;
-  },
-
-  employeeData(state) {
-    return state.employee;
+  trainerData(state) {
+    return state.trainer;
   },
 };
 
 const mutations = {
-  setEmployeesBatch(state, value) {
-    state.employeesBatch = value;
+  setTrainers(state, value) {
+    state.trainers = value;
   },
 
-  setEmployees(state, value) {
-    state.employees = value;
-  },
-
-  setEmployee(state, value) {
-    state.employee = value;
+  setTrainer(state, value) {
+    state.trainer = value;
   },
 };
 
 const actions = {
-  getEmployeesBatch({ commit }, payload) {
+  getTrainers({ commit }, payload) {
     axios({
       method: 'get',
-      url: `${API}/admin/batch/employee`,
+      url: `${API}/admin/trainer`,
+      responseType: 'json',
+    })
+      .then((res) => {
+        commit('setTrainers', res.data);
+        payload.resolve(res.data.code);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  getTrainer({ commit }, payload) {
+    axios({
+      method: 'get',
+      url: `${API}/admin/trainer/detail`,
       params: payload.params,
       responseType: 'json',
     })
       .then((res) => {
-        commit('setEmployeesBatch', res.data);
+        commit('setTrainer', res.data);
         payload.resolve(res.data.code);
       })
       .catch((err) => {
@@ -54,41 +60,10 @@ const actions = {
       });
   },
 
-  getEmployees({ commit }, payload) {
-    axios({
-      method: 'get',
-      url: `${API}/admin/employee`,
-      responseType: 'json',
-    })
-      .then((res) => {
-        commit('setEmployees', res.data);
-        payload.resolve(res.data.code);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
-
-  getEmployee({ commit }, payload) {
-    axios({
-      method: 'get',
-      url: `${API}/admin/employee/detail`,
-      params: payload.params,
-      responseType: 'json',
-    })
-      .then((res) => {
-        commit('setEmployee', res.data);
-        payload.resolve(res.data.code);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
-
-  postEmployee({ commit }, payload) {
+  postTrainer({ commit }, payload) {
     axios({
       method: 'post',
-      url: `${API}/admin/employee`,
+      url: `${API}/admin/trainer`,
       data: payload.params,
       responseType: 'json',
     })
@@ -101,10 +76,10 @@ const actions = {
       });
   },
 
-  putEmployee({ commit }, payload) {
+  putTrainer({ commit }, payload) {
     axios({
       method: 'put',
-      url: `${API}/admin/employee`,
+      url: `${API}/admin/trainer`,
       data: payload.params,
       responseType: 'json',
     })
@@ -117,10 +92,10 @@ const actions = {
       });
   },
 
-  deleteEmployee({ commit }, payload) {
+  deleteTrainer({ commit }, payload) {
     axios({
       method: 'delete',
-      url: `${API}/admin/employee`,
+      url: `${API}/admin/trainer`,
       params: payload.params,
       responseType: 'json',
     })

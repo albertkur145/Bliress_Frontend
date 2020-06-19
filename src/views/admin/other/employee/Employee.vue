@@ -15,11 +15,14 @@
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" v-if="apiReady">
       <!-- search -->
       <div class="search">
         <label for="keyword">Pencarian</label>
-        <input id="keyword" type="text" placeholder="Nama pegawai..." autocomplete="off">
+        <input id="keyword" type="text"
+        placeholder="Cari pegawai..."
+        autocomplete="off"
+        v-model="searchText">
       </div>
       <!-- search -->
 
@@ -27,19 +30,21 @@
       <div class="data-employees">
         <table>
           <thead>
-            <th>ID</th>
+            <th>ID Card</th>
             <th>Nama</th>
             <th></th>
           </thead>
 
           <tbody>
-            <tr v-for="(value, index) in employees" :key="index">
-              <td>{{ value.id }}</td>
+            <tr v-for="(value) in filteredEmployees" :key="value.id">
+              <td>{{ value.cardId }}</td>
               <td>{{ value.name }}</td>
               <td>
                 <div class="justify-content">
-                  <font-awesome-icon icon="pen" class="edit-icon"></font-awesome-icon>
-                  <font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon>
+                  <font-awesome-icon icon="pen" class="edit-icon"
+                  @click="redirectCreateEmployee(value.id)"></font-awesome-icon>
+                  <font-awesome-icon icon="times" class="remove-icon"
+                  @click="confirmDelete(value.id)"></font-awesome-icon>
                 </div>
               </td>
             </tr>
@@ -50,9 +55,7 @@
     </div>
     <!-- end content -->
 
-    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
-
   </div>
 </template>
 
@@ -298,82 +301,110 @@
 <script>
 
 import AnimationLoader from '@/components/AnimationLoader.vue';
-import PopupMessage from '@/components/PopupMessage.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
   components: {
     AnimationLoader,
-    PopupMessage,
   },
 
   data() {
     return {
       animationLoaderDisplay: false,
-      popupMessageDisplay: false,
-      employees: [
-        {
-          id: 'BLI-1153AD',
-          name: 'Albert Kurniawan',
-        },
-        {
-          id: 'BLI-1953OP',
-          name: 'Simon Samosir',
-        },
-        {
-          id: 'BLI-D885A1',
-          name: 'Maudy Hana',
-        },
-        {
-          id: 'BLI-B95AAC',
-          name: 'Angelia Yohana',
-        },
-        {
-          id: 'BLI-15A9DS',
-          name: 'Rio Martin',
-        },
-        {
-          id: 'BLI-HG9563',
-          name: 'Maria Rosaria',
-        },
-        {
-          id: 'BLI-PO956E',
-          name: 'Spencer Lonhou',
-        },
-        {
-          id: 'BLI-D89ADC',
-          name: 'Roni Simanjuntak',
-        },
-        {
-          id: 'BLI-55D23A',
-          name: 'Julio Cesar',
-        },
-        {
-          id: 'BLI-PE7SL6',
-          name: 'Fifin Andriani',
-        },
-        {
-          id: 'BLI-S6DD92',
-          name: 'Kimmy',
-        },
-        {
-          id: 'BLI-I7AALS',
-          name: 'Andi Wijaya',
-        },
-        {
-          id: 'BLI-N8UDOP',
-          name: 'Lorencia Agnes',
-        },
-        {
-          id: 'BLI-L5SSPA',
-          name: 'Algi Nosi',
-        },
-        {
-          id: 'BLI-K96DS1',
-          name: 'Jessica Natalia',
-        },
-      ],
+      apiReady: false,
+      searchText: '',
     };
+  },
+
+  computed: {
+    ...mapGetters('adminEmployee', [
+      'employeeList',
+    ]),
+
+    filteredEmployees() {
+      return this.employeeList.data.filter((value) => value.name.match(this.searchText));
+    },
+  },
+
+  methods: {
+    ...mapActions('adminEmployee', [
+      'getEmployees',
+      'deleteEmployee',
+    ]),
+
+    async getAllEmployee() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getEmployees({
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.apiReady = true;
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+
+    async delete(id) {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.deleteEmployee({
+          params: {
+            id,
+          },
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.$func.popupSuccessfull('Berhasil hapus data', 5000, null);
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+
+    redirectCreateEmployee(id) {
+      this.$router.push({
+        name: 'AdminChangeEmployee',
+        params: {
+          id,
+        },
+      });
+    },
+
+    confirmDelete(id) {
+      this.$func.popupConfirmDialog(
+        'Kamu yakin?',
+        'Data akan dihapus secara permanen',
+      ).then((res) => {
+        if (res.value) {
+          this.delete(id);
+        }
+      });
+    },
+  },
+
+  created() {
+    // check user auth
+    this.$func.userAuth('Admin');
+
+    // req api
+    this.getAllEmployee();
   },
 
 };

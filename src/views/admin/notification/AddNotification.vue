@@ -6,22 +6,21 @@
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
         <span class="text">Tambah</span>
       </router-link>
-      <div class="save">Simpan</div>
+      <div class="save" @click="save()">Simpan</div>
     </div>
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" v-if="apiReady">
       <div class="form-group">
         <fieldset>
-          <legend>Ditujukan kepada</legend>
-          <select class="input-text">
-            <option value="batch 1">Batch 1</option>
-            <option value="batch 2">Batch 2</option>
-            <option value="batch 3">Batch 3</option>
-            <option value="batch 4">Batch 4</option>
-            <option value="batch 5">Batch 5</option>
-            <option value="batch 6">Batch 6</option>
+          <legend>Ditujukan ke batch</legend>
+          <select class="input-text" v-model="form.batchId">
+            <option value="" disabled>Pilih batch</option>
+            <option v-for="(value) in batchList.data"
+            :key="value.id"
+            :value="value.id">{{ value.batch }} - {{ value.year }}
+            </option>
           </select>
         </fieldset>
       </div>
@@ -29,20 +28,19 @@
       <div class="form-group">
         <fieldset>
           <legend>Judul</legend>
-          <input type="text" class="input-text">
+          <input type="text" class="input-text" v-model="form.title">
         </fieldset>
       </div>
 
       <div class="form-group">
         <fieldset class="text-area">
           <legend>Pesan</legend>
-          <textarea class="input-area"></textarea>
+          <textarea class="input-area" v-model="form.message"></textarea>
         </fieldset>
       </div>
     </div>
     <!-- end content -->
 
-    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
@@ -288,20 +286,109 @@
 <script>
 
 import AnimationLoader from '@/components/AnimationLoader.vue';
-import PopupMessage from '@/components/PopupMessage.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
   components: {
     AnimationLoader,
-    PopupMessage,
   },
 
   data() {
     return {
       animationLoaderDisplay: false,
-      popupMessageDisplay: false,
+      apiReady: false,
+      form: {
+        batchId: '',
+        title: '',
+        message: '',
+      },
     };
+  },
+
+  computed: {
+    ...mapGetters('adminBatch', [
+      'batchList',
+    ]),
+  },
+
+  methods: {
+    ...mapActions('adminBatch', [
+      'getBatch',
+    ]),
+
+    ...mapActions('adminNotification', [
+      'postNotification',
+    ]),
+
+    async getAllBatch() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getBatch({
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.apiReady = true;
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+
+    save() {
+      if (this.validationForm()) {
+        this.sendNotification();
+      } else {
+        this.$func.popupError('Form tidak lengkap!', 0);
+      }
+    },
+
+    validationForm() {
+      if (this.form.batchId.length === 0
+      || this.form.title.length === 0
+      || this.form.message.length === 0) {
+        return 0;
+      }
+
+      return 1;
+    },
+
+    async sendNotification() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.postNotification({
+          params: this.form,
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.$func.popupSuccessfull('Berhasil kirim notifikasi', 5000, { name: 'AdminNotification' });
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+  },
+
+  created() {
+    // check user auth
+    this.$func.userAuth('Admin');
+
+    // req api
+    this.getAllBatch();
   },
 
 };

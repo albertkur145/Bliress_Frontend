@@ -15,11 +15,14 @@
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" v-if="apiReady">
       <!-- search -->
       <div class="search">
         <label for="keyword">Pencarian</label>
-        <input id="keyword" type="text" placeholder="Nama trainer..." autocomplete="off">
+        <input id="keyword" type="text"
+        placeholder="Nama trainer..."
+        autocomplete="off"
+        v-model="searchText">
       </div>
       <!-- search -->
 
@@ -33,13 +36,15 @@
           </thead>
 
           <tbody>
-            <tr v-for="(value, index) in trainers" :key="index">
+            <tr v-for="(value) in filteredTrainers" :key="value.id">
               <td>{{ value.name }}</td>
               <td>{{ value.division }}</td>
               <td>
                 <div class="justify-content">
-                  <font-awesome-icon icon="pen" class="edit-icon"></font-awesome-icon>
-                  <font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon>
+                  <font-awesome-icon icon="pen" class="edit-icon"
+                  @click="redirectCreateTrainer(value.id)"></font-awesome-icon>
+                  <font-awesome-icon icon="times" class="remove-icon"
+                  @click="confirmDelete(value.id)"></font-awesome-icon>
                 </div>
               </td>
             </tr>
@@ -50,9 +55,7 @@
     </div>
     <!-- end content -->
 
-    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
-
   </div>
 </template>
 
@@ -298,52 +301,111 @@
 <script>
 
 import AnimationLoader from '@/components/AnimationLoader.vue';
-import PopupMessage from '@/components/PopupMessage.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
   components: {
     AnimationLoader,
-    PopupMessage,
   },
 
   data() {
     return {
       animationLoaderDisplay: false,
-      popupMessageDisplay: false,
-      trainers: [
-        {
-          name: 'Albert Kurniawan',
-          division: 'Human Resources',
-        },
-        {
-          name: 'Simon Samosir',
-          division: 'Software Engineering',
-        },
-        {
-          name: 'Maudy Hana',
-          division: 'Quality Assurance',
-        },
-        {
-          name: 'Angelia Yohana',
-          division: 'Human Resources',
-        },
-        {
-          name: 'Rio Martin',
-          division: 'Human Resources',
-        },
-        {
-          name: 'Maria Rosaria',
-          division: 'Quality Assurance',
-        },
-        {
-          name: 'Spencer Lonhou',
-          division: 'Software Engineering',
-        },
-      ],
+      apiReady: false,
+      searchText: '',
     };
   },
 
+  computed: {
+    ...mapGetters('adminTrainer', [
+      'trainerList',
+    ]),
+
+    filteredTrainers() {
+      return this.trainerList.data.filter((value) => value.name.match(this.searchText));
+    },
+  },
+
+  methods: {
+    ...mapActions('adminTrainer', [
+      'getTrainers',
+      'deleteTrainer',
+    ]),
+
+    async getAllTrainer() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getTrainers({
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.apiReady = true;
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+
+    async delete(id) {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.deleteTrainer({
+          params: {
+            id,
+          },
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.$func.popupSuccessfull('Berhasil hapus data', 5000, null);
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+
+    confirmDelete(id) {
+      this.$func.popupConfirmDialog(
+        'Kamu yakin?',
+        'Data akan dihapus secara permanen',
+      ).then((res) => {
+        if (res.value) {
+          this.delete(id);
+        }
+      });
+    },
+
+    redirectCreateTrainer(id) {
+      this.$router.push({
+        name: 'AdminChangeTrainer',
+        params: {
+          id,
+        },
+      });
+    },
+  },
+
+  created() {
+    // check user auth
+    this.$func.userAuth('Admin');
+
+    // req api
+    this.getAllTrainer();
+  },
 };
 
 </script>

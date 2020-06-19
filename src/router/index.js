@@ -157,8 +157,8 @@ const routes = [
     component: () => import('../views/admin/other/employee/CreateEmployee.vue'),
   },
   {
-    path: '/admin/employee/create/:id',
-    name: 'AdminCreateEmployee',
+    path: '/admin/employee/:id',
+    name: 'AdminChangeEmployee',
     component: () => import('../views/admin/other/employee/CreateEmployee.vue'),
   },
   {
@@ -172,8 +172,8 @@ const routes = [
     component: () => import('../views/admin/other/trainer/CreateTrainer.vue'),
   },
   {
-    path: '/admin/trainer/create/:id',
-    name: 'AdminCreateTrainer',
+    path: '/admin/trainer/:id',
+    name: 'AdminChangeTrainer',
     component: () => import('../views/admin/other/trainer/CreateTrainer.vue'),
   },
   {

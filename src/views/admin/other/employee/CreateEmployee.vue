@@ -7,62 +7,75 @@
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
         <span class="text">{{ title }}</span>
       </router-link>
-      <div class="save">Simpan</div>
+      <div class="save" @click="validationForm">Simpan</div>
     </div>
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" v-if="apiReady">
       <div class="form">
         <div class="form-group">
           <fieldset>
             <legend>Nama</legend>
-            <input type="text" class="input-text">
+            <input type="text" class="input-text" v-model="form.name">
           </fieldset>
         </div>
 
         <div class="form-group">
           <fieldset>
             <legend>Email</legend>
-            <input type="text" class="input-text">
+            <input type="text" class="input-text" v-model="form.email">
           </fieldset>
         </div>
 
         <div class="form-group">
           <fieldset>
             <legend>Password</legend>
-            <input type="password" class="input-text">
-            <!-- <font-awesome-icon icon="chevron-right" class="change-password"></font-awesome-icon> -->
+            <input :type="passwordType" class="input-text" v-model="form.password">
+            <font-awesome-icon :icon="showPasswordIcon" class="eye-icon" @click="tooglePassword"></font-awesome-icon>
           </fieldset>
         </div>
 
         <div class="form-group">
           <fieldset>
             <legend>Nomor HP</legend>
-            <input type="number" class="input-text">
+            <input type="number" class="input-text" v-model="form.phoneNumber">
           </fieldset>
         </div>
 
         <div class="form-group">
           <fieldset>
-            <legend>Jabatan</legend>
-            <input type="text" class="input-text">
+            <legend>Divisi</legend>
+            <input type="text" class="input-text" v-model="form.division">
           </fieldset>
         </div>
 
         <div class="form-group">
           <fieldset>
             <legend>Tanggal lahir</legend>
-            <input type="date" value="2020-01-01" class="input-text">
+            <input type="date" value="2020-01-01" class="input-text" v-model="form.birthdate">
           </fieldset>
         </div>
 
         <div class="form-group">
           <fieldset>
             <legend>Jenis kelamin</legend>
-            <select class="input-text">
+            <select class="input-text" v-model="form.gender">
               <option value="Pria">Pria</option>
               <option value="Wanita">Wanita</option>
+            </select>
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <fieldset>
+            <legend>Batch</legend>
+            <select class="input-text" v-model="form.batchId">
+              <option value="" disabled>Pilih batch</option>
+              <option v-for="(value) in batchList.data"
+              :key="value.id"
+              :value="value.id">{{ value.batch }} - {{ value.year }}
+              </option>
             </select>
           </fieldset>
         </div>
@@ -70,9 +83,7 @@
     </div>
     <!-- end content -->
 
-    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
-
   </div>
 </template>
 
@@ -176,8 +187,8 @@
               }
             }
 
-            .change-password {
-              color: #0984E3;
+            .eye-icon {
+              color: #EE5A24;
               cursor: pointer;
               position: absolute;
               top: 1.5875rem;
@@ -241,7 +252,7 @@
                 }
               }
 
-              .change-password {
+              .eye-icon {
                 top: 1.75rem;
                 right: 0.875rem;
                 font-size: 0.9375em;
@@ -302,7 +313,7 @@
                 }
               }
 
-              .change-password {
+              .eye-icon {
                 top: 2rem;
                 right: 1rem;
                 font-size: 1em;
@@ -320,24 +331,43 @@
 <script>
 
 import AnimationLoader from '@/components/AnimationLoader.vue';
-import PopupMessage from '@/components/PopupMessage.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
   components: {
     AnimationLoader,
-    PopupMessage,
   },
 
   data() {
     return {
       paramId: '',
       animationLoaderDisplay: false,
-      popupMessageDisplay: false,
+      passwordType: 'password',
+      showPasswordIcon: 'eye-slash',
+      apiReady: false,
+      form: {
+        name: '',
+        email: '',
+        password: '',
+        phoneNumber: '',
+        division: '',
+        birthdate: '1990-01-01',
+        gender: 'Pria',
+        batchId: '',
+      },
     };
   },
 
   computed: {
+    ...mapGetters('adminEmployee', [
+      'employeeData',
+    ]),
+
+    ...mapGetters('adminBatch', [
+      'batchList',
+    ]),
+
     title() {
       if (this.paramId) {
         return 'Ubah';
@@ -347,8 +377,147 @@ export default {
     },
   },
 
+  methods: {
+    ...mapActions('adminEmployee', [
+      'getEmployee',
+      'postEmployee',
+      'putEmployee',
+    ]),
+
+    ...mapActions('adminBatch', [
+      'getBatch',
+    ]),
+
+    async getAllBatch() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getBatch({
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.apiReady = true;
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+
+    async getDetailEmployee() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getEmployee({
+          params: {
+            id: this.paramId,
+          },
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.setForm(this.employeeData.data);
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+
+    setForm(data) {
+      this.form = {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        phoneNumber: data.phoneNumber,
+        division: data.division,
+        birthdate: data.birthdate,
+        gender: data.gender,
+        batchId: data.batchId,
+      };
+    },
+
+    async reqApi(action) {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        action({
+          params: this.form,
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.$func.popupSuccessfull('Berhasil simpan data', 5000, { name: 'AdminMenuEmployee' });
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+
+    tooglePassword() {
+      if (this.passwordType === 'password') {
+        this.passwordType = 'text';
+        this.showPasswordIcon = 'eye';
+      } else {
+        this.passwordType = 'password';
+        this.showPasswordIcon = 'eye-slash';
+      }
+    },
+
+    save() {
+      if (!this.paramId) {
+        this.reqApi(this.postEmployee);
+      } else {
+        this.form.id = this.paramId;
+        this.reqApi(this.putEmployee);
+      }
+    },
+
+    validationForm() {
+      const regEmail = /^[a-zA-Z0-9._-]+@[a-z]{5,10}.[a-z]{2,5}$/;
+      const regPhoneNumber = /^08[0-9]{8,11}$/;
+
+      if (this.form.name.length === 0
+      || this.form.password.length === 0
+      || this.form.division.length === 0
+      || this.form.batchId.length === 0) {
+        this.$func.popupError('Form tidak lengkap!', 0);
+      } else if (!regEmail.test(this.form.email)) {
+        this.$func.popupError('Email tidak valid!', 0);
+      } else if (!regPhoneNumber.test(this.form.phoneNumber)) {
+        this.$func.popupError('Nomor HP tidak valid!', 0);
+      } else {
+        this.save();
+      }
+    },
+  },
+
   created() {
-    this.paramId = this.$route.params.id;
+    // check user auth
+    this.$func.userAuth('Admin');
+
+    // get params
+    this.paramId = parseInt(this.$route.params.id, 10);
+
+    // req api
+    this.getAllBatch();
+    if (this.paramId) {
+      this.getDetailEmployee();
+    }
   },
 
 };

@@ -11,6 +11,8 @@ import adminEmployee from './modules/admin/employee';
 import adminTraining from './modules/admin/training';
 import adminMaterial from './modules/admin/material';
 import adminTest from './modules/admin/test';
+import adminNotification from './modules/admin/notification';
+import adminTrainer from './modules/admin/trainer';
 
 Vue.use(Vuex);
 
@@ -26,5 +28,7 @@ export default new Vuex.Store({
     adminTraining,
     adminMaterial,
     adminTest,
+    adminNotification,
+    adminTrainer,
   },
 });

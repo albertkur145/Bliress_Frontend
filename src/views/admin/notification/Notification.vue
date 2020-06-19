@@ -11,15 +11,15 @@
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" v-if="apiReady">
 
       <!-- list of notification -->
       <div class="notification-list">
-        <div class="notification" v-for="(value, index) in notifications" :key="index">
+        <div class="notification" v-for="(value) in notificationList.data" :key="value.id">
           <div class="title">{{ value.title }}</div>
           <div class="message">{{ value.message }}</div>
-          <div class="batch">Batch {{ value.batch }}</div>
-          <div class="time">{{ value.time }}</div>
+          <div class="batch">Batch - {{ value.batch }}</div>
+          <div class="time">{{ value.date }} WIB</div>
         </div>
       </div>
       <!-- list of notification -->
@@ -28,7 +28,6 @@
     <!-- end content -->
 
     <MenuBar></MenuBar>
-    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
@@ -221,41 +220,61 @@
 
 import MenuBar from '@/components/admin/MenuBar.vue';
 import AnimationLoader from '@/components/AnimationLoader.vue';
-import PopupMessage from '@/components/PopupMessage.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
   components: {
     MenuBar,
     AnimationLoader,
-    PopupMessage,
   },
 
   data() {
     return {
-      notifications: [
-        {
-          title: 'PENGUMUMAN',
-          message: 'Dalam mengikuti training 2, diharapkan setiap peserta training membawa kebutuhan masing-masing seperti alat tulis, laptop, ataupun peralatan mandi lainnya. Terimakasih.',
-          batch: '1',
-          time: '12/03/2020, 09.00 WIB',
-        },
-        {
-          title: 'PENGUMUMAN',
-          message: 'Dalam mengikuti training 4, diharapkan setiap peserta training pas foto 3x4 sebanyak 2 lembar dan 6x4 sebanyak 4 lembar. Terimakasih.',
-          batch: '1',
-          time: '20/03/2020, 13.00 WIB',
-        },
-        {
-          title: 'PENGUMUMAN',
-          message: 'Dalam mengikuti training 1, diharapkan setiap peserta training membawa kebutuhan masing-masing seperti alat tulis, laptop, ataupun peralatan mandi lainnya. Terimakasih.',
-          batch: '2',
-          time: '12/04/2020, 10.00 WIB',
-        },
-      ],
       animationLoaderDisplay: false,
-      popupMessageDisplay: false,
+      apiReady: false,
     };
+  },
+
+  computed: {
+    ...mapGetters('adminNotification', [
+      'notificationList',
+    ]),
+  },
+
+  methods: {
+    ...mapActions('adminNotification', [
+      'getNotifications',
+    ]),
+
+    async getAllNotification() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getNotifications({
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.apiReady = true;
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+  },
+
+  created() {
+    // check user auth
+    this.$func.userAuth('Admin');
+
+    // req api
+    this.getAllNotification();
   },
 
 };
