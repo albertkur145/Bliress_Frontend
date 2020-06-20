@@ -19,9 +19,9 @@
           <div class="material">{{ value.material }}</div>
           <div class="txt date-available">Tersedia pada {{ value.dateAvailable }}</div>
           <div class="txt date-closed">Ditutup pada {{ value.dateClosed }}</div>
-          <div class="txt time">Batas waktu: {{ value.timeLimit }}</div>
+          <div class="txt time">Batas waktu: {{ value.timeLimit }} menit</div>
           <div v-if="value.status" class="score">Nilai: {{ value.score }}</div>
-          <button v-else class="btn-start" @click="redirectToQuestion">Start !</button>
+          <button v-else class="btn-start" @click="redirectToQuestion(value.id)">Start !</button>
         </div>
         <!-- test -->
       </div>
@@ -285,8 +285,8 @@ export default {
       const promise = await new Promise((resolve) => {
         this.getMaterials({
           params: {
-            employeeId: 1,
-            training: '1',
+            employeeId: this.$cookies.get('user').id,
+            training: this.paramTraining,
           },
           resolve,
         });
@@ -304,13 +304,21 @@ export default {
       }
     },
 
-    redirectToQuestion() {
-      this.$router.push({
-        name: 'Question',
-        params: {
-          training: this.paramTraining,
-          material: '1',
-        },
+    redirectToQuestion(id) {
+      this.$func.popupConfirmDialog(
+        'Sudah siap?',
+        'Test hanya dapat dikerjakan 1x',
+      ).then((res) => {
+        if (res.value) {
+          localStorage.setItem('timeLimit', new Date().getTime());
+          this.$router.push({
+            name: 'Question',
+            params: {
+              training: this.paramTraining,
+              material: id,
+            },
+          });
+        }
       });
     },
   },

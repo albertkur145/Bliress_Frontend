@@ -452,7 +452,7 @@ export default {
       const promise = await new Promise((resolve) => {
         this.getUser({
           params: {
-            employeeId: 1,
+            employeeId: this.$cookies.get('user').id,
           },
           resolve,
         });

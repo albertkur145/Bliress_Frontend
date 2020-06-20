@@ -7,19 +7,24 @@
         <font-awesome-icon icon="sign-out-alt"></font-awesome-icon>
       </span>
       <div class="text">Test</div>
+      <div class="time-limit">{{ this.time.minute }}:{{ this.time.second }}</div>
     </div>
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" v-if="apiReady">
 
       <!-- questions -->
       <div class="preview">
-        <div class="question" v-for="(value) in questionList.data" :key="value.id">
+        <div class="question" v-for="(value, i) in questionList.data.questions" :key="value.id">
           <div class="question-text">{{ value.questionText }}</div>
+          <span style="display: none">{{ form[i].id = value.id }}</span>
           <div class="choices-list">
             <label class="radio" v-for="(choice) in value.choices" :key="choice.choice">
-              <input type="radio" :value="choice.choice" :name="`choice-${value.id}`"><span></span>
+              <input type="radio"
+              :value="choice.choice"
+              :name="`choice-${value.id}`"
+              v-model="form[i].choice"><span></span>
               <div class="answer">{{ choice.answer }}</div>
             </label>
           </div>
@@ -57,7 +62,6 @@
       max-width: 100%;
       color: #FFF;
       background-color: #0ABDE3;
-      font-weight: 600;
       z-index: 1;
       padding: 0.875rem 1rem;
 
@@ -72,7 +76,17 @@
       }
 
       .text {
+        font-weight: 600;
         font-size: 1.0625em;
+      }
+
+      .time-limit {
+        position: absolute;
+        color: #FFF;
+        cursor: pointer;
+        top: 1rem;
+        right: 1rem;
+        font-size: 0.9375em;
       }
     }
 
@@ -195,6 +209,12 @@
         .text {
           font-size: 1.125em;
         }
+
+        .time-limit {
+          top: 1.1875rem;
+          right: 1.25rem;
+          font-size: 1em;
+        }
       }
 
       .content {
@@ -268,6 +288,12 @@
 
         .text {
           font-size: 1.25em;
+        }
+
+        .time-limit {
+          top: 1.3125rem;
+          right: 1.5rem;
+          font-size: 1.125em;
         }
       }
 
@@ -344,6 +370,33 @@ export default {
       apiReady: '',
       paramTraining: '',
       paramMaterial: '',
+      timeLimit: null,
+      time: {
+        minute: null,
+        second: null,
+      },
+      form: [
+        {
+          id: null,
+          choice: '',
+        },
+        {
+          id: null,
+          choice: '',
+        },
+        {
+          id: null,
+          choice: '',
+        },
+        {
+          id: null,
+          choice: '',
+        },
+        {
+          id: null,
+          choice: '',
+        },
+      ],
     };
   },
 
@@ -376,9 +429,9 @@ export default {
       const promise = await new Promise((resolve) => {
         this.getQuestions({
           params: {
-            employeeId: 1,
-            training: '1',
-            materialId: 1,
+            employeeId: this.$cookies.get('user').id,
+            training: this.paramTraining,
+            materialId: this.paramMaterial,
           },
           resolve,
         });
@@ -390,6 +443,7 @@ export default {
       // show popup message if code response != 200
       if (promise === 200) {
         this.apiReady = true;
+        this.timeLimit = parseInt(localStorage.getItem('timeLimit'), 10) + (this.questionList.data.timeLimit * 60 * 1000);
       } else {
         // show popup error
         this.$func.popupLostConnection();
@@ -399,7 +453,7 @@ export default {
     confirmOut() {
       this.$func.popupConfirmDialog(
         'Lho, sudah menyerah?',
-        'Test ini menentukan tingkat pemahaman kamu!',
+        'Test akan disubmit secara otomatis!',
       ).then((result) => {
         if (result.value) {
           this.submit();
@@ -426,31 +480,10 @@ export default {
       const promise = await new Promise((resolve) => {
         this.submitTest({
           params: {
-            employeeId: 1,
-            materialId: 1,
-            training: '1',
-            question: [
-              {
-                id: 1,
-                choice: '2',
-              },
-              {
-                id: 2,
-                choice: '1',
-              },
-              {
-                id: 3,
-                choice: '4',
-              },
-              {
-                id: 4,
-                choice: '2',
-              },
-              {
-                id: 5,
-                choice: '3',
-              },
-            ],
+            employeeId: this.$cookies.get('user').id,
+            materialId: this.paramMaterial,
+            training: this.paramTraining,
+            question: this.form,
           },
           resolve,
         });
@@ -461,11 +494,28 @@ export default {
 
       // show popup
       if (promise === 200) {
+        localStorage.removeItem('timeLimit');
         this.$func.popupSuccessfull('Berhasil submit test', 5000, this.back);
       } else {
         this.$func.popupLostConnection();
       }
     },
+  },
+
+  mounted() {
+    setInterval(() => {
+      const count = this.timeLimit - new Date().getTime();
+      this.time.minute = Math.floor(count / 1000 / 60);
+      this.time.second = Math.floor((count / 1000) % 60);
+
+      if (this.time.second < 10) {
+        this.time.second = `0${this.time.second}`;
+      }
+
+      if (this.time.minute < 10) {
+        this.time.minute = `0${this.time.minute}`;
+      }
+    }, 1000);
   },
 
   created() {
@@ -474,7 +524,7 @@ export default {
 
     // get params
     this.paramTraining = this.$route.params.training;
-    this.paramMaterial = this.$route.params.material;
+    this.paramMaterial = parseInt(this.$route.params.material, 10);
 
     // req api
     this.getAllQuestions();

@@ -11,7 +11,7 @@
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" v-if="apiReady">
       <div class="form-group">
         <fieldset>
           <legend>Training ke</legend>
@@ -101,12 +101,8 @@
         <fieldset>
           <legend>Trainer</legend>
           <select class="input-text" v-model="form.trainerId">
-            <option value=1>Andi Law</option>
-            <option value=2>Rudi Hartono</option>
-            <option value=3>Heryanto Surya</option>
-            <option value=4>Chelsea</option>
-            <option value=5>Martin Sutanto</option>
-            <option value=6>Joe Taslim</option>
+            <option v-for="(value) in trainerList.data"
+            :key="value.id" :value="value.id">{{ value.name }}</option>
           </select>
         </fieldset>
       </div>
@@ -391,6 +387,7 @@ export default {
       paramTraining: '',
       animationLoaderDisplay: false,
       inputDisabled: false,
+      apiReady: false,
       form: {
         batchId: null,
         training: '1',
@@ -406,6 +403,10 @@ export default {
   computed: {
     ...mapGetters('adminTraining', [
       'training',
+    ]),
+
+    ...mapGetters('adminTrainer', [
+      'trainerList',
     ]),
 
     back() {
@@ -424,6 +425,31 @@ export default {
       'putTraining',
       'getTrainingBy',
     ]),
+
+    ...mapActions('adminTrainer', [
+      'getTrainers',
+    ]),
+
+    async getAllTrainer() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getTrainers({
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.apiReady = true;
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
 
     validateForm() {
       if (this.form.location.length === 0) {
@@ -504,6 +530,9 @@ export default {
   created() {
     // check user auth
     this.$func.userAuth('Admin');
+
+    // req api
+    this.getAllTrainer();
 
     // get params
     this.paramBatch = parseInt(this.$route.params.batch, 10);
