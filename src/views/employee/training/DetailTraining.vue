@@ -35,7 +35,7 @@
       <!-- rincian -->
 
       <!-- participants -->
-      <div class="participants">
+      <!-- <div class="participants">
         <div class="top">
           <div class="title">Peserta</div>
           <div class="count">{{ employees.total }} orang</div>
@@ -58,8 +58,29 @@
             </tbody>
           </table>
         </div>
-      </div>
+      </div> -->
       <!-- participants -->
+
+      <!-- attendance -->
+      <div class="attendance">
+        <div v-if="response.data.isAttend">
+          <img src="@/assets/images/check.png">
+          <p style="color: #10AC84">Sudah absensi</p>
+        </div>
+
+        <div v-else>
+          <img src="@/assets/images/wrong.png">
+          <p style="color: #EE5253">Belum absensi</p>
+        </div>
+      </div>
+      <!-- attendance -->
+
+      <!-- test link -->
+      <div class="test" @click="redirectTest">
+        <span class="text">Test</span>
+        <font-awesome-icon icon="chevron-right" class="icon"></font-awesome-icon>
+      </div>
+      <!-- test link -->
 
     </div>
     <!-- end content -->
@@ -214,6 +235,49 @@
           }
         }
       }
+
+      .attendance {
+        background-color: #FFF;
+        text-align: center;
+        margin-top: 0.5rem;
+        padding: 1.25rem 1rem;
+
+        img {
+          width: 35%;
+        }
+
+        p {
+          margin-top: 0.8125rem;
+          font-size: 0.9375em;
+        }
+      }
+
+      .test {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #FFF;
+        color: #130F40;
+        cursor: pointer;
+        transition: .2s background-color ease-out;
+        margin: 0.5rem 0;
+        padding: 1.25rem 1rem;
+
+        &:hover {
+          background-color: #1B9CFC;
+          color: #FFF;
+        }
+
+        .text {
+          font-weight: 500;
+          text-transform: uppercase;
+          font-size: 0.875em;
+        }
+
+        .icon {
+          font-size: 0.8125em;
+        }
+      }
     }
 
     .display-flex {
@@ -306,6 +370,30 @@
                 font-size: 0.9375em;
               }
             }
+          }
+        }
+
+        .attendance {
+          padding: 1.5rem 1rem;
+
+          img {
+            width: 30%;
+          }
+
+          p {
+            font-size: 1em;
+          }
+        }
+
+        .test {
+          padding: 1.5rem 1.25rem;
+
+          .text {
+            font-size: 0.9375em;
+          }
+
+          .icon {
+            font-size: 0.875em;
           }
         }
       }
@@ -401,6 +489,30 @@
             }
           }
         }
+
+        .attendance {
+          padding: 1.75rem 1rem;
+
+          img {
+            width: 35%;
+          }
+
+          p {
+            font-size: 1.1875em;
+          }
+        }
+
+        .test {
+          padding: 1.75rem 1.5rem;
+
+          .text {
+            font-size: 1em;
+          }
+
+          .icon {
+            font-size: 0.9375em;
+          }
+        }
       }
     }
   }
@@ -425,7 +537,6 @@ export default {
       apiReady: false,
       paramTraining: '',
       training: {},
-      employees: {},
     };
   },
 
@@ -464,11 +575,19 @@ export default {
 
         // asignment split response data
         this.training = this.response.data.training;
-        this.employees = this.response.data.employees;
       } else {
         // show popup error
         this.$func.popupLostConnection();
       }
+    },
+
+    redirectTest() {
+      this.$router.push({
+        name: 'DetailTest',
+        params: {
+          training: this.paramTraining,
+        },
+      });
     },
   },
 
