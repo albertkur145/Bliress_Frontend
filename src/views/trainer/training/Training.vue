@@ -8,14 +8,15 @@
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" v-if="apiReady">
       <div class="training-list">
-        <div class="training" v-for="(value, index) in trainingList" :key="index" @click="redirectToDetail(value.training, value.batch)">
+        <div class="training" v-for="(value, index) in trainingList.data"
+        :key="index" @click="redirectToDetail(value.training, value.batch.id)">
           <div class="left">
-            <p class="txt-batch">Batch {{ value.batch }}</p>
+            <p class="txt-batch">Batch - {{ value.batch.batch }} {{ value.batch.year }}</p>
             <p class="txt-training">Training {{ value.training }}</p>
             <p class="date">{{ value.date }}</p>
-            <p class="time">{{ value.time }}</p>
+            <p class="time">{{ value.timeStart }} - {{ value.timeFinish }} WIB</p>
             <p class="location">{{ value.location }}</p>
           </div>
 
@@ -28,6 +29,7 @@
     <!-- end content -->
 
     <MenuBar></MenuBar>
+    <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
 
@@ -90,8 +92,8 @@
 
             .txt-training {
               font-weight: 500;
-              font-size: 1.0625em;
-              margin-top: 0.25rem;
+              font-size: 1.125em;
+              margin-top: 0.3125rem;
             }
 
             .date {
@@ -119,6 +121,10 @@
           }
         }
       }
+    }
+
+    .display-flex {
+      display: flex;
     }
   }
   // global css
@@ -153,7 +159,7 @@
               }
 
               .txt-training {
-                font-size: 1.125em;
+                font-size: 1.1875em;
               }
 
               .date {
@@ -211,7 +217,7 @@
               }
 
               .txt-training {
-                font-size: 1.25em;
+                font-size: 1.3125em;
               }
 
               .date {
@@ -242,63 +248,59 @@
 <script>
 
 import MenuBar from '@/components/trainer/MenuBar.vue';
+import AnimationLoader from '@/components/AnimationLoader.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
   components: {
     MenuBar,
+    AnimationLoader,
   },
 
   data() {
     return {
-      trainingList: [
-        {
-          batch: '2',
-          training: '1',
-          date: '12 September 2020',
-          time: '08.00 WIB - 15.00 WIB',
-          location: 'di Gedung Serbaguna Basement 1 R.52, Sarana Jaya',
-        },
-        {
-          batch: '1',
-          training: '5',
-          date: '24 September 2020',
-          time: '12.00 WIB - 18.00 WIB',
-          location: 'di Gedung Serbaguna Basement 1 R.44, Sarana Jaya',
-        },
-        {
-          batch: '2',
-          training: '3',
-          date: '08 Oktober 2020',
-          time: '09.00 WIB - 18.00 WIB',
-          location: 'di Gedung Serbaguna Basement 1 R.23, Sarana Jaya',
-        },
-        {
-          batch: '3',
-          training: '1',
-          date: '12 Oktober 2020',
-          time: '12.00 WIB - 15.00 WIB',
-          location: 'di Hotel Grand Tjokro Lt 40 R. Melati, Bogor',
-        },
-        {
-          batch: '3',
-          training: '5',
-          date: '15 Desember 2020',
-          time: '08.00 WIB - 16.00 WIB',
-          location: 'di Gedung Serbaguna Basement 1 R.11, Sarana Jaya',
-        },
-        {
-          batch: '2',
-          training: '6',
-          date: '18 Desember 2020',
-          time: '12.00 WIB - 18.00 WIB',
-          location: 'di Gedung Serbaguna Basement 1 R.10, Sarana Jaya',
-        },
-      ],
+      animationLoaderDisplay: false,
+      apiReady: false,
     };
   },
 
+  computed: {
+    ...mapGetters('trainerTraining', [
+      'trainingList',
+    ]),
+  },
+
   methods: {
+    ...mapActions('trainerTraining', [
+      'getTrainings',
+    ]),
+
+    async getAllTraining() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getTrainings({
+          params: {
+            trainerId: this.$cookies.get('user').id,
+          },
+          resolve,
+        });
+      });
+
+      // hide loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.apiReady = true;
+      } else {
+        // show popup error
+        this.$func.popupLostConnection();
+      }
+    },
+
     redirectToDetail(training, batch) {
       this.$router.push({
         name: 'TrainerDetailTraining',
@@ -308,6 +310,14 @@ export default {
         },
       });
     },
+  },
+
+  created() {
+    // check user auth
+    this.$func.userAuth('Trainer');
+
+    // req api
+    this.getAllTraining();
   },
 
 };

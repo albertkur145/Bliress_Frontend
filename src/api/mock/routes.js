@@ -40,6 +40,25 @@ export default [
     },
   },
   {
+    url: `${API}/login`,
+    method: 'POST',
+    params: {
+      email: 'trainer@gmail.com',
+      password: '123',
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: {
+        id: 1,
+        role: 'Trainer',
+      },
+      paging: null,
+      errors: null,
+    },
+  },
+  {
     url: `${API}/training`,
     method: 'GET',
     params: {
@@ -2299,6 +2318,229 @@ export default [
     params: {
       params: {
         id: 1,
+      },
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: null,
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/trainer/training`,
+    method: 'GET',
+    params: {
+      params: {
+        trainerId: 1,
+      },
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: [
+        {
+          training: '1',
+          batch: {
+            id: 202006,
+            batch: 'Juni',
+            year: 2020,
+          },
+          date: '15 September 2020',
+          timeStart: '12:00',
+          timeFinish: '18:00',
+          location: 'di Gedung Serbaguna Basement 1 R.25, Sarana Jaya',
+        },
+        {
+          training: '4',
+          batch: {
+            id: 202009,
+            batch: 'September',
+            year: 2020,
+          },
+          date: '06 Desember 2020',
+          timeStart: '09:30',
+          timeFinish: '16:30',
+          location: 'di Gedung Serbaguna Basement 2 R.2C, Sarana Jaya',
+        },
+        {
+          training: '2',
+          batch: {
+            id: 202101,
+            batch: 'Januari',
+            year: 2021,
+          },
+          date: '10 Februari 2021',
+          timeStart: '08:00',
+          timeFinish: '15:00',
+          location: 'di Gedung Serbaguna Basement 2 R.2A, Sarana Jaya',
+        },
+      ],
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/trainer/training/detail`,
+    method: 'GET',
+    params: {
+      params: {
+        trainerId: 1,
+        training: '1',
+        batchId: 202006,
+      },
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: {
+        batch: {
+          id: 202006,
+          batch: 'Juni',
+          year: 2020,
+        },
+        materials: [
+          {
+            id: 1,
+            name: 'Think Win Win',
+          },
+          {
+            id: 2,
+            name: 'Private Victory',
+          },
+        ],
+        employees: {
+          total: 15,
+          employee: [
+            {
+              id: 1,
+              cardId: 'BLI-1153AD',
+              name: 'Albert Kurniawan',
+              status: 1,
+            },
+            {
+              id: 2,
+              cardId: 'BLI-1953OP',
+              name: 'Simon Samosir',
+              status: 1,
+            },
+            {
+              id: 3,
+              cardId: 'BLI-D885A1',
+              name: 'Maudy Hana',
+              status: 1,
+            },
+            {
+              id: 4,
+              cardId: 'BLI-B95AAC',
+              name: 'Angelia Yohana',
+              status: 0,
+            },
+            {
+              id: 5,
+              cardId: 'BLI-15A9DS',
+              name: 'Rio Martin',
+              status: 1,
+            },
+            {
+              id: 6,
+              cardId: 'BLI-HG9563',
+              name: 'Maria Rosaria',
+              status: 0,
+            },
+            {
+              id: 7,
+              cardId: 'BLI-PO956E',
+              name: 'Spencer Lonhou',
+              status: 0,
+            },
+            {
+              id: 8,
+              cardId: 'BLI-D89ADC',
+              name: 'Roni Simanjuntak',
+              status: 1,
+            },
+            {
+              id: 9,
+              cardId: 'BLI-55D23A',
+              name: 'Julio Cesar',
+              status: 1,
+            },
+            {
+              id: 10,
+              cardId: 'BLI-PE7SL6',
+              name: 'Fifin Andriani',
+              status: 0,
+            },
+            {
+              id: 11,
+              cardId: 'BLI-S6DD92',
+              name: 'Kimmy',
+              status: 1,
+            },
+            {
+              id: 12,
+              cardId: 'BLI-I7AALS',
+              name: 'Andi Wijaya',
+              status: 0,
+            },
+            {
+              id: 13,
+              cardId: 'BLI-N8UDOP',
+              name: 'Lorencia Agnes',
+              status: 0,
+            },
+            {
+              id: 14,
+              cardId: 'BLI-L5SSPA',
+              name: 'Algi Nosi',
+              status: 1,
+            },
+            {
+              id: 15,
+              cardId: 'BLI-K96DS1',
+              name: 'Jessica Natalia',
+              status: 1,
+            },
+          ],
+        },
+      },
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/trainer/material`,
+    method: 'POST',
+    params: {
+      batchId: 202006,
+      training: '1',
+      material: {
+        name: 'Time Management',
+        file: 'time.pptx',
+      },
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: null,
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/trainer/material`,
+    method: 'DELETE',
+    params: {
+      params: {
+        batchId: 202006,
+        training: '1',
+        materialId: 1,
       },
     },
     status: 200,

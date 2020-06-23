@@ -13,7 +13,7 @@
     <div class="content">
       <div class="qrcode-generator">
         <div class="qrcode">
-          <qrcode-vue value="www.google.co.id" size="175" level="L"></qrcode-vue>
+          <qrcode-vue :value="qrValue" size="175" level="L"></qrcode-vue>
         </div>
         <hr>
         <div class="txt-training">Training {{ paramTraining }}</div>
@@ -168,10 +168,14 @@ export default {
         },
       };
     },
+
+    qrValue() {
+      return `${this.paramBatch}?${this.paramTraining}`;
+    },
   },
 
   created() {
-    this.paramBatch = this.$route.params.batch;
+    this.paramBatch = parseInt(this.$route.params.batch, 10);
     this.paramTraining = this.$route.params.training;
   },
 

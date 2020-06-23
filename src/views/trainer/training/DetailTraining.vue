@@ -16,7 +16,7 @@
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" v-if="apiReady">
 
       <!-- material list -->
       <div class="material-list">
@@ -35,7 +35,10 @@
             <tbody>
               <tr v-for="(value) in materials" :key="value.id">
                 <td>{{ value.name }}</td>
-                <td><font-awesome-icon icon="times" class="times-icon"></font-awesome-icon></td>
+                <td><font-awesome-icon
+                icon="times"
+                class="times-icon"
+                @click="confirmDelete(value.id)"></font-awesome-icon></td>
               </tr>
             </tbody>
           </table>
@@ -43,13 +46,13 @@
       </div>
       <!-- material list -->
 
-      <div class="txt-batch">Batch {{ paramBatch }}</div>
+      <div class="txt-batch">Batch - {{ batch.batch }} {{ batch.year }}</div>
 
       <!-- participants -->
       <div class="participants">
         <div class="top">
           <div class="title">Peserta</div>
-          <div class="count">86 orang</div>
+          <div class="count">{{ employees.total }} orang</div>
         </div>
 
         <div class="data">
@@ -61,10 +64,10 @@
             </thead>
 
             <tbody>
-              <tr v-for="(value, index) in employees" :key="index">
-                <td>{{ value.id }}</td>
+              <tr v-for="(value) in employees.employee" :key="value.id">
+                <td>{{ value.cardId }}</td>
                 <td>{{ value.name }}</td>
-                <td v-if="value.status === '1'"><font-awesome-icon icon="check" class="check-icon"></font-awesome-icon></td>
+                <td v-if="value.status"><font-awesome-icon icon="check" class="check-icon"></font-awesome-icon></td>
                 <td v-else><font-awesome-icon icon="times" class="times-icon"></font-awesome-icon></td>
               </tr>
             </tbody>
@@ -76,6 +79,7 @@
     </div>
     <!-- end content -->
 
+    <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
 
@@ -243,6 +247,10 @@
           }
         }
       }
+    }
+
+    .display-flex {
+      display: flex;
     }
   }
   // global css
@@ -455,103 +463,32 @@
 
 <script>
 
+import AnimationLoader from '@/components/AnimationLoader.vue';
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
+
+  components: {
+    AnimationLoader,
+  },
 
   data() {
     return {
       paramBatch: '',
       paramTraining: '',
-      materials: [
-        {
-          id: '1',
-          name: 'Think Win Win',
-        },
-        {
-          id: '2',
-          name: 'Time Management',
-        },
-      ],
-      employees: [
-        {
-          id: 'BLI-1153AD',
-          name: 'Albert Kurniawan',
-          status: '1',
-        },
-        {
-          id: 'BLI-1953OP',
-          name: 'Simon Samosir',
-          status: '1',
-        },
-        {
-          id: 'BLI-D885A1',
-          name: 'Maudy Hana',
-          status: '0',
-        },
-        {
-          id: 'BLI-B95AAC',
-          name: 'Angelia Yohana',
-          status: '1',
-        },
-        {
-          id: 'BLI-15A9DS',
-          name: 'Rio Martin',
-          status: '0',
-        },
-        {
-          id: 'BLI-HG9563',
-          name: 'Maria Rosaria',
-          status: '0',
-        },
-        {
-          id: 'BLI-PO956E',
-          name: 'Spencer Lonhou',
-          status: '1',
-        },
-        {
-          id: 'BLI-D89ADC',
-          name: 'Roni Simanjuntak',
-          status: '0',
-        },
-        {
-          id: 'BLI-55D23A',
-          name: 'Julio Cesar',
-          status: '1',
-        },
-        {
-          id: 'BLI-PE7SL6',
-          name: 'Fifin Andriani',
-          status: '0',
-        },
-        {
-          id: 'BLI-S6DD92',
-          name: 'Kimmy',
-          status: '1',
-        },
-        {
-          id: 'BLI-I7AALS',
-          name: 'Andi Wijaya',
-          status: '1',
-        },
-        {
-          id: 'BLI-N8UDOP',
-          name: 'Lorencia Agnes',
-          status: '1',
-        },
-        {
-          id: 'BLI-L5SSPA',
-          name: 'Algi Nosi',
-          status: '0',
-        },
-        {
-          id: 'BLI-K96DS1',
-          name: 'Jessica Natalia',
-          status: '0',
-        },
-      ],
+      animationLoaderDisplay: false,
+      apiReady: false,
+      materials: [],
+      batch: {},
+      employees: {},
     };
   },
 
   computed: {
+    ...mapGetters('trainerTraining', [
+      'trainingBy',
+    ]),
+
     redirectToQrcode() {
       return {
         name: 'TrainerQrcode',
@@ -564,6 +501,46 @@ export default {
   },
 
   methods: {
+    ...mapActions('trainerTraining', [
+      'getTrainingBy',
+    ]),
+
+    ...mapActions('trainerMaterial', [
+      'deleteMaterial',
+    ]),
+
+    async getTrainingById() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getTrainingBy({
+          params: {
+            trainerId: this.$cookies.get('user').id,
+            training: this.paramTraining,
+            batchId: this.paramBatch,
+          },
+          resolve,
+        });
+      });
+
+      // hide loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.apiReady = true;
+
+        // assingment split data response
+        this.materials = this.trainingBy.data.materials;
+        this.batch = this.trainingBy.data.batch;
+        this.employees = this.trainingBy.data.employees;
+      } else {
+        // show popup error
+        this.$func.popupLostConnection();
+      }
+    },
+
     redirectToUpload() {
       this.$router.push({
         name: 'TrainerUploadMaterial',
@@ -573,11 +550,56 @@ export default {
         },
       });
     },
+
+    confirmDelete(materialId) {
+      this.$func.popupConfirmDialog(
+        'Kamu yakin?',
+        'Data yang dihapus tidak dapat kembali lagi',
+      ).then((res) => {
+        if (res.value) {
+          console.log(materialId);
+          this.deleteData(materialId);
+        }
+      });
+    },
+
+    async deleteData(materialId) {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.deleteMaterial({
+          params: {
+            batchId: this.paramBatch,
+            training: this.paramTraining,
+            materialId,
+          },
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.$func.popupSuccessfull('Berhasil hapus data', 5000, null);
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
   },
 
   created() {
+    // check user auth
+    this.$func.userAuth('Trainer');
+
+    // get params
     this.paramTraining = this.$route.params.training;
-    this.paramBatch = this.$route.params.batch;
+    this.paramBatch = parseInt(this.$route.params.batch, 10);
+
+    // req api
+    this.getTrainingById();
   },
 
 };
