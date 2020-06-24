@@ -6,12 +6,12 @@
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
         <span class="text">Test</span>
       </router-link>
-      <div class="txt-batch">Batch {{ paramBatch }}</div>
+      <div class="txt-batch">{{ batch.batch }} {{ batch.year }}</div>
     </div>
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" v-if="apiReady">
 
       <!-- top -->
       <div class="top">
@@ -22,19 +22,21 @@
 
       <!-- list of material -->
       <div class="materials">
-        <div class="material" v-for="(value, index) in materialList" :key="index">
+        <div class="material" v-for="(value) in material" :key="value.id">
           <div class="information">
             <div class="left">
               <p class="material-name">{{ value.name }}</p>
-              <p class="available-date"><span>(Dibuka)</span> {{ value.date_available }}</p>
-              <p class="expired-date"><span>(Ditutup)</span> {{ value.date_closed }}</p>
-              <p class="time-limit">Batas: {{ value.limit_time }}</p>
+              <p class="available-date"><span>(Dibuka)</span> {{ value.available }}</p>
+              <p class="expired-date"><span>(Ditutup)</span> {{ value.closed }}</p>
+              <p class="time-limit">Batas: {{ value.timeLimit }} <span v-if="value.timeLimit !== '-'">menit</span></p>
             </div>
 
             <div class="right">
               <div>
-                <font-awesome-icon icon="pen" class="edit-icon" @click="redirectToAddTest(index)"></font-awesome-icon>
-                <font-awesome-icon icon="eye" class="see-icon" @click="redirectReviewTest(index)"></font-awesome-icon>
+                <font-awesome-icon icon="pen" class="edit-icon"
+                @click="redirectToAddTest(value.id, `${value.available}`)"></font-awesome-icon>
+                <font-awesome-icon icon="eye" class="see-icon"
+                @click="redirectReviewTest(value.id)"></font-awesome-icon>
               </div>
             </div>
           </div>
@@ -47,7 +49,6 @@
     </div>
     <!-- end content -->
 
-    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
@@ -382,61 +383,87 @@
 <script>
 
 import AnimationLoader from '@/components/AnimationLoader.vue';
-import PopupMessage from '@/components/PopupMessage.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
   components: {
     AnimationLoader,
-    PopupMessage,
   },
 
   data() {
     return {
       paramBatch: '',
       paramTraining: '',
-      materialList: [
-        {
-          name: 'Private Victory',
-          date_available: '12 September 2020',
-          date_closed: '13 September 2020',
-          limit_time: '20 menit',
-        },
-        {
-          name: 'Emotional Banking',
-          date_available: '-',
-          date_closed: '-',
-          limit_time: '-',
-        },
-        {
-          name: 'Think Win Win',
-          date_available: '20 September 2020',
-          date_closed: '22 September 2020',
-          limit_time: '60 menit',
-        },
-        {
-          name: 'Time Management',
-          date_available: '23 September 2020',
-          date_closed: '26 September 2020',
-          limit_time: '60 menit',
-        },
-      ],
+      apiReady: false,
       animationLoaderDisplay: false,
-      popupMessageDisplay: false,
+      batch: {},
+      material: [],
     };
   },
 
+  computed: {
+    ...mapGetters('trainerTest', [
+      'materialTestList',
+    ]),
+  },
+
   methods: {
-    redirectToAddTest(id) {
-      this.$router.push({
-        name: 'TrainerAddTest',
-        params: {
-          batch: this.paramBatch,
-          training: this.paramTraining,
-          material: id,
-        },
+    ...mapActions('trainerTest', [
+      'getMaterialsTest',
+    ]),
+
+    async getAllMaterialTest() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getMaterialsTest({
+          params: {
+            batchId: this.paramBatch,
+            training: this.paramTraining,
+          },
+          resolve,
+        });
       });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.apiReady = true;
+
+        // assignment split data
+        this.batch = this.materialTestList.data.batch;
+        this.material = this.materialTestList.data.material;
+      } else {
+        this.$func.popupLostConnection();
+      }
     },
+
+    redirectToAddTest(id, available) {
+      if (available === '-') {
+        this.$router.push({
+          name: 'TrainerAddTest',
+          params: {
+            batch: this.paramBatch,
+            training: this.paramTraining,
+            material: id,
+          },
+        });
+      } else {
+        this.$router.push({
+          name: 'TrainerChangeTest',
+          params: {
+            batch: this.paramBatch,
+            training: this.paramTraining,
+            material: id,
+          },
+        });
+      }
+    },
+
     redirectReviewTest(id) {
       this.$router.push({
         name: 'TrainerReviewTest',
@@ -450,8 +477,15 @@ export default {
   },
 
   created() {
-    this.paramBatch = this.$route.params.batch;
+    // check user auth
+    this.$func.userAuth('Trainer');
+
+    // get params
+    this.paramBatch = parseInt(this.$route.params.batch, 10);
     this.paramTraining = this.$route.params.training;
+
+    // req api
+    this.getAllMaterialTest();
   },
 
 };

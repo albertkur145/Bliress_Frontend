@@ -8,12 +8,13 @@
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" v-if="apiReady">
       <div class="training-list">
-        <div class="training" v-for="(value, index) in trainingList" :key="index" @click="redirectToDetail(value.batch, value.training)">
+        <div class="training" v-for="(value, index) in trainingList.data"
+        :key="index" @click="redirectToDetail(value.batch.id, value.training)">
           <div>
             <div class="txt-training">Training {{ value.training }}</div>
-            <div class="txt-batch">Batch {{ value.batch }}</div>
+            <div class="txt-batch">Batch - {{ value.batch.batch }} {{ value.batch.year }}</div>
           </div>
           <font-awesome-icon icon="chevron-right"></font-awesome-icon>
         </div>
@@ -22,7 +23,7 @@
     <!-- end content -->
 
     <MenuBar></MenuBar>
-
+    <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
 
@@ -66,8 +67,8 @@
           justify-content: space-between;
           align-items: center;
           cursor: pointer;
-          background-color: #8FC8CF;
-          color: #FFF;
+          background-color: #DFE4EA;
+          color: #444;
           border-radius: 0.375rem;
           margin-bottom: 0.5rem;
           padding: 0.75rem 1.25rem;
@@ -168,37 +169,59 @@
 <script>
 
 import MenuBar from '@/components/trainer/MenuBar.vue';
+import AnimationLoader from '@/components/AnimationLoader.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
   components: {
     MenuBar,
+    AnimationLoader,
   },
 
   data() {
     return {
-      trainingList: [
-        {
-          training: '1',
-          batch: '4',
-        },
-        {
-          training: '3',
-          batch: '2',
-        },
-        {
-          training: '2',
-          batch: '1',
-        },
-        {
-          training: '6',
-          batch: '1',
-        },
-      ],
+      animationLoaderDisplay: false,
+      apiReady: false,
     };
   },
 
+  computed: {
+    ...mapGetters('trainerTraining', [
+      'trainingList',
+    ]),
+  },
+
   methods: {
+    ...mapActions('trainerTraining', [
+      'getTrainings',
+    ]),
+
+    async getAllTraining() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getTrainings({
+          params: {
+            trainerId: this.$cookies.get('user').id,
+          },
+          resolve,
+        });
+      });
+
+      // hide loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.apiReady = true;
+      } else {
+        // show popup error
+        this.$func.popupLostConnection();
+      }
+    },
+
     redirectToDetail(batch, training) {
       this.$router.push({
         name: 'TrainerDetailTest',
@@ -208,6 +231,14 @@ export default {
         },
       });
     },
+  },
+
+  created() {
+    // check user auth
+    this.$func.userAuth('Trainer');
+
+    // req api
+    this.getAllTraining();
   },
 
 };

@@ -33,8 +33,10 @@
 
             <div class="right">
               <div>
-                <font-awesome-icon icon="pen" class="edit-icon" @click="redirectToAddTest(value.id, `${value.available}`)"></font-awesome-icon>
-                <font-awesome-icon icon="eye" class="see-icon" @click="redirectReviewTest(value.id)"></font-awesome-icon>
+                <font-awesome-icon icon="pen" class="edit-icon"
+                @click="redirectToAddTest(value.id, `${value.available}`)"></font-awesome-icon>
+                <font-awesome-icon icon="eye" class="see-icon"
+                @click="redirectReviewTest(value.id)"></font-awesome-icon>
               </div>
             </div>
           </div>
@@ -466,7 +468,7 @@ export default {
       this.$router.push({
         name: 'AdminReviewTest',
         params: {
-          batchId: this.paramBatch,
+          batch: this.paramBatch,
           training: this.paramTraining,
           material: id,
         },

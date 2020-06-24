@@ -15,6 +15,8 @@ import adminNotification from './modules/admin/notification';
 import adminTrainer from './modules/admin/trainer';
 import trainerTraining from './modules/trainer/training';
 import trainerMaterial from './modules/trainer/material';
+import trainerTest from './modules/trainer/test';
+import trainerNotification from './modules/trainer/notification';
 
 Vue.use(Vuex);
 
@@ -34,5 +36,7 @@ export default new Vuex.Store({
     adminTrainer,
     trainerTraining,
     trainerMaterial,
+    trainerTest,
+    trainerNotification,
   },
 });

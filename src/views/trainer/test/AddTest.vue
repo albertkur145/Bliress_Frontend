@@ -6,34 +6,34 @@
       <router-link class="back" :to="back">
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
       </router-link>
-      <div class="txt">Simpan</div>
+      <div class="txt" @click="save">Simpan</div>
     </div>
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
-      <div class="material-name">{{ materialList[paramMaterial].name }}</div>
+    <div class="content" v-if="apiReady">
+      <div class="material-name">{{ material.name }}</div>
 
       <!-- form -->
       <div class="form">
         <div class="form-group">
           <fieldset>
             <legend>Dibuka pada</legend>
-            <input type="date" class="input-text" value="2020-01-01">
+            <input type="date" class="input-text" v-model="form.available">
           </fieldset>
         </div>
 
         <div class="form-group">
           <fieldset>
             <legend>Ditutup pada</legend>
-            <input type="date" class="input-text" value="2020-01-01">
+            <input type="date" class="input-text" v-model="form.closed">
           </fieldset>
         </div>
 
         <div class="form-group">
           <fieldset>
             <legend>Batas waktu (menit)</legend>
-            <input type="number" class="input-text">
+            <input type="number" class="input-text" v-model="form.timeLimit">
           </fieldset>
         </div>
 
@@ -43,33 +43,22 @@
           <div class="form-group">
             <fieldset class="text-area">
               <legend>Pertanyaan</legend>
-              <textarea class="input-area"></textarea>
+              <textarea class="input-area" v-model="form.questions[n-1].questionText"></textarea>
             </fieldset>
           </div>
 
           <div class="form-group">
-            <fieldset class="text-area choices">
-              <legend>Pilihan 1</legend>
-              <textarea class="input-area"></textarea>
-              <label class="radio"><input type="radio" value="1" :name="`question-${n}`"><span></span></label>
-            </fieldset>
-
-            <fieldset class="text-area choices">
-              <legend>Pilihan 2</legend>
-              <textarea class="input-area"></textarea>
-              <label class="radio"><input type="radio" value="2" :name="`question-${n}`"><span></span></label>
-            </fieldset>
-
-            <fieldset class="text-area choices">
-              <legend>Pilihan 3</legend>
-              <textarea class="input-area"></textarea>
-              <label class="radio"><input type="radio" value="3" :name="`question-${n}`"><span></span></label>
-            </fieldset>
-
-            <fieldset class="text-area choices">
-              <legend>Pilihan 4</legend>
-              <textarea class="input-area"></textarea>
-              <label class="radio"><input type="radio" value="4" :name="`question-${n}`"><span></span></label>
+            <fieldset class="text-area choices" v-for="i in 4" :key="i">
+              <legend>Pilihan {{ i }}</legend>
+              <textarea class="input-area" v-model="form.questions[n-1].choices[i-1].answer"></textarea>
+              <label class="radio">
+                <input type="radio"
+                :value="`${i}`"
+                :name="`question-${n}`"
+                :checked="`${i}` === form.questions[n-1].correctAnswer ? true : false"
+                v-model="form.questions[n-1].correctAnswer">
+                <span></span>
+              </label>
             </fieldset>
           </div>
         </div>
@@ -78,9 +67,7 @@
     </div>
     <!-- end content -->
 
-    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
-
   </div>
 </template>
 
@@ -478,13 +465,12 @@
 <script>
 
 import AnimationLoader from '@/components/AnimationLoader.vue';
-import PopupMessage from '@/components/PopupMessage.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
   components: {
     AnimationLoader,
-    PopupMessage,
   },
 
   data() {
@@ -492,38 +478,23 @@ export default {
       paramBatch: '',
       paramTraining: '',
       paramMaterial: '',
-      materialList: [
-        {
-          name: 'Private Victory',
-          date_available: '12 September 2020',
-          date_closed: '13 September 2020',
-          limit_time: '20 menit',
-        },
-        {
-          name: 'Emotional Banking',
-          date_available: '-',
-          date_closed: '-',
-          limit_time: '-',
-        },
-        {
-          name: 'Think Win Win',
-          date_available: '20 September 2020',
-          date_closed: '22 September 2020',
-          limit_time: '60 menit',
-        },
-        {
-          name: 'Time Management',
-          date_available: '23 September 2020',
-          date_closed: '26 September 2020',
-          limit_time: '60 menit',
-        },
-      ],
       animationLoaderDisplay: false,
-      popupMessageDisplay: false,
+      apiReady: false,
+      material: {},
+      form: {
+        available: '2020-01-01',
+        closed: '2020-01-01',
+        timeLimit: 0,
+        questions: [],
+      },
     };
   },
 
   computed: {
+    ...mapGetters('trainerTest', [
+      'questionTest',
+    ]),
+
     back() {
       return {
         name: 'TrainerDetailTest',
@@ -535,10 +506,172 @@ export default {
     },
   },
 
+  methods: {
+    ...mapActions('trainerTest', [
+      'getTest',
+      'postTest',
+      'putTest',
+    ]),
+
+    async getQuestions() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getTest({
+          params: {
+            batchId: this.paramBatch,
+            training: this.paramTraining,
+            materialId: this.paramMaterial,
+          },
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.apiReady = true;
+        this.material = this.questionTest.data.material;
+
+        if (this.material.questions !== null) {
+          this.setform(this.questionTest.data);
+        }
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+
+    setform(data) {
+      this.form = {
+        available: data.available,
+        closed: data.closed,
+        timeLimit: data.timeLimit,
+      };
+
+      this.form.questions = data.material.questions;
+    },
+
+    setFormQuestion() {
+      for (let i = 0; i < 5; i += 1) {
+        this.form.questions.push({
+          questionText: '',
+          choices: [
+            {
+              choice: '1',
+              answer: '',
+            },
+            {
+              choice: '2',
+              answer: '',
+            },
+            {
+              choice: '3',
+              answer: '',
+            },
+            {
+              choice: '4',
+              answer: '',
+            },
+          ],
+          correctAnswer: '1',
+        });
+      }
+    },
+
+    save() {
+      if (this.validateForm()) {
+        if (this.material.questions !== null) {
+          this.reqApi(this.putTest);
+        } else {
+          this.form.timeLimit = parseInt(this.form.timeLimit, 10);
+          this.reqApi(this.postTest);
+        }
+      }
+    },
+
+    async reqApi(action) {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        action({
+          params: {
+            batchId: this.paramBatch,
+            training: this.paramTraining,
+            materialId: this.paramMaterial,
+            test: this.form,
+          },
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.$func.popupSuccessfull('Berhasil simpan data', 5000, this.back);
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+
+    validateForm() {
+      let questVal = 5;
+      let choices = 20;
+
+      if (this.form.timeLimit <= 0) {
+        this.$func.popupError('Batas waktu harus lebih dari 0!', 0);
+        return 0;
+      }
+
+      for (let i = 0; i < this.form.questions.length; i += 1) {
+        if (this.form.questions[i].questionText.length === 0) {
+          this.$func.popupError('Pertanyaan soal tidak lengkap!', 0);
+          questVal -= 1;
+          break;
+        }
+      }
+
+      for (let i = 0; i < this.form.questions.length; i += 1) {
+        for (let j = 0; j < this.form.questions[i].choices.length; j += 1) {
+          if (this.form.questions[i].choices[j].answer.length === 0) {
+            this.$func.popupError('Pilihan soal tidak lengkap!', 0);
+            choices -= 1;
+            break;
+          }
+        }
+      }
+
+      if (questVal !== 5) {
+        return 0;
+      }
+
+      if (choices !== 20) {
+        return 0;
+      }
+
+      return 1;
+    },
+  },
+
   created() {
-    this.paramBatch = this.$route.params.batch;
+    // check user auth
+    this.$func.userAuth('Trainer');
+
+    // get params
+    this.paramBatch = parseInt(this.$route.params.batch, 10);
     this.paramTraining = this.$route.params.training;
-    this.paramMaterial = this.$route.params.material;
+    this.paramMaterial = parseInt(this.$route.params.material, 10);
+
+    // set form array
+    this.setFormQuestion();
+
+    // req api
+    this.getQuestions();
   },
 
 };

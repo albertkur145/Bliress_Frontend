@@ -217,6 +217,11 @@ const routes = [
     component: () => import('../views/trainer/test/AddTest.vue'),
   },
   {
+    path: '/trainer/test/batch/:batch/training/:training/material/:material/changetest',
+    name: 'TrainerChangeTest',
+    component: () => import('../views/trainer/test/AddTest.vue'),
+  },
+  {
     path: '/trainer/notification',
     name: 'TrainerNotification',
     component: () => import('../views/trainer/notification/Notification.vue'),

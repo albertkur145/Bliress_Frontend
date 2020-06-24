@@ -175,6 +175,10 @@ export default {
   },
 
   created() {
+    // check user auth
+    this.$func.userAuth('Trainer');
+
+    // get params
     this.paramBatch = parseInt(this.$route.params.batch, 10);
     this.paramTraining = this.$route.params.training;
   },

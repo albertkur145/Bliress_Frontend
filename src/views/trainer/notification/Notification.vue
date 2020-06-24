@@ -1,5 +1,6 @@
 <template>
   <div id="container">
+
     <!-- head -->
     <div class="head">
       <div class="text">Notifikasi</div>
@@ -7,27 +8,16 @@
     <!-- end head -->
 
     <!-- content -->
-    <div class="content">
-      <div class="notif">
-        <div class="title">Reminder - Training</div>
-        <div class="message">{{ message }}</div>
-        <hr>
-      </div>
-      <div class="notif">
-        <div class="title">Reminder - Training</div>
-        <div class="message">{{ message }}</div>
-        <hr>
-      </div>
-      <div class="notif">
-        <div class="title">Reminder - Training</div>
-        <div class="message">{{ message }}</div>
+    <div class="content" v-if="apiReady">
+      <div class="notif" v-for="(value) in notificationList.data" :key="value.id">
+        <div class="title">{{ value.title }}</div>
+        <div class="message">{{ value.message }}</div>
         <hr>
       </div>
     </div>
     <!-- end content -->
 
     <MenuBar></MenuBar>
-    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
@@ -176,22 +166,64 @@
 
 import MenuBar from '@/components/trainer/MenuBar.vue';
 import AnimationLoader from '@/components/AnimationLoader.vue';
-import PopupMessage from '@/components/PopupMessage.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
   components: {
     MenuBar,
     AnimationLoader,
-    PopupMessage,
   },
 
   data() {
     return {
-      message: 'Haloo Albert, ingat lho 2 minggu lagi kamu ada training 1 di Wisma Rahayu. Tepatnya pada tanggal 15 September 2020. Untuk lebih detailnya, cek jadwal di halaman training ya!',
       animationLoaderDisplay: false,
-      popupMessageDisplay: false,
+      apiReady: false,
     };
+  },
+
+  computed: {
+    ...mapGetters('trainerNotification', [
+      'notificationList',
+    ]),
+  },
+
+  methods: {
+    ...mapActions('trainerNotification', [
+      'getNotifications',
+    ]),
+
+    async getAllNotification() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await new Promise((resolve) => {
+        this.getNotifications({
+          params: {
+            trainerId: this.$cookies.get('user').id,
+          },
+          resolve,
+        });
+      });
+
+      // show loader
+      this.animationLoaderDisplay = false;
+
+      if (promise === 200) {
+        this.apiReady = true;
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+  },
+
+  created() {
+    // check user auth
+    this.$func.userAuth('Trainer');
+
+    // req api
+    this.getAllNotification();
   },
 
 };

@@ -1538,14 +1538,14 @@ export default [
             name: 'Private Victory',
             available: '12 September 2020',
             closed: '15 September 2020',
-            timeLimit: '20',
+            timeLimit: 20,
           },
           {
             id: 2,
             name: 'Emotional Banking',
             available: '20 September 2020',
             closed: '22 September 2020',
-            timeLimit: '60',
+            timeLimit: 60,
           },
           {
             id: 3,
@@ -1714,8 +1714,6 @@ export default [
       code: 200,
       status: 'OK',
       data: {
-        batch: '1',
-        training: '1',
         available: null,
         closed: null,
         timeLimit: null,
@@ -2548,6 +2546,517 @@ export default [
       code: 200,
       status: 'OK',
       data: null,
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/trainer/test`,
+    method: 'GET',
+    params: {
+      params: {
+        batchId: 202006,
+        training: '1',
+      },
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: {
+        batch: {
+          id: 202006,
+          batch: 'Juni',
+          year: 2020,
+        },
+        training: '1',
+        material: [
+          {
+            id: 1,
+            name: 'Private Victory',
+            available: '12 September 2020',
+            closed: '15 September 2020',
+            timeLimit: 20,
+          },
+          {
+            id: 2,
+            name: 'Emotional Banking',
+            available: '20 September 2020',
+            closed: '22 September 2020',
+            timeLimit: 60,
+          },
+          {
+            id: 3,
+            name: 'Public Victory',
+            available: '-',
+            closed: '-',
+            timeLimit: '-',
+          },
+        ],
+      },
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/trainer/test/preview`,
+    method: 'GET',
+    params: {
+      params: {
+        batchId: 202006,
+        training: '1',
+        materialId: 1,
+      },
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: {
+        available: '2020-01-15',
+        closed: '2020-01-18',
+        timeLimit: 20,
+        material: {
+          id: 1,
+          name: 'Think Win Win',
+          questions: [
+            {
+              questionText: 'Semua mahasiswa Perguruan Tinggi memiliki Nomor Induk Mahasiswa. Budi seorang mahasiswa. Jadi,',
+              choices: [
+                {
+                  choice: '1',
+                  answer: 'Budi mungkin memiliki nomor induk mahasiswa.',
+                },
+                {
+                  choice: '2',
+                  answer: 'Belum tentu Budi memiliki nomor induk mahasiswa.',
+                },
+                {
+                  choice: '3',
+                  answer: 'Budi memiliki nomor induk mahasiswa.',
+                },
+                {
+                  choice: '4',
+                  answer: 'Budi tidak memiliki nomor induk mahasiswa.',
+                },
+              ],
+              correctAnswer: '3',
+            },
+            {
+              questionText: 'Sebagian pedagang pecel lele mengeluhkan harga cabe naik. Pak Rudi seorang pedagang pecel lele.',
+              choices: [
+                {
+                  choice: '1',
+                  answer: 'Pak Rudi pasti mengeluhkan harga cabe naik.',
+                },
+                {
+                  choice: '2',
+                  answer: 'Pak Rudi tidak mengeluhkan harga cabe naik.',
+                },
+                {
+                  choice: '3',
+                  answer: 'Harga cabe bukanlah keluhan Pak Rudi.',
+                },
+                {
+                  choice: '4',
+                  answer: 'Pak Rudi mungkin ikut mengeluhkan harga cabe naik.',
+                },
+              ],
+              correctAnswer: '4',
+            },
+            {
+              questionText: 'Semua pemain sepakbola yang berkebangsaan Itali berwajah tampan. David Beckham adalah pemain sepakbola berkebangsaan Inggris.',
+              choices: [
+                {
+                  choice: '1',
+                  answer: 'David Beckham bukanlah pemain sepakbola yang tampan.',
+                },
+                {
+                  choice: '2',
+                  answer: 'David Beckham adalah pemain sepakbola yang tampan.',
+                },
+                {
+                  choice: '3',
+                  answer: 'Meskipun bukan berkebangsaan Italia, David Beckham pasti berwajah tampan.',
+                },
+                {
+                  choice: '4',
+                  answer: 'Tidak dapat ditarik kesimpulan.',
+                },
+              ],
+              correctAnswer: '4',
+            },
+            {
+              questionText: 'Sebagian orang yang berminat menjadi pejabat hanya menginginkan harta dan tahta. Budi tidak berminat menjadi pejabat.',
+              choices: [
+                {
+                  choice: '1',
+                  answer: 'Budi tidak menginginkan harta dan tahta.',
+                },
+                {
+                  choice: '2',
+                  answer: 'Tahta bukanlah keinginan Budi, tapi harta mungkin ya.',
+                },
+                {
+                  choice: '3',
+                  answer: 'Budi menginginkan tahta tapi tidak berminat menjadi pejabat.',
+                },
+                {
+                  choice: '4',
+                  answer: 'Tidak dapat ditarik kesimpulan.',
+                },
+              ],
+              correctAnswer: '1',
+            },
+            {
+              questionText: 'Coklat yang dibungkus dalam kemasan menarik sangat laris terjual. Coklat Jago dibungkus dalam kemasan berwarna merah menyala. Menurut anak-anak, warna merah menyala sangatlah menarik.',
+              choices: [
+                {
+                  choice: '1',
+                  answer: 'Coklat Jago kurang laris terjual di kalangan anak-anak.',
+                },
+                {
+                  choice: '2',
+                  answer: 'Coklat Jago tidak laku terjual di kalangan orang dewasa.',
+                },
+                {
+                  choice: '3',
+                  answer: 'Coklat Jago laris terjual.',
+                },
+                {
+                  choice: '4',
+                  answer: 'Coklat Jago laris terjual di kalangan anak-anak.',
+                },
+              ],
+              correctAnswer: '4',
+            },
+          ],
+        },
+      },
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/trainer/test/preview`,
+    method: 'GET',
+    params: {
+      params: {
+        batchId: 202006,
+        training: '1',
+        materialId: 3,
+      },
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: {
+        available: null,
+        closed: null,
+        timeLimit: null,
+        material: {
+          id: 1,
+          name: 'Public Victory',
+          questions: null,
+        },
+      },
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/trainer/test`,
+    method: 'POST',
+    params: {
+      batchId: 202006,
+      training: '1',
+      materialId: 3,
+      test: {
+        available: '2020-01-15',
+        closed: '2020-01-18',
+        timeLimit: 20,
+        questions: [
+          {
+            questionText: 'Semua mahasiswa Perguruan Tinggi memiliki Nomor Induk Mahasiswa. Budi seorang mahasiswa. Jadi,',
+            choices: [
+              {
+                choice: '1',
+                answer: 'Budi mungkin memiliki nomor induk mahasiswa.',
+              },
+              {
+                choice: '2',
+                answer: 'Belum tentu Budi memiliki nomor induk mahasiswa.',
+              },
+              {
+                choice: '3',
+                answer: 'Budi memiliki nomor induk mahasiswa.',
+              },
+              {
+                choice: '4',
+                answer: 'Budi tidak memiliki nomor induk mahasiswa.',
+              },
+            ],
+            correctAnswer: '3',
+          },
+          {
+            questionText: 'Sebagian pedagang pecel lele mengeluhkan harga cabe naik. Pak Rudi seorang pedagang pecel lele.',
+            choices: [
+              {
+                choice: '1',
+                answer: 'Pak Rudi pasti mengeluhkan harga cabe naik.',
+              },
+              {
+                choice: '2',
+                answer: 'Pak Rudi tidak mengeluhkan harga cabe naik.',
+              },
+              {
+                choice: '3',
+                answer: 'Harga cabe bukanlah keluhan Pak Rudi.',
+              },
+              {
+                choice: '4',
+                answer: 'Pak Rudi mungkin ikut mengeluhkan harga cabe naik.',
+              },
+            ],
+            correctAnswer: '4',
+          },
+          {
+            questionText: 'Semua pemain sepakbola yang berkebangsaan Itali berwajah tampan. David Beckham adalah pemain sepakbola berkebangsaan Inggris.',
+            choices: [
+              {
+                choice: '1',
+                answer: 'David Beckham bukanlah pemain sepakbola yang tampan.',
+              },
+              {
+                choice: '2',
+                answer: 'David Beckham adalah pemain sepakbola yang tampan.',
+              },
+              {
+                choice: '3',
+                answer: 'Meskipun bukan berkebangsaan Italia, David Beckham pasti berwajah tampan.',
+              },
+              {
+                choice: '4',
+                answer: 'Tidak dapat ditarik kesimpulan.',
+              },
+            ],
+            correctAnswer: '4',
+          },
+          {
+            questionText: 'Sebagian orang yang berminat menjadi pejabat hanya menginginkan harta dan tahta. Budi tidak berminat menjadi pejabat.',
+            choices: [
+              {
+                choice: '1',
+                answer: 'Budi tidak menginginkan harta dan tahta.',
+              },
+              {
+                choice: '2',
+                answer: 'Tahta bukanlah keinginan Budi, tapi harta mungkin ya.',
+              },
+              {
+                choice: '3',
+                answer: 'Budi menginginkan tahta tapi tidak berminat menjadi pejabat.',
+              },
+              {
+                choice: '4',
+                answer: 'Tidak dapat ditarik kesimpulan.',
+              },
+            ],
+            correctAnswer: '1',
+          },
+          {
+            questionText: 'Coklat yang dibungkus dalam kemasan menarik sangat laris terjual. Coklat Jago dibungkus dalam kemasan berwarna merah menyala. Menurut anak-anak, warna merah menyala sangatlah menarik.',
+            choices: [
+              {
+                choice: '1',
+                answer: 'Coklat Jago kurang laris terjual di kalangan anak-anak.',
+              },
+              {
+                choice: '2',
+                answer: 'Coklat Jago tidak laku terjual di kalangan orang dewasa.',
+              },
+              {
+                choice: '3',
+                answer: 'Coklat Jago laris terjual.',
+              },
+              {
+                choice: '4',
+                answer: 'Coklat Jago laris terjual di kalangan anak-anak.',
+              },
+            ],
+            correctAnswer: '4',
+          },
+        ],
+      },
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: null,
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/trainer/test`,
+    method: 'PUT',
+    params: {
+      batchId: 202006,
+      training: '1',
+      materialId: 1,
+      test: {
+        available: '2020-01-15',
+        closed: '2020-01-18',
+        timeLimit: 20,
+        questions: [
+          {
+            questionText: 'Semua mahasiswa Perguruan Tinggi memiliki Nomor Induk Mahasiswa. Budi seorang mahasiswa. Jadi,',
+            choices: [
+              {
+                choice: '1',
+                answer: 'Budi mungkin memiliki nomor induk mahasiswa.',
+              },
+              {
+                choice: '2',
+                answer: 'Belum tentu Budi memiliki nomor induk mahasiswa.',
+              },
+              {
+                choice: '3',
+                answer: 'Budi memiliki nomor induk mahasiswa.',
+              },
+              {
+                choice: '4',
+                answer: 'Budi tidak memiliki nomor induk mahasiswa.',
+              },
+            ],
+            correctAnswer: '3',
+          },
+          {
+            questionText: 'Sebagian pedagang pecel lele mengeluhkan harga cabe naik. Pak Rudi seorang pedagang pecel lele.',
+            choices: [
+              {
+                choice: '1',
+                answer: 'Pak Rudi pasti mengeluhkan harga cabe naik.',
+              },
+              {
+                choice: '2',
+                answer: 'Pak Rudi tidak mengeluhkan harga cabe naik.',
+              },
+              {
+                choice: '3',
+                answer: 'Harga cabe bukanlah keluhan Pak Rudi.',
+              },
+              {
+                choice: '4',
+                answer: 'Pak Rudi mungkin ikut mengeluhkan harga cabe naik.',
+              },
+            ],
+            correctAnswer: '4',
+          },
+          {
+            questionText: 'Semua pemain sepakbola yang berkebangsaan Itali berwajah tampan. David Beckham adalah pemain sepakbola berkebangsaan Inggris.',
+            choices: [
+              {
+                choice: '1',
+                answer: 'David Beckham bukanlah pemain sepakbola yang tampan.',
+              },
+              {
+                choice: '2',
+                answer: 'David Beckham adalah pemain sepakbola yang tampan.',
+              },
+              {
+                choice: '3',
+                answer: 'Meskipun bukan berkebangsaan Italia, David Beckham pasti berwajah tampan.',
+              },
+              {
+                choice: '4',
+                answer: 'Tidak dapat ditarik kesimpulan.',
+              },
+            ],
+            correctAnswer: '4',
+          },
+          {
+            questionText: 'Sebagian orang yang berminat menjadi pejabat hanya menginginkan harta dan tahta. Budi tidak berminat menjadi pejabat.',
+            choices: [
+              {
+                choice: '1',
+                answer: 'Budi tidak menginginkan harta dan tahta.',
+              },
+              {
+                choice: '2',
+                answer: 'Tahta bukanlah keinginan Budi, tapi harta mungkin ya.',
+              },
+              {
+                choice: '3',
+                answer: 'Budi menginginkan tahta tapi tidak berminat menjadi pejabat.',
+              },
+              {
+                choice: '4',
+                answer: 'Tidak dapat ditarik kesimpulan.',
+              },
+            ],
+            correctAnswer: '1',
+          },
+          {
+            questionText: 'Coklat yang dibungkus dalam kemasan menarik sangat laris terjual. Coklat Jago dibungkus dalam kemasan berwarna merah menyala. Menurut anak-anak, warna merah menyala sangatlah menarik.',
+            choices: [
+              {
+                choice: '1',
+                answer: 'Coklat Jago kurang laris terjual di kalangan anak-anak.',
+              },
+              {
+                choice: '2',
+                answer: 'Coklat Jago tidak laku terjual di kalangan orang dewasa.',
+              },
+              {
+                choice: '3',
+                answer: 'Coklat Jago laris terjual.',
+              },
+              {
+                choice: '4',
+                answer: 'Coklat Jago laris terjual di kalangan anak-anak.',
+              },
+            ],
+            correctAnswer: '4',
+          },
+        ],
+      },
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: null,
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/trainer/notification`,
+    method: 'GET',
+    params: {
+      params: {
+        trainerId: 1,
+      },
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: [
+        {
+          id: 1,
+          title: 'Reminder - Training',
+          message: 'Haloo Albert, ingat lho 2 minggu lagi kamu ada jadwal mengajar batch Juni 2020 training 1 di Wisma Rahayu, tepatnya pada tanggal 15 September 2020. Untuk lebih detailnya, cek jadwal di halaman training ya!',
+        },
+        {
+          id: 2,
+          title: 'Reminder - Training',
+          message: 'Haloo Albert, ingat lho 2 minggu lagi kamu ada jadwal mengajar batch Januari 2021 training 3 di Sarana Jaya, tepatnya pada tanggal 22 April 2021. Untuk lebih detailnya, cek jadwal di halaman training ya!',
+        },
+      ],
       paging: null,
       errors: null,
     },
