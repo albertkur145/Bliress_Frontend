@@ -345,7 +345,7 @@ export default {
     this.$func.userAuth('Admin');
 
     // get params
-    this.paramBatch = parseInt(this.$route.params.batch);
+    this.paramBatch = parseInt(this.$route.params.batch, 10);
     this.paramTraining = this.$route.params.training;
 
     // req api

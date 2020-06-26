@@ -14,7 +14,12 @@
       <!-- input email -->
       <div class="input-container">
         <font-awesome-icon icon="envelope" class="icon-form" />
-        <input @keyup.enter="loginUser" type="text" v-model="form.email" placeholder="example@gmail.com" autocomplete="off">
+        <input @keyup.enter="loginUser"
+        id="email"
+        type="text"
+        v-model="form.email"
+        placeholder="example@gmail.com"
+        autocomplete="off">
       </div>
       <!-- input email -->
 
