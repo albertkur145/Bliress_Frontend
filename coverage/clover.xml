@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1593184057243" clover="3.2.0">
-  <project timestamp="1593184057243" name="All files">
-    <metrics statements="20" coveredstatements="5" conditionals="10" coveredconditionals="2" methods="4" coveredmethods="2" elements="34" coveredelements="9" complexity="0" loc="20" ncloc="20" packages="1" files="1" classes="1"/>
+<coverage generated="1593431671091" clover="3.2.0">
+  <project timestamp="1593431671091" name="All files">
+    <metrics statements="20" coveredstatements="8" conditionals="10" coveredconditionals="2" methods="4" coveredmethods="4" elements="34" coveredelements="14" complexity="0" loc="20" ncloc="20" packages="1" files="1" classes="1"/>
     <file name="Login.vue" path="D:\Project\bliress-frontend\src\views\Login.vue">
-      <metrics statements="20" coveredstatements="5" conditionals="10" coveredconditionals="2" methods="4" coveredmethods="2"/>
-      <line num="252" count="1" type="stmt"/>
-      <line num="253" count="1" type="stmt"/>
-      <line num="262" count="3" type="stmt"/>
-      <line num="284" count="0" type="stmt"/>
-      <line num="287" count="0" type="stmt"/>
-      <line num="288" count="0" type="stmt"/>
-      <line num="298" count="0" type="stmt"/>
-      <line num="301" count="0" type="cond" truecount="0" falsecount="2"/>
-      <line num="303" count="0" type="stmt"/>
-      <line num="306" count="0" type="stmt"/>
+      <metrics statements="20" coveredstatements="8" conditionals="10" coveredconditionals="2" methods="4" coveredmethods="4"/>
+      <line num="257" count="1" type="stmt"/>
+      <line num="258" count="1" type="stmt"/>
+      <line num="267" count="5" type="stmt"/>
+      <line num="290" count="1" type="stmt"/>
+      <line num="293" count="1" type="stmt"/>
+      <line num="294" count="1" type="stmt"/>
+      <line num="304" count="0" type="stmt"/>
       <line num="307" count="0" type="cond" truecount="0" falsecount="2"/>
-      <line num="308" count="0" type="stmt"/>
-      <line num="309" count="0" type="cond" truecount="0" falsecount="2"/>
-      <line num="310" count="0" type="stmt"/>
-      <line num="311" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="309" count="0" type="stmt"/>
       <line num="312" count="0" type="stmt"/>
+      <line num="313" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="314" count="0" type="stmt"/>
+      <line num="315" count="0" type="cond" truecount="0" falsecount="2"/>
       <line num="316" count="0" type="stmt"/>
-      <line num="319" count="0" type="stmt"/>
-      <line num="325" count="3" type="cond" truecount="2" falsecount="0"/>
-      <line num="326" count="1" type="stmt"/>
+      <line num="317" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="318" count="0" type="stmt"/>
+      <line num="322" count="0" type="stmt"/>
+      <line num="325" count="0" type="stmt"/>
+      <line num="331" count="5" type="cond" truecount="2" falsecount="0"/>
+      <line num="332" count="1" type="stmt"/>
     </file>
   </project>
 </coverage>

@@ -14,7 +14,7 @@
       <!-- input email -->
       <div class="input-container">
         <font-awesome-icon icon="envelope" class="icon-form" />
-        <input @keyup.enter="loginUser"
+        <input @keyup.enter="loginUser()"
         id="email"
         type="text"
         v-model="form.email"
@@ -26,12 +26,17 @@
       <!-- input password -->
       <div class="input-container">
         <font-awesome-icon icon="lock" class="icon-form" />
-        <input @keyup.enter="loginUser" type="password" v-model="form.password" placeholder="********" autocomplete="off">
+        <input @keyup.enter="loginUser()"
+        id="password"
+        type="password"
+        v-model="form.password"
+        placeholder="********"
+        autocomplete="off">
       </div>
       <!-- input password -->
 
       <!-- btn login -->
-      <button class="btn-login" @click="loginUser">Masuk</button>
+      <button class="btn-login" @click="loginUser()">Masuk</button>
       <!-- btn login -->
     </div>
     <!-- end form -->
@@ -265,6 +270,7 @@ export default {
         email: '',
         password: '',
       },
+      promise: null,
     };
   },
 
@@ -284,7 +290,7 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      this.promise = await new Promise((resolve) => {
         this.login({
           params: {
             email: this.form.email,
@@ -298,7 +304,7 @@ export default {
       this.animationLoaderDisplay = false;
 
       // set cookies if successfull
-      if (promise === 200) {
+      if (this.promise === 200) {
         // set cookies
         this.$cookies.set('user', this.user.data, '3h');
 

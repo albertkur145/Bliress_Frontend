@@ -22,6 +22,7 @@
     "nprogress": "^0.2.0",
     "qrcode.vue": "^1.7.0",
     "serve-dist": "^1.0.11",
+    "sinon": "^9.0.2",
     "sweetalert2": "^9.14.4",
     "vue": "^2.6.11",
     "vue-cookies": "^1.7.0",
