@@ -31,9 +31,9 @@ const actions = {
         commit('setUser', res.data);
         payload.resolve(res.data.code);
       })
-      .catch(() => {
+      .catch((err) => {
         payload.resolve(500);
-        console.log('Error');
+        console.log(err);
       });
   },
 };

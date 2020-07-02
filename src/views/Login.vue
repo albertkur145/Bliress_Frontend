@@ -270,6 +270,7 @@ export default {
         email: '',
         password: '',
       },
+      name: '',
       promise: null,
     };
   },
@@ -290,7 +291,15 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      this.promise = await new Promise((resolve) => {
+      this.promise = await this.reqApi();
+
+      // hide loader
+      this.animationLoaderDisplay = false;
+      this.redirectPage();
+    },
+
+    reqApi() {
+      return new Promise((resolve) => {
         this.login({
           params: {
             email: this.form.email,
@@ -299,27 +308,25 @@ export default {
           resolve,
         });
       });
+    },
 
-      // hide loader
-      this.animationLoaderDisplay = false;
-
+    redirectPage() {
       // set cookies if successfull
       if (this.promise === 200) {
         // set cookies
         this.$cookies.set('user', this.user.data, '3h');
 
         // navigate route role
-        let name = '';
         if (this.user.data.role === 'Employee') {
-          name = 'Training';
+          this.name = 'Training';
         } else if (this.user.data.role === 'Admin') {
-          name = 'AdminBatch';
+          this.name = 'AdminBatch';
         } else if (this.user.data.role === 'Trainer') {
-          name = 'TrainerTraining';
+          this.name = 'TrainerTraining';
         }
 
         // show popup success
-        this.$func.popupSuccessfull('Berhasil login', 5000, { name });
+        this.$func.popupSuccessfull('Berhasil login', 5000, { name: this.name });
       } else {
         // show popup error
         this.$func.popupError('Email / password salah', 5000);
