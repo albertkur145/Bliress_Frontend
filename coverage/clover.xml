@@ -1,30 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1593658648106" clover="3.2.0">
-  <project timestamp="1593658648106" name="All files">
-    <metrics statements="21" coveredstatements="21" conditionals="10" coveredconditionals="10" methods="6" coveredmethods="6" elements="37" coveredelements="37" complexity="0" loc="21" ncloc="21" packages="1" files="1" classes="1"/>
-    <file name="Login.vue" path="D:\Project\bliress-frontend\src\views\Login.vue">
+<coverage generated="1593708323832" clover="3.2.0">
+  <project timestamp="1593708323832" name="All files">
+    <metrics statements="38" coveredstatements="38" conditionals="12" coveredconditionals="12" methods="13" coveredmethods="13" elements="63" coveredelements="63" complexity="0" loc="38" ncloc="38" packages="2" files="2" classes="2"/>
+    <package name="views">
       <metrics statements="21" coveredstatements="21" conditionals="10" coveredconditionals="10" methods="6" coveredmethods="6"/>
-      <line num="257" count="1" type="stmt"/>
-      <line num="258" count="1" type="stmt"/>
-      <line num="267" count="8" type="stmt"/>
-      <line num="291" count="2" type="stmt"/>
-      <line num="294" count="2" type="stmt"/>
-      <line num="297" count="1" type="stmt"/>
-      <line num="298" count="1" type="stmt"/>
-      <line num="302" count="1" type="stmt"/>
-      <line num="303" count="1" type="stmt"/>
-      <line num="315" count="5" type="cond" truecount="2" falsecount="0"/>
-      <line num="317" count="4" type="stmt"/>
-      <line num="320" count="4" type="cond" truecount="2" falsecount="0"/>
-      <line num="321" count="1" type="stmt"/>
-      <line num="322" count="3" type="cond" truecount="2" falsecount="0"/>
-      <line num="323" count="1" type="stmt"/>
-      <line num="324" count="2" type="cond" truecount="2" falsecount="0"/>
-      <line num="325" count="1" type="stmt"/>
-      <line num="329" count="4" type="stmt"/>
-      <line num="332" count="1" type="stmt"/>
-      <line num="338" count="8" type="cond" truecount="2" falsecount="0"/>
-      <line num="339" count="1" type="stmt"/>
-    </file>
+      <file name="Login.vue" path="D:\Project\bliress-frontend\src\views\Login.vue">
+        <metrics statements="21" coveredstatements="21" conditionals="10" coveredconditionals="10" methods="6" coveredmethods="6"/>
+        <line num="257" count="1" type="stmt"/>
+        <line num="258" count="1" type="stmt"/>
+        <line num="267" count="8" type="stmt"/>
+        <line num="291" count="2" type="stmt"/>
+        <line num="294" count="2" type="stmt"/>
+        <line num="297" count="1" type="stmt"/>
+        <line num="298" count="1" type="stmt"/>
+        <line num="302" count="1" type="stmt"/>
+        <line num="303" count="1" type="stmt"/>
+        <line num="315" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="317" count="4" type="stmt"/>
+        <line num="320" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="321" count="1" type="stmt"/>
+        <line num="322" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="323" count="1" type="stmt"/>
+        <line num="324" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="325" count="1" type="stmt"/>
+        <line num="329" count="4" type="stmt"/>
+        <line num="332" count="1" type="stmt"/>
+        <line num="338" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="339" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="views.employee.account">
+      <metrics statements="17" coveredstatements="17" conditionals="2" coveredconditionals="2" methods="7" coveredmethods="7"/>
+      <file name="Account.vue" path="D:\Project\bliress-frontend\src\views\employee\account\Account.vue">
+        <metrics statements="17" coveredstatements="17" conditionals="2" coveredconditionals="2" methods="7" coveredmethods="7"/>
+        <line num="418" count="1" type="stmt"/>
+        <line num="419" count="1" type="stmt"/>
+        <line num="420" count="1" type="stmt"/>
+        <line num="430" count="4" type="stmt"/>
+        <line num="450" count="5" type="stmt"/>
+        <line num="453" count="5" type="stmt"/>
+        <line num="456" count="1" type="stmt"/>
+        <line num="457" count="1" type="stmt"/>
+        <line num="461" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="462" count="1" type="stmt"/>
+        <line num="465" count="1" type="stmt"/>
+        <line num="470" count="4" type="stmt"/>
+        <line num="471" count="4" type="stmt"/>
+        <line num="481" count="1" type="stmt"/>
+        <line num="482" count="1" type="stmt"/>
+        <line num="488" count="4" type="stmt"/>
+        <line num="491" count="4" type="stmt"/>
+      </file>
+    </package>
   </project>
 </coverage>

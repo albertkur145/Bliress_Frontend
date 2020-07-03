@@ -291,14 +291,14 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      this.promise = await this.reqApi();
+      this.promise = await this.promiseAPI();
 
       // hide loader
       this.animationLoaderDisplay = false;
       this.redirectPage();
     },
 
-    reqApi() {
+    promiseAPI() {
       return new Promise((resolve) => {
         this.login({
           params: {

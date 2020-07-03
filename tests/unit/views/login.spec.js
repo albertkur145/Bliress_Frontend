@@ -1,19 +1,13 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
-import flushPromises from 'flush-promises';
 import Login from '@/views/Login.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
-jest.mock('axios', () => ({
-  post: jest.fn(() => {
-    Promise.resolve(200);
-  }),
-}))
 
-// describe
-describe('When Created', () => {
+// describe when created
+describe('When created', () => {
   const wrapper = shallowMount(Login, {
     mocks: {
       $cookies: {
@@ -29,19 +23,21 @@ describe('When Created', () => {
     ],
   });
 
-  // it
+  // it popuplogout
   it('If cookies user exist, popuplogout function have been called', () => {
     expect(wrapper.vm.$func.popupLogoutFirst).toBeCalled();
   });
-  // it
+  // it popuplogout
 });
-// describe
+// end describe when created
 
-// describe
+
+// describe button click
 describe(`When button 'masuk' click`, () => {
   let store;
   let actions;
 
+  // before each
   beforeEach(() => {
     actions = {
       login: jest.fn(),
@@ -56,8 +52,9 @@ describe(`When button 'masuk' click`, () => {
       },
     });
   });
+  // before each
 
-  // it
+  // it vuex action
   it('Vuex action login to be called', () => {
     const wrapper = shallowMount(Login, {
       mocks: {
@@ -73,15 +70,18 @@ describe(`When button 'masuk' click`, () => {
     });
 
     wrapper.find('.btn-login').trigger('click');
+
+    // expect
     expect(actions.login).toBeCalled();
   });
-  // it
+  // it vuex action
 });
-// describe
+// end describe button click
 
-// describe
+
+// describe redirect page method
 describe('Redirect page method', () => {
-  // it
+  // it incorrect account
   it('Incorrect account', () => {
     const wrapper = shallowMount(Login, {
       data() {
@@ -105,15 +105,18 @@ describe('Redirect page method', () => {
 
     const spy = jest.spyOn(wrapper.vm, 'redirectPage');
     wrapper.vm.redirectPage();
+
+    // expect
     expect(spy).toHaveBeenCalled();
   });
-  // it
+  // it incorrect account
 
-  // describe
+  // describe correct account
   describe('Correct account', () => {
     let store;
     let getters;
 
+    // before each
     beforeEach(() => {
       getters = {
         user: jest.fn(() => {
@@ -135,9 +138,10 @@ describe('Redirect page method', () => {
         },
       });
     });
+    // before each
 
-    // it
-    it('Role Employee', () => {
+    // it role employee
+    it('Role employee', () => {
       const wrapper = shallowMount(Login, {
         data() {
           return {
@@ -161,17 +165,20 @@ describe('Redirect page method', () => {
       });
 
       wrapper.vm.redirectPage();
+
+      // expect
       expect(wrapper.vm.name).toBe('Training');
     });
-    // it
+    // it role employee
   });
-  // describe
+  // describe correct acount
 
-  // describe
+  // describe correct acount
   describe('Correct account', () => {
     let store;
     let getters;
 
+    // before each
     beforeEach(() => {
       getters = {
         user: jest.fn(() => {
@@ -193,9 +200,10 @@ describe('Redirect page method', () => {
         },
       });
     });
+    // before each
 
-    // it
-    it('Role Admin', () => {
+    // it role admin
+    it('Role admin', () => {
       const wrapper = shallowMount(Login, {
         data() {
           return {
@@ -219,17 +227,20 @@ describe('Redirect page method', () => {
       });
 
       wrapper.vm.redirectPage();
+
+      // expect
       expect(wrapper.vm.name).toBe('AdminBatch');
     });
-    // it
+    // it role admin
   });
-  // describe
+  // describe correct acount
 
-  // describe
+  // describe correct account
   describe('Correct account', () => {
     let store;
     let getters;
 
+    // before each
     beforeEach(() => {
       getters = {
         user: jest.fn(() => {
@@ -251,9 +262,10 @@ describe('Redirect page method', () => {
         },
       });
     });
+    // before each
 
-    // it
-    it('Role Trainer', () => {
+    // it role trainer
+    it('Role trainer', () => {
       const wrapper = shallowMount(Login, {
         data() {
           return {
@@ -277,17 +289,20 @@ describe('Redirect page method', () => {
       });
 
       wrapper.vm.redirectPage();
+
+      // expect
       expect(wrapper.vm.name).toBe('TrainerTraining');
     });
-    // it
+    // it role trainer
   });
-  // describe
+  // describe correct account
 
-  // describe
+  // describe correct account
   describe('Correct account', () => {
     let store;
     let getters;
 
+    // before each
     beforeEach(() => {
       getters = {
         user: jest.fn(() => {
@@ -309,9 +324,10 @@ describe('Redirect page method', () => {
         },
       });
     });
+    // before each
 
-    // it
-    it('Role Unknown', () => {
+    // it role unknown
+    it('Role unknown', () => {
       const wrapper = shallowMount(Login, {
         data() {
           return {
@@ -335,19 +351,23 @@ describe('Redirect page method', () => {
       });
 
       wrapper.vm.redirectPage();
+
+      // expect
       expect(wrapper.vm.name).toBe('');
     });
-    // it
+    // it role unknown
   });
-  // describe
+  // describe correct account
 });
-// describe
+// end describe redirect page method
 
-// describe
+
+// describe promise async loginUser
 describe('Promise async loginUser', () => {
   let actions;
   let store;
 
+  // before each
   beforeEach(() => {
     actions = {
       login: jest.fn(),
@@ -362,9 +382,10 @@ describe('Promise async loginUser', () => {
       },
     });
   });
+  // before each
 
-  // it
-  it('Animation loader value', async () => {
+  // it after resolve
+  it('After resolve', async () => {
     const wrapper = shallowMount(Login, {
       mocks: {
         $cookies: {
@@ -378,7 +399,7 @@ describe('Promise async loginUser', () => {
       ],
     });
 
-    jest.spyOn(wrapper.vm, 'reqApi').mockImplementation(() => {
+    jest.spyOn(wrapper.vm, 'promiseAPI').mockImplementation(() => {
       Promise.resolve(200);
     });
 
@@ -389,9 +410,10 @@ describe('Promise async loginUser', () => {
     wrapper.find('.btn-login').trigger('click');
     await wrapper.vm.$nextTick();
 
+    // expect
     expect(wrapper.vm.animationLoaderDisplay).toBeFalsy();
     expect(spyRedirectPage).toBeCalled();
   });
-  // it
+  // it after resolve
 });
-// describe
+// end describe promise async loginUser

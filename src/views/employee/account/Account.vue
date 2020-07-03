@@ -430,6 +430,7 @@ export default {
     return {
       animationLoaderDisplay: false,
       apiReady: '',
+      promise: null,
     };
   },
 
@@ -449,7 +450,24 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      this.promise = await this.promiseAPI();
+
+      // hide loader
+      this.animationLoaderDisplay = false;
+      this.dataReady();
+    },
+
+    dataReady() {
+      if (this.promise === 200) {
+        this.apiReady = true;
+      } else {
+        // show popup error
+        this.$func.popupLostConnection();
+      }
+    },
+
+    promiseAPI() {
+      return new Promise((resolve) => {
         this.getUser({
           params: {
             employeeId: this.$cookies.get('user').id,
@@ -457,16 +475,6 @@ export default {
           resolve,
         });
       });
-
-      // hide loader
-      this.animationLoaderDisplay = false;
-
-      if (promise === 200) {
-        this.apiReady = true;
-      } else {
-        // show popup error
-        this.$func.popupLostConnection();
-      }
     },
 
     logout() {
