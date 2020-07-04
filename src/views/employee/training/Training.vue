@@ -281,6 +281,7 @@ export default {
     return {
       animationLoaderDisplay: false,
       apiReady: false,
+      promise: null,
     };
   },
 
@@ -300,7 +301,15 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      this.promise = await this.promiseAPI();
+
+      // hide loader
+      this.animationLoaderDisplay = false;
+      this.dataReady();
+    },
+
+    promiseAPI() {
+      return new Promise((resolve) => {
         this.getTrainings({
           params: {
             employeeId: this.$cookies.get('user').id,
@@ -308,11 +317,10 @@ export default {
           resolve,
         });
       });
+    },
 
-      // req api finish then change status
-      this.animationLoaderDisplay = false;
-
-      if (promise === 200) {
+    dataReady() {
+      if (this.promise === 200) {
         this.apiReady = true;
       } else {
         this.$func.popupLostConnection();
