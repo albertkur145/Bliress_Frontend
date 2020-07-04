@@ -281,7 +281,15 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      this.promise = await this.promiseAPI();
+
+      // hide loader
+      this.animationLoaderDisplay = false;
+      this.dataReady();
+    },
+
+    promiseAPI() {
+      return new Promise((resolve) => {
         this.getTests({
           params: {
             employeeId: this.$cookies.get('user').id,
@@ -289,12 +297,10 @@ export default {
           resolve,
         });
       });
+    },
 
-      // hide loader
-      this.animationLoaderDisplay = false;
-
-      // show popup message if code response != 200
-      if (promise === 200) {
+    dataReady() {
+      if (this.promise === 200) {
         this.apiReady = true;
       } else {
         // show popup error

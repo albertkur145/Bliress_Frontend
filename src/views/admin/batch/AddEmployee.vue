@@ -134,9 +134,7 @@
     </div>
     <!-- end content -->
 
-    <PopupMessage :class="{ 'display-flex': popupMessageDisplay }"></PopupMessage>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
-
   </div>
 </template>
 
@@ -510,13 +508,11 @@
 <script>
 
 import AnimationLoader from '@/components/AnimationLoader.vue';
-import PopupMessage from '@/components/PopupMessage.vue';
 
 export default {
 
   components: {
     AnimationLoader,
-    PopupMessage,
   },
 
   data() {
@@ -524,7 +520,6 @@ export default {
       id: '',
       employees: [],
       animationLoaderDisplay: false,
-      popupMessageDisplay: false,
     };
   },
 

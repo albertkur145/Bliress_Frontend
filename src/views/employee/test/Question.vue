@@ -370,6 +370,7 @@ export default {
       apiReady: '',
       paramTraining: '',
       paramMaterial: '',
+      promise: null,
       timeLimit: null,
       time: {
         minute: null,
@@ -426,7 +427,15 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      this.promise = await this.promiseAPI();
+
+      // hide loader
+      this.animationLoaderDisplay = false;
+      this.dataReady();
+    },
+
+    promiseAPI() {
+      return new Promise((resolve) => {
         this.getQuestions({
           params: {
             employeeId: this.$cookies.get('user').id,
@@ -436,12 +445,10 @@ export default {
           resolve,
         });
       });
+    },
 
-      // hide loader
-      this.animationLoaderDisplay = false;
-
-      // show popup message if code response != 200
-      if (promise === 200) {
+    dataReady() {
+      if (this.promise === 200) {
         this.apiReady = true;
         this.timeLimit = parseInt(localStorage.getItem('timeLimit'), 10) + (this.questionList.data.timeLimit * 60 * 1000);
       } else {
@@ -477,7 +484,15 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      this.promise = await this.promiseSubmit();
+
+      // hide loader
+      this.animationLoaderDisplay = false;
+      this.afterSubmit();
+    },
+
+    promiseSubmit() {
+      return new Promise((resolve) => {
         this.submitTest({
           params: {
             employeeId: this.$cookies.get('user').id,
@@ -488,12 +503,10 @@ export default {
           resolve,
         });
       });
+    },
 
-      // hide loader
-      this.animationLoaderDisplay = false;
-
-      // show popup
-      if (promise === 200) {
+    afterSubmit() {
+      if (this.promise === 200) {
         localStorage.removeItem('timeLimit');
         this.$func.popupSuccessfull('Berhasil submit test', 5000, this.back);
       } else {

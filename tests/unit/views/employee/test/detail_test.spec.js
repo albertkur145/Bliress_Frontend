@@ -1,6 +1,6 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
-import Training from '@/views/employee/training/Training.vue';
+import DetailTest from '@/views/employee/test/DetailTest.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -9,17 +9,17 @@ localVue.use(Vuex);
 // describe when created
 describe('When created', () => {
   let actions;
-  let store;
+  let store
 
   // before each
   beforeEach(() => {
     actions = {
-      getTrainings: jest.fn(),
+      getMaterials: jest.fn(),
     };
 
     store = new Vuex.Store({
       modules: {
-        employeeTraining: {
+        employeeTest: {
           namespaced: true,
           actions,
         },
@@ -30,10 +30,15 @@ describe('When created', () => {
 
   // it user auth
   it('User auth', () => {
-    const wrapper = shallowMount(Training, {
+    const wrapper = shallowMount(DetailTest, {
       mocks: {
         $func: {
           userAuth: jest.fn(),
+        },
+        $route: {
+          params: {
+            training: {},
+          },
         },
         $cookies: {
           get: jest.fn((user) => user),
@@ -43,6 +48,7 @@ describe('When created', () => {
       store,
       stubs: [
         'font-awesome-icon',
+        'router-link',
       ],
     });
 
@@ -54,20 +60,20 @@ describe('When created', () => {
 // end describe when created
 
 
-// describe method dataReady
-describe('Method dataReady', () => {
+// describe method
+describe('Method', () => {
   let actions;
-  let store;
   let getters;
+  let store;
 
   // before each
   beforeEach(() => {
     actions = {
-      getTrainings: jest.fn(),
+      getMaterials: jest.fn(),
     };
 
     getters = {
-      trainingList: jest.fn(() => {
+      materialList: jest.fn(() => {
         return {
           data: {},
         };
@@ -76,7 +82,7 @@ describe('Method dataReady', () => {
 
     store = new Vuex.Store({
       modules: {
-        employeeTraining: {
+        employeeTest: {
           namespaced: true,
           actions,
           getters,
@@ -86,9 +92,9 @@ describe('Method dataReady', () => {
   });
   // before each
 
-  // it branch
-  it('Branch', () => {
-    const wrapper = shallowMount(Training, {
+  // it data ready branch
+  it('Data ready - branch', () => {
+    const wrapper = shallowMount(DetailTest, {
       data() {
         return {
           promise: 200,
@@ -99,6 +105,11 @@ describe('Method dataReady', () => {
           userAuth: jest.fn(),
           popupLostConnection: jest.fn(),
         },
+        $route: {
+          params: {
+            training: {},
+          },
+        },
         $cookies: {
           get: jest.fn((user) => user),
         },
@@ -107,13 +118,14 @@ describe('Method dataReady', () => {
       store,
       stubs: [
         'font-awesome-icon',
+        'router-link',
       ],
     });
 
     wrapper.vm.dataReady();
 
     // expect
-    expect(wrapper.vm.promise).toBe(200);
+    expect(wrapper.vm.apiReady).toBeTruthy();
 
     wrapper.setData({
       promise: 404,
@@ -123,38 +135,19 @@ describe('Method dataReady', () => {
     // expect
     expect(wrapper.vm.$func.popupLostConnection).toBeCalled();
   });
-  // it branch
-});
-// end describe method dataReady
+  // it data ready branch
 
-
-// describe method getAllTraining
-describe('Method getAllTraining', () => {
-  let actions;
-  let store;
-
-  // before each
-  beforeEach(() => {
-    actions = {
-      getTrainings: jest.fn(),
-    };
-    store = new Vuex.Store({
-      modules: {
-        employeeTraining: {
-          namespaced: true,
-          actions,
-        },
-      },
-    });
-  });
-  // before each
-
-  // it after promise
+  // it getAllMaterials
   it('After promise', async () => {
-    const wrapper = shallowMount(Training, {
+    const wrapper = shallowMount(DetailTest, {
       mocks: {
         $func: {
           userAuth: jest.fn(),
+        },
+        $route: {
+          params: {
+            training: {},
+          },
         },
         $cookies: {
           get: jest.fn((user) => user),
@@ -164,6 +157,7 @@ describe('Method getAllTraining', () => {
       store,
       stubs: [
         'font-awesome-icon',
+        'router-link',
       ],
     });
 
@@ -174,12 +168,45 @@ describe('Method getAllTraining', () => {
       return;
     });
 
-    await wrapper.vm.getAllTraining();
+    await wrapper.vm.getAllMaterials();
 
     // expect
     expect(wrapper.vm.animationLoaderDisplay).toBeFalsy();
     expect(spyDataReady).toBeCalled();
   });
-  // it after promise
+  // it getAllMaterials
+
+  // it redirectToQuestion
+  it('redirectToQuestion', () => {
+    const wrapper = shallowMount(DetailTest, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+          popupConfirmDialog: jest.fn(() => {
+            return {
+              then: jest.fn(),
+            };
+          }),
+        },
+        $route: {
+          params: {
+            training: {},
+          },
+        },
+        $cookies: {
+          get: jest.fn((user) => user),
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    wrapper.vm.redirectToQuestion(1);
+  });
+  // it redirectToQuestion
 });
-// end describe method getAllTraining
+// describe method
