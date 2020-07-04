@@ -555,8 +555,16 @@ export default {
       // show loader
       this.animationLoaderDisplay = true;
 
-      // req api on vuex
-      const promise = await new Promise((resolve) => {
+      // req api
+      this.promise = await this.promiseAPI();
+
+      // hide loader
+      this.animationLoaderDisplay = false;
+      this.dataReady();
+    },
+
+    promiseAPI() {
+      return new Promise((resolve) => {
         this.getTrainingBy({
           params: {
             employeeId: this.$cookies.get('user').id,
@@ -565,12 +573,11 @@ export default {
           resolve,
         });
       });
+    },
 
-      // req api finish then change status
-      this.animationLoaderDisplay = false;
-
+    dataReady() {
       // show popup message if code response != 200
-      if (promise === 200) {
+      if (this.promise === 200) {
         this.apiReady = true;
 
         // asignment split response data

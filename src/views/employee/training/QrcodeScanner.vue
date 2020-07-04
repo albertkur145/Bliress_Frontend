@@ -175,19 +175,23 @@ export default {
       try {
         await promise;
       } catch (error) {
-        if (error.name === 'NotAllowedError') {
-          this.error = 'ERROR: You need to grant camera access permisson.';
-        } else if (error.name === 'NotFoundError') {
-          this.error = 'ERROR: No camera on this device.';
-        } else if (error.name === 'NotSupportedError') {
-          this.error = 'ERROR: Secure context required (HTTPS, localhost).';
-        } else if (error.name === 'NotReadableError') {
-          this.error = 'ERROR: Is the camera already in use?.';
-        } else if (error.name === 'OverconstrainedError') {
-          this.error = 'ERROR: Installed cameras are not suitable.';
-        } else if (error.name === 'StreamApiNotSupportedError') {
-          this.error = 'ERROR: Stream API is not supported in this browser.';
-        }
+        this.catchError(error);
+      }
+    },
+
+    catchError({ name }) {
+      if (name === 'NotAllowedError') {
+        this.error = 'ERROR: You need to grant camera access permisson.';
+      } else if (name === 'NotFoundError') {
+        this.error = 'ERROR: No camera on this device.';
+      } else if (name === 'NotSupportedError') {
+        this.error = 'ERROR: Secure context required (HTTPS, localhost).';
+      } else if (name === 'NotReadableError') {
+        this.error = 'ERROR: Is the camera already in use?.';
+      } else if (name === 'OverconstrainedError') {
+        this.error = 'ERROR: Installed cameras are not suitable.';
+      } else if (name === 'StreamApiNotSupportedError') {
+        this.error = 'ERROR: Stream API is not supported in this browser.';
       }
     },
   },

@@ -16,6 +16,7 @@
     "@fortawesome/vue-fontawesome": "^0.1.9",
     "axios": "^0.19.2",
     "axios-mock-adapter": "^1.18.1",
+    "canvas": "^2.6.1",
     "core-js": "^3.6.4",
     "epic-spinners": "^1.1.0",
     "flush-promises": "^1.0.2",
