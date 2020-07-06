@@ -29,6 +29,7 @@ describe('When created', () => {
   // before each
 
   it('User auth', () => {
+    const timer = jest.fn();
     const wrapper = shallowMount(Question, {
       mocks: {
         $func: {
@@ -46,6 +47,9 @@ describe('When created', () => {
       },
       localVue,
       store,
+      methods: {
+        timer,
+      },
       stubs: [
         'font-awesome-icon',
         'router-link',
@@ -54,6 +58,7 @@ describe('When created', () => {
 
     // expect
     expect(wrapper.vm.$func.userAuth).toBeCalled();
+    expect(timer).toBeCalled();
   });
 });
 // end describe when created
@@ -266,33 +271,236 @@ describe('Method', () => {
   // it submit after promise
 
   // it confirm out button click
-  // it('Confirm out button click', () => {
-  //   const wrapper = shallowMount(Question, {
-  //     mocks: {
-  //       $func: {
-  //         userAuth: jest.fn(),
-  //       },
-  //       $route: {
-  //         params: {
-  //           training: {},
-  //           material: {},
-  //         },
-  //       },
-  //       $cookies: {
-  //         get: jest.fn((user) => user),
-  //       },
-  //     },
-  //     localVue,
-  //     store,
-  //     stubs: [
-  //       'font-awesome-icon',
-  //       'router-link',
-  //     ],
-  //   });
+  it('Confirm out button click', () => {
+    const wrapper = shallowMount(Question, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+          popupConfirmDialog: jest.fn().mockReturnValue({
+            value: true,
+          }),
+        },
+        $route: {
+          params: {
+            training: {},
+            material: {},
+          },
+        },
+        $cookies: {
+          get: jest.fn((user) => user),
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
 
-  //   wrapper.find('#container .head .back').trigger('click');
+    wrapper.find('#container .head .back').trigger('click');
 
-  // });
+    // expect
+    expect(wrapper.vm.$func.popupConfirmDialog).toBeCalled();
+
+    wrapper.vm.$func.popupConfirmDialog.mockReturnValue({
+      value: false,
+    });
+    wrapper.find('#container .head .back').trigger('click');
+  });
   // it confirm out button click
+
+  // it confirm submit button click
+  it('Confirm submit button click', () => {
+    const wrapper = shallowMount(Question, {
+      data() {
+        return {
+          apiReady: true,
+        };
+      },
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+          popupConfirmDialog: jest.fn().mockReturnValue({
+            value: true,
+          }),
+        },
+        $route: {
+          params: {
+            training: {},
+            material: {},
+          },
+        },
+        $cookies: {
+          get: jest.fn((user) => user),
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    wrapper.find('#container .content .preview .btn-submit button').trigger('click');
+
+    // expect
+    expect(wrapper.vm.$func.popupConfirmDialog).toBeCalled();
+
+    wrapper.vm.$func.popupConfirmDialog.mockReturnValue({
+      value: false,
+    });
+    wrapper.find('#container .content .preview .btn-submit button').trigger('click');
+  });
+  // it confirm submit button click
+
+  // it timer
+  it('Timer', () => {
+    const wrapper = shallowMount(Question, {
+      data() {
+        return {
+          timeLimit: 1200000,
+        };
+      },
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+        },
+        $route: {
+          params: {
+            training: {},
+            material: {},
+          },
+        },
+        $cookies: {
+          get: jest.fn((user) => user),
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    jest.useFakeTimers();
+    wrapper.vm.timer();
+    jest.advanceTimersByTime(1000);
+  });
+  // it timer
+
+  // it textTime
+  it('TextTime', () => {
+    const wrapper = shallowMount(Question, {
+      data() {
+        return {
+          time: {
+            minute: 10,
+            second: 12,
+          },
+        };
+      },
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+        },
+        $route: {
+          params: {
+            training: {},
+            material: {},
+          },
+        },
+        $cookies: {
+          get: jest.fn((user) => user),
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    wrapper.vm.textTime();
+  });
+  // it textTime
+
+  // it timeOut
+  it('TimeOut', () => {
+    const wrapper = shallowMount(Question, {
+      data() {
+        return {
+          time: {
+            minute: 0,
+            second: 0,
+          },
+        };
+      },
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+        },
+        $route: {
+          params: {
+            training: {},
+            material: {},
+          },
+        },
+        $cookies: {
+          get: jest.fn((user) => user),
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    const spyClearTimer = jest.spyOn(wrapper.vm, 'clearTimer').mockImplementation(() => {
+      return;
+    });
+    const spySubmit = jest.spyOn(wrapper.vm, 'submit').mockImplementation(() => {
+      return;
+    });
+    wrapper.vm.timeOut();
+
+    expect(spyClearTimer).toBeCalled();
+    expect(spySubmit).toBeCalled();
+  });
+  // it timeOut
+
+  // it clear timer
+  it('Clear timer method', () => {
+    const wrapper = shallowMount(Question, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+        },
+        $route: {
+          params: {
+            training: {},
+            material: {},
+          },
+        },
+        $cookies: {
+          get: jest.fn((user) => user),
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    wrapper.vm.clearTimer();
+  });
+  // it clear timer
 });
 // end describe method

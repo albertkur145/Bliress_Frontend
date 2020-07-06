@@ -177,21 +177,22 @@ describe('Method', () => {
   // it getAllMaterials
 
   // it redirectToQuestion
-  it('redirectToQuestion', () => {
+  it('redirectToQuestion', async () => {
     const wrapper = shallowMount(DetailTest, {
       mocks: {
         $func: {
           userAuth: jest.fn(),
-          popupConfirmDialog: jest.fn(() => {
-            return {
-              then: jest.fn(),
-            };
+          popupConfirmDialog: jest.fn().mockReturnValue({
+            value: true,
           }),
         },
         $route: {
           params: {
             training: {},
           },
+        },
+        $router: {
+          push: jest.fn(),
         },
         $cookies: {
           get: jest.fn((user) => user),
@@ -205,7 +206,15 @@ describe('Method', () => {
       ],
     });
 
-    wrapper.vm.redirectToQuestion(1);
+    await wrapper.vm.redirectToQuestion(1);
+
+    // expect
+    expect(wrapper.vm.$router.push).toBeCalled();
+
+    wrapper.vm.$func.popupConfirmDialog.mockReturnValue({
+      value: false,
+    });
+    await wrapper.vm.redirectToQuestion(1);
   });
   // it redirectToQuestion
 });

@@ -457,26 +457,26 @@ export default {
       }
     },
 
-    confirmOut() {
-      this.$func.popupConfirmDialog(
+    async confirmOut() {
+      const res = await this.$func.popupConfirmDialog(
         'Lho, sudah menyerah?',
         'Test akan disubmit secara otomatis!',
-      ).then((result) => {
-        if (result.value) {
-          this.submit();
-        }
-      });
+      );
+
+      if (res.value) {
+        this.submit();
+      }
     },
 
-    confirmSubmit() {
-      this.$func.popupConfirmDialog(
+    async confirmSubmit() {
+      const res = await this.$func.popupConfirmDialog(
         'Apakah kamu yakin?',
         'Test ini menentukan tingkat pemahaman kamu!',
-      ).then((result) => {
-        if (result.value) {
-          this.submit();
-        }
-      });
+      );
+
+      if (res.value) {
+        this.submit();
+      }
     },
 
     async submit() {
@@ -513,14 +513,26 @@ export default {
         this.$func.popupLostConnection();
       }
     },
-  },
 
-  mounted() {
-    setInterval(() => {
-      const count = this.timeLimit - new Date().getTime();
-      this.time.minute = Math.floor(count / 1000 / 60);
-      this.time.second = Math.floor((count / 1000) % 60);
+    clearTimer(timer) {
+      clearInterval(timer);
+    },
 
+    timer() {
+      const timer = setInterval(() => {
+        const count = this.timeLimit - new Date().getTime();
+        this.time.minute = Math.floor(count / 1000 / 60);
+        this.time.second = Math.floor((count / 1000) % 60);
+
+        // generate text time
+        this.textTime();
+
+        // check timeOut
+        this.timeOut(timer);
+      }, 1000);
+    },
+
+    textTime() {
       if (this.time.second < 10) {
         this.time.second = `0${this.time.second}`;
       }
@@ -528,7 +540,18 @@ export default {
       if (this.time.minute < 10) {
         this.time.minute = `0${this.time.minute}`;
       }
-    }, 1000);
+    },
+
+    timeOut(timer) {
+      if (this.time.minute <= 0 && this.time.second <= 0) {
+        this.clearTimer(timer);
+        this.submit();
+      }
+    },
+  },
+
+  mounted() {
+    this.timer();
   },
 
   created() {

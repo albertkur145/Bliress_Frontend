@@ -311,22 +311,22 @@ export default {
       }
     },
 
-    redirectToQuestion(id) {
-      this.$func.popupConfirmDialog(
+    async redirectToQuestion(id) {
+      const res = await this.$func.popupConfirmDialog(
         'Sudah siap?',
         'Test hanya dapat dikerjakan 1x',
-      ).then((res) => {
-        if (res.value) {
-          localStorage.setItem('timeLimit', new Date().getTime());
-          this.$router.push({
-            name: 'Question',
-            params: {
-              training: this.paramTraining,
-              material: id,
-            },
-          });
-        }
-      });
+      );
+
+      if (res.value) {
+        localStorage.setItem('timeLimit', new Date().getTime());
+        this.$router.push({
+          name: 'Question',
+          params: {
+            training: this.paramTraining,
+            material: id,
+          },
+        });
+      }
     },
   },
 

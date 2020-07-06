@@ -314,7 +314,7 @@ export default {
       // set cookies if successfull
       if (this.promise === 200) {
         // set cookies
-        this.$cookies.set('user', this.user.data, '3h');
+        this.$cookies.set('user', this.user.data, '10h');
 
         // navigate route role
         if (this.user.data.role === 'Employee') {
