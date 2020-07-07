@@ -518,7 +518,15 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseGetTest();
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.dataReady(promise);
+    },
+
+    promiseGetTest() {
+      return new Promise((resolve) => {
         this.getTest({
           params: {
             batchId: this.paramBatch,
@@ -528,30 +536,28 @@ export default {
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    dataReady(promise) {
       if (promise === 200) {
         this.apiReady = true;
         this.material = this.questionTest.data.material;
 
         if (this.material.questions !== null) {
-          this.setform(this.questionTest.data);
+          this.setForm(this.questionTest.data);
         }
       } else {
         this.$func.popupLostConnection();
       }
     },
 
-    setform(data) {
+    setForm(data) {
       this.form = {
         available: data.available,
         closed: data.closed,
         timeLimit: data.timeLimit,
+        questions: data.material.questions,
       };
-
-      this.form.questions = data.material.questions;
     },
 
     setFormQuestion() {
@@ -597,7 +603,15 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseSave(action);
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.redirectAfterSave(promise);
+    },
+
+    promiseSave(action) {
+      return new Promise((resolve) => {
         action({
           params: {
             batchId: this.paramBatch,
@@ -608,10 +622,9 @@ export default {
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    redirectAfterSave(promise) {
       if (promise === 200) {
         this.$func.popupSuccessfull('Berhasil simpan data', 5000, this.back);
       } else {

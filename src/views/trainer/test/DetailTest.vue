@@ -399,6 +399,7 @@ export default {
       animationLoaderDisplay: false,
       batch: {},
       material: [],
+      promise: null,
     };
   },
 
@@ -418,7 +419,15 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      this.promise = await this.promiseAPI();
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.dataReady();
+    },
+
+    promiseAPI() {
+      return new Promise((resolve) => {
         this.getMaterialsTest({
           params: {
             batchId: this.paramBatch,
@@ -427,11 +436,10 @@ export default {
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
-      if (promise === 200) {
+    dataReady() {
+      if (this.promise === 200) {
         this.apiReady = true;
 
         // assignment split data
