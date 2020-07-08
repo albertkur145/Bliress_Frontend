@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1594126706703" clover="3.2.0">
-  <project timestamp="1594126706703" name="All files">
-    <metrics statements="324" coveredstatements="324" conditionals="82" coveredconditionals="82" methods="114" coveredmethods="114" elements="520" coveredelements="520" complexity="0" loc="324" ncloc="324" packages="9" files="16" classes="16"/>
+<coverage generated="1594179561617" clover="3.2.0">
+  <project timestamp="1594179561617" name="All files">
+    <metrics statements="401" coveredstatements="401" conditionals="96" coveredconditionals="96" methods="147" coveredmethods="147" elements="644" coveredelements="644" complexity="0" loc="401" ncloc="401" packages="10" files="20" classes="20"/>
     <package name="components.admin">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="MenuBar.vue" path="D:\Project\bliress-frontend\src\components\admin\MenuBar.vue">
@@ -399,6 +399,98 @@
         <line num="234" count="1" type="stmt"/>
         <line num="246" count="4" type="stmt"/>
         <line num="249" count="4" type="stmt"/>
+      </file>
+    </package>
+    <package name="views.trainer.training">
+      <metrics statements="77" coveredstatements="77" conditionals="14" coveredconditionals="14" methods="33" coveredmethods="33"/>
+      <file name="DetailTraining.vue" path="D:\Project\bliress-frontend\src\views\trainer\training\DetailTraining.vue">
+        <metrics statements="33" coveredstatements="33" conditionals="6" coveredconditionals="6" methods="13" coveredmethods="13"/>
+        <line num="466" count="1" type="stmt"/>
+        <line num="467" count="1" type="stmt"/>
+        <line num="476" count="8" type="stmt"/>
+        <line num="493" count="8" type="stmt"/>
+        <line num="514" count="9" type="stmt"/>
+        <line num="517" count="9" type="stmt"/>
+        <line num="520" count="1" type="stmt"/>
+        <line num="521" count="1" type="stmt"/>
+        <line num="525" count="8" type="stmt"/>
+        <line num="526" count="8" type="stmt"/>
+        <line num="538" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="539" count="1" type="stmt"/>
+        <line num="542" count="1" type="stmt"/>
+        <line num="543" count="1" type="stmt"/>
+        <line num="544" count="1" type="stmt"/>
+        <line num="547" count="1" type="stmt"/>
+        <line num="552" count="1" type="stmt"/>
+        <line num="562" count="2" type="stmt"/>
+        <line num="567" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="568" count="1" type="stmt"/>
+        <line num="574" count="1" type="stmt"/>
+        <line num="577" count="1" type="stmt"/>
+        <line num="580" count="1" type="stmt"/>
+        <line num="581" count="1" type="stmt"/>
+        <line num="585" count="1" type="stmt"/>
+        <line num="586" count="1" type="stmt"/>
+        <line num="598" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="599" count="1" type="stmt"/>
+        <line num="601" count="1" type="stmt"/>
+        <line num="608" count="8" type="stmt"/>
+        <line num="611" count="8" type="stmt"/>
+        <line num="612" count="8" type="stmt"/>
+        <line num="615" count="8" type="stmt"/>
+      </file>
+      <file name="Qrcode.vue" path="D:\Project\bliress-frontend\src\views\trainer\training\Qrcode.vue">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+        <line num="146" count="1" type="stmt"/>
+        <line num="155" count="2" type="stmt"/>
+        <line num="163" count="2" type="stmt"/>
+        <line num="173" count="2" type="stmt"/>
+        <line num="179" count="2" type="stmt"/>
+        <line num="182" count="2" type="stmt"/>
+        <line num="183" count="2" type="stmt"/>
+      </file>
+      <file name="Training.vue" path="D:\Project\bliress-frontend\src\views\trainer\training\Training.vue">
+        <metrics statements="16" coveredstatements="16" conditionals="2" coveredconditionals="2" methods="7" coveredmethods="7"/>
+        <line num="250" count="1" type="stmt"/>
+        <line num="251" count="1" type="stmt"/>
+        <line num="252" count="1" type="stmt"/>
+        <line num="262" count="4" type="stmt"/>
+        <line num="281" count="5" type="stmt"/>
+        <line num="284" count="5" type="stmt"/>
+        <line num="287" count="1" type="stmt"/>
+        <line num="288" count="1" type="stmt"/>
+        <line num="292" count="4" type="stmt"/>
+        <line num="293" count="4" type="stmt"/>
+        <line num="303" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="304" count="1" type="stmt"/>
+        <line num="307" count="1" type="stmt"/>
+        <line num="312" count="1" type="stmt"/>
+        <line num="324" count="4" type="stmt"/>
+        <line num="327" count="4" type="stmt"/>
+      </file>
+      <file name="UploadMaterial.vue" path="D:\Project\bliress-frontend\src\views\trainer\training\UploadMaterial.vue">
+        <metrics statements="21" coveredstatements="21" conditionals="6" coveredconditionals="6" methods="9" coveredmethods="9"/>
+        <line num="288" count="1" type="stmt"/>
+        <line num="289" count="1" type="stmt"/>
+        <line num="298" count="7" type="stmt"/>
+        <line num="312" count="7" type="stmt"/>
+        <line num="328" count="1" type="stmt"/>
+        <line num="329" count="1" type="stmt"/>
+        <line num="333" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="334" count="1" type="stmt"/>
+        <line num="336" count="1" type="stmt"/>
+        <line num="342" count="1" type="stmt"/>
+        <line num="345" count="1" type="stmt"/>
+        <line num="348" count="1" type="stmt"/>
+        <line num="349" count="1" type="stmt"/>
+        <line num="353" count="1" type="stmt"/>
+        <line num="354" count="1" type="stmt"/>
+        <line num="366" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="367" count="1" type="stmt"/>
+        <line num="369" count="1" type="stmt"/>
+        <line num="376" count="7" type="stmt"/>
+        <line num="379" count="7" type="stmt"/>
+        <line num="380" count="7" type="stmt"/>
       </file>
     </package>
   </project>

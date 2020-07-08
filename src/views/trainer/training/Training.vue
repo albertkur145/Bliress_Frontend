@@ -281,7 +281,15 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseAPI();
+
+      // hide loader
+      this.animationLoaderDisplay = false;
+      this.dataReady(promise);
+    },
+
+    promiseAPI() {
+      return new Promise((resolve) => {
         this.getTrainings({
           params: {
             trainerId: this.$cookies.get('user').id,
@@ -289,10 +297,9 @@ export default {
           resolve,
         });
       });
+    },
 
-      // hide loader
-      this.animationLoaderDisplay = false;
-
+    dataReady(promise) {
       if (promise === 200) {
         this.apiReady = true;
       } else {
