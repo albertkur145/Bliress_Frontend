@@ -452,15 +452,15 @@ export default {
       'deleteBatch',
     ]),
 
-    confirmDialog() {
-      this.$func.popupConfirmDialog(
+    async confirmDialog() {
+      const res = await this.$func.popupConfirmDialog(
         'Kamu yakin?',
         'Semua atribut yang berhubungan akan ikut terhapus',
-      ).then((res) => {
-        if (res.value) {
-          this.delete();
-        }
-      });
+      );
+
+      if (res.value) {
+        this.delete();
+      }
     },
 
     async delete() {
@@ -468,7 +468,15 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseDelete();
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.afterDelete(promise);
+    },
+
+    promiseDelete() {
+      return new Promise((resolve) => {
         this.deleteBatch({
           params: {
             batchId: this.paramBatch,
@@ -476,10 +484,9 @@ export default {
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    afterDelete(promise) {
       if (promise === 200) {
         this.$func.popupSuccessfull('Sukses hapus data', 5000, { name: 'AdminBatch' });
       } else {
@@ -492,7 +499,15 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseGetDetailByBatch();
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.afterGetDetailByBatch(promise);
+    },
+
+    promiseGetDetailByBatch() {
+      return new Promise((resolve) => {
         this.getBatchBy({
           params: {
             batchId: this.paramBatch,
@@ -500,10 +515,9 @@ export default {
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    afterGetDetailByBatch(promise) {
       if (promise === 200) {
         this.apiReady = true;
 

@@ -282,7 +282,15 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseGetAllMaterial();
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.dataReady(promise);
+    },
+
+    promiseGetAllMaterial() {
+      return new Promise((resolve) => {
         this.getMaterials({
           params: {
             batchId: this.paramBatch,
@@ -291,10 +299,9 @@ export default {
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    dataReady(promise) {
       if (promise === 200) {
         this.apiReady = true;
       } else {
@@ -302,15 +309,15 @@ export default {
       }
     },
 
-    confirmDelete(materialId) {
-      this.$func.popupConfirmDialog(
+    async confirmDelete(materialId) {
+      const res = await this.$func.popupConfirmDialog(
         'Kamu yakin?',
         'Data yang dihapus tidak dapat kembali lagi',
-      ).then((res) => {
-        if (res.value) {
-          this.deleteData(materialId);
-        }
-      });
+      );
+
+      if (res.value) {
+        this.deleteData(materialId);
+      }
     },
 
     async deleteData(materialId) {
@@ -318,7 +325,15 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseDeleteData(materialId);
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.afterDeleteData(promise);
+    },
+
+    promiseDeleteData(materialId) {
+      return new Promise((resolve) => {
         this.deleteMaterial({
           params: {
             batchId: this.paramBatch,
@@ -328,10 +343,9 @@ export default {
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    afterDeleteData(promise) {
       if (promise === 200) {
         this.$func.popupSuccessfull('Berhasil hapus data', 5000, null);
       } else {

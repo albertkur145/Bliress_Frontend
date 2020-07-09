@@ -536,7 +536,15 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseGetAllTraining();
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.dataReady(promise);
+    },
+
+    promiseGetAllTraining() {
+      return new Promise((resolve) => {
         this.getTrainings({
           params: {
             batchId: this.paramBatch,
@@ -544,10 +552,9 @@ export default {
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    dataReady(promise) {
       if (promise === 200) {
         this.apiReady = true;
 
@@ -559,15 +566,15 @@ export default {
       }
     },
 
-    confirmDelete(training) {
-      this.$func.popupConfirmDialog(
+    async confirmDelete(training) {
+      const res = await this.$func.popupConfirmDialog(
         'Kamu yakin?',
         'Data yang dihapus tidak dapat kembali lagi',
-      ).then((res) => {
-        if (res.value) {
-          this.deleteData(training);
-        }
-      });
+      );
+
+      if (res.value) {
+        this.deleteData(training);
+      }
     },
 
     async deleteData(training) {
@@ -575,7 +582,15 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseDeleteData(training);
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.afterDeleteData(promise);
+    },
+
+    promiseDeleteData(training) {
+      return new Promise((resolve) => {
         this.deleteTraining({
           params: {
             batchId: this.paramBatch,
@@ -584,10 +599,9 @@ export default {
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    afterDeleteData(promise) {
       if (promise === 200) {
         this.$func.popupSuccessfull('Berhasil hapus data', 5000, null);
       } else {

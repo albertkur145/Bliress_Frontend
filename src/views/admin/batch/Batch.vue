@@ -246,15 +246,22 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseGetAllBatch();
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.dataReady(promise);
+    },
+
+    promiseGetAllBatch() {
+      return new Promise((resolve) => {
         this.getBatch({
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    dataReady(promise) {
       if (promise === 200) {
         this.apiReady = true;
       } else {
@@ -262,8 +269,8 @@ export default {
       }
     },
 
-    inputDialog() {
-      this.$swal.mixin({
+    async inputDialog() {
+      const result = await this.$swal.mixin({
         confirmButtonText: 'Next',
         backdrop: false,
         allowEscapeKey: false,
@@ -296,13 +303,13 @@ export default {
             2021: '2021',
           },
         },
-      ]).then((result) => {
-        if (result.value[0].length > 0 && result.value[1].length > 0) {
-          this.addBatch(result.value);
-        } else {
-          this.$func.popupError('Form tidak lengkap!', 5000);
-        }
-      });
+      ]);
+
+      if (result.value[0].length > 0 && result.value[1].length > 0) {
+        this.addBatch(result.value);
+      } else {
+        this.$func.popupError('Form tidak lengkap!', 5000);
+      }
     },
 
     async addBatch(value) {
@@ -310,7 +317,15 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseAddBatch(value);
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.afterAddBatch(promise);
+    },
+
+    promiseAddBatch(value) {
+      return new Promise((resolve) => {
         this.postBatch({
           params: {
             batch: parseInt(value[0], 10),
@@ -319,10 +334,9 @@ export default {
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    afterAddBatch(promise) {
       if (promise === 200) {
         this.$func.popupSuccessfull('Berhasil tambah batch baru', 5000, { name: 'AdminBatch' });
       } else {

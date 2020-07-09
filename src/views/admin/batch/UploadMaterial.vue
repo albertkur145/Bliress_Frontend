@@ -342,7 +342,15 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseAddMaterial();
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.afterAddMaterial(promise);
+    },
+
+    promiseAddMaterial() {
+      return new Promise((resolve) => {
         this.postMaterial({
           params: {
             batchId: this.paramBatch,
@@ -352,10 +360,9 @@ export default {
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    afterAddMaterial(promise) {
       if (promise === 200) {
         this.$func.popupSuccessfull('Berhasil simpan data', 5000, this.back);
       } else {

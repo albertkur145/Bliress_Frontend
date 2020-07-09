@@ -435,15 +435,22 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseGetAllTrainer();
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.dataReady(promise);
+    },
+
+    promiseGetAllTrainer() {
+      return new Promise((resolve) => {
         this.getTrainers({
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    dataReady(promise) {
       if (promise === 200) {
         this.apiReady = true;
       } else {
@@ -470,16 +477,23 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseReqApi(action);
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.afterReqApi(promise);
+    },
+
+    promiseReqApi(action) {
+      return new Promise((resolve) => {
         action({
           params: this.form,
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    afterReqApi(promise) {
       if (promise === 200) {
         this.$func.popupSuccessfull('Berhasil simpan data', 5000, this.back);
       } else {
@@ -492,7 +506,15 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseGetTrainingByTraining();
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.afterGetTrainingByTraining(promise);
+    },
+
+    promiseGetTrainingByTraining() {
+      return new Promise((resolve) => {
         this.getTrainingBy({
           params: {
             batchId: this.paramBatch,
@@ -501,10 +523,9 @@ export default {
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    afterGetTrainingByTraining(promise) {
       if (promise === 200) {
         this.setForm();
       } else {
