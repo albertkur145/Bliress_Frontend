@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1594276243410" clover="3.2.0">
-  <project timestamp="1594276243410" name="All files">
-    <metrics statements="631" coveredstatements="631" conditionals="144" coveredconditionals="144" methods="240" coveredmethods="240" elements="1015" coveredelements="1015" complexity="0" loc="631" ncloc="631" packages="11" files="29" classes="29"/>
+<coverage generated="1594369796814" clover="3.2.0">
+  <project timestamp="1594369796814" name="All files">
+    <metrics statements="755" coveredstatements="748" conditionals="172" coveredconditionals="172" methods="278" coveredmethods="277" elements="1205" coveredelements="1197" complexity="0" loc="755" ncloc="755" packages="12" files="33" classes="33"/>
     <package name="components.admin">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="MenuBar.vue" path="D:\Project\bliress-frontend\src\components\admin\MenuBar.vue">
@@ -303,6 +303,145 @@
         <line num="376" count="6" type="stmt"/>
         <line num="379" count="6" type="stmt"/>
         <line num="380" count="6" type="stmt"/>
+      </file>
+    </package>
+    <package name="views.admin.test">
+      <metrics statements="124" coveredstatements="117" conditionals="28" coveredconditionals="28" methods="38" coveredmethods="37"/>
+      <file name="AddTest.vue" path="D:\Project\bliress-frontend\src\views\admin\test\AddTest.vue">
+        <metrics statements="60" coveredstatements="60" conditionals="20" coveredconditionals="20" methods="15" coveredmethods="15"/>
+        <line num="467" count="1" type="stmt"/>
+        <line num="468" count="1" type="stmt"/>
+        <line num="477" count="10" type="stmt"/>
+        <line num="499" count="10" type="stmt"/>
+        <line num="518" count="11" type="stmt"/>
+        <line num="521" count="11" type="stmt"/>
+        <line num="524" count="1" type="stmt"/>
+        <line num="525" count="1" type="stmt"/>
+        <line num="529" count="10" type="stmt"/>
+        <line num="530" count="10" type="stmt"/>
+        <line num="542" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="543" count="2" type="stmt"/>
+        <line num="544" count="2" type="stmt"/>
+        <line num="546" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="547" count="1" type="stmt"/>
+        <line num="550" count="1" type="stmt"/>
+        <line num="555" count="1" type="stmt"/>
+        <line num="564" count="11" type="stmt"/>
+        <line num="565" count="55" type="stmt"/>
+        <line num="591" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="592" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="593" count="1" type="stmt"/>
+        <line num="595" count="1" type="stmt"/>
+        <line num="596" count="1" type="stmt"/>
+        <line num="603" count="1" type="stmt"/>
+        <line num="606" count="1" type="stmt"/>
+        <line num="609" count="1" type="stmt"/>
+        <line num="610" count="1" type="stmt"/>
+        <line num="614" count="1" type="stmt"/>
+        <line num="615" count="1" type="stmt"/>
+        <line num="628" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="629" count="1" type="stmt"/>
+        <line num="631" count="1" type="stmt"/>
+        <line num="636" count="4" type="stmt"/>
+        <line num="637" count="4" type="stmt"/>
+        <line num="639" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="640" count="1" type="stmt"/>
+        <line num="641" count="1" type="stmt"/>
+        <line num="644" count="3" type="stmt"/>
+        <line num="645" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="646" count="1" type="stmt"/>
+        <line num="647" count="1" type="stmt"/>
+        <line num="648" count="1" type="stmt"/>
+        <line num="652" count="3" type="stmt"/>
+        <line num="653" count="3" type="stmt"/>
+        <line num="654" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="655" count="2" type="stmt"/>
+        <line num="656" count="2" type="stmt"/>
+        <line num="657" count="2" type="stmt"/>
+        <line num="662" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="663" count="1" type="stmt"/>
+        <line num="666" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="667" count="1" type="stmt"/>
+        <line num="670" count="1" type="stmt"/>
+        <line num="676" count="10" type="stmt"/>
+        <line num="679" count="10" type="stmt"/>
+        <line num="680" count="10" type="stmt"/>
+        <line num="681" count="10" type="stmt"/>
+        <line num="684" count="10" type="stmt"/>
+        <line num="687" count="10" type="stmt"/>
+      </file>
+      <file name="DetailTest.vue" path="D:\Project\bliress-frontend\src\views\admin\test\DetailTest.vue">
+        <metrics statements="22" coveredstatements="22" conditionals="4" coveredconditionals="4" methods="8" coveredmethods="8"/>
+        <line num="385" count="1" type="stmt"/>
+        <line num="386" count="1" type="stmt"/>
+        <line num="395" count="5" type="stmt"/>
+        <line num="418" count="6" type="stmt"/>
+        <line num="421" count="6" type="stmt"/>
+        <line num="424" count="1" type="stmt"/>
+        <line num="425" count="1" type="stmt"/>
+        <line num="429" count="5" type="stmt"/>
+        <line num="430" count="5" type="stmt"/>
+        <line num="441" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="442" count="1" type="stmt"/>
+        <line num="445" count="1" type="stmt"/>
+        <line num="446" count="1" type="stmt"/>
+        <line num="448" count="1" type="stmt"/>
+        <line num="453" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="454" count="1" type="stmt"/>
+        <line num="463" count="1" type="stmt"/>
+        <line num="475" count="1" type="stmt"/>
+        <line num="488" count="5" type="stmt"/>
+        <line num="491" count="5" type="stmt"/>
+        <line num="492" count="5" type="stmt"/>
+        <line num="495" count="5" type="stmt"/>
+      </file>
+      <file name="ReviewTest.vue" path="D:\Project\bliress-frontend\src\views\admin\test\ReviewTest.vue">
+        <metrics statements="19" coveredstatements="19" conditionals="2" coveredconditionals="2" methods="7" coveredmethods="7"/>
+        <line num="310" count="1" type="stmt"/>
+        <line num="311" count="1" type="stmt"/>
+        <line num="320" count="3" type="stmt"/>
+        <line num="336" count="3" type="stmt"/>
+        <line num="353" count="4" type="stmt"/>
+        <line num="356" count="4" type="stmt"/>
+        <line num="359" count="1" type="stmt"/>
+        <line num="360" count="1" type="stmt"/>
+        <line num="364" count="3" type="stmt"/>
+        <line num="365" count="3" type="stmt"/>
+        <line num="377" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="378" count="1" type="stmt"/>
+        <line num="379" count="1" type="stmt"/>
+        <line num="381" count="1" type="stmt"/>
+        <line num="388" count="3" type="stmt"/>
+        <line num="391" count="3" type="stmt"/>
+        <line num="392" count="3" type="stmt"/>
+        <line num="393" count="3" type="stmt"/>
+        <line num="396" count="3" type="stmt"/>
+      </file>
+      <file name="Test.vue" path="D:\Project\bliress-frontend\src\views\admin\test\Test.vue">
+        <metrics statements="23" coveredstatements="16" conditionals="2" coveredconditionals="2" methods="8" coveredmethods="7"/>
+        <line num="244" count="1" type="stmt"/>
+        <line num="245" count="1" type="stmt"/>
+        <line num="246" count="1" type="stmt"/>
+        <line num="256" count="5" type="stmt"/>
+        <line num="275" count="6" type="stmt"/>
+        <line num="278" count="6" type="stmt"/>
+        <line num="281" count="1" type="stmt"/>
+        <line num="282" count="1" type="stmt"/>
+        <line num="286" count="5" type="stmt"/>
+        <line num="287" count="5" type="stmt"/>
+        <line num="294" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="295" count="1" type="stmt"/>
+        <line num="297" count="1" type="stmt"/>
+        <line num="302" count="0" type="stmt"/>
+        <line num="303" count="0" type="stmt"/>
+        <line num="304" count="0" type="stmt"/>
+        <line num="305" count="0" type="stmt"/>
+        <line num="307" count="0" type="stmt"/>
+        <line num="308" count="0" type="stmt"/>
+        <line num="309" count="0" type="stmt"/>
+        <line num="313" count="1" type="stmt"/>
+        <line num="325" count="5" type="stmt"/>
+        <line num="328" count="5" type="stmt"/>
       </file>
     </package>
     <package name="views.employee.account">

@@ -11,8 +11,10 @@
 
       <!-- batch -->
       <div class="batch-list">
-        <div :class="'batch batch-' + batch.batch" v-for="(batch) in batchTrainingList.data" :key="batch.id">
-          <div class="general" @click="showDetailTraining(`batch-${batch.batch}`)">
+        <div :id="`batch-${batch.id}`"
+        :class="'batch batch-' + batch.batch" v-for="(batch) in batchTrainingList.data"
+        :key="batch.id">
+          <div class="general" @click="showDetailTraining(`batch-${batch.id}`)">
             <div class="txt">{{ batch.batch }} ({{ batch.year }})</div>
             <font-awesome-icon icon="chevron-down" class="chev-icon"></font-awesome-icon>
           </div>
@@ -273,15 +275,22 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseGetAll();
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.dataReady(promise);
+    },
+
+    promiseGetAll() {
+      return new Promise((resolve) => {
         this.getBatchTraining({
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    dataReady(promise) {
       if (promise === 200) {
         this.apiReady = true;
       } else {
@@ -290,7 +299,7 @@ export default {
     },
 
     showDetailTraining(el) {
-      const target = document.querySelector(`.${el}`);
+      const target = document.querySelector(`#${el}`);
       const general = target.querySelector('.general');
       const chevIcon = general.querySelector('.chev-icon');
       const detail = target.querySelector('.detail');
