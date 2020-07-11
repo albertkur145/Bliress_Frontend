@@ -393,15 +393,22 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseGetAllBatch();
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.dataReady(promise);
+    },
+
+    promiseGetAllBatch() {
+      return new Promise((resolve) => {
         this.getBatch({
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    dataReady(promise) {
       if (promise === 200) {
         this.apiReady = true;
       } else {
@@ -414,7 +421,15 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseGetDetailEmployee();
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.afterGetDetailEmployee(promise);
+    },
+
+    promiseGetDetailEmployee() {
+      return new Promise((resolve) => {
         this.getEmployee({
           params: {
             id: this.paramId,
@@ -422,10 +437,9 @@ export default {
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    afterGetDetailEmployee(promise) {
       if (promise === 200) {
         this.setForm(this.employeeData.data);
       } else {
@@ -451,16 +465,23 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseReqApi(action);
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.afterReqApi(promise);
+    },
+
+    promiseReqApi(action) {
+      return new Promise((resolve) => {
         action({
           params: this.form,
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    afterReqApi(promise) {
       if (promise === 200) {
         this.$func.popupSuccessfull('Berhasil simpan data', 5000, { name: 'AdminMenuEmployee' });
       } else {

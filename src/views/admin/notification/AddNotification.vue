@@ -326,15 +326,22 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseGetAllBatch();
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.dataReady(promise);
+    },
+
+    promiseGetAllBatch() {
+      return new Promise((resolve) => {
         this.getBatch({
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    dataReady(promise) {
       if (promise === 200) {
         this.apiReady = true;
       } else {
@@ -365,16 +372,23 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseSendNotif();
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.afterSendNotif(promise);
+    },
+
+    promiseSendNotif() {
+      return new Promise((resolve) => {
         this.postNotification({
           params: this.form,
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    afterSendNotif(promise) {
       if (promise === 200) {
         this.$func.popupSuccessfull('Berhasil kirim notifikasi', 5000, { name: 'AdminNotification' });
       } else {

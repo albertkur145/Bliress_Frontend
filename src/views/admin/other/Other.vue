@@ -194,6 +194,11 @@ export default {
     },
   },
 
+  created() {
+    // check user auth
+    this.$func.userAuth('Admin');
+  },
+
 };
 
 </script>

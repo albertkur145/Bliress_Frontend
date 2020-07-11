@@ -252,15 +252,22 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseAPI();
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.dataReady(promise);
+    },
+
+    promiseAPI() {
+      return new Promise((resolve) => {
         this.getNotifications({
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    dataReady(promise) {
       if (promise === 200) {
         this.apiReady = true;
       } else {

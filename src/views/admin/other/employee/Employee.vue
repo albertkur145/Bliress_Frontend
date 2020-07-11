@@ -338,15 +338,22 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseGetAllEmployee();
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.dataReady(promise);
+    },
+
+    promiseGetAllEmployee() {
+      return new Promise((resolve) => {
         this.getEmployees({
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    dataReady(promise) {
       if (promise === 200) {
         this.apiReady = true;
       } else {
@@ -359,7 +366,15 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseDelete(id);
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.afterDelete(promise);
+    },
+
+    promiseDelete(id) {
+      return new Promise((resolve) => {
         this.deleteEmployee({
           params: {
             id,
@@ -367,10 +382,9 @@ export default {
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    afterDelete(promise) {
       if (promise === 200) {
         this.$func.popupSuccessfull('Berhasil hapus data', 5000, null);
       } else {
@@ -387,15 +401,15 @@ export default {
       });
     },
 
-    confirmDelete(id) {
-      this.$func.popupConfirmDialog(
+    async confirmDelete(id) {
+      const res = await this.$func.popupConfirmDialog(
         'Kamu yakin?',
         'Data akan dihapus secara permanen',
-      ).then((res) => {
-        if (res.value) {
-          this.delete(id);
-        }
-      });
+      );
+
+      if (res.value) {
+        this.delete(id);
+      }
     },
   },
 

@@ -353,7 +353,15 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseGetDetailTrainer();
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.afterGetDetailTrainer(promise);
+    },
+
+    promiseGetDetailTrainer() {
+      return new Promise((resolve) => {
         this.getTrainer({
           params: {
             id: this.paramId,
@@ -361,10 +369,9 @@ export default {
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    afterGetDetailTrainer(promise) {
       if (promise === 200) {
         this.setForm(this.trainerData.data);
       } else {
@@ -395,16 +402,23 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await new Promise((resolve) => {
+      const promise = await this.promiseReqApi(action);
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.afterReqApi(promise);
+    },
+
+    promiseReqApi(action) {
+      return new Promise((resolve) => {
         action({
           params: this.form,
           resolve,
         });
       });
+    },
 
-      // show loader
-      this.animationLoaderDisplay = false;
-
+    afterReqApi(promise) {
       if (promise === 200) {
         this.$func.popupSuccessfull('Berhasil simpan data', 5000, { name: 'AdminTrainer' });
       } else {
