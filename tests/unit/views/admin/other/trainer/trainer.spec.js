@@ -68,7 +68,7 @@ describe('Method', () => {
     getters = {
       trainerList: jest.fn().mockReturnValue({
         data: {
-          filter: jest.fn(),
+          filter: jest.fn((value) => value),
         },
       }),
     };

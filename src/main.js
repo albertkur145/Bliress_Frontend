@@ -7,6 +7,7 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import func from './function';
 import router from './router';
+import 'nprogress/nprogress.css';
 import store from './store';
 import App from './App.vue';
 

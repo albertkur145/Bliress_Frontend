@@ -11,8 +11,8 @@ export default {
     }
   },
 
-  popupSuccessfull: (msg, timer, route) => {
-    swal.fire({
+  popupSuccessfull: async (msg, timer, route) => {
+    await swal.fire({
       text: msg,
       icon: 'success',
       timer,
@@ -20,9 +20,8 @@ export default {
       allowEscapeKey: false,
       timerProgressBar: true,
       showCloseButton: true,
-    }).then(() => {
-      router.push(route);
     });
+    router.push(route);
   },
 
   popupLostConnection: () => {
@@ -47,33 +46,38 @@ export default {
     });
   },
 
-  popupLogoutFirst: () => {
-    swal.fire({
+  popupLogoutFirst: async () => {
+    await swal.fire({
       text: 'Silahkan logout terlebih dahulu',
       icon: 'info',
       backdrop: false,
       timerProgressBar: true,
       allowEscapeKey: false,
-    }).then(() => {
-      let name = '';
-      switch (cookies.get('user').role) {
-        case 'Employee':
-          name = 'Training';
-          break;
-
-        case 'Admin':
-          name = 'AdminBatch';
-          break;
-
-        case 'Trainer':
-          name = 'TrainerTraining';
-          break;
-
-        default:
-          console.log('Error');
-      }
-      router.push({ name });
     });
+
+    let name = '';
+    let exist = true;
+    switch (cookies.get('user').role) {
+      case 'Employee':
+        name = 'Training';
+        break;
+
+      case 'Admin':
+        name = 'AdminBatch';
+        break;
+
+      case 'Trainer':
+        name = 'TrainerTraining';
+        break;
+
+      default:
+        exist = false;
+        break;
+    }
+
+    if (exist) {
+      router.push({ name });
+    }
   },
 
   popupConfirmDialog: (title, text) => {
