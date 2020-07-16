@@ -100,11 +100,11 @@ const routes = [
     name: 'AdminEmployee',
     component: () => import('../views/admin/batch/Employee.vue'),
   },
-  {
-    path: '/admin/batch/:batch/employee/add',
-    name: 'AdminAddEmployee',
-    component: () => import('../views/admin/batch/AddEmployee.vue'),
-  },
+  // {
+  //   path: '/admin/batch/:batch/employee/add',
+  //   name: 'AdminAddEmployee',
+  //   component: () => import('../views/admin/batch/AddEmployee.vue'),
+  // },
   {
     path: '/admin/test',
     name: 'AdminTest',
