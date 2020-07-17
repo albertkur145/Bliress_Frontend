@@ -1,4 +1,4 @@
-const API = 'http://localhost:8123/api';
+const API = 'http://localhost:8080/api';
 
 export default [
   {

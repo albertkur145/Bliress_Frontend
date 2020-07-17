@@ -21,7 +21,7 @@ const mutations = {
 
 const actions = {
   login({ commit }, payload) {
-    axios({
+    return axios({
       method: 'post',
       url: `${API}/login`,
       data: payload.params,
