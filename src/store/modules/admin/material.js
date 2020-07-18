@@ -21,7 +21,7 @@ const mutations = {
 
 const actions = {
   getMaterials({ commit }, payload) {
-    axios({
+    return axios({
       method: 'get',
       url: `${API}/admin/material`,
       params: payload.params,
@@ -37,7 +37,7 @@ const actions = {
   },
 
   deleteMaterial({ commit }, payload) {
-    axios({
+    return axios({
       method: 'delete',
       url: `${API}/admin/material`,
       params: payload.params,
@@ -53,7 +53,7 @@ const actions = {
   },
 
   postMaterial({ commit }, payload) {
-    axios({
+    return axios({
       method: 'post',
       url: `${API}/admin/material`,
       data: payload.params,

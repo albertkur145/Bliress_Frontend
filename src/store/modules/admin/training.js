@@ -39,7 +39,7 @@ const mutations = {
 
 const actions = {
   getTrainings({ commit }, payload) {
-    axios({
+    return axios({
       method: 'get',
       url: `${API}/admin/batch/training`,
       params: payload.params,
@@ -55,7 +55,7 @@ const actions = {
   },
 
   getTrainingBy({ commit }, payload) {
-    axios({
+    return axios({
       method: 'get',
       url: `${API}/admin/batch/training/detail`,
       params: payload.params,
@@ -71,7 +71,7 @@ const actions = {
   },
 
   postTraining({ commit }, payload) {
-    axios({
+    return axios({
       method: 'post',
       url: `${API}/admin/batch/training`,
       data: payload.params,
@@ -87,7 +87,7 @@ const actions = {
   },
 
   putTraining({ commit }, payload) {
-    axios({
+    return axios({
       method: 'put',
       url: `${API}/admin/batch/training`,
       data: payload.params,
@@ -103,7 +103,7 @@ const actions = {
   },
 
   deleteTraining({ commit }, payload) {
-    axios({
+    return axios({
       method: 'delete',
       url: `${API}/admin/batch/training`,
       params: payload.params,
@@ -119,7 +119,7 @@ const actions = {
   },
 
   getAttendance({ commit }, payload) {
-    axios({
+    return axios({
       method: 'get',
       url: `${API}/admin/batch/training/attendance`,
       params: payload.params,

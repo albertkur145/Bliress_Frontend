@@ -39,7 +39,7 @@ const mutations = {
 
 const actions = {
   getEmployeesBatch({ commit }, payload) {
-    axios({
+    return axios({
       method: 'get',
       url: `${API}/admin/batch/employee`,
       params: payload.params,
@@ -55,7 +55,7 @@ const actions = {
   },
 
   getEmployees({ commit }, payload) {
-    axios({
+    return axios({
       method: 'get',
       url: `${API}/admin/employee`,
       responseType: 'json',
@@ -70,7 +70,7 @@ const actions = {
   },
 
   getEmployee({ commit }, payload) {
-    axios({
+    return axios({
       method: 'get',
       url: `${API}/admin/employee/detail`,
       params: payload.params,
@@ -86,7 +86,7 @@ const actions = {
   },
 
   postEmployee({ commit }, payload) {
-    axios({
+    return axios({
       method: 'post',
       url: `${API}/admin/employee`,
       data: payload.params,
@@ -102,7 +102,7 @@ const actions = {
   },
 
   putEmployee({ commit }, payload) {
-    axios({
+    return axios({
       method: 'put',
       url: `${API}/admin/employee`,
       data: payload.params,
@@ -118,7 +118,7 @@ const actions = {
   },
 
   deleteEmployee({ commit }, payload) {
-    axios({
+    return axios({
       method: 'delete',
       url: `${API}/admin/employee`,
       params: payload.params,

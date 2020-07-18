@@ -4,11 +4,20 @@ import axios from 'axios';
 const store = Login;
 jest.mock('axios', () => jest.fn());
 
+
 // describe
-describe('Describe', () => {
+describe('Login modules', () => {
+  // it getters
+  it('Getters', () => {
+    const state = { user: 'User123' };
+
+    // expect
+    expect(store.getters.user(state)).toBe('User123');
+  });
+  // it getters
 
   // it mutations
-  it('Mutations', async () => {
+  it('Mutations', () => {
     const state = { user: '' };
     store.mutations.setUser(state, 'User123');
 
@@ -16,16 +25,6 @@ describe('Describe', () => {
     expect(state.user).toBe('User123');
   });
   // it mutations
-
-  // it getters
-  it('Getters', () => {
-    const state = { user: 'User123' };
-    let getters = store.getters.user(state);
-
-    // expect
-    expect(getters).toBe('User123');
-  });
-  // it getters
 
   // it actions
   it('Actions', async () => {
@@ -54,4 +53,4 @@ describe('Describe', () => {
   });
   // it actions
 });
-// describe
+// end describe

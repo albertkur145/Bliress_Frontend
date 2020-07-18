@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">38.46% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/13</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
@@ -36,16 +36,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">38.46% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/13</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
@@ -54,7 +54,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -121,34 +121,34 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -172,35 +172,35 @@ const getters = {};
 const mutations = {};
 &nbsp;
 const actions = {
-<span class="fstat-no" title="function not covered" >  de</span>leteMaterial({ commit }, payload) {
-<span class="cstat-no" title="statement not covered" >    axios({</span>
+  deleteMaterial({ commit }, payload) {
+    return axios({
       method: 'delete',
       url: `${API}/trainer/material`,
       params: payload.params,
       responseType: 'json',
     })
-      .then(<span class="fstat-no" title="function not covered" >(r</span>es) =&gt; {
-<span class="cstat-no" title="statement not covered" >        console.log(commit);</span>
-<span class="cstat-no" title="statement not covered" >        payload.resolve(res.data.code);</span>
+      .then((res) =&gt; {
+        console.log(commit);
+        payload.resolve(res.data.code);
       })
-      .catch(<span class="fstat-no" title="function not covered" >(e</span>rr) =&gt; {
-<span class="cstat-no" title="statement not covered" >        console.log(err);</span>
+      .catch((err) =&gt; {
+        console.log(err);
       });
   },
 &nbsp;
-<span class="fstat-no" title="function not covered" >  po</span>stMaterial({ commit }, payload) {
-<span class="cstat-no" title="statement not covered" >    axios({</span>
+  postMaterial({ commit }, payload) {
+    return axios({
       method: 'post',
       url: `${API}/trainer/material`,
       data: payload.params,
       responseType: 'json',
     })
-      .then(<span class="fstat-no" title="function not covered" >(r</span>es) =&gt; {
-<span class="cstat-no" title="statement not covered" >        console.log(commit);</span>
-<span class="cstat-no" title="statement not covered" >        payload.resolve(res.data.code);</span>
+      .then((res) =&gt; {
+        console.log(commit);
+        payload.resolve(res.data.code);
       })
-      .catch(<span class="fstat-no" title="function not covered" >(e</span>rr) =&gt; {
-<span class="cstat-no" title="statement not covered" >        console.log(err);</span>
+      .catch((err) =&gt; {
+        console.log(err);
       });
   },
 };
@@ -219,7 +219,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Jul 17 2020 15:04:48 GMT+0700 (GMT+07:00)
+                at Sat Jul 18 2020 21:15:37 GMT+0700 (GMT+07:00)
             </div>
         </div>
         <script src="..\..\..\prettify.js"></script>

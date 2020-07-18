@@ -39,7 +39,7 @@ const mutations = {
 
 const actions = {
   getBatch({ commit }, payload) {
-    axios({
+    return axios({
       method: 'get',
       url: `${API}/admin/batch`,
       responseType: 'json',
@@ -54,7 +54,7 @@ const actions = {
   },
 
   getBatchTraining({ commit }, payload) {
-    axios({
+    return axios({
       method: 'get',
       url: `${API}/admin/batchtraining`,
       responseType: 'json',
@@ -69,7 +69,7 @@ const actions = {
   },
 
   postBatch({ commit }, payload) {
-    axios({
+    return axios({
       method: 'post',
       url: `${API}/admin/batch`,
       data: payload.params,
@@ -85,7 +85,7 @@ const actions = {
   },
 
   getBatchBy({ commit }, payload) {
-    axios({
+    return axios({
       method: 'get',
       url: `${API}/admin/batch/detail`,
       params: payload.params,
@@ -101,7 +101,7 @@ const actions = {
   },
 
   deleteBatch({ commit }, payload) {
-    axios({
+    return axios({
       method: 'delete',
       url: `${API}/admin/batch`,
       params: payload.params,

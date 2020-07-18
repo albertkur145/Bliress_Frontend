@@ -21,7 +21,7 @@ const mutations = {
 
 const actions = {
   getNotifications({ commit }, payload) {
-    axios({
+    return axios({
       method: 'get',
       url: `${API}/admin/notification`,
       responseType: 'json',
@@ -36,7 +36,7 @@ const actions = {
   },
 
   postNotification({ commit }, payload) {
-    axios({
+    return axios({
       method: 'post',
       url: `${API}/admin/notification`,
       data: payload.params,

@@ -30,7 +30,7 @@ const mutations = {
 
 const actions = {
   getTrainings({ commit }, payload) {
-    axios({
+    return axios({
       method: 'get',
       url: `${API}/trainer/training`,
       params: payload.params,
@@ -46,7 +46,7 @@ const actions = {
   },
 
   getTrainingBy({ commit }, payload) {
-    axios({
+    return axios({
       method: 'get',
       url: `${API}/trainer/training/detail`,
       params: payload.params,

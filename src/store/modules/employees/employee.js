@@ -21,7 +21,7 @@ const mutations = {
 
 const actions = {
   getUser({ commit }, payload) {
-    axios({
+    return axios({
       method: 'get',
       url: `${API}/employee`,
       params: payload.params,

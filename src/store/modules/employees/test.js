@@ -39,7 +39,7 @@ const mutations = {
 
 const actions = {
   getTests({ commit }, payload) {
-    axios({
+    return axios({
       method: 'get',
       url: `${API}/test`,
       params: payload.params,
@@ -55,7 +55,7 @@ const actions = {
   },
 
   getMaterials({ commit }, payload) {
-    axios({
+    return axios({
       method: 'get',
       url: `${API}/test/material`,
       params: payload.params,
@@ -71,7 +71,7 @@ const actions = {
   },
 
   getQuestions({ commit }, payload) {
-    axios({
+    return axios({
       method: 'get',
       url: `${API}/test/material/question`,
       params: payload.params,
@@ -87,7 +87,7 @@ const actions = {
   },
 
   submitTest({ commit }, payload) {
-    axios({
+    return axios({
       method: 'post',
       url: `${API}/test/material/question`,
       data: payload.params,

@@ -11,7 +11,7 @@ const mutations = {};
 
 const actions = {
   deleteMaterial({ commit }, payload) {
-    axios({
+    return axios({
       method: 'delete',
       url: `${API}/trainer/material`,
       params: payload.params,
@@ -27,7 +27,7 @@ const actions = {
   },
 
   postMaterial({ commit }, payload) {
-    axios({
+    return axios({
       method: 'post',
       url: `${API}/trainer/material`,
       data: payload.params,
