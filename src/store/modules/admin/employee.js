@@ -41,7 +41,7 @@ const actions = {
   getEmployeesBatch({ commit }, payload) {
     return axios({
       method: 'get',
-      url: `${API}/admin/batch/employee`,
+      url: `${API}/admin/employee/batch`,
       params: payload.params,
       responseType: 'json',
     })

@@ -16,7 +16,7 @@
     </div>
     <!-- end content -->
 
-    <MenuBar></MenuBar>
+    <MenuBar :show="false"></MenuBar>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
@@ -191,7 +191,23 @@ export default {
   methods: {
     ...mapActions('employeeNotification', [
       'getNotifications',
+      'postNotifications',
     ]),
+
+    async hasReadNotifications() {
+      await this.promiseHasRead();
+    },
+
+    promiseHasRead() {
+      return new Promise((resolve) => {
+        this.postNotifications({
+          params: {
+            employeeId: this.$cookies.get('user').id,
+          },
+          resolve,
+        });
+      });
+    },
 
     async getAllNotifications() {
       // show loader
@@ -232,6 +248,7 @@ export default {
 
     // req api
     this.getAllNotifications();
+    this.hasReadNotifications();
   },
 
 };

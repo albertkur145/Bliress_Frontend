@@ -10,6 +10,8 @@ localVue.use(Vuex);
 describe('When created', () => {
   let actions;
   let store;
+  let actionsNotif;
+  let gettersNotif;
 
   // before each
   beforeEach(() => {
@@ -17,11 +19,30 @@ describe('When created', () => {
       getTrainings: jest.fn(),
     };
 
+    actionsNotif = {
+      getTriggerNotif: jest.fn(),
+    };
+
+    gettersNotif = {
+      triggerNotif: jest.fn(() => {
+        return {
+          data: {
+            hasNotif: true,
+          },
+        };
+      }),
+    };
+
     store = new Vuex.Store({
       modules: {
         employeeTraining: {
           namespaced: true,
           actions,
+        },
+        employeeNotification: {
+          namespaced: true,
+          actions: actionsNotif,
+          getters: gettersNotif,
         },
       },
     });
@@ -54,11 +75,13 @@ describe('When created', () => {
 // end describe when created
 
 
-// describe method dataReady
-describe('Method dataReady', () => {
+// describe method
+describe('Method', () => {
   let actions;
   let store;
   let getters;
+  let actionsNotif;
+  let gettersNotif;
 
   // before each
   beforeEach(() => {
@@ -66,10 +89,24 @@ describe('Method dataReady', () => {
       getTrainings: jest.fn(),
     };
 
+    actionsNotif = {
+      getTriggerNotif: jest.fn(),
+    };
+
     getters = {
       trainingList: jest.fn(() => {
         return {
           data: {},
+        };
+      }),
+    };
+
+    gettersNotif = {
+      triggerNotif: jest.fn(() => {
+        return {
+          data: {
+            hasNotif: true,
+          },
         };
       }),
     };
@@ -81,13 +118,18 @@ describe('Method dataReady', () => {
           actions,
           getters,
         },
+        employeeNotification: {
+          namespaced: true,
+          actions: actionsNotif,
+          getters: gettersNotif,
+        },
       },
     });
   });
   // before each
 
-  // it branch
-  it('Branch', () => {
+  // it data ready
+  it('Data ready', () => {
     const wrapper = shallowMount(Training, {
       data() {
         return {
@@ -123,34 +165,10 @@ describe('Method dataReady', () => {
     // expect
     expect(wrapper.vm.$func.popupLostConnection).toBeCalled();
   });
-  // it branch
-});
-// end describe method dataReady
+  // it data ready
 
-
-// describe method getAllTraining
-describe('Method getAllTraining', () => {
-  let actions;
-  let store;
-
-  // before each
-  beforeEach(() => {
-    actions = {
-      getTrainings: jest.fn(),
-    };
-    store = new Vuex.Store({
-      modules: {
-        employeeTraining: {
-          namespaced: true,
-          actions,
-        },
-      },
-    });
-  });
-  // before each
-
-  // it after promise
-  it('After promise', async () => {
+  // it get all training
+  it('Get all training', async () => {
     const wrapper = shallowMount(Training, {
       mocks: {
         $func: {
@@ -180,6 +198,70 @@ describe('Method getAllTraining', () => {
     expect(wrapper.vm.animationLoaderDisplay).toBeFalsy();
     expect(spyDataReady).toBeCalled();
   });
-  // it after promise
+  // it get all training
+
+  // it is has notif
+  it('Is has notif', async () => {
+    const wrapper = shallowMount(Training, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+        },
+        $cookies: {
+          get: jest.fn((user) => user),
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+      ],
+    });
+
+    jest.spyOn(wrapper.vm, 'promiseIsHasNotif').mockImplementation(() => {
+      Promise.resolve(200);
+    });
+    const spy = jest.spyOn(wrapper.vm, 'afterTriggerNotif').mockImplementation(() => {
+      return;
+    });
+
+    await wrapper.vm.isHasNotif();
+
+    // expect
+    expect(wrapper.vm.animationLoaderDisplay).toBeFalsy();
+    expect(spy).toBeCalled();
+  });
+  // it is has notif
+
+  // it after trigger notif
+  it('After trigger notif', () => {
+    const wrapper = shallowMount(Training, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+          popupLostConnection: jest.fn(),
+        },
+        $cookies: {
+          get: jest.fn((user) => user),
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+      ],
+    });
+
+    wrapper.vm.afterTriggerNotif(200);
+
+    // expect
+    expect(wrapper.vm.hasNotif).toBe(wrapper.vm.triggerNotif.data.hasNotif);
+
+    wrapper.vm.afterTriggerNotif(404);
+
+    // expect
+    expect(wrapper.vm.$func.popupLostConnection).toBeCalled();
+  });
+  // it after trigger notif
 });
-// end describe method getAllTraining
+// end describe method

@@ -504,6 +504,25 @@ export default [
     },
   },
   {
+    url: `${API}/notification/trigger`,
+    method: 'GET',
+    params: {
+      params: {
+        employeeId: 1,
+      },
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: {
+        hasNotif: true,
+      },
+      paging: null,
+      errors: null,
+    },
+  },
+  {
     url: `${API}/notification`,
     method: 'GET',
     params: {
@@ -527,6 +546,21 @@ export default [
           message: 'Dalam mengikuti training 2, diharapkan setiap peserta training membawa kebutuhan masing-masing seperti alat tulis, laptop, ataupun peralatan mandi lainnya. Terimakasih.',
         },
       ],
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/notification`,
+    method: 'POST',
+    params: {
+      employeeId: 1,
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: null,
       paging: null,
       errors: null,
     },
@@ -923,7 +957,7 @@ export default [
     },
   },
   {
-    url: `${API}/admin/batch/employee`,
+    url: `${API}/admin/employee/batch`,
     method: 'GET',
     params: {
       params: {

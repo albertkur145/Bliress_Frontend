@@ -35,7 +35,7 @@
     </div>
     <!-- end content  -->
 
-    <MenuBar></MenuBar>
+    <MenuBar :show="hasNotif"></MenuBar>
     <AnimationLoader :class="{ 'display-flex': animationLoaderDisplay }"></AnimationLoader>
   </div>
 </template>
@@ -262,6 +262,7 @@ export default {
     return {
       animationLoaderDisplay: false,
       apiReady: false,
+      hasNotif: false,
     };
   },
 
@@ -269,12 +270,51 @@ export default {
     ...mapGetters('employeeTest', [
       'testList',
     ]),
+
+    ...mapGetters('employeeNotification', [
+      'triggerNotif',
+    ]),
   },
 
   methods: {
     ...mapActions('employeeTest', [
       'getTests',
     ]),
+
+    ...mapActions('employeeNotification', [
+      'getTriggerNotif',
+    ]),
+
+    async isHasNotif() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await this.promiseIsHasNotif();
+
+      // hide loader
+      this.animationLoaderDisplay = false;
+      this.afterTriggerNotif(promise);
+    },
+
+    promiseIsHasNotif() {
+      return new Promise((resolve) => {
+        this.getTriggerNotif({
+          params: {
+            employeeId: this.$cookies.get('user').id,
+          },
+          resolve,
+        });
+      });
+    },
+
+    afterTriggerNotif(promise) {
+      if (promise === 200) {
+        this.hasNotif = this.triggerNotif.data.hasNotif;
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
 
     async getAllTests() {
       // show loader
@@ -315,6 +355,7 @@ export default {
 
     // req api
     this.getAllTests();
+    this.isHasNotif();
   },
 
 };
