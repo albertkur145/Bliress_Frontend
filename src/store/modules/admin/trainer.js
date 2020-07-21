@@ -107,6 +107,22 @@ const actions = {
         console.log(err);
       });
   },
+
+  resetPassword({ commit }, payload) {
+    return axios({
+      method: 'put',
+      url: `${API}/admin/trainer/reset`,
+      data: payload.params,
+      responseType: 'json',
+    })
+      .then((res) => {
+        console.log(commit);
+        payload.resolve(res.data.code);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };
 
 export default {

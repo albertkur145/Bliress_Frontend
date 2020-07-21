@@ -84,6 +84,7 @@ describe('Method', () => {
       getEmployee: jest.fn(),
       postEmployee: jest.fn(),
       putEmployee: jest.fn(),
+      resetPassword: jest.fn(),
     };
 
     gettersBatch = {
@@ -619,5 +620,146 @@ describe('Method', () => {
     expect(spy).toBeCalled();
   });
   // it validate form
+
+  // it confirm reset
+  it('Confirm reset', async () => {
+    const wrapper = shallowMount(CreateEmployee, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+          popupConfirmDialog: jest.fn().mockReturnValue({
+            value: true,
+          }),
+        },
+        $route: {
+          params: {
+            id: 5,
+          },
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    const spy = jest.spyOn(wrapper.vm, 'resetPasswordUser').mockImplementation(() => { return });
+    await wrapper.vm.confirmReset();
+
+    // expect
+    expect(spy).toBeCalled();
+    spy.mockClear();
+
+    wrapper.vm.$func.popupConfirmDialog.mockReturnValue({ value: false });
+    await wrapper.vm.confirmReset();
+
+    expect(spy).not.toBeCalled();
+  });
+  // it confirm reset
+
+  // it resetPasswordUser
+  it('Reset password user', async () => {
+    const wrapper = shallowMount(CreateEmployee, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+        },
+        $route: {
+          params: {
+            id: 5,
+          },
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    jest.spyOn(wrapper.vm, 'promiseResetPassword').mockImplementation(() => {
+      Promise.resolve(200);
+    });
+    const spy = jest.spyOn(wrapper.vm, 'afterResetPassword').mockImplementation(() => { return; });
+    await wrapper.vm.resetPasswordUser();
+
+    // expect
+    expect(wrapper.vm.animationLoaderDisplay).toBeFalsy();
+    expect(spy).toBeCalled();
+  });
+  // it resetPasswordUser
+
+  // it promise reset password
+  it('Promise reset password', () => {
+    const wrapper = shallowMount(CreateEmployee, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+        },
+        $route: {
+          params: {
+            id: 5,
+          },
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    const spy = jest.spyOn(wrapper.vm, 'resetPassword');
+    wrapper.vm.promiseResetPassword();
+
+    // expect
+    expect(spy).toBeCalled();
+    expect(spy).toBeCalledWith({
+      params: {
+        id: wrapper.vm.paramId,
+      },
+      resolve: expect.any(Function),
+    });
+  });
+  // it promise reset password
+
+  // it afterResetPassword
+  it('After reset password', () => {
+    const wrapper = shallowMount(CreateEmployee, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+          popupSuccessfull: jest.fn(),
+          popupLostConnection: jest.fn(),
+        },
+        $route: {
+          params: {
+            id: 5,
+          },
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    wrapper.vm.afterResetPassword(200);
+
+    // expect
+    expect(wrapper.vm.$func.popupSuccessfull).toBeCalled();
+
+    wrapper.vm.afterResetPassword(404);
+
+    // expect
+    expect(wrapper.vm.$func.popupLostConnection).toBeCalled();
+  });
+  // it afterResetPassword
 });
 // end describe method

@@ -31,8 +31,17 @@
         <div class="form-group">
           <fieldset>
             <legend>Password</legend>
-            <input :type="passwordType" class="input-text" v-model="form.password">
-            <font-awesome-icon :icon="showPasswordIcon" class="eye-icon" @click="tooglePassword"></font-awesome-icon>
+            <input
+            :class="{ 'fieldset-disabled': inputDisabled }"
+            :type="passwordType"
+            class="input-text"
+            v-model="form.password"
+            :disabled="inputDisabled">
+
+            <font-awesome-icon v-if="!paramId" :icon="showPasswordIcon"
+            class="eye-icon" @click="tooglePassword"></font-awesome-icon>
+
+            <div v-else class="reset-password" @click="confirmReset">reset</div>
           </fieldset>
         </div>
 
@@ -158,6 +167,22 @@
               right: 0.75rem;
               font-size: 0.875em;
             }
+
+            .reset-password {
+              cursor: pointer;
+              position: absolute;
+              background-color: #FF5252;
+              color: #FFF;
+              border-radius: 2rem;
+              top: 1.5rem;
+              right: 0.75rem;
+              padding: 0.25rem 0.5rem;
+              font-size: 0.75em;
+            }
+          }
+
+          .fieldset-disabled:hover {
+            cursor: no-drop;
           }
         }
       }
@@ -220,6 +245,13 @@
                 right: 0.875rem;
                 font-size: 0.9375em;
               }
+
+              .reset-password {
+                top: 1.5rem;
+                right: 0.875rem;
+                padding: 0.3125rem 0.5875rem;
+                font-size: 0.8125em;
+              }
             }
           }
         }
@@ -281,6 +313,13 @@
                 right: 1rem;
                 font-size: 1em;
               }
+
+              .reset-password {
+                top: 1.6875rem;
+                right: 1rem;
+                padding: 0.375rem 0.625rem;
+                font-size: 0.875em;
+              }
             }
           }
         }
@@ -308,6 +347,7 @@ export default {
       animationLoaderDisplay: false,
       passwordType: 'password',
       showPasswordIcon: 'eye-slash',
+      inputDisabled: false,
       form: {
         name: '',
         email: '',
@@ -336,6 +376,7 @@ export default {
       'getTrainer',
       'postTrainer',
       'putTrainer',
+      'resetPassword',
     ]),
 
     tooglePassword() {
@@ -393,6 +434,7 @@ export default {
         this.reqApi(this.postTrainer);
       } else {
         this.form.id = this.paramId;
+        delete this.form.password;
         this.reqApi(this.putTrainer);
       }
     },
@@ -439,6 +481,48 @@ export default {
         this.save();
       }
     },
+
+    async confirmReset() {
+      const res = await this.$func.popupConfirmDialog(
+        'Kamu yakin?',
+        'Password akan di reset menjadi 12345',
+      );
+
+      if (res.value) {
+        this.resetPasswordUser();
+      }
+    },
+
+    async resetPasswordUser() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await this.promiseResetPassword();
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.afterResetPassword(promise);
+    },
+
+    promiseResetPassword() {
+      return new Promise((resolve) => {
+        this.resetPassword({
+          params: {
+            id: this.paramId,
+          },
+          resolve,
+        });
+      });
+    },
+
+    afterResetPassword(promise) {
+      if (promise === 200) {
+        this.$func.popupSuccessfull('Berhasil reset password', 5000, { name: 'AdminTrainer' });
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
   },
 
   created() {
@@ -450,6 +534,7 @@ export default {
 
     // req api
     if (this.paramId) {
+      this.inputDisabled = true;
       this.getDetailTrainer();
     }
   },

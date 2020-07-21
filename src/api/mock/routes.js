@@ -2218,12 +2218,26 @@ export default [
       id: 1,
       name: 'Albert Kurniawan',
       email: 'albertkur@gmail.com',
-      password: '123456',
       phoneNumber: '081392290882',
       division: 'Operation',
       birthdate: '1990-11-03',
       gender: 'Pria',
       batchId: 202009,
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: null,
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/admin/employee/reset`,
+    method: 'PUT',
+    params: {
+      id: 1,
     },
     status: 200,
     response: {
@@ -2332,8 +2346,22 @@ export default [
       id: 1,
       name: 'Alfonsus Nugroho',
       email: 'alfon@gmail.com',
-      password: '123456',
       division: 'Software Engineer',
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: null,
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/admin/trainer/reset`,
+    method: 'PUT',
+    params: {
+      id: 1,
     },
     status: 200,
     response: {

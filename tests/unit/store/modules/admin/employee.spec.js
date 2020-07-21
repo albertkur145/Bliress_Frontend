@@ -151,6 +151,23 @@ describe('Employee modules admin', () => {
     // expect
     expect(spyConsole).toBeCalledWith('Catch');
     // deleteEmployee
+
+    jest.clearAllMocks();
+
+    // resetPassword
+    axios.mockResolvedValue(res);
+    await store.actions.resetPassword({ commit }, { resolve });
+
+    // expect
+    expect(spyConsole).toBeCalledWith(commit);
+    expect(resolve).toBeCalledWith(res.data.code);
+
+    axios.mockRejectedValue('Catch');
+    await store.actions.resetPassword({ commit }, { resolve });
+
+    // expect
+    expect(spyConsole).toBeCalledWith('Catch');
+    // resetPassword
   });
   // it actions
 });
