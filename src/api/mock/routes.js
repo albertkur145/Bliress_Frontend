@@ -593,6 +593,23 @@ export default [
     },
   },
   {
+    url: `${API}/employee/password`,
+    method: 'PUT',
+    params: {
+      employeeId: 1,
+      oldPassword: '123',
+      currentPassword: '456',
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: null,
+      paging: null,
+      errors: null,
+    },
+  },
+  {
     url: `${API}/admin/batch`,
     method: 'GET',
     status: 200,
@@ -2180,7 +2197,7 @@ export default [
         email: 'albertkur@gmail.com',
         password: '123456',
         phoneNumber: '081392290882',
-        division: 'Operation',
+        division: 'Software Engineer',
         birthdate: '1990-11-03',
         gender: 'Pria',
         batchId: 202009,
@@ -2346,7 +2363,7 @@ export default [
       id: 1,
       name: 'Alfonsus Nugroho',
       email: 'alfon@gmail.com',
-      division: 'Software Engineer',
+      division: 'Operation',
     },
     status: 200,
     response: {
@@ -3147,6 +3164,23 @@ export default [
     method: 'POST',
     params: {
       trainerId: 1,
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: null,
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/trainer/password`,
+    method: 'PUT',
+    params: {
+      trainerId: 1,
+      oldPassword: '123',
+      currentPassword: '456',
     },
     status: 200,
     response: {

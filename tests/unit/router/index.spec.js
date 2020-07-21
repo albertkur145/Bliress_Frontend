@@ -192,14 +192,6 @@ describe('Router', () => {
     });
     await wrapper.vm.$nextTick();
 
-    // router.push({
-    //   name: 'AdminAddEmployee',
-    //   params: {
-    //     batch: 202006,
-    //   },
-    // });
-    // await wrapper.vm.$nextTick();
-
     router.push({ name: 'AdminTest' });
     await wrapper.vm.$nextTick();
 
@@ -352,6 +344,9 @@ describe('Router', () => {
     await wrapper.vm.$nextTick();
 
     router.push({ name: 'TrainerNotification' });
+    await wrapper.vm.$nextTick();
+
+    router.push({ name: 'TrainerSetting' });
     await wrapper.vm.$nextTick();
   });
   // it routes

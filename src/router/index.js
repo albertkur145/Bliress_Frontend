@@ -225,6 +225,11 @@ const routes = [
     name: 'TrainerNotification',
     component: () => import('../views/trainer/notification/Notification.vue'),
   },
+  {
+    path: '/trainer/setting',
+    name: 'TrainerSetting',
+    component: () => import('../views/trainer/setting/Setting.vue'),
+  },
 ];
 
 const router = new VueRouter({

@@ -1,6 +1,6 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
-import Account from '@/views/employee/account/Account.vue';
+import Setting from '@/views/trainer/setting/Setting.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -9,21 +9,21 @@ localVue.use(Vuex);
 // describe when created
 describe('When created', () => {
   let actions;
+  let gettersNotification;
+  let actionsNotification;
   let store;
-  let actionsNotif;
-  let gettersNotif;
 
   // before each
   beforeEach(() => {
     actions = {
-      getUser: jest.fn(),
+      changePassword: jest.fn(),
     };
 
-    actionsNotif = {
+    actionsNotification = {
       getTriggerNotif: jest.fn(),
     };
 
-    gettersNotif = {
+    gettersNotification = {
       triggerNotif: jest.fn(() => {
         return {
           data: {
@@ -35,78 +35,64 @@ describe('When created', () => {
 
     store = new Vuex.Store({
       modules: {
-        employeeEmployee: {
+        trainerAccount: {
           namespaced: true,
           actions,
         },
-        employeeNotification: {
+        trainerNotification: {
           namespaced: true,
-          actions: actionsNotif,
-          getters: gettersNotif,
+          getters: gettersNotification,
+          actions: actionsNotification,
         },
       },
     });
   });
   // before each
 
-  // it popuplogout
-  it('User auth', async () => {
-    const wrapper = shallowMount(Account, {
+  // it user auth
+  it('User auth', () => {
+    const wrapper = shallowMount(Setting, {
       mocks: {
-        $cookies: {
-          get: jest.fn((user) => user),
-        },
         $func: {
           userAuth: jest.fn(),
+        },
+        $cookies: {
+          get: jest.fn((user) => user),
         },
       },
       localVue,
       store,
       stubs: [
         'font-awesome-icon',
+        'router-link',
       ],
-    });
-
-    jest.spyOn(wrapper.vm, 'promiseAPI').mockImplementation(() => {
-      Promise.resolve(200);
     });
 
     // expect
     expect(wrapper.vm.$func.userAuth).toBeCalled();
   });
-  // it popuplogout
+  // it user auth
 });
 // end describe when created
-
 
 // describe method
 describe('Method', () => {
   let actions;
+  let gettersNotification;
+  let actionsNotification;
   let store;
-  let getters;
-  let actionsNotif;
-  let gettersNotif;
 
   // before each
   beforeEach(() => {
     actions = {
-      getUser: jest.fn(),
       changePassword: jest.fn(),
     };
 
-    actionsNotif = {
+    actionsNotification = {
       getTriggerNotif: jest.fn(),
     };
 
-    getters = {
-      user: jest.fn(() => {
-        return {
-          data: {},
-        };
-      }),
-    };
-
-    gettersNotif = {
+    gettersNotification = {
       triggerNotif: jest.fn(() => {
         return {
           data: {
@@ -118,168 +104,95 @@ describe('Method', () => {
 
     store = new Vuex.Store({
       modules: {
-        employeeEmployee: {
+        trainerAccount: {
           namespaced: true,
           actions,
-          getters,
         },
-        employeeNotification: {
+        trainerNotification: {
           namespaced: true,
-          actions: actionsNotif,
-          getters: gettersNotif,
+          getters: gettersNotification,
+          actions: actionsNotification,
         },
       },
     });
   });
   // before each
 
-  // it logout
-  it('Logout', () => {
-    const wrapper = shallowMount(Account, {
+  // it has notif
+  it('It has notif', async () => {
+    const wrapper = shallowMount(Setting, {
       mocks: {
-        $cookies: {
-          get: jest.fn((user) => user),
-          remove: jest.fn(),
-        },
         $func: {
           userAuth: jest.fn(),
         },
-        $router: {
-          push: jest.fn(),
+        $cookies: {
+          get: jest.fn((user) => user),
         },
       },
       localVue,
       store,
       stubs: [
         'font-awesome-icon',
+        'router-link',
       ],
     });
 
-    const spyLogout = jest.spyOn(wrapper.vm, 'logout');
-    wrapper.vm.logout();
-
-    // expect
-    expect(spyLogout).toBeCalled();
-  });
-  // it logout
-
-  // it data ready
-  it('Data ready', () => {
-    const wrapper = shallowMount(Account, {
-      data() {
-        return {
-          promise: 200,
-        };
-      },
-      mocks: {
-        $cookies: {
-          get: jest.fn((user) => user),
-        },
-        $func: {
-          userAuth: jest.fn(),
-          popupLostConnection: jest.fn(),
-        },
-      },
-      localVue,
-      store,
-      stubs: [
-        'font-awesome-icon',
-      ],
-    });
-
-    wrapper.vm.dataReady();
-
-    // expect
-    expect(wrapper.vm.apiReady).toBeTruthy();
-
-    wrapper.setData({
-      promise: 404,
-    });
-    wrapper.vm.dataReady();
-
-    // expect
-    expect(wrapper.vm.$func.popupLostConnection).toBeCalled();
-  });
-  // it data ready
-
-  // it getUserAccount
-  it('Get user account', async () => {
-    const wrapper = shallowMount(Account, {
-      mocks: {
-        $cookies: {
-          get: jest.fn((user) => user),
-        },
-        $func: {
-          userAuth: jest.fn(),
-          popupLostConnection: jest.fn(),
-        },
-      },
-      localVue,
-      store,
-      stubs: [
-        'font-awesome-icon',
-      ],
-    });
-
-    const spyDataReady = jest.spyOn(wrapper.vm, 'dataReady');
-    jest.spyOn(wrapper.vm, 'promiseAPI').mockImplementation(() => {
-      Promise.resolve(200);
-    });
-    await wrapper.vm.getUserAccount();
-
-    // expect
-    expect(wrapper.vm.animationLoaderDisplay).toBeFalsy();
-    expect(spyDataReady).toBeCalled();
-  });
-  // it getUserAccount
-
-  // it isHasNotif
-  it('Is has notif', async () => {
-    const wrapper = shallowMount(Account, {
-      mocks: {
-        $cookies: {
-          get: jest.fn((user) => user),
-        },
-        $func: {
-          userAuth: jest.fn(),
-          popupLostConnection: jest.fn(),
-        },
-      },
-      localVue,
-      store,
-      stubs: [
-        'font-awesome-icon',
-      ],
-    });
-
-    const spy = jest.spyOn(wrapper.vm, 'afterTriggerNotif');
     jest.spyOn(wrapper.vm, 'promiseIsHasNotif').mockImplementation(() => {
       Promise.resolve(200);
     });
+    const spy = jest.spyOn(wrapper.vm, 'afterTriggerNotif').mockImplementation(() => { return });
     await wrapper.vm.isHasNotif();
 
     // expect
     expect(wrapper.vm.animationLoaderDisplay).toBeFalsy();
     expect(spy).toBeCalled();
   });
-  // it isHasNotif
+  // it has notif
 
-  // it afterTriggerNotif
-  it('After trigger notif', () => {
-    const wrapper = shallowMount(Account, {
+  // it promise has notif
+  it('It promise has notif', () => {
+    const wrapper = shallowMount(Setting, {
       mocks: {
-        $cookies: {
-          get: jest.fn((user) => user),
-        },
         $func: {
           userAuth: jest.fn(),
-          popupLostConnection: jest.fn(),
+        },
+        $cookies: {
+          get: jest.fn((user) => user),
         },
       },
       localVue,
       store,
       stubs: [
         'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    const spy = jest.spyOn(wrapper.vm, 'getTriggerNotif');
+    wrapper.vm.promiseIsHasNotif();
+
+    // expect
+    expect(spy).toBeCalled();
+  });
+  // it promise has notif
+
+  // it afterTriggerNotif
+  it('After trigger notif', () => {
+    const wrapper = shallowMount(Setting, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+          popupLostConnection: jest.fn(),
+        },
+        $cookies: {
+          get: jest.fn((user) => user),
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
       ],
     });
 
@@ -297,7 +210,7 @@ describe('Method', () => {
 
   // it form password
   it('Form password', async () => {
-    const wrapper = shallowMount(Account, {
+    const wrapper = shallowMount(Setting, {
       mocks: {
         $cookies: {
           get: jest.fn((user) => user),
@@ -355,7 +268,7 @@ describe('Method', () => {
 
   // it changePasswordUser
   it('Change password user', async () => {
-    const wrapper = shallowMount(Account, {
+    const wrapper = shallowMount(Setting, {
       mocks: {
         $cookies: {
           get: jest.fn((user) => user),
@@ -386,7 +299,7 @@ describe('Method', () => {
 
   // it promiseChangePassword
   it('Promise change password', () => {
-    const wrapper = shallowMount(Account, {
+    const wrapper = shallowMount(Setting, {
       mocks: {
         $cookies: {
           get: jest.fn((user) => user),
@@ -417,7 +330,7 @@ describe('Method', () => {
 
   // it afterChangePassword
   it('After trigger notif', () => {
-    const wrapper = shallowMount(Account, {
+    const wrapper = shallowMount(Setting, {
       mocks: {
         $cookies: {
           get: jest.fn((user) => user),
@@ -448,5 +361,36 @@ describe('Method', () => {
     expect(wrapper.vm.$func.popupLostConnection).toBeCalled();
   });
   // it afterChangePassword
+
+  // it logout
+  it('Logout', () => {
+    const wrapper = shallowMount(Setting, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+        },
+        $router: {
+          push: jest.fn(),
+        },
+        $cookies: {
+          get: jest.fn((user) => user),
+          remove: jest.fn(),
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    wrapper.vm.logout();
+
+    // expect
+    expect(wrapper.vm.$cookies.remove).toBeCalledWith('user');
+    expect(wrapper.vm.$router.push).toBeCalledWith({ name: 'Login' });
+  });
+  // it logout
 });
 // end describe method

@@ -323,7 +323,7 @@ export default {
     ]),
 
     filteredTrainers() {
-      return this.trainerList.data.filter((value) => value.name.match(this.searchText));
+      return this.trainerList.data.filter((value) => value.name.toLowerCase().match(this.searchText.toLowerCase()));
     },
   },
 

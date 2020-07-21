@@ -9,7 +9,7 @@ localVue.use(Vuex);
 // describe when created
 describe('When created', () => {
   let actions;
-  let store
+  let store;
 
   // before each
   beforeEach(() => {

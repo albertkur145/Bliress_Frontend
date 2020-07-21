@@ -3,21 +3,37 @@
 
     <!-- head -->
     <div class="head">
-      <div class="text">Test</div>
+      <div class="text">Pengaturan</div>
     </div>
     <!-- end head -->
 
     <!-- content -->
     <div class="content" v-if="apiReady">
-      <div class="training-list">
-        <div class="training" v-for="(value, index) in trainingList.data"
-        :key="index" @click="redirectToDetail(value.batch.id, value.training)">
+      <div class="list">
+        <div class="bar" @click="formPassword">
           <div>
-            <div class="txt-training">Training {{ value.training }}</div>
-            <div class="txt-batch">Batch - {{ value.batch.batch }} {{ value.batch.year }}</div>
+            <font-awesome-icon class="text-icon password-icon" icon="key"></font-awesome-icon>
+            <span>Ubah Password</span>
           </div>
-          <font-awesome-icon icon="chevron-right"></font-awesome-icon>
+          <font-awesome-icon class="right-icon" icon="chevron-right"></font-awesome-icon>
         </div>
+
+        <div class="hr">
+          <div></div>
+        </div>
+
+        <div class="bar" @click="logout">
+          <div>
+            <font-awesome-icon class="text-icon logout-icon" icon="sign-out-alt"></font-awesome-icon>
+            <span>Keluar</span>
+          </div>
+          <font-awesome-icon class="right-icon" icon="chevron-right"></font-awesome-icon>
+        </div>
+
+        <div class="hr">
+          <div></div>
+        </div>
+
       </div>
     </div>
     <!-- end content -->
@@ -57,30 +73,50 @@
 
     .content {
       margin-top: 3rem;
-      padding-bottom: 2.375rem;
 
-      .training-list {
-        padding: 0.625rem;
+      .list {
 
-        .training {
+        .bar {
           display: flex;
           justify-content: space-between;
           align-items: center;
           cursor: pointer;
-          background-color: rgba(0, 184, 148, 0.2);
-          color: #444;
-          border-radius: 0.375rem;
-          margin-bottom: 0.5rem;
-          padding: 0.75rem 1.25rem;
+          padding: 1.375rem 1rem;
 
-          .txt-training {
-            font-weight: 500;
-            font-size: 1em;
+          .text-icon {
+            font-size: 0.8125em;
           }
 
-          .txt-batch {
-            margin-top: 0.375rem;
+          .password-icon {
+            color: #0BE881;
+          }
+
+          .logout-icon {
+            color: #F53B57;
+          }
+
+          span {
+            color: #222;
+            margin-left: 0.75rem;
+            font-size: 0.875em;
+          }
+
+          .right-icon {
+            color: #666;
             font-size: 0.75em;
+          }
+
+          &:hover {
+            background-color: #F8F8F8;
+          }
+        }
+
+        .hr {
+          padding: 0 1rem;
+
+          div {
+            background-color: #DDD;
+            height: 0.0625rem;
           }
         }
       }
@@ -106,22 +142,28 @@
 
       .content {
         margin-top: 3.375rem;
-        padding-bottom: 2.75rem;
 
-        .training-list {
-          padding: 0.75rem;
+        .list {
 
-          .training {
-            margin-bottom: 0.625rem;
-            padding: 1rem 1.5rem;
+          .bar {
+            padding: 1.5rem 1.25rem;
 
-            .txt-training {
-              font-size: 1.0625em;
+            .text-icon {
+              font-size: 0.875em;
             }
 
-            .txt-batch {
+            span {
+              margin-left: 0.875rem;
+              font-size: 0.9375em;
+            }
+
+            .right-icon {
               font-size: 0.8125em;
             }
+          }
+
+          .hr {
+            padding: 0 1.25rem;
           }
         }
       }
@@ -145,22 +187,28 @@
 
       .content {
         margin-top: 3.75rem;
-        padding-bottom: 3rem;
 
-        .training-list {
-          padding: 1rem;
+        .list {
 
-          .training {
-            margin-bottom: 1rem;
-            padding: 1.25rem 1.75rem;
+          .bar {
+            padding: 1.75rem 1.5rem;
 
-            .txt-training {
-              font-size: 1.125em;
+            .text-icon {
+              font-size: 1em;
             }
 
-            .txt-batch {
-              font-size: 0.875em;
+            span {
+              margin-left: 1rem;
+              font-size: 1.0625em;
             }
+
+            .right-icon {
+              font-size: 0.9375em;
+            }
+          }
+
+          .hr {
+            padding: 0 1.5rem;
           }
         }
       }
@@ -185,26 +233,21 @@ export default {
 
   data() {
     return {
+      apiReady: true,
       animationLoaderDisplay: false,
-      apiReady: false,
-      promise: null,
       hasNotif: false,
     };
   },
 
   computed: {
-    ...mapGetters('trainerTraining', [
-      'trainingList',
-    ]),
-
     ...mapGetters('trainerNotification', [
       'triggerNotif',
     ]),
   },
 
   methods: {
-    ...mapActions('trainerTraining', [
-      'getTrainings',
+    ...mapActions('trainerAccount', [
+      'changePassword',
     ]),
 
     ...mapActions('trainerNotification', [
@@ -242,46 +285,79 @@ export default {
       }
     },
 
-    async getAllTraining() {
+    async formPassword() {
+      const res = await this.$swal.mixin({
+        confirmButtonText: 'Next',
+        backdrop: false,
+        allowEscapeKey: false,
+        showCloseButton: true,
+        progressSteps: ['1', '2', '3', '4'],
+      }).queue([
+        {
+          input: 'password',
+          inputPlaceholder: 'Password lama',
+        },
+        {
+          input: 'password',
+          inputPlaceholder: 'Konfirmasi password lama',
+        },
+        {
+          input: 'password',
+          inputPlaceholder: 'Password baru',
+        },
+        {
+          input: 'password',
+          inputPlaceholder: 'Konfirmasi password baru',
+        },
+      ]);
+
+      if (res.value[0] !== res.value[1]) {
+        this.$func.popupError('Konfirmasi password lama salah!', 5000);
+      } else if (res.value[2] !== res.value[3]) {
+        this.$func.popupError('Konfirmasi password baru salah!', 5000);
+      } else {
+        this.changePasswordUser({
+          trainerId: this.$cookies.get('user').id,
+          oldPassword: res.value[0],
+          currentPassword: res.value[2],
+        });
+      }
+    },
+
+    async changePasswordUser(params) {
       // show loader
       this.animationLoaderDisplay = true;
 
       // req api
-      this.promise = await this.promiseAPI();
+      const promise = await this.promiseChangePassword(params);
 
       // hide loader
       this.animationLoaderDisplay = false;
-      this.dataReady();
+      this.afterChangePassword(promise);
     },
 
-    promiseAPI() {
+    promiseChangePassword(params) {
       return new Promise((resolve) => {
-        this.getTrainings({
-          params: {
-            trainerId: this.$cookies.get('user').id,
-          },
+        this.changePassword({
+          params,
           resolve,
         });
       });
     },
 
-    dataReady() {
-      if (this.promise === 200) {
-        this.apiReady = true;
+    afterChangePassword(promise) {
+      if (promise === 200) {
+        this.$cookies.remove('user');
+        this.$func.popupSuccessfull('Berhasil, silahkan login kembali', 5000, { name: 'Login' });
       } else {
         // show popup error
         this.$func.popupLostConnection();
       }
     },
 
-    redirectToDetail(batch, training) {
-      this.$router.push({
-        name: 'TrainerDetailTest',
-        params: {
-          batch,
-          training,
-        },
-      });
+    logout() {
+      this.$cookies.remove('user');
+      this.$router.push({ name: 'Login' });
     },
   },
 
@@ -290,10 +366,8 @@ export default {
     this.$func.userAuth('Trainer');
 
     // req api
-    this.getAllTraining();
     this.isHasNotif();
   },
-
 };
 
 </script>

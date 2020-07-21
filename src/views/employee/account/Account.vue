@@ -78,6 +78,13 @@
       </div>
       <!-- profile info data -->
 
+      <!-- change password -->
+      <div class="change-password" @click="formPassword">
+        <p>Ubah password</p>
+        <font-awesome-icon icon="chevron-right" class="right-icon"></font-awesome-icon>
+      </div>
+      <!-- change password -->
+
       <!-- logout -->
       <div class="logout" @click="logout">
         <p>keluar</p>
@@ -207,6 +214,31 @@
         }
       }
 
+      .change-password {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        background-color: #FFF;
+        color: #444;
+        transition: color .2s linear;
+        margin-top: 0.375rem;
+        padding: 1rem;
+
+        p {
+          font-weight: 500;
+          font-size: 0.8125em;
+        }
+
+        .right-icon {
+          font-size: 0.75em;
+        }
+
+        &:hover {
+          color: #2E2E2E;
+        }
+      }
+
       .logout {
         cursor: pointer;
         background-color: #FFF;
@@ -308,6 +340,19 @@
           }
         }
 
+        .change-password {
+          margin-top: 0.5rem;
+          padding: 1.125rem 1.25rem;
+
+          p {
+            font-size: 0.9375em;
+          }
+
+          .right-icon {
+            font-size: 0.875em;
+          }
+        }
+
         .logout {
           margin-top: 0.5rem;
           padding: 1.125rem;
@@ -397,6 +442,19 @@
           }
         }
 
+        .change-password {
+          margin-top: 0.625rem;
+          padding: 1.375rem 1.75rem;
+
+          p {
+            font-size: 1em;
+          }
+
+          .right-icon {
+            font-size: 0.9375em;
+          }
+        }
+
         .logout {
           margin-top: 0.625rem;
           padding: 1.25rem;
@@ -448,6 +506,7 @@ export default {
   methods: {
     ...mapActions('employeeEmployee', [
       'getUser',
+      'changePassword',
     ]),
 
     ...mapActions('employeeNotification', [
@@ -520,6 +579,76 @@ export default {
     logout() {
       this.$cookies.remove('user');
       this.$router.push({ name: 'Login' });
+    },
+
+    async formPassword() {
+      const res = await this.$swal.mixin({
+        confirmButtonText: 'Next',
+        backdrop: false,
+        allowEscapeKey: false,
+        showCloseButton: true,
+        progressSteps: ['1', '2', '3', '4'],
+      }).queue([
+        {
+          input: 'password',
+          inputPlaceholder: 'Password lama',
+        },
+        {
+          input: 'password',
+          inputPlaceholder: 'Konfirmasi password lama',
+        },
+        {
+          input: 'password',
+          inputPlaceholder: 'Password baru',
+        },
+        {
+          input: 'password',
+          inputPlaceholder: 'Konfirmasi password baru',
+        },
+      ]);
+
+      if (res.value[0] !== res.value[1]) {
+        this.$func.popupError('Konfirmasi password lama salah!', 5000);
+      } else if (res.value[2] !== res.value[3]) {
+        this.$func.popupError('Konfirmasi password baru salah!', 5000);
+      } else {
+        this.changePasswordUser({
+          employeeId: this.$cookies.get('user').id,
+          oldPassword: res.value[0],
+          currentPassword: res.value[2],
+        });
+      }
+    },
+
+    async changePasswordUser(params) {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await this.promiseChangePassword(params);
+
+      // hide loader
+      this.animationLoaderDisplay = false;
+      this.afterChangePassword(promise);
+    },
+
+    promiseChangePassword(params) {
+      return new Promise((resolve) => {
+        this.changePassword({
+          params,
+          resolve,
+        });
+      });
+    },
+
+    afterChangePassword(promise) {
+      if (promise === 200) {
+        this.$cookies.remove('user');
+        this.$func.popupSuccessfull('Berhasil, silahkan login kembali', 5000, { name: 'Login' });
+      } else {
+        // show popup error
+        this.$func.popupLostConnection();
+      }
     },
   },
 

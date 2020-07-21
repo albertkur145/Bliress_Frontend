@@ -42,6 +42,7 @@ describe('Employee modules employees', () => {
     };
     const spyConsole = jest.spyOn(console, 'log');
 
+    // getUser
     axios.mockResolvedValue(res);
     await store.actions.getUser({ commit }, { resolve });
 
@@ -54,6 +55,24 @@ describe('Employee modules employees', () => {
 
     // expect
     expect(spyConsole).toBeCalledWith('Catch');
+    // getUser
+
+    jest.clearAllMocks();
+
+    // changePassword
+    axios.mockResolvedValue(res);
+    await store.actions.changePassword({ commit }, { resolve });
+
+    // expect
+    expect(spyConsole).toBeCalledWith(commit);
+    expect(resolve).toBeCalledWith(res.data.code);
+
+    axios.mockRejectedValue('Catch');
+    await store.actions.changePassword({ commit }, { resolve });
+
+    // expect
+    expect(spyConsole).toBeCalledWith('Catch');
+    // changePassword
   });
   // it actions
 });

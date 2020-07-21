@@ -22,11 +22,11 @@
       </router-link>
     </div>
 
-    <div class="bar" @click="logout">
-      <div class="txt-bar" style="cursor: pointer;">
-        <font-awesome-icon icon="sign-out-alt" class="menu-icon"></font-awesome-icon>
-        <span>Keluar</span>
-      </div>
+    <div class="bar">
+      <router-link to="/trainer/setting" class="txt-bar">
+        <font-awesome-icon icon="cogs" class="menu-icon"></font-awesome-icon>
+        <span>Pengaturan</span>
+      </router-link>
     </div>
   </div>
 </template>
@@ -159,13 +159,6 @@
 export default {
 
   props: ['show'],
-
-  methods: {
-    logout() {
-      this.$cookies.remove('user');
-      this.$router.push({ name: 'Login' });
-    },
-  },
 
 };
 

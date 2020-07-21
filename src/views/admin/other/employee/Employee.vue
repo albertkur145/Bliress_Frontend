@@ -323,7 +323,7 @@ export default {
     ]),
 
     filteredEmployees() {
-      return this.employeeList.data.filter((value) => value.name.match(this.searchText));
+      return this.employeeList.data.filter((value) => value.name.toLowerCase().match(this.searchText.toLowerCase()));
     },
   },
 

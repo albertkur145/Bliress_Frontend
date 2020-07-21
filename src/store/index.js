@@ -17,6 +17,7 @@ import trainerTraining from './modules/trainer/training';
 import trainerMaterial from './modules/trainer/material';
 import trainerTest from './modules/trainer/test';
 import trainerNotification from './modules/trainer/notification';
+import trainerAccount from './modules/trainer/account';
 
 Vue.use(Vuex);
 
@@ -38,5 +39,6 @@ export default new Vuex.Store({
     trainerMaterial,
     trainerTest,
     trainerNotification,
+    trainerAccount,
   },
 });

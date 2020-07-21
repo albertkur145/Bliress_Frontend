@@ -4,16 +4,11 @@ import MenuBar from '@/components/trainer/MenuBar.vue';
 
 // describe component
 describe('Components trainer - MenuBar.vue', () => {
-  // it method logout
-  it('Method logout', () => {
+  // it props
+  it('Props', () => {
     const wrapper = shallowMount(MenuBar, {
-      mocks: {
-        $cookies: {
-          remove: jest.fn(),
-        },
-        $router: {
-          push: jest.fn(),
-        },
+      propsData: {
+        show: true,
       },
       stubs: [
         'font-awesome-icon',
@@ -21,12 +16,9 @@ describe('Components trainer - MenuBar.vue', () => {
       ],
     });
 
-    wrapper.vm.logout();
-
     // expect
-    expect(wrapper.vm.$cookies.remove).toBeCalled();
-    expect(wrapper.vm.$router.push).toBeCalled();
+    expect(wrapper.vm.show).toBeTruthy();
   });
-  // it method logout
+  // it props
 });
 // end describe component

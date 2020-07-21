@@ -35,6 +35,22 @@ const actions = {
         console.log(err);
       });
   },
+
+  changePassword({ commit }, payload) {
+    return axios({
+      method: 'put',
+      url: `${API}/employee/password`,
+      data: payload.params,
+      responseType: 'json',
+    })
+      .then((res) => {
+        console.log(commit);
+        payload.resolve(res.data.code);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };
 
 export default {
