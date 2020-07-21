@@ -10,6 +10,8 @@ localVue.use(Vuex);
 describe('When created', () => {
   let actions;
   let store;
+  let actionsNotif;
+  let gettersNotif;
 
   // before each
   beforeEach(() => {
@@ -17,11 +19,30 @@ describe('When created', () => {
       getTrainings: jest.fn(),
     };
 
+    actionsNotif = {
+      getTriggerNotif: jest.fn(),
+    };
+
+    gettersNotif = {
+      triggerNotif: jest.fn(() => {
+        return {
+          data: {
+            hasNotif: true,
+          },
+        };
+      }),
+    };
+
     store = new Vuex.Store({
       modules: {
         trainerTraining: {
           namespaced: true,
           actions,
+        },
+        trainerNotification: {
+          namespaced: true,
+          actions: actionsNotif,
+          getters: gettersNotif,
         },
       },
     });
@@ -60,6 +81,8 @@ describe('Method', () => {
   let actions;
   let getters;
   let store;
+  let actionsNotif;
+  let gettersNotif;
 
   // before each
   beforeEach(() => {
@@ -73,12 +96,31 @@ describe('Method', () => {
       }),
     };
 
+    actionsNotif = {
+      getTriggerNotif: jest.fn(),
+    };
+
+    gettersNotif = {
+      triggerNotif: jest.fn(() => {
+        return {
+          data: {
+            hasNotif: true,
+          },
+        };
+      }),
+    };
+
     store = new Vuex.Store({
       modules: {
         trainerTraining: {
           namespaced: true,
           getters,
           actions,
+        },
+        trainerNotification: {
+          namespaced: true,
+          actions: actionsNotif,
+          getters: gettersNotif,
         },
       },
     });
@@ -118,7 +160,7 @@ describe('Method', () => {
   // it data ready branch
 
   // it getAllTraining after promise
-  it('After promise', async () => {
+  it('Get all training', async () => {
     const wrapper = shallowMount(Training, {
       mocks: {
         $func: {
@@ -150,8 +192,8 @@ describe('Method', () => {
   });
   // it getAllTraining after promise
 
-  // it getAllTraining after promise
-  it('After promise', () => {
+  // it redirect to detail
+  it('Redirect to detail', () => {
     const wrapper = shallowMount(Training, {
       mocks: {
         $func: {
@@ -185,6 +227,71 @@ describe('Method', () => {
       },
     });
   });
-  // it getAllTraining after promise
+  // it redirect to detail
+
+  // it is has notif
+  it('Is has notif', async () => {
+    const wrapper = shallowMount(Training, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+          popupLostConnection: jest.fn(),
+        },
+        $cookies: {
+          get: jest.fn((user) => user),
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    jest.spyOn(wrapper.vm, 'promiseIsHasNotif').mockImplementation(() => {
+      Promise.resolve(200);
+    });
+    const spy = jest.spyOn(wrapper.vm, 'afterTriggerNotif').mockImplementation(() => { return; });
+
+    await wrapper.vm.isHasNotif();
+
+    // expect
+    expect(wrapper.vm.animationLoaderDisplay).toBeFalsy();
+    expect(spy).toBeCalled();
+  });
+  // it is has notif
+
+  // it after trigger notif
+  it('After trigger notif', () => {
+    const wrapper = shallowMount(Training, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+          popupLostConnection: jest.fn(),
+        },
+        $cookies: {
+          get: jest.fn((user) => user),
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    wrapper.vm.afterTriggerNotif(200);
+
+    // expect
+    expect(wrapper.vm.hasNotif).toBe(wrapper.vm.triggerNotif.data.hasNotif);
+
+    wrapper.vm.afterTriggerNotif(404);
+
+    // expect
+    expect(wrapper.vm.$func.popupLostConnection).toBeCalled();
+  });
+  // it after trigger notif
 });
 // end describe method

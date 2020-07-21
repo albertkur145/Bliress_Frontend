@@ -15,7 +15,8 @@
     </div>
 
     <div class="bar">
-      <router-link to="/trainer/notification" class="txt-bar">
+      <router-link to="/trainer/notification" class="txt-bar" style="position: relative">
+        <span class="notif" :class="{ 'display': show }"></span>
         <font-awesome-icon icon="bell" class="menu-icon"></font-awesome-icon>
         <span>Notifikasi</span>
       </router-link>
@@ -44,9 +45,24 @@
     box-shadow: 0 -0.0625rem 0.375rem rgba(0, 0, 0, 0.3);
     padding: 0.5rem 0 0.25rem;
 
+    .display {
+      opacity: 1 !important;
+    }
+
     .bar {
       width: 25%;
       text-align: center;
+
+      .notif {
+        opacity: 0;
+        position: absolute;
+        background-color: rgba(231, 76, 60, 0.8);
+        border-radius: 5rem;
+        top: -0.4375rem;
+        right: 33%;
+        width: 0.25rem;
+        height: 0.25rem;
+      }
 
       .txt-bar {
         display: block;
@@ -80,6 +96,13 @@
 
       .bar {
 
+        .notif {
+          top: -0.4375rem;
+          right: 36%;
+          width: 0.3125rem;
+          height: 0.3125rem;
+        }
+
         .txt-bar {
           font-size: 0.75em;
 
@@ -106,6 +129,13 @@
 
       .bar {
 
+        .notif {
+          top: -0.375rem;
+          right: 2.8125rem;
+          width: 0.375rem;
+          height: 0.375rem;
+        }
+
         .txt-bar {
           font-size: 0.875em;
 
@@ -127,12 +157,16 @@
 <script>
 
 export default {
+
+  props: ['show'],
+
   methods: {
     logout() {
       this.$cookies.remove('user');
       this.$router.push({ name: 'Login' });
     },
   },
+
 };
 
 </script>

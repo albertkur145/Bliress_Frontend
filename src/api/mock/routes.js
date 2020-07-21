@@ -3095,4 +3095,38 @@ export default [
       errors: null,
     },
   },
+  {
+    url: `${API}/trainer/notification/trigger`,
+    method: 'GET',
+    params: {
+      params: {
+        trainerId: 1,
+      },
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: {
+        hasNotif: true,
+      },
+      paging: null,
+      errors: null,
+    },
+  },
+  {
+    url: `${API}/trainer/notification`,
+    method: 'POST',
+    params: {
+      trainerId: 1,
+    },
+    status: 200,
+    response: {
+      code: 200,
+      status: 'OK',
+      data: null,
+      paging: null,
+      errors: null,
+    },
+  },
 ];

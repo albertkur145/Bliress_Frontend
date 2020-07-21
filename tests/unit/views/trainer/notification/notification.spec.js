@@ -15,6 +15,7 @@ describe('When created', () => {
   beforeEach(() => {
     actions = {
       getNotifications: jest.fn(),
+      postNotifications: jest.fn(),
     };
 
     store = new Vuex.Store({
@@ -65,6 +66,7 @@ describe('Method', () => {
   beforeEach(() => {
     actions = {
       getNotifications: jest.fn(),
+      postNotifications: jest.fn(),
     };
 
     getters = {
