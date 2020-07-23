@@ -26,6 +26,9 @@ const actions = {
       url: `${API}/login`,
       data: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
       .then((res) => {
         commit('setUser', res.data);

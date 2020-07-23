@@ -1,3 +1,11 @@
 module.exports = {
-    // lintOnSave: false,
+  assetsDir: 'static',
+  // devServer: {
+  //   proxy: {
+  //     '*': {
+  //       target: 'http://localhost:8080',
+  //       changeOrigin: true,
+  //     },
+  //   },
+  // },
 }

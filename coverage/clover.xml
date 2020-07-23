@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1595356267469" clover="3.2.0">
-  <project timestamp="1595356267469" name="All files">
-    <metrics statements="1537" coveredstatements="1530" conditionals="286" coveredconditionals="286" methods="693" coveredmethods="690" elements="2516" coveredelements="2506" complexity="0" loc="1537" ncloc="1537" packages="23" files="59" classes="59"/>
+<coverage generated="1595429227890" clover="3.2.0">
+  <project timestamp="1595429227890" name="All files">
+    <metrics statements="1540" coveredstatements="1533" conditionals="286" coveredconditionals="286" methods="693" coveredmethods="690" elements="2519" coveredelements="2509" complexity="0" loc="1540" ncloc="1540" packages="23" files="59" classes="59"/>
     <package name="components.admin">
-      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="MenuBar.vue" path="D:\Project\bliress-frontend\src\components\admin\MenuBar.vue">
-        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="138" count="1" type="stmt"/>
         <line num="139" count="1" type="stmt"/>
+        <line num="140" count="1" type="stmt"/>
       </file>
     </package>
     <package name="config">
@@ -120,10 +121,10 @@
         <line num="18" count="1" type="stmt"/>
         <line num="22" count="1" type="stmt"/>
         <line num="24" count="2" type="stmt"/>
-        <line num="31" count="1" type="stmt"/>
-        <line num="32" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
         <line num="35" count="1" type="stmt"/>
-        <line num="36" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
       </file>
     </package>
     <package name="store.modules.admin">
@@ -534,9 +535,9 @@
       </file>
     </package>
     <package name="views">
-      <metrics statements="21" coveredstatements="21" conditionals="10" coveredconditionals="10" methods="6" coveredmethods="6"/>
+      <metrics statements="23" coveredstatements="23" conditionals="10" coveredconditionals="10" methods="6" coveredmethods="6"/>
       <file name="Login.vue" path="D:\Project\bliress-frontend\src\views\Login.vue">
-        <metrics statements="21" coveredstatements="21" conditionals="10" coveredconditionals="10" methods="6" coveredmethods="6"/>
+        <metrics statements="23" coveredstatements="23" conditionals="10" coveredconditionals="10" methods="6" coveredmethods="6"/>
         <line num="257" count="3" type="stmt"/>
         <line num="258" count="3" type="stmt"/>
         <line num="267" count="8" type="stmt"/>
@@ -548,16 +549,18 @@
         <line num="303" count="1" type="stmt"/>
         <line num="315" count="5" type="cond" truecount="2" falsecount="0"/>
         <line num="317" count="4" type="stmt"/>
-        <line num="320" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="321" count="1" type="stmt"/>
-        <line num="322" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="323" count="1" type="stmt"/>
-        <line num="324" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="325" count="1" type="stmt"/>
-        <line num="329" count="4" type="stmt"/>
-        <line num="332" count="1" type="stmt"/>
-        <line num="338" count="8" type="cond" truecount="2" falsecount="0"/>
-        <line num="339" count="1" type="stmt"/>
+        <line num="318" count="4" type="stmt"/>
+        <line num="321" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="322" count="1" type="stmt"/>
+        <line num="323" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="324" count="1" type="stmt"/>
+        <line num="325" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="326" count="1" type="stmt"/>
+        <line num="330" count="4" type="stmt"/>
+        <line num="333" count="1" type="stmt"/>
+        <line num="339" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="340" count="1" type="stmt"/>
+        <line num="342" count="8" type="stmt"/>
       </file>
     </package>
     <package name="views.admin.batch">

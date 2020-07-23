@@ -322,7 +322,7 @@ export default {
 
   created() {
     // check user auth
-    this.$func.userAuth('Admin');
+    this.$func.userAuth('ROLE_ADMIN');
 
     // req api
     this.getAllBatchTraining();

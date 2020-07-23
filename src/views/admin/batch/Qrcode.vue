@@ -176,7 +176,7 @@ export default {
 
   created() {
     // check user auth
-    this.$func.userAuth('Admin');
+    this.$func.userAuth('ROLE_ADMIN');
 
     // get params
     this.paramBatch = parseInt(this.$route.params.batch, 10);

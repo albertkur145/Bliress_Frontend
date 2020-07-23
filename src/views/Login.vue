@@ -302,7 +302,7 @@ export default {
       return new Promise((resolve) => {
         this.login({
           params: {
-            email: this.form.email,
+            usermail: this.form.email,
             password: this.form.password,
           },
           resolve,
@@ -314,14 +314,15 @@ export default {
       // set cookies if successfull
       if (this.promise === 200) {
         // set cookies
-        this.$cookies.set('user', this.user.data, '5h');
+        this.$cookies.set('user', this.user.data.user, '5h');
+        this.$cookies.set('token', this.user.data.token, '5h');
 
         // navigate route role
-        if (this.user.data.role === 'Employee') {
+        if (this.user.data.user.roles[0] === 'ROLE_EMPLOYEE') {
           this.name = 'Training';
-        } else if (this.user.data.role === 'Admin') {
+        } else if (this.user.data.user.roles[0] === 'ROLE_ADMIN') {
           this.name = 'AdminBatch';
-        } else if (this.user.data.role === 'Trainer') {
+        } else if (this.user.data.user.roles[0] === 'ROLE_TRAINER') {
           this.name = 'TrainerTraining';
         }
 

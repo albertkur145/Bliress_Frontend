@@ -136,6 +136,7 @@ export default {
   methods: {
     logout() {
       this.$cookies.remove('user');
+      this.$cookies.remove('token');
       this.$router.push({ name: 'Login' });
     },
   },

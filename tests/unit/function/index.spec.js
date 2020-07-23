@@ -10,7 +10,7 @@ describe('Method', () => {
   // it user auth
   it('User auth', () => {
     const spyPush = jest.spyOn(router, 'push');
-    Func.userAuth('Employee');
+    Func.userAuth('ROLE_ADMIN');
 
     // expect
     expect(spyPush).toBeCalled();
@@ -18,7 +18,7 @@ describe('Method', () => {
     spyPush.mockClear();
 
     const spyGo = jest.spyOn(router, 'go');
-    cookies.set('user', { role: 'Employee' });
+    cookies.set('user', { roles: ['ROLE_ADMIN'] });
     Func.userAuth('Test');
 
     // expect
@@ -26,8 +26,8 @@ describe('Method', () => {
     expect(spyGo).toBeCalledWith(-1);
     spyGo.mockClear();
 
-    cookies.set('user', { role: 'Employee' });
-    Func.userAuth('Employee');
+    cookies.set('user', { roles: ['ROLE_ADMIN'] });
+    Func.userAuth('ROLE_ADMIN');
 
     // expect
     expect(spyPush).not.toBeCalled();
@@ -81,7 +81,7 @@ describe('Method', () => {
     });
     const spyPush = jest.spyOn(router, 'push');
 
-    cookies.set('user', { role: '-' });
+    cookies.set('user', { roles: ['-'] });
     await Func.popupLogoutFirst();
 
     // expect
@@ -89,21 +89,21 @@ describe('Method', () => {
     expect(spyPush).not.toBeCalled();
 
     spyPush.mockClear();
-    cookies.set('user', { role: 'Employee' });
+    cookies.set('user', { roles: ['ROLE_EMPLOYEE'] });
     await Func.popupLogoutFirst();
 
     // expect
     expect(spyPush).toBeCalledWith({ name: 'Training' });
 
     spyPush.mockClear();
-    cookies.set('user', { role: 'Admin' });
+    cookies.set('user', { roles: ['ROLE_ADMIN'] });
     await Func.popupLogoutFirst();
 
     // expect
     expect(spyPush).toBeCalledWith({ name: 'AdminBatch' });
 
     spyPush.mockClear();
-    cookies.set('user', { role: 'Trainer' });
+    cookies.set('user', { roles: ['ROLE_TRAINER'] });
     await Func.popupLogoutFirst();
 
     // expect

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import '@/api/mock';
+// import '@/api/mock';
 import login from './modules/login';
 import employeeTraining from './modules/employees/training';
 import employeeTest from './modules/employees/test';

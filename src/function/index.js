@@ -6,7 +6,7 @@ export default {
   userAuth: (role) => {
     if (!cookies.isKey('user')) {
       router.push({ name: 'Login' });
-    } else if (cookies.get('user').role !== role) {
+    } else if (cookies.get('user').roles[0] !== role) {
       router.go(-1);
     }
   },
@@ -57,16 +57,16 @@ export default {
 
     let name = '';
     let exist = true;
-    switch (cookies.get('user').role) {
-      case 'Employee':
+    switch (cookies.get('user').roles[0]) {
+      case 'ROLE_EMPLOYEE':
         name = 'Training';
         break;
 
-      case 'Admin':
+      case 'ROLE_ADMIN':
         name = 'AdminBatch';
         break;
 
-      case 'Trainer':
+      case 'ROLE_TRAINER':
         name = 'TrainerTraining';
         break;
 

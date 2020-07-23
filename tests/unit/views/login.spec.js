@@ -122,8 +122,10 @@ describe('Redirect page method', () => {
         user: jest.fn(() => {
           return {
             data: {
-              id: 1,
-              role: 'Employee',
+              user: {
+                id: 1,
+                roles: ['ROLE_EMPLOYEE'],
+              },
             },
           };
         }),
@@ -184,8 +186,10 @@ describe('Redirect page method', () => {
         user: jest.fn(() => {
           return {
             data: {
-              id: 1,
-              role: 'Admin',
+              user: {
+                id: 1,
+                roles: ['ROLE_ADMIN'],
+              },
             },
           };
         }),
@@ -246,8 +250,10 @@ describe('Redirect page method', () => {
         user: jest.fn(() => {
           return {
             data: {
-              id: 1,
-              role: 'Trainer',
+              user: {
+                id: 1,
+                roles: ['ROLE_TRAINER'],
+              },
             },
           };
         }),
@@ -308,8 +314,10 @@ describe('Redirect page method', () => {
         user: jest.fn(() => {
           return {
             data: {
-              id: 1,
-              role: 'Unknown',
+              user: {
+                id: 1,
+                roles: ['Unknown'],
+              },
             },
           };
         }),
