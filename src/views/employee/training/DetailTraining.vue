@@ -6,7 +6,7 @@
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
       </router-link>
 
-      <div class="text">Training {{ this.training.training }}</div>
+      <div class="text">Training {{ paramTraining }}</div>
 
       <router-link :to="`/training/${paramTraining}/attendance`" class="qr-code-reader">
         <font-awesome-icon icon="qrcode"></font-awesome-icon>
@@ -21,49 +21,22 @@
         <p class="txt">Rincian</p>
 
         <div class="detail">
-          <p class="date">Dilaksanakan tanggal {{ this.training.date }}</p>
-          <p class="location">{{ this.training.location }}</p>
-          <p class="start">Dimulai pada pkl {{ this.training.timeStart }} - {{ this.training.timeFinish }} WIB</p>
+          <p class="date">Dilaksanakan tanggal {{ training.date }}</p>
+          <p class="location">{{ training.location }}</p>
+          <p class="start">Dimulai pada pkl {{ training.timeStart }} - {{ training.timeFinish }} WIB</p>
         </div>
 
-        <p class="trainer">Trainer: {{ this.training.trainer }}</p>
+        <p class="trainer">Trainer: {{ training.trainer }}</p>
 
-        <div class="materials" v-for="(value) in this.training.materials" :key="value.id">
+        <div class="materials" v-for="(value) in material" :key="value.id">
           <p class="material-link"><a :href="value.link" target="_blank">{{ value.name }}</a></p>
         </div>
       </div>
       <!-- rincian -->
 
-      <!-- participants -->
-      <!-- <div class="participants">
-        <div class="top">
-          <div class="title">Peserta</div>
-          <div class="count">{{ employees.total }} orang</div>
-        </div>
-
-        <div class="data">
-          <table>
-            <thead>
-              <th>No</th>
-              <th>Nama</th>
-              <th>Divisi</th>
-            </thead>
-
-            <tbody>
-              <tr v-for="(value, index) in employees.employee" :key="value.id">
-                <td>{{ index + 1 }}</td>
-                <td>{{ value.name }}</td>
-                <td>{{ value.division }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div> -->
-      <!-- participants -->
-
       <!-- attendance -->
       <div class="attendance">
-        <div v-if="response.data.isAttend">
+        <div v-if="isAttend">
           <img src="@/assets/images/check.png">
           <p style="color: #10AC84">Sudah absensi</p>
         </div>
@@ -259,13 +232,12 @@
         background-color: #FFF;
         color: #130F40;
         cursor: pointer;
-        transition: .2s background-color ease-out;
+        transition: .1s color ease-out;
         margin: 0.5rem 0;
         padding: 1.25rem 1rem;
 
         &:hover {
-          background-color: #1B9CFC;
-          color: #FFF;
+          color: rgba(0, 0, 0, 0.8);
         }
 
         .text {
@@ -537,18 +509,30 @@ export default {
       apiReady: false,
       paramTraining: '',
       training: {},
+      material: [],
+      isAttend: '',
     };
   },
 
   computed: {
-    ...mapGetters('employeeTraining', {
-      response: 'trainingBy',
-    }),
+    ...mapGetters('employeeTraining', [
+      'trainingBy',
+      'attendanceUser',
+    ]),
+
+    ...mapGetters('employeeMaterial', [
+      'materialList',
+    ]),
   },
 
   methods: {
     ...mapActions('employeeTraining', [
       'getTrainingBy',
+      'getAttendance',
+    ]),
+
+    ...mapActions('employeeMaterial', [
+      'getMaterials',
     ]),
 
     async getTrainingByID() {
@@ -556,32 +540,98 @@ export default {
       this.animationLoaderDisplay = true;
 
       // req api
-      this.promise = await this.promiseAPI();
+      const promise = await this.promiseGetTraining();
 
       // hide loader
       this.animationLoaderDisplay = false;
-      this.dataReady();
+      this.afterGetTraining(promise);
     },
 
-    promiseAPI() {
+    promiseGetTraining() {
       return new Promise((resolve) => {
         this.getTrainingBy({
           params: {
-            employeeId: this.$cookies.get('user').id,
+            employeeId: this.$cookies.get('user').userId,
             training: this.paramTraining,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
 
-    dataReady() {
-      // show popup message if code response != 200
-      if (this.promise === 200) {
-        this.apiReady = true;
+    afterGetTraining(promise) {
+      if (promise === 200) {
+        this.training = this.trainingBy.data.training;
+      } else {
+        // show popup error
+        this.$func.popupLostConnection();
+      }
+    },
 
-        // asignment split response data
-        this.training = this.response.data.training;
+    async getMaterialByID() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await this.promiseGetMaterialByID();
+
+      // hide loader
+      this.animationLoaderDisplay = false;
+      this.afterGetMaterial(promise);
+    },
+
+    promiseGetMaterialByID() {
+      return new Promise((resolve) => {
+        this.getMaterials({
+          params: {
+            employeeId: this.$cookies.get('user').userId,
+            training: this.paramTraining,
+          },
+          resolve,
+          token: this.$cookies.get('token'),
+        });
+      });
+    },
+
+    afterGetMaterial(promise) {
+      if (promise === 200) {
+        this.material = this.materialList.data.materialList;
+      } else {
+        // show popup error
+        this.$func.popupLostConnection();
+      }
+    },
+
+    async getAttendanceUser() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await this.promiseGetAttendance();
+
+      // hide loader
+      this.animationLoaderDisplay = false;
+      this.afterGetAttendance(promise);
+    },
+
+    promiseGetAttendance() {
+      return new Promise((resolve) => {
+        this.getAttendance({
+          params: {
+            employeeId: this.$cookies.get('user').userId,
+            training: this.paramTraining,
+          },
+          resolve,
+          token: this.$cookies.get('token'),
+        });
+      });
+    },
+
+    afterGetAttendance(promise) {
+      if (promise === 200) {
+        this.apiReady = true;
+        this.isAttend = this.attendanceUser.data.hasAttend;
       } else {
         // show popup error
         this.$func.popupLostConnection();
@@ -600,13 +650,15 @@ export default {
 
   created() {
     // check user auth
-    this.$func.userAuth('Employee');
+    this.$func.userAuth('ROLE_EMPLOYEE');
 
     // get params
     this.paramTraining = this.$route.params.training;
 
     // req api
     this.getTrainingByID();
+    this.getMaterialByID();
+    this.getAttendanceUser();
   },
 
 };

@@ -11,11 +11,11 @@
     <div class="content" v-if="apiReady">
       <!-- list of batch -->
       <div class="batch-list">
-        <router-link v-for="(value) in batchList.data" :key="value.id"
-        :to="{ name: 'AdminDetailBatch', params: { batch: value.id } }"
+        <router-link v-for="(value) in batchList.data.batchList" :key="value.id"
+        :to="{ name: 'AdminDetailBatch', params: { batch: value.batchId } }"
         class="batch">
           <div>
-            <div class="txt">{{ value.batch }}</div>
+            <div class="txt">{{ value.batchName.split(' - ')[0] }}</div>
             <div class="year">{{ value.year }}</div>
           </div>
           <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
@@ -328,8 +328,8 @@ export default {
       return new Promise((resolve) => {
         this.postBatch({
           params: {
-            batch: parseInt(value[0], 10),
-            year: parseInt(value[1], 10),
+            batch: value[0],
+            year: value[1],
           },
           resolve,
         });
@@ -337,7 +337,7 @@ export default {
     },
 
     afterAddBatch(promise) {
-      if (promise === 200) {
+      if (promise === 202) {
         this.$func.popupSuccessfull('Berhasil tambah batch baru', 5000, { name: 'AdminBatch' });
       } else {
         this.$func.popupLostConnection();

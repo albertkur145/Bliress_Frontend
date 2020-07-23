@@ -13,27 +13,11 @@ const getters = {
   batchList(state) {
     return state.batchs;
   },
-
-  batchBy(state) {
-    return state.batchBy;
-  },
-
-  batchTrainingList(state) {
-    return state.batchTrainings;
-  },
 };
 
 const mutations = {
   setBatch(state, value) {
     state.batchs = value;
-  },
-
-  setBatchBy(state, value) {
-    state.batchBy = value;
-  },
-
-  setBatchTraining(state, value) {
-    state.batchTrainings = value;
   },
 };
 
@@ -53,21 +37,6 @@ const actions = {
       });
   },
 
-  getBatchTraining({ commit }, payload) {
-    return axios({
-      method: 'get',
-      url: `${API}/admin/batchtraining`,
-      responseType: 'json',
-    })
-      .then((res) => {
-        commit('setBatchTraining', res.data);
-        payload.resolve(res.data.code);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
-
   postBatch({ commit }, payload) {
     return axios({
       method: 'post',
@@ -77,22 +46,6 @@ const actions = {
     })
       .then((res) => {
         console.log(commit);
-        payload.resolve(res.data.code);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
-
-  getBatchBy({ commit }, payload) {
-    return axios({
-      method: 'get',
-      url: `${API}/admin/batch/detail`,
-      params: payload.params,
-      responseType: 'json',
-    })
-      .then((res) => {
-        commit('setBatchBy', res.data);
         payload.resolve(res.data.code);
       })
       .catch((err) => {

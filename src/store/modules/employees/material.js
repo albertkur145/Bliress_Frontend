@@ -4,38 +4,38 @@ import config from '@/config';
 const { API } = config;
 
 const data = {
-  user: {},
+  materials: {},
 };
 
 const getters = {
-  user(state) {
-    return state.user;
+  materialList(state) {
+    return state.materials;
   },
 };
 
 const mutations = {
-  setUser(state, value) {
-    state.user = value;
+  setMaterials(state, value) {
+    state.materials = value;
   },
 };
 
 const actions = {
-  login({ commit }, payload) {
+  getMaterials({ commit }, payload) {
     return axios({
-      method: 'post',
-      url: `${API}/auth/login`,
-      data: payload.params,
+      method: 'get',
+      url: `${API}/material`,
+      params: payload.params,
       responseType: 'json',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
       },
     })
       .then((res) => {
-        commit('setUser', res.data);
+        commit('setMaterials', res.data);
         payload.resolve(res.data.code);
       })
       .catch((err) => {
-        payload.resolve(500);
         console.log(err);
       });
   },

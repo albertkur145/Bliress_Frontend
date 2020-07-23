@@ -4,7 +4,7 @@
     <div class="head">
       <router-link class="back" :to="{ name: 'AdminBatch' }">
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
-        <span class="text">{{ batch.batch }} {{ batch.year }}</span>
+        <span class="text">{{ paramBatch.split('-')[0] }} {{ paramBatch.split('-')[1] }}</span>
       </router-link>
       <div class="delete" @click="confirmDialog">Hapus</div>
     </div>
@@ -426,15 +426,18 @@ export default {
       paramBatch: '',
       animationLoaderDisplay: false,
       apiReady: false,
-      batch: {},
       training: [],
       employee: [],
     };
   },
 
   computed: {
-    ...mapGetters('adminBatch', [
-      'batchBy',
+    ...mapGetters('adminTraining', [
+      'trainingList',
+    ]),
+
+    ...mapGetters('adminEmployee', [
+      'batchEmployeeList',
     ]),
 
     filteredTraining() {
@@ -448,8 +451,15 @@ export default {
 
   methods: {
     ...mapActions('adminBatch', [
-      'getBatchBy',
       'deleteBatch',
+    ]),
+
+    ...mapActions('adminTraining', [
+      'getTrainings',
+    ]),
+
+    ...mapActions('adminEmployee', [
+      'getEmployeesBatch',
     ]),
 
     async confirmDialog() {
@@ -494,21 +504,21 @@ export default {
       }
     },
 
-    async getDetailByBatch() {
+    async getTraining() {
       // show loader
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await this.promiseGetDetailByBatch();
+      const promise = await this.promiseGetTraining();
 
       // show loader
       this.animationLoaderDisplay = false;
-      this.afterGetDetailByBatch(promise);
+      this.afterGetTraining(promise);
     },
 
-    promiseGetDetailByBatch() {
+    promiseGetTraining() {
       return new Promise((resolve) => {
-        this.getBatchBy({
+        this.getTrainings({
           params: {
             batchId: this.paramBatch,
           },
@@ -517,14 +527,44 @@ export default {
       });
     },
 
-    afterGetDetailByBatch(promise) {
+    afterGetTraining(promise) {
+      if (promise === 200) {
+        // assignment split response data
+        this.training = this.trainingList.data.trainingList;
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+
+    async getEmployee() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await this.promiseGetEmployee();
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.afterGetEmployee(promise);
+    },
+
+    promiseGetEmployee() {
+      return new Promise((resolve) => {
+        this.getEmployeesBatch({
+          params: {
+            batchId: this.paramBatch,
+          },
+          resolve,
+        });
+      });
+    },
+
+    afterGetEmployee(promise) {
       if (promise === 200) {
         this.apiReady = true;
 
         // assignment split response data
-        this.batch = this.batchBy.data.batch;
-        this.training = this.batchBy.data.training;
-        this.employee = this.batchBy.data.employee;
+        this.employee = this.batchEmployeeList.data.employeeList;
       } else {
         this.$func.popupLostConnection();
       }
@@ -536,10 +576,11 @@ export default {
     this.$func.userAuth('ROLE_ADMIN');
 
     // get params
-    this.paramBatch = parseInt(this.$route.params.batch, 10);
+    this.paramBatch = this.$route.params.batch;
 
     // req api
-    this.getDetailByBatch();
+    this.getTraining();
+    this.getEmployee();
   },
 
 };

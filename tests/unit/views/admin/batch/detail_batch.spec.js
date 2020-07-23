@@ -8,21 +8,30 @@ localVue.use(Vuex);
 
 // describe when created
 describe('When created', () => {
-  let actions;
+  let actionsTraining;
+  let actionsEmployee;
   let store;
 
   // before each
   beforeEach(() => {
-    actions = {
-      getBatchBy: jest.fn(),
+    actionsTraining = {
+      getTrainings: jest.fn(),
+    };
+
+    actionsEmployee = {
+      getEmployeesBatch: jest.fn(),
     };
 
     store = new Vuex.Store({
       modules: {
-        adminBatch: {
+        adminTraining: {
           namespaced: true,
-          actions,
-        }
+          actions: actionsTraining,
+        },
+        adminEmployee: {
+          namespaced: true,
+          actions: actionsEmployee,
+        },
       },
     });
   });
@@ -37,7 +46,9 @@ describe('When created', () => {
         },
         $route: {
           params: {
-            batch: 202006,
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -59,27 +70,39 @@ describe('When created', () => {
 
 // describe method
 describe('Method', () => {
-  let actions;
-  let getters;
+  let actionsBatch;
+  let actionsTraining;
+  let actionsEmployee;
+  let gettersTraining;
+  let gettersEmployee;
   let store;
 
   // before each
   beforeEach(() => {
-    actions = {
-      getBatchBy: jest.fn(),
+    actionsBatch = {
       deleteBatch: jest.fn(),
     };
 
-    getters = {
-      batchBy: jest.fn().mockReturnValue({
+    actionsTraining = {
+      getTrainings: jest.fn(),
+    };
+
+    gettersTraining = {
+      trainingList: jest.fn().mockReturnValue({
         data: {
-          batch: {},
-          training: {
-            slice: jest.fn(),
-          },
-          employee: {
-            slice: jest.fn(),
-          },
+          trainingList: [],
+        },
+      }),
+    };
+
+    actionsEmployee = {
+      getEmployeesBatch: jest.fn(),
+    };
+
+    gettersEmployee = {
+      batchEmployeeList: jest.fn().mockReturnValue({
+        data: {
+          employeeList: [],
         },
       }),
     };
@@ -88,9 +111,18 @@ describe('Method', () => {
       modules: {
         adminBatch: {
           namespaced: true,
-          getters,
-          actions,
-        }
+          actions: actionsBatch,
+        },
+        adminTraining: {
+          namespaced: true,
+          actions: actionsTraining,
+          getters: gettersTraining,
+        },
+        adminEmployee: {
+          namespaced: true,
+          actions: actionsEmployee,
+          getters: gettersEmployee,
+        },
       },
     });
   });
@@ -106,7 +138,9 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -142,7 +176,9 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -175,7 +211,9 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -212,7 +250,9 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -237,8 +277,8 @@ describe('Method', () => {
   });
   // it after delete
 
-  // it get detail by batch
-  it('Get detail by batch', async () => {
+  // it get training
+  it('Get training', async () => {
     const wrapper = shallowMount(DetailBatch, {
       mocks: {
         $func: {
@@ -246,7 +286,9 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -258,23 +300,20 @@ describe('Method', () => {
       ],
     });
 
-    jest.spyOn(wrapper.vm, 'promiseGetDetailByBatch').mockImplementation(() => {
+    jest.spyOn(wrapper.vm, 'promiseGetTraining').mockImplementation(() => {
       Promise.resolve(200);
     });
-    const spyAfterGetDetailByBatch = jest.spyOn(wrapper.vm, 'afterGetDetailByBatch').mockImplementation(() => {
-      return;
-    });
-
-    await wrapper.vm.getDetailByBatch();
+    const spy = jest.spyOn(wrapper.vm, 'afterGetTraining').mockImplementation(() => { return; });
+    await wrapper.vm.getTraining();
 
     // expect
     expect(wrapper.vm.animationLoaderDisplay).toBeFalsy();
-    expect(spyAfterGetDetailByBatch).toBeCalled();
+    expect(spy).toBeCalled();
   });
-  // it get detail by batch
+  // it get training
 
-  // it promise get detail batch
-  it('Promise get detail by batch', () => {
+  // it promise get training
+  it('Promise get training', () => {
     const wrapper = shallowMount(DetailBatch, {
       mocks: {
         $func: {
@@ -282,7 +321,9 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -294,22 +335,21 @@ describe('Method', () => {
       ],
     });
 
-    const spyGetBatchBy = jest.spyOn(wrapper.vm, 'getBatchBy');
-    wrapper.vm.promiseGetDetailByBatch();
+    const spy = jest.spyOn(wrapper.vm, 'getTrainings');
+    wrapper.vm.promiseGetTraining();
 
     // expect
-    expect(spyGetBatchBy).toBeCalled();
-    expect(spyGetBatchBy).toBeCalledWith({
+    expect(spy).toBeCalledWith({
       params: {
         batchId: wrapper.vm.paramBatch,
       },
       resolve: expect.any(Function),
     });
   });
-  // it promise get detail batch
+  // it promise get training
 
-  // it afterGetDetailByBatch
-  it('After get detail by batch', () => {
+  // it after get training
+  it('After get training', () => {
     const wrapper = shallowMount(DetailBatch, {
       mocks: {
         $func: {
@@ -318,7 +358,9 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -330,19 +372,124 @@ describe('Method', () => {
       ],
     });
 
-    wrapper.vm.afterGetDetailByBatch(200);
+    wrapper.vm.afterGetTraining(200);
 
     // expect
-    expect(wrapper.vm.apiReady).toBeTruthy();
-    expect(wrapper.vm.batch).toStrictEqual(wrapper.vm.batchBy.data.batch);
-    expect(wrapper.vm.training).toStrictEqual(wrapper.vm.batchBy.data.training);
-    expect(wrapper.vm.employee).toStrictEqual(wrapper.vm.batchBy.data.employee);
+    expect(wrapper.vm.training).toStrictEqual(wrapper.vm.trainingList.data.trainingList);
 
-    wrapper.vm.afterGetDetailByBatch(404);
+    wrapper.vm.afterGetTraining(404);
 
     // expect
     expect(wrapper.vm.$func.popupLostConnection).toBeCalled();
   });
-  // it afterGetDetailByBatch
+  // it after get training
+
+  // it get employee
+  it('Get employee', async () => {
+    const wrapper = shallowMount(DetailBatch, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+        },
+        $route: {
+          params: {
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
+          },
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    jest.spyOn(wrapper.vm, 'promiseGetEmployee').mockImplementation(() => {
+      Promise.resolve(200);
+    });
+    const spy = jest.spyOn(wrapper.vm, 'afterGetEmployee').mockImplementation(() => { return; });
+    await wrapper.vm.getEmployee();
+
+    // expect
+    expect(wrapper.vm.animationLoaderDisplay).toBeFalsy();
+    expect(spy).toBeCalled();
+  });
+  // it get employee
+
+  // it promise get employee
+  it('Promise get employee', () => {
+    const wrapper = shallowMount(DetailBatch, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+        },
+        $route: {
+          params: {
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
+          },
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    const spy = jest.spyOn(wrapper.vm, 'getEmployeesBatch');
+    wrapper.vm.promiseGetEmployee();
+
+    // expect
+    expect(spy).toBeCalledWith({
+      params: {
+        batchId: wrapper.vm.paramBatch,
+      },
+      resolve: expect.any(Function),
+    });
+  });
+  // it promise get employee
+
+  // it after get employee
+  it('After get employee', () => {
+    const wrapper = shallowMount(DetailBatch, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+          popupLostConnection: jest.fn(),
+        },
+        $route: {
+          params: {
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
+          },
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    wrapper.vm.afterGetEmployee(200);
+
+    // expect
+    expect(wrapper.vm.apiReady).toBeTruthy();
+    expect(wrapper.vm.employee).toStrictEqual(wrapper.vm.batchEmployeeList.data.employeeList);
+
+    wrapper.vm.afterGetEmployee(404);
+
+    // expect
+    expect(wrapper.vm.$func.popupLostConnection).toBeCalled();
+  });
+  // it after get employee
 });
 // describe method

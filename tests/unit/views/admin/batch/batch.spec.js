@@ -252,8 +252,8 @@ describe('Method', () => {
     expect(spyPostBatch).toBeCalled();
     expect(spyPostBatch).toBeCalledWith({
       params: {
-        batch: 2,
-        year: 5,
+        batch: '2',
+        year: '5',
       },
       resolve: expect.any(Function),
     });
@@ -278,7 +278,7 @@ describe('Method', () => {
       ],
     });
 
-    wrapper.vm.afterAddBatch(200);
+    wrapper.vm.afterAddBatch(202);
 
     // expect
     expect(wrapper.vm.$func.popupSuccessfull).toBeCalled();

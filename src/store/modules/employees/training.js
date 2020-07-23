@@ -6,6 +6,7 @@ const { API } = config;
 const data = {
   trainings: {},
   trainingBy: {},
+  attendance: {},
 };
 
 const getters = {
@@ -15,6 +16,10 @@ const getters = {
 
   trainingBy(state) {
     return state.trainingBy;
+  },
+
+  attendanceUser(state) {
+    return state.attendance;
   },
 };
 
@@ -26,6 +31,10 @@ const mutations = {
   setTrainingBy(state, value) {
     state.trainingBy = value;
   },
+
+  setAttendance(state, value) {
+    state.attendance = value;
+  },
 };
 
 const actions = {
@@ -35,6 +44,10 @@ const actions = {
       url: `${API}/training`,
       params: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         commit('setTrainings', res.data);
@@ -51,9 +64,33 @@ const actions = {
       url: `${API}/training/detail`,
       params: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         commit('setTrainingBy', res.data);
+        payload.resolve(res.data.code);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  getAttendance({ commit }, payload) {
+    return axios({
+      method: 'get',
+      url: `${API}/training/attendance`,
+      params: payload.params,
+      responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
+    })
+      .then((res) => {
+        commit('setAttendance', res.data);
         payload.resolve(res.data.code);
       })
       .catch((err) => {

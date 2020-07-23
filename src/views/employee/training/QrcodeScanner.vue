@@ -198,7 +198,7 @@ export default {
 
   created() {
     // check user auth
-    this.$func.userAuth('Employee');
+    this.$func.userAuth('ROLE_EMPLOYEE');
 
     // get params
     this.paramTraining = this.$route.params.training;

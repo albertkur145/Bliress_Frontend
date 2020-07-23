@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-// import '@/api/mock';
+import '@/api/mock';
 import login from './modules/login';
 import employeeTraining from './modules/employees/training';
+import employeeMaterial from './modules/employees/material';
 import employeeTest from './modules/employees/test';
 import employeeNotification from './modules/employees/notification';
 import employeeEmployee from './modules/employees/employee';
@@ -25,6 +26,7 @@ export default new Vuex.Store({
   modules: {
     login,
     employeeTraining,
+    employeeMaterial,
     employeeTest,
     employeeNotification,
     employeeEmployee,

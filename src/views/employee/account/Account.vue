@@ -529,7 +529,7 @@ export default {
       return new Promise((resolve) => {
         this.getTriggerNotif({
           params: {
-            employeeId: this.$cookies.get('user').id,
+            employeeId: this.$cookies.get('user').userId,
           },
           resolve,
         });
@@ -569,7 +569,7 @@ export default {
       return new Promise((resolve) => {
         this.getUser({
           params: {
-            employeeId: this.$cookies.get('user').id,
+            employeeId: this.$cookies.get('user').userId,
           },
           resolve,
         });
@@ -578,6 +578,7 @@ export default {
 
     logout() {
       this.$cookies.remove('user');
+      this.$cookies.remove('token');
       this.$router.push({ name: 'Login' });
     },
 
@@ -613,7 +614,7 @@ export default {
         this.$func.popupError('Konfirmasi password baru salah!', 5000);
       } else {
         this.changePasswordUser({
-          employeeId: this.$cookies.get('user').id,
+          employeeId: this.$cookies.get('user').userId,
           oldPassword: res.value[0],
           currentPassword: res.value[2],
         });
@@ -654,7 +655,7 @@ export default {
 
   created() {
     // check user auth
-    this.$func.userAuth('Employee');
+    this.$func.userAuth('ROLE_EMPLOYEE');
 
     // req api
     this.getUserAccount();

@@ -9,7 +9,7 @@
     <!-- content -->
     <div class="content" v-if="apiReady">
       <!-- list training -->
-      <div class="training" v-for="(value) in trainingList.data" :key="value.id">
+      <div class="training" v-for="(value) in trainingList.data.trainingList" :key="value.id">
         <!-- left -->
         <div class="left">
           <span>Training {{ value.training }}</span>
@@ -321,9 +321,10 @@ export default {
       return new Promise((resolve) => {
         this.getTriggerNotif({
           params: {
-            employeeId: this.$cookies.get('user').id,
+            employeeId: this.$cookies.get('user').userId,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -352,9 +353,10 @@ export default {
       return new Promise((resolve) => {
         this.getTrainings({
           params: {
-            employeeId: this.$cookies.get('user').id,
+            employeeId: this.$cookies.get('user').userId,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -370,7 +372,7 @@ export default {
 
   created() {
     // check user auth
-    this.$func.userAuth('Employee');
+    this.$func.userAuth('ROLE_EMPLOYEE');
 
     // req api
     this.getAllTraining();
