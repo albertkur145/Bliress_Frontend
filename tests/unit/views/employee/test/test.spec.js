@@ -203,6 +203,33 @@ describe('Method', () => {
   });
   // it getAllTests
 
+  // it promise api
+  it('Promise API', () => {
+    const wrapper = shallowMount(Test, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+        },
+        $cookies: {
+          get: jest.fn((user) => user),
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    const spy = jest.spyOn(wrapper.vm, 'getTests');
+    wrapper.vm.promiseAPI();
+
+    // expect
+    expect(spy).toBeCalled();
+  });
+  // it promise api
+
   // it isHasNotif
   it('Is has notif', async () => {
     const wrapper = shallowMount(Test, {
@@ -236,6 +263,33 @@ describe('Method', () => {
     expect(spy).toBeCalled();
   });
   // it isHasNotif
+
+  // it promise is has notif
+  it('Promise is has notif', () => {
+    const wrapper = shallowMount(Test, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+        },
+        $cookies: {
+          get: jest.fn((user) => user),
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    const spy = jest.spyOn(wrapper.vm, 'getTriggerNotif');
+    wrapper.vm.promiseIsHasNotif();
+
+    // expect
+    expect(spy).toBeCalled();
+  });
+  // it promise is has notif
 
   // it afterTriggerNotif
   it('After trigger notif', () => {

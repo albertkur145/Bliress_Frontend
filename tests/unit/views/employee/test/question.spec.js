@@ -188,7 +188,7 @@ describe('Method', () => {
     const wrapper = shallowMount(Question, {
       data() {
         return {
-          promise: 200,
+          promise: 202,
         };
       },
       mocks: {

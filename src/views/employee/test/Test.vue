@@ -12,7 +12,7 @@
       <!-- list training test -->
       <div class="tests">
         <!-- training test -->
-        <router-link v-for="(value) in testList.data"
+        <router-link v-for="(value) in testList.data.testList"
         :key="value.id" class="training-test"
         :to="{ name: 'DetailTest', params: { training: value.training } }">
           <div class="img-test">
@@ -301,9 +301,10 @@ export default {
       return new Promise((resolve) => {
         this.getTriggerNotif({
           params: {
-            employeeId: this.$cookies.get('user').id,
+            employeeId: this.$cookies.get('user').userId,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -332,9 +333,10 @@ export default {
       return new Promise((resolve) => {
         this.getTests({
           params: {
-            employeeId: this.$cookies.get('user').id,
+            employeeId: this.$cookies.get('user').userId,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -351,7 +353,7 @@ export default {
 
   created() {
     // check user auth
-    this.$func.userAuth('Employee');
+    this.$func.userAuth('ROLE_EMPLOYEE');
 
     // req api
     this.getAllTests();

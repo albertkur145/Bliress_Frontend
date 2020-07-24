@@ -44,6 +44,10 @@ const actions = {
       url: `${API}/test`,
       params: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         commit('setTests', res.data);
@@ -60,6 +64,10 @@ const actions = {
       url: `${API}/test/material`,
       params: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         commit('setMaterials', res.data);
@@ -76,6 +84,10 @@ const actions = {
       url: `${API}/test/material/question`,
       params: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         commit('setQuestions', res.data);
@@ -92,6 +104,10 @@ const actions = {
       url: `${API}/test/material/question`,
       data: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         console.log(commit);

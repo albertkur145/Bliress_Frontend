@@ -1,12 +1,12 @@
-import Login from '@/store/modules/login';
+import Auth from '@/store/modules/auth';
 import axios from 'axios';
 
-const store = Login;
+const store = Auth;
 jest.mock('axios', () => jest.fn());
 
 
 // describe
-describe('Login modules', () => {
+describe('Auth modules', () => {
   // it getters
   it('Getters', () => {
     const state = { user: 'User123' };
@@ -36,6 +36,7 @@ describe('Login modules', () => {
       },
     };
 
+    // login
     axios.mockResolvedValue(res);
     await store.actions.login({ commit }, { resolve });
 
@@ -50,6 +51,7 @@ describe('Login modules', () => {
     // expect
     expect(resolve).toBeCalledWith(500);
     expect(spyConsole).toBeCalledWith('Catch');
+    // login
   });
   // it actions
 });

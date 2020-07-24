@@ -101,7 +101,9 @@ describe('Method', () => {
     getters = {
       user: jest.fn(() => {
         return {
-          data: {},
+          data: {
+            employee: {},
+          },
         };
       }),
     };

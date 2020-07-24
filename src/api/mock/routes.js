@@ -232,40 +232,42 @@ export default [
     method: 'GET',
     params: {
       params: {
-        employeeId: 1,
+        employeeId: '1',
       },
     },
     status: 200,
     response: {
       code: 200,
       status: 'OK',
-      data: [
-        {
-          id: 1,
-          training: '1',
-          status: 'Available',
-        },
-        {
-          id: 2,
-          training: '2',
-          status: 'Available',
-        },
-        {
-          id: 3,
-          training: '3',
-          status: 'Closed',
-        },
-        {
-          id: 4,
-          training: '4',
-          status: 'Closed',
-        },
-        {
-          id: 5,
-          training: '5',
-          status: 'Closed',
-        },
-      ],
+      data: {
+        testList: [
+          {
+            id: '1',
+            training: '1',
+            status: 'Available',
+          },
+          {
+            id: '2',
+            training: '2',
+            status: 'Available',
+          },
+          {
+            id: '3',
+            training: '3',
+            status: 'Closed',
+          },
+          {
+            id: '4',
+            training: '4',
+            status: 'Closed',
+          },
+          {
+            id: '5',
+            training: '5',
+            status: 'Closed',
+          },
+        ],
+      },
       paging: null,
       errors: null,
     },
@@ -275,7 +277,7 @@ export default [
     method: 'GET',
     params: {
       params: {
-        employeeId: 1,
+        employeeId: '1',
         training: '1',
       },
     },
@@ -283,26 +285,28 @@ export default [
     response: {
       code: 200,
       status: 'OK',
-      data: [
-        {
-          id: 1,
-          material: 'Private Victory',
-          dateAvailable: '12 September 2020',
-          dateClosed: '14 September 2020',
-          timeLimit: 20,
-          score: 0,
-          status: 0,
-        },
-        {
-          id: 2,
-          material: 'Public Victory',
-          dateAvailable: '17 September 2020',
-          dateClosed: '18 September 2020',
-          timeLimit: 30,
-          score: 60,
-          status: 1,
-        },
-      ],
+      data: {
+        materialList: [
+          {
+            id: '1',
+            material: 'Private Victory',
+            dateAvailable: '12 September 2020',
+            dateClosed: '14 September 2020',
+            timeLimit: '20',
+            score: '0',
+            status: '0',
+          },
+          {
+            id: '2',
+            material: 'Public Victory',
+            dateAvailable: '17 September 2020',
+            dateClosed: '18 September 2020',
+            timeLimit: '30',
+            score: '60',
+            status: '1',
+          },
+        ],
+      },
       paging: null,
       errors: null,
     },
@@ -312,9 +316,9 @@ export default [
     method: 'GET',
     params: {
       params: {
-        employeeId: 1,
+        employeeId: '1',
         training: '1',
-        materialId: 1,
+        materialId: '1',
       },
     },
     status: 200,
@@ -325,7 +329,7 @@ export default [
         timeLimit: 20,
         questions: [
           {
-            id: 1,
+            id: '1',
             questionText: 'Sebagian pedagang pecel lele mengeluhkan harga cabe naik. Pak Rudi seorang pedagang pecel lele.',
             choices: [
               {
@@ -347,7 +351,7 @@ export default [
             ],
           },
           {
-            id: 2,
+            id: '2',
             questionText: 'Semua pemain sepakbola yang berkebangsaan Itali berwajah tampan. David Beckham adalah pemain sepakbola berkebangsaan Inggris.',
             choices: [
               {
@@ -369,7 +373,7 @@ export default [
             ],
           },
           {
-            id: 3,
+            id: '3',
             questionText: 'Semua mahasiswa Perguruan Tinggi memiliki Nomor Induk Mahasiswa. Budi seorang mahasiswa. Jadi,',
             choices: [
               {
@@ -391,7 +395,7 @@ export default [
             ],
           },
           {
-            id: 4,
+            id: '4',
             questionText: 'Sebagian orang yang berminat menjadi pejabat hanya menginginkan harta dan tahta. Budi tidak berminat menjadi pejabat.',
             choices: [
               {
@@ -413,7 +417,7 @@ export default [
             ],
           },
           {
-            id: 5,
+            id: '5',
             questionText: 'Coklat yang dibungkus dalam kemasan menarik sangat laris terjual. Coklat Jago dibungkus dalam kemasan berwarna merah menyala. Menurut anak-anak, warna merah menyala sangatlah menarik.',
             choices: [
               {
@@ -444,37 +448,40 @@ export default [
     url: `${API}/test/material/question`,
     method: 'POST',
     params: {
-      employeeId: 1,
-      materialId: 1,
+      employeeId: '1',
+      materialId: '1',
       training: '1',
       question: [
         {
-          id: 1,
+          id: '1',
           choice: '2',
         },
         {
-          id: 2,
+          id: '2',
           choice: '1',
         },
         {
-          id: 3,
+          id: '3',
           choice: '4',
         },
         {
-          id: 4,
+          id: '4',
           choice: '2',
         },
         {
-          id: 5,
+          id: '5',
           choice: '3',
         },
       ],
     },
-    status: 200,
+    status: 202,
     response: {
-      code: 200,
-      status: 'OK',
-      data: null,
+      code: 202,
+      status: 'ACCEPTED',
+      data: {
+        status: 'ACCEPTED',
+        message: 'Test has been submit',
+      },
       paging: null,
       errors: null,
     },
@@ -483,37 +490,40 @@ export default [
     url: `${API}/test/material/question`,
     method: 'POST',
     params: {
-      employeeId: 1,
-      materialId: 1,
+      employeeId: '1',
+      materialId: '1',
       training: '1',
       question: [
         {
-          id: 1,
+          id: '1',
           choice: '',
         },
         {
-          id: 2,
+          id: '2',
           choice: '',
         },
         {
-          id: 3,
+          id: '3',
           choice: '',
         },
         {
-          id: 4,
+          id: '4',
           choice: '',
         },
         {
-          id: 5,
+          id: '5',
           choice: '',
         },
       ],
     },
-    status: 200,
+    status: 202,
     response: {
-      code: 200,
-      status: 'OK',
-      data: null,
+      code: 202,
+      status: 'ACCEPTED',
+      data: {
+        status: 'ACCEPTED',
+        message: 'Test has been submit',
+      },
       paging: null,
       errors: null,
     },
@@ -549,18 +559,20 @@ export default [
     response: {
       code: 200,
       status: 'OK',
-      data: [
-        {
-          id: 1,
-          title: 'Reminder - Training',
-          message: 'Haloo Albert, ingat lho 1 minggu lagi kamu ada training perdanamu di Gedung Serbaguna Sarana Jaya. Tepatnya pada tanggal 15 September 2020 pkl 08.00 WIB. Untuk lebih detailnya, cek jadwal di halaman training ya!',
-        },
-        {
-          id: 2,
-          title: 'PENGUMUMAN',
-          message: 'Dalam mengikuti training 2, diharapkan setiap peserta training membawa kebutuhan masing-masing seperti alat tulis, laptop, ataupun peralatan mandi lainnya. Terimakasih.',
-        },
-      ],
+      data: {
+        notificationList: [
+          {
+            id: 1,
+            title: 'Reminder - Training',
+            message: 'Haloo Albert, ingat lho 1 minggu lagi kamu ada training perdanamu di Gedung Serbaguna Sarana Jaya. Tepatnya pada tanggal 15 September 2020 pkl 08.00 WIB. Untuk lebih detailnya, cek jadwal di halaman training ya!',
+          },
+          {
+            id: 2,
+            title: 'PENGUMUMAN',
+            message: 'Dalam mengikuti training 2, diharapkan setiap peserta training membawa kebutuhan masing-masing seperti alat tulis, laptop, ataupun peralatan mandi lainnya. Terimakasih.',
+          },
+        ],
+      },
       paging: null,
       errors: null,
     },
@@ -571,11 +583,14 @@ export default [
     params: {
       employeeId: '1',
     },
-    status: 200,
+    status: 202,
     response: {
-      code: 200,
-      status: 'OK',
-      data: null,
+      code: 202,
+      status: 'ACCEPTED',
+      data: {
+        status: 'ACCEPTED',
+        message: 'Notification has been read',
+      },
       paging: null,
       errors: null,
     },
@@ -593,15 +608,17 @@ export default [
       code: 200,
       status: 'OK',
       data: {
-        id: '1',
-        cardId: 'BLI-22D9D6',
-        batch: 'Juni - 2020',
-        name: 'Albert Kurniawan',
-        email: 'albertkur@gmail.com',
-        phoneNumber: '081995561257',
-        division: 'Software Developer',
-        birthdate: '21-08-1995',
-        gender: 'Pria',
+        employee: {
+          id: '1',
+          cardId: 'BLI-22D9D6',
+          batch: 'Juni - 2020',
+          name: 'Albert Kurniawan',
+          email: 'albertkur@gmail.com',
+          phoneNumber: '081995561257',
+          division: 'Software Developer',
+          birthdate: '21-08-1995',
+          gender: 'Pria',
+        },
       },
       paging: null,
       errors: null,

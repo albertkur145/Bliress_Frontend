@@ -8,7 +8,7 @@
 
     <!-- content -->
     <div class="content" v-if="apiReady">
-      <div class="notif" v-for="(value) in this.notificationList.data" :key="value.id">
+      <div class="notif" v-for="(value) in this.notificationList.data.notificationList" :key="value.id">
         <div class="title">{{ value.title }}</div>
         <div class="message">{{ value.message }}</div>
         <hr>
@@ -202,9 +202,10 @@ export default {
       return new Promise((resolve) => {
         this.postNotifications({
           params: {
-            employeeId: this.$cookies.get('user').id,
+            employeeId: this.$cookies.get('user').userId,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -225,9 +226,10 @@ export default {
       return new Promise((resolve) => {
         this.getNotifications({
           params: {
-            employeeId: this.$cookies.get('user').id,
+            employeeId: this.$cookies.get('user').userId,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -244,7 +246,7 @@ export default {
 
   created() {
     // check user auth
-    this.$func.userAuth('Employee');
+    this.$func.userAuth('ROLE_EMPLOYEE');
 
     // req api
     this.getAllNotifications();

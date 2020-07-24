@@ -15,12 +15,12 @@
       <!-- list test of material -->
       <div class="materials">
         <!-- test -->
-        <div class="test" v-for="(value) in this.materialList.data" :key="value.id">
+        <div class="test" v-for="(value) in this.materialList.data.materialList" :key="value.id">
           <div class="material">{{ value.material }}</div>
           <div class="txt date-available">Tersedia pada {{ value.dateAvailable }}</div>
           <div class="txt date-closed">Ditutup pada {{ value.dateClosed }}</div>
           <div class="txt time">Batas waktu: {{ value.timeLimit }} menit</div>
-          <div v-if="value.status" class="score">Nilai: {{ value.score }}</div>
+          <div v-if="value.status !== '0'" class="score">Nilai: {{ value.score }}</div>
           <button v-else class="btn-start" @click="redirectToQuestion(value.id)">Start !</button>
         </div>
         <!-- test -->
@@ -294,10 +294,11 @@ export default {
       return new Promise((resolve) => {
         this.getMaterials({
           params: {
-            employeeId: this.$cookies.get('user').id,
+            employeeId: this.$cookies.get('user').userId,
             training: this.paramTraining,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -332,7 +333,7 @@ export default {
 
   created() {
     // check user auth
-    this.$func.userAuth('Employee');
+    this.$func.userAuth('ROLE_EMPLOYEE');
 
     // get params
     this.paramTraining = this.$route.params.training;

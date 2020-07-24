@@ -276,13 +276,13 @@ export default {
   },
 
   computed: {
-    ...mapGetters('login', [
+    ...mapGetters('auth', [
       'user',
     ]),
   },
 
   methods: {
-    ...mapActions('login', [
+    ...mapActions('auth', [
       'login',
     ]),
 

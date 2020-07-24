@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import '@/api/mock';
-import login from './modules/login';
+import auth from './modules/auth';
 import employeeTraining from './modules/employees/training';
 import employeeMaterial from './modules/employees/material';
 import employeeTest from './modules/employees/test';
@@ -24,7 +24,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
-    login,
+    auth,
     employeeTraining,
     employeeMaterial,
     employeeTest,

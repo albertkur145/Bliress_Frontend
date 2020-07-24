@@ -26,6 +26,10 @@ const actions = {
       url: `${API}/employee`,
       params: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         commit('setUser', res.data);
@@ -39,9 +43,12 @@ const actions = {
   changePassword({ commit }, payload) {
     return axios({
       method: 'put',
-      url: `${API}/employee/password`,
+      url: `${API}/auth/password`,
       data: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
       .then((res) => {
         console.log(commit);

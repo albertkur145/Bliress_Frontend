@@ -438,11 +438,12 @@ export default {
       return new Promise((resolve) => {
         this.getQuestions({
           params: {
-            employeeId: this.$cookies.get('user').id,
+            employeeId: this.$cookies.get('user').userId,
             training: this.paramTraining,
             materialId: this.paramMaterial,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -495,18 +496,19 @@ export default {
       return new Promise((resolve) => {
         this.submitTest({
           params: {
-            employeeId: this.$cookies.get('user').id,
+            employeeId: this.$cookies.get('user').userId,
             materialId: this.paramMaterial,
             training: this.paramTraining,
             question: this.form,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
 
     afterSubmit() {
-      if (this.promise === 200) {
+      if (this.promise === 202) {
         localStorage.removeItem('timeLimit');
         this.$func.popupSuccessfull('Berhasil submit test', 5000, this.back);
       } else {
@@ -556,11 +558,11 @@ export default {
 
   created() {
     // check user auth
-    this.$func.userAuth('Employee');
+    this.$func.userAuth('ROLE_EMPLOYEE');
 
     // get params
     this.paramTraining = this.$route.params.training;
-    this.paramMaterial = parseInt(this.$route.params.material, 10);
+    this.paramMaterial = this.$route.params.material;
 
     // req api
     this.getAllQuestions();

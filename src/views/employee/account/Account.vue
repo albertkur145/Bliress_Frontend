@@ -15,8 +15,8 @@
           <font-awesome-icon icon="user-circle" class="user-icon"></font-awesome-icon>
         </div>
         <div class="right">
-          <p class="name">{{ user.data.name }}</p>
-          <p class="position">{{ user.data.division }}</p>
+          <p class="name">{{ userData.name }}</p>
+          <p class="position">{{ userData.division }}</p>
         </div>
       </div>
       <!-- top head -->
@@ -30,49 +30,49 @@
         <div class="form-group">
           <fieldset>
             <legend>Batch</legend>
-            <p class="value">{{ user.data.batch }}</p>
+            <p class="value">{{ userData.batch }}</p>
           </fieldset>
         </div>
 
         <div class="form-group">
           <fieldset>
             <legend>Nama lengkap</legend>
-            <p class="value">{{ user.data.name }}</p>
+            <p class="value">{{ userData.name }}</p>
           </fieldset>
         </div>
 
         <div class="form-group">
           <fieldset>
             <legend>Email</legend>
-            <p class="value">{{ user.data.email }}</p>
+            <p class="value">{{ userData.email }}</p>
           </fieldset>
         </div>
 
         <div class="form-group">
           <fieldset>
             <legend>Nomor HP</legend>
-            <p class="value">{{ user.data.phoneNumber }}</p>
+            <p class="value">{{ userData.phoneNumber }}</p>
           </fieldset>
         </div>
 
         <div class="form-group">
           <fieldset>
             <legend>Divisi</legend>
-            <p class="value">{{ user.data.division }}</p>
+            <p class="value">{{ userData.division }}</p>
           </fieldset>
         </div>
 
         <div class="form-group">
           <fieldset>
             <legend>Tanggal lahir</legend>
-            <p class="value">{{ user.data.birthdate }}</p>
+            <p class="value">{{ userData.birthdate }}</p>
           </fieldset>
         </div>
 
         <div class="form-group">
           <fieldset>
             <legend>Jenis kelamin</legend>
-            <p class="value">{{ user.data.gender }}</p>
+            <p class="value">{{ userData.gender }}</p>
           </fieldset>
         </div>
       </div>
@@ -490,6 +490,7 @@ export default {
       apiReady: '',
       promise: null,
       hasNotif: false,
+      userData: {},
     };
   },
 
@@ -559,6 +560,7 @@ export default {
     dataReady() {
       if (this.promise === 200) {
         this.apiReady = true;
+        this.userData = this.user.data.employee;
       } else {
         // show popup error
         this.$func.popupLostConnection();

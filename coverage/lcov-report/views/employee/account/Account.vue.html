@@ -24,7 +24,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>44/44</span>
+                <span class='fraction'>45/45</span>
             </div>
         
             
@@ -45,7 +45,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>44/44</span>
+                <span class='fraction'>45/45</span>
             </div>
         
             
@@ -723,7 +723,9 @@
 <a name='L665'></a><a href='#L665'>665</a>
 <a name='L666'></a><a href='#L666'>666</a>
 <a name='L667'></a><a href='#L667'>667</a>
-<a name='L668'></a><a href='#L668'>668</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L668'></a><a href='#L668'>668</a>
+<a name='L669'></a><a href='#L669'>669</a>
+<a name='L670'></a><a href='#L670'>670</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1211,6 +1213,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1283,6 +1286,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1407,8 +1411,8 @@
           &lt;font-awesome-icon icon="user-circle" class="user-icon"&gt;&lt;/font-awesome-icon&gt;
         &lt;/div&gt;
         &lt;div class="right"&gt;
-          &lt;p class="name"&gt;{{ user.data.name }}&lt;/p&gt;
-          &lt;p class="position"&gt;{{ user.data.division }}&lt;/p&gt;
+          &lt;p class="name"&gt;{{ userData.name }}&lt;/p&gt;
+          &lt;p class="position"&gt;{{ userData.division }}&lt;/p&gt;
         &lt;/div&gt;
       &lt;/div&gt;
       &lt;!-- top head --&gt;
@@ -1422,49 +1426,49 @@
         &lt;div class="form-group"&gt;
           &lt;fieldset&gt;
             &lt;legend&gt;Batch&lt;/legend&gt;
-            &lt;p class="value"&gt;{{ user.data.batch }}&lt;/p&gt;
+            &lt;p class="value"&gt;{{ userData.batch }}&lt;/p&gt;
           &lt;/fieldset&gt;
         &lt;/div&gt;
 &nbsp;
         &lt;div class="form-group"&gt;
           &lt;fieldset&gt;
             &lt;legend&gt;Nama lengkap&lt;/legend&gt;
-            &lt;p class="value"&gt;{{ user.data.name }}&lt;/p&gt;
+            &lt;p class="value"&gt;{{ userData.name }}&lt;/p&gt;
           &lt;/fieldset&gt;
         &lt;/div&gt;
 &nbsp;
         &lt;div class="form-group"&gt;
           &lt;fieldset&gt;
             &lt;legend&gt;Email&lt;/legend&gt;
-            &lt;p class="value"&gt;{{ user.data.email }}&lt;/p&gt;
+            &lt;p class="value"&gt;{{ userData.email }}&lt;/p&gt;
           &lt;/fieldset&gt;
         &lt;/div&gt;
 &nbsp;
         &lt;div class="form-group"&gt;
           &lt;fieldset&gt;
             &lt;legend&gt;Nomor HP&lt;/legend&gt;
-            &lt;p class="value"&gt;{{ user.data.phoneNumber }}&lt;/p&gt;
+            &lt;p class="value"&gt;{{ userData.phoneNumber }}&lt;/p&gt;
           &lt;/fieldset&gt;
         &lt;/div&gt;
 &nbsp;
         &lt;div class="form-group"&gt;
           &lt;fieldset&gt;
             &lt;legend&gt;Divisi&lt;/legend&gt;
-            &lt;p class="value"&gt;{{ user.data.division }}&lt;/p&gt;
+            &lt;p class="value"&gt;{{ userData.division }}&lt;/p&gt;
           &lt;/fieldset&gt;
         &lt;/div&gt;
 &nbsp;
         &lt;div class="form-group"&gt;
           &lt;fieldset&gt;
             &lt;legend&gt;Tanggal lahir&lt;/legend&gt;
-            &lt;p class="value"&gt;{{ user.data.birthdate }}&lt;/p&gt;
+            &lt;p class="value"&gt;{{ userData.birthdate }}&lt;/p&gt;
           &lt;/fieldset&gt;
         &lt;/div&gt;
 &nbsp;
         &lt;div class="form-group"&gt;
           &lt;fieldset&gt;
             &lt;legend&gt;Jenis kelamin&lt;/legend&gt;
-            &lt;p class="value"&gt;{{ user.data.gender }}&lt;/p&gt;
+            &lt;p class="value"&gt;{{ userData.gender }}&lt;/p&gt;
           &lt;/fieldset&gt;
         &lt;/div&gt;
       &lt;/div&gt;
@@ -1882,6 +1886,7 @@ export default {
       apiReady: '',
       promise: null,
       hasNotif: false,
+      userData: {},
     };
   },
 &nbsp;
@@ -1951,6 +1956,7 @@ export default {
     dataReady() {
       if (this.promise === 200) {
         this.apiReady = true;
+        this.userData = this.user.data.employee;
       } else {
         // show popup error
         this.$func.popupLostConnection();
@@ -2064,7 +2070,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Jul 24 2020 00:09:45 GMT+0700 (GMT+07:00)
+                at Fri Jul 24 2020 11:25:42 GMT+0700 (GMT+07:00)
             </div>
         </div>
         <script src="..\..\..\prettify.js"></script>

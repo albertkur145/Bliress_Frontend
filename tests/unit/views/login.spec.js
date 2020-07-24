@@ -45,7 +45,7 @@ describe(`When button 'masuk' click`, () => {
 
     store = new Vuex.Store({
       modules: {
-        login: {
+        auth: {
           namespaced: true,
           actions,
         },
@@ -133,7 +133,7 @@ describe('Redirect page method', () => {
 
       store = new Vuex.Store({
         modules: {
-          login: {
+          auth: {
             namespaced: true,
             getters,
           },
@@ -197,7 +197,7 @@ describe('Redirect page method', () => {
 
       store = new Vuex.Store({
         modules: {
-          login: {
+          auth: {
             namespaced: true,
             getters,
           },
@@ -261,7 +261,7 @@ describe('Redirect page method', () => {
 
       store = new Vuex.Store({
         modules: {
-          login: {
+          auth: {
             namespaced: true,
             getters,
           },
@@ -325,7 +325,7 @@ describe('Redirect page method', () => {
 
       store = new Vuex.Store({
         modules: {
-          login: {
+          auth: {
             namespaced: true,
             getters,
           },
@@ -383,7 +383,7 @@ describe('Promise async loginUser', () => {
 
     store = new Vuex.Store({
       modules: {
-        login: {
+        auth: {
           namespaced: true,
           actions,
         }
