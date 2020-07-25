@@ -37,7 +37,9 @@ describe('When created', () => {
         },
         $route: {
           params: {
-            batch: 202006,
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -72,8 +74,7 @@ describe('Method', () => {
     getters = {
       batchEmployeeList: jest.fn().mockReturnValue({
         data: {
-          batch: {},
-          employee: {},
+          employeeList: {},
         },
       }),
     };
@@ -99,7 +100,9 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -134,7 +137,9 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -150,8 +155,7 @@ describe('Method', () => {
 
     // expect
     expect(wrapper.vm.apiReady).toBeTruthy();
-    expect(wrapper.vm.batch).toStrictEqual(wrapper.vm.batchEmployeeList.data.batch);
-    expect(wrapper.vm.employee).toStrictEqual(wrapper.vm.batchEmployeeList.data.employee);
+    expect(wrapper.vm.employee).toStrictEqual(wrapper.vm.batchEmployeeList.data.employeeList);
 
     wrapper.vm.dataReady(404);
 

@@ -1143,6 +1143,39 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1174,42 +1207,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -1258,9 +1258,9 @@
 &nbsp;
         &lt;div class="list"&gt;
           &lt;div class="train" v-for="(value) in filteredTraining" :key="value.id"&gt;
-            &lt;p class="title"&gt;Training {{ value.training }}&lt;/p&gt;
+            &lt;p class="title"&gt;Training {{ value.stage }}&lt;/p&gt;
             &lt;p class="date"&gt;{{ value.date }}&lt;/p&gt;
-            &lt;p class="time"&gt;{{ value.timeStart }} - {{ value.timeFinish }} WIB&lt;/p&gt;
+            &lt;p class="time"&gt;{{ value.startedAt }} - {{ value.endedAt }} WIB&lt;/p&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
@@ -1278,14 +1278,14 @@
         &lt;div class="table"&gt;
           &lt;table&gt;
             &lt;thead&gt;
-              &lt;th&gt;ID&lt;/th&gt;
               &lt;th&gt;Nama&lt;/th&gt;
+              &lt;th&gt;Divisi&lt;/th&gt;
             &lt;/thead&gt;
 &nbsp;
             &lt;tbody&gt;
               &lt;tr v-for="(value) in filteredEmployee" :key="value.id"&gt;
-                &lt;td&gt;{{ value.cardId }}&lt;/td&gt;
-                &lt;td&gt;{{ value.name }}&lt;/td&gt;
+                &lt;td&gt;{{ value.username }}&lt;/td&gt;
+                &lt;td&gt;{{ value.division }}&lt;/td&gt;
               &lt;/tr&gt;
             &lt;/tbody&gt;
           &lt;/table&gt;
@@ -1726,6 +1726,7 @@ export default {
             batchId: this.paramBatch,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -1757,13 +1758,13 @@ export default {
             batchId: this.paramBatch,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
 &nbsp;
     afterGetTraining(promise) {
       if (promise === 200) {
-        // assignment split response data
         this.training = this.trainingList.data.trainingList;
       } else {
         this.$func.popupLostConnection();
@@ -1789,6 +1790,7 @@ export default {
             batchId: this.paramBatch,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -1796,8 +1798,6 @@ export default {
     afterGetEmployee(promise) {
       if (promise === 200) {
         this.apiReady = true;
-&nbsp;
-        // assignment split response data
         this.employee = this.batchEmployeeList.data.employeeList;
       } else {
         this.$func.popupLostConnection();
@@ -1827,7 +1827,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Jul 24 2020 11:25:42 GMT+0700 (GMT+07:00)
+                at Sat Jul 25 2020 11:55:28 GMT+0700 (GMT+07:00)
             </div>
         </div>
         <script src="..\..\..\prettify.js"></script>

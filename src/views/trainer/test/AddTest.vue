@@ -673,12 +673,12 @@ export default {
 
   created() {
     // check user auth
-    this.$func.userAuth('Trainer');
+    this.$func.userAuth('ROLE_TRAINER');
 
     // get params
-    this.paramBatch = parseInt(this.$route.params.batch, 10);
+    this.paramBatch = this.$route.params.batch;
     this.paramTraining = this.$route.params.training;
-    this.paramMaterial = parseInt(this.$route.params.material, 10);
+    this.paramMaterial = this.$route.params.material;
 
     // set form array
     this.setFormQuestion();

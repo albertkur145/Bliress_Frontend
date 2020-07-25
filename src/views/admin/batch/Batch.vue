@@ -257,6 +257,7 @@ export default {
       return new Promise((resolve) => {
         this.getBatch({
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -332,6 +333,7 @@ export default {
             year: value[1],
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },

@@ -35,6 +35,10 @@ const actions = {
       url: `${API}/trainer/notification`,
       params: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         commit('setNotifications', res.data);
@@ -51,6 +55,10 @@ const actions = {
       url: `${API}/trainer/notification/trigger`,
       params: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         commit('setHasNotif', res.data);
@@ -67,6 +75,10 @@ const actions = {
       url: `${API}/trainer/notification`,
       data: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         console.log(commit);

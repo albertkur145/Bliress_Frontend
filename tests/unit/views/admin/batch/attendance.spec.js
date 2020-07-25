@@ -37,8 +37,8 @@ describe('When created', () => {
         },
         $route: {
           params: {
-            batch: 202006,
-            training: 1,
+            batch: '202006',
+            training: '1',
           },
         },
       },
@@ -97,8 +97,8 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
-            training: 1,
+            batch: '202006',
+            training: '1',
           },
         },
       },
@@ -132,8 +132,8 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
-            training: 1,
+            batch: '202006',
+            training: '1',
           },
         },
       },

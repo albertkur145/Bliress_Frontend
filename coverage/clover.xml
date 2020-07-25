@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1595564742195" clover="3.2.0">
-  <project timestamp="1595564742195" name="All files">
-    <metrics statements="1563" coveredstatements="1556" conditionals="292" coveredconditionals="292" methods="700" coveredmethods="697" elements="2555" coveredelements="2545" complexity="0" loc="1563" ncloc="1563" packages="23" files="59" classes="59"/>
+<coverage generated="1595652928726" clover="3.2.0">
+  <project timestamp="1595652928726" name="All files">
+    <metrics statements="1581" coveredstatements="1574" conditionals="294" coveredconditionals="294" methods="711" coveredmethods="707" elements="2586" coveredelements="2575" complexity="0" loc="1581" ncloc="1581" packages="23" files="59" classes="59"/>
     <package name="components.admin">
       <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="MenuBar.vue" path="D:\Project\bliress-frontend\src\components\admin\MenuBar.vue">
@@ -121,17 +121,17 @@
         <line num="20" count="1" type="stmt"/>
         <line num="24" count="1" type="stmt"/>
         <line num="26" count="2" type="stmt"/>
-        <line num="32" count="1" type="stmt"/>
-        <line num="33" count="1" type="stmt"/>
         <line num="36" count="1" type="stmt"/>
-        <line num="41" count="2" type="stmt"/>
-        <line num="48" count="1" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
-        <line num="52" count="1" type="stmt"/>
-        <line num="57" count="2" type="stmt"/>
-        <line num="64" count="1" type="stmt"/>
-        <line num="65" count="1" type="stmt"/>
-        <line num="68" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="45" count="2" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="57" count="1" type="stmt"/>
+        <line num="60" count="1" type="stmt"/>
+        <line num="65" count="2" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="77" count="1" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
       </file>
       <file name="employee.js" path="D:\Project\bliress-frontend\src\store\modules\admin\employee.js">
         <metrics statements="39" coveredstatements="39" conditionals="0" coveredconditionals="0" methods="27" coveredmethods="27"/>
@@ -147,33 +147,33 @@
         <line num="36" count="1" type="stmt"/>
         <line num="40" count="1" type="stmt"/>
         <line num="42" count="2" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
-        <line num="50" count="1" type="stmt"/>
         <line num="53" count="1" type="stmt"/>
-        <line num="58" count="2" type="stmt"/>
-        <line num="64" count="1" type="stmt"/>
-        <line num="65" count="1" type="stmt"/>
-        <line num="68" count="1" type="stmt"/>
-        <line num="73" count="2" type="stmt"/>
-        <line num="80" count="1" type="stmt"/>
-        <line num="81" count="1" type="stmt"/>
-        <line num="84" count="1" type="stmt"/>
-        <line num="89" count="2" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="57" count="1" type="stmt"/>
+        <line num="62" count="2" type="stmt"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="81" count="2" type="stmt"/>
+        <line num="92" count="1" type="stmt"/>
+        <line num="93" count="1" type="stmt"/>
         <line num="96" count="1" type="stmt"/>
-        <line num="97" count="1" type="stmt"/>
-        <line num="100" count="1" type="stmt"/>
-        <line num="105" count="2" type="stmt"/>
+        <line num="101" count="2" type="stmt"/>
         <line num="112" count="1" type="stmt"/>
         <line num="113" count="1" type="stmt"/>
         <line num="116" count="1" type="stmt"/>
         <line num="121" count="2" type="stmt"/>
-        <line num="128" count="1" type="stmt"/>
-        <line num="129" count="1" type="stmt"/>
         <line num="132" count="1" type="stmt"/>
-        <line num="137" count="2" type="stmt"/>
-        <line num="144" count="1" type="stmt"/>
-        <line num="145" count="1" type="stmt"/>
-        <line num="148" count="1" type="stmt"/>
+        <line num="133" count="1" type="stmt"/>
+        <line num="136" count="1" type="stmt"/>
+        <line num="141" count="2" type="stmt"/>
+        <line num="152" count="1" type="stmt"/>
+        <line num="153" count="1" type="stmt"/>
+        <line num="156" count="1" type="stmt"/>
+        <line num="161" count="2" type="stmt"/>
+        <line num="172" count="1" type="stmt"/>
+        <line num="173" count="1" type="stmt"/>
+        <line num="176" count="1" type="stmt"/>
       </file>
       <file name="material.js" path="D:\Project\bliress-frontend\src\store\modules\admin\material.js">
         <metrics statements="19" coveredstatements="19" conditionals="0" coveredconditionals="0" methods="11" coveredmethods="11"/>
@@ -185,17 +185,17 @@
         <line num="18" count="1" type="stmt"/>
         <line num="22" count="1" type="stmt"/>
         <line num="24" count="2" type="stmt"/>
-        <line num="31" count="1" type="stmt"/>
-        <line num="32" count="1" type="stmt"/>
         <line num="35" count="1" type="stmt"/>
-        <line num="40" count="2" type="stmt"/>
-        <line num="47" count="1" type="stmt"/>
-        <line num="48" count="1" type="stmt"/>
-        <line num="51" count="1" type="stmt"/>
-        <line num="56" count="2" type="stmt"/>
-        <line num="63" count="1" type="stmt"/>
-        <line num="64" count="1" type="stmt"/>
-        <line num="67" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="44" count="2" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="64" count="2" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
       </file>
       <file name="notification.js" path="D:\Project\bliress-frontend\src\store\modules\admin\notification.js">
         <metrics statements="15" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="8"/>
@@ -207,13 +207,13 @@
         <line num="18" count="1" type="stmt"/>
         <line num="22" count="1" type="stmt"/>
         <line num="24" count="2" type="stmt"/>
-        <line num="30" count="1" type="stmt"/>
-        <line num="31" count="1" type="stmt"/>
         <line num="34" count="1" type="stmt"/>
-        <line num="39" count="2" type="stmt"/>
-        <line num="46" count="1" type="stmt"/>
-        <line num="47" count="1" type="stmt"/>
-        <line num="50" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="43" count="2" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
       </file>
       <file name="test.js" path="D:\Project\bliress-frontend\src\store\modules\admin\test.js">
         <metrics statements="25" coveredstatements="25" conditionals="0" coveredconditionals="0" methods="16" coveredmethods="16"/>
@@ -227,21 +227,21 @@
         <line num="27" count="1" type="stmt"/>
         <line num="31" count="1" type="stmt"/>
         <line num="33" count="2" type="stmt"/>
-        <line num="40" count="1" type="stmt"/>
-        <line num="41" count="1" type="stmt"/>
         <line num="44" count="1" type="stmt"/>
-        <line num="49" count="2" type="stmt"/>
-        <line num="56" count="1" type="stmt"/>
-        <line num="57" count="1" type="stmt"/>
-        <line num="60" count="1" type="stmt"/>
-        <line num="65" count="2" type="stmt"/>
-        <line num="72" count="1" type="stmt"/>
-        <line num="73" count="1" type="stmt"/>
-        <line num="76" count="1" type="stmt"/>
-        <line num="81" count="2" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="53" count="2" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="68" count="1" type="stmt"/>
+        <line num="73" count="2" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="85" count="1" type="stmt"/>
         <line num="88" count="1" type="stmt"/>
-        <line num="89" count="1" type="stmt"/>
-        <line num="92" count="1" type="stmt"/>
+        <line num="93" count="2" type="stmt"/>
+        <line num="104" count="1" type="stmt"/>
+        <line num="105" count="1" type="stmt"/>
+        <line num="108" count="1" type="stmt"/>
       </file>
       <file name="trainer.js" path="D:\Project\bliress-frontend\src\store\modules\admin\trainer.js">
         <metrics statements="33" coveredstatements="33" conditionals="0" coveredconditionals="0" methods="22" coveredmethods="22"/>
@@ -255,29 +255,29 @@
         <line num="27" count="1" type="stmt"/>
         <line num="31" count="1" type="stmt"/>
         <line num="33" count="2" type="stmt"/>
-        <line num="39" count="1" type="stmt"/>
-        <line num="40" count="1" type="stmt"/>
         <line num="43" count="1" type="stmt"/>
-        <line num="48" count="2" type="stmt"/>
-        <line num="55" count="1" type="stmt"/>
-        <line num="56" count="1" type="stmt"/>
-        <line num="59" count="1" type="stmt"/>
-        <line num="64" count="2" type="stmt"/>
-        <line num="71" count="1" type="stmt"/>
-        <line num="72" count="1" type="stmt"/>
-        <line num="75" count="1" type="stmt"/>
-        <line num="80" count="2" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="52" count="2" type="stmt"/>
+        <line num="63" count="1" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="72" count="2" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
         <line num="87" count="1" type="stmt"/>
-        <line num="88" count="1" type="stmt"/>
-        <line num="91" count="1" type="stmt"/>
-        <line num="96" count="2" type="stmt"/>
+        <line num="92" count="2" type="stmt"/>
         <line num="103" count="1" type="stmt"/>
         <line num="104" count="1" type="stmt"/>
         <line num="107" count="1" type="stmt"/>
         <line num="112" count="2" type="stmt"/>
-        <line num="119" count="1" type="stmt"/>
-        <line num="120" count="1" type="stmt"/>
         <line num="123" count="1" type="stmt"/>
+        <line num="124" count="1" type="stmt"/>
+        <line num="127" count="1" type="stmt"/>
+        <line num="132" count="2" type="stmt"/>
+        <line num="143" count="1" type="stmt"/>
+        <line num="144" count="1" type="stmt"/>
+        <line num="147" count="1" type="stmt"/>
       </file>
       <file name="training.js" path="D:\Project\bliress-frontend\src\store\modules\admin\training.js">
         <metrics statements="35" coveredstatements="35" conditionals="0" coveredconditionals="0" methods="24" coveredmethods="24"/>
@@ -293,29 +293,29 @@
         <line num="36" count="1" type="stmt"/>
         <line num="40" count="1" type="stmt"/>
         <line num="42" count="2" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
-        <line num="50" count="1" type="stmt"/>
         <line num="53" count="1" type="stmt"/>
-        <line num="58" count="2" type="stmt"/>
-        <line num="65" count="1" type="stmt"/>
-        <line num="66" count="1" type="stmt"/>
-        <line num="69" count="1" type="stmt"/>
-        <line num="74" count="2" type="stmt"/>
-        <line num="81" count="1" type="stmt"/>
-        <line num="82" count="1" type="stmt"/>
-        <line num="85" count="1" type="stmt"/>
-        <line num="90" count="2" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="57" count="1" type="stmt"/>
+        <line num="62" count="2" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="77" count="1" type="stmt"/>
+        <line num="82" count="2" type="stmt"/>
+        <line num="93" count="1" type="stmt"/>
+        <line num="94" count="1" type="stmt"/>
         <line num="97" count="1" type="stmt"/>
-        <line num="98" count="1" type="stmt"/>
-        <line num="101" count="1" type="stmt"/>
-        <line num="106" count="2" type="stmt"/>
+        <line num="102" count="2" type="stmt"/>
         <line num="113" count="1" type="stmt"/>
         <line num="114" count="1" type="stmt"/>
         <line num="117" count="1" type="stmt"/>
         <line num="122" count="2" type="stmt"/>
-        <line num="129" count="1" type="stmt"/>
-        <line num="130" count="1" type="stmt"/>
         <line num="133" count="1" type="stmt"/>
+        <line num="134" count="1" type="stmt"/>
+        <line num="137" count="1" type="stmt"/>
+        <line num="142" count="2" type="stmt"/>
+        <line num="153" count="1" type="stmt"/>
+        <line num="154" count="1" type="stmt"/>
+        <line num="157" count="1" type="stmt"/>
       </file>
     </package>
     <package name="store.modules.auth">
@@ -438,22 +438,28 @@
       </file>
     </package>
     <package name="store.modules.trainer">
-      <metrics statements="76" coveredstatements="76" conditionals="0" coveredconditionals="0" methods="45" coveredmethods="45"/>
+      <metrics statements="82" coveredstatements="82" conditionals="0" coveredconditionals="0" methods="50" coveredmethods="50"/>
       <file name="material.js" path="D:\Project\bliress-frontend\src\store\modules\trainer\material.js">
-        <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
+        <metrics statements="19" coveredstatements="19" conditionals="0" coveredconditionals="0" methods="11" coveredmethods="11"/>
         <line num="4" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
-        <line num="14" count="2" type="stmt"/>
-        <line num="21" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
         <line num="22" count="1" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
-        <line num="30" count="2" type="stmt"/>
-        <line num="37" count="1" type="stmt"/>
-        <line num="38" count="1" type="stmt"/>
-        <line num="41" count="1" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="44" count="2" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="64" count="2" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
       </file>
       <file name="notification.js" path="D:\Project\bliress-frontend\src\store\modules\trainer\notification.js">
         <metrics statements="21" coveredstatements="21" conditionals="0" coveredconditionals="0" methods="13" coveredmethods="13"/>
@@ -467,17 +473,17 @@
         <line num="27" count="1" type="stmt"/>
         <line num="31" count="1" type="stmt"/>
         <line num="33" count="2" type="stmt"/>
-        <line num="40" count="1" type="stmt"/>
-        <line num="41" count="1" type="stmt"/>
         <line num="44" count="1" type="stmt"/>
-        <line num="49" count="2" type="stmt"/>
-        <line num="56" count="1" type="stmt"/>
-        <line num="57" count="1" type="stmt"/>
-        <line num="60" count="1" type="stmt"/>
-        <line num="65" count="2" type="stmt"/>
-        <line num="72" count="1" type="stmt"/>
-        <line num="73" count="1" type="stmt"/>
-        <line num="76" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="53" count="2" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="68" count="1" type="stmt"/>
+        <line num="73" count="2" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="85" count="1" type="stmt"/>
+        <line num="88" count="1" type="stmt"/>
       </file>
       <file name="test.js" path="D:\Project\bliress-frontend\src\store\modules\trainer\test.js">
         <metrics statements="25" coveredstatements="25" conditionals="0" coveredconditionals="0" methods="16" coveredmethods="16"/>
@@ -491,21 +497,21 @@
         <line num="27" count="1" type="stmt"/>
         <line num="31" count="1" type="stmt"/>
         <line num="33" count="2" type="stmt"/>
-        <line num="40" count="1" type="stmt"/>
-        <line num="41" count="1" type="stmt"/>
         <line num="44" count="1" type="stmt"/>
-        <line num="49" count="2" type="stmt"/>
-        <line num="56" count="1" type="stmt"/>
-        <line num="57" count="1" type="stmt"/>
-        <line num="60" count="1" type="stmt"/>
-        <line num="65" count="2" type="stmt"/>
-        <line num="72" count="1" type="stmt"/>
-        <line num="73" count="1" type="stmt"/>
-        <line num="76" count="1" type="stmt"/>
-        <line num="81" count="2" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="53" count="2" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="68" count="1" type="stmt"/>
+        <line num="73" count="2" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="85" count="1" type="stmt"/>
         <line num="88" count="1" type="stmt"/>
-        <line num="89" count="1" type="stmt"/>
-        <line num="92" count="1" type="stmt"/>
+        <line num="93" count="2" type="stmt"/>
+        <line num="104" count="1" type="stmt"/>
+        <line num="105" count="1" type="stmt"/>
+        <line num="108" count="1" type="stmt"/>
       </file>
       <file name="training.js" path="D:\Project\bliress-frontend\src\store\modules\trainer\training.js">
         <metrics statements="17" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="10" coveredmethods="10"/>
@@ -519,13 +525,13 @@
         <line num="27" count="1" type="stmt"/>
         <line num="31" count="1" type="stmt"/>
         <line num="33" count="2" type="stmt"/>
-        <line num="40" count="1" type="stmt"/>
-        <line num="41" count="1" type="stmt"/>
         <line num="44" count="1" type="stmt"/>
-        <line num="49" count="2" type="stmt"/>
-        <line num="56" count="1" type="stmt"/>
-        <line num="57" count="1" type="stmt"/>
-        <line num="60" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="53" count="2" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="68" count="1" type="stmt"/>
       </file>
     </package>
     <package name="views">
@@ -557,56 +563,61 @@
       </file>
     </package>
     <package name="views.admin.batch">
-      <metrics statements="238" coveredstatements="238" conditionals="50" coveredconditionals="50" methods="97" coveredmethods="97"/>
+      <metrics statements="241" coveredstatements="241" conditionals="50" coveredconditionals="50" methods="99" coveredmethods="98"/>
       <file name="AddTraining.vue" path="D:\Project\bliress-frontend\src\views\admin\batch\AddTraining.vue">
-        <metrics statements="47" coveredstatements="47" conditionals="12" coveredconditionals="12" methods="17" coveredmethods="17"/>
+        <metrics statements="52" coveredstatements="52" conditionals="12" coveredconditionals="12" methods="19" coveredmethods="18"/>
         <line num="374" count="2" type="stmt"/>
         <line num="375" count="2" type="stmt"/>
-        <line num="384" count="10" type="stmt"/>
-        <line num="413" count="10" type="stmt"/>
-        <line num="435" count="11" type="stmt"/>
-        <line num="438" count="11" type="stmt"/>
-        <line num="441" count="1" type="stmt"/>
+        <line num="384" count="13" type="stmt"/>
+        <line num="414" count="13" type="stmt"/>
+        <line num="436" count="14" type="stmt"/>
+        <line num="439" count="14" type="stmt"/>
         <line num="442" count="1" type="stmt"/>
-        <line num="446" count="10" type="stmt"/>
-        <line num="447" count="10" type="stmt"/>
-        <line num="454" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="455" count="1" type="stmt"/>
+        <line num="443" count="1" type="stmt"/>
+        <line num="447" count="14" type="stmt"/>
+        <line num="448" count="14" type="stmt"/>
+        <line num="456" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="457" count="1" type="stmt"/>
-        <line num="462" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="463" count="1" type="stmt"/>
-        <line num="465" count="2" type="stmt"/>
-        <line num="467" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="468" count="1" type="stmt"/>
-        <line num="470" count="1" type="stmt"/>
-        <line num="477" count="1" type="stmt"/>
-        <line num="480" count="1" type="stmt"/>
-        <line num="483" count="1" type="stmt"/>
-        <line num="484" count="1" type="stmt"/>
-        <line num="488" count="1" type="stmt"/>
+        <line num="459" count="1" type="stmt"/>
+        <line num="464" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="465" count="1" type="stmt"/>
+        <line num="467" count="2" type="stmt"/>
+        <line num="468" count="2" type="stmt"/>
+        <line num="469" count="2" type="stmt"/>
+        <line num="470" count="2" type="stmt"/>
+        <line num="472" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="473" count="1" type="stmt"/>
+        <line num="475" count="1" type="stmt"/>
+        <line num="481" count="1" type="stmt"/>
+        <line num="486" count="1" type="stmt"/>
         <line num="489" count="1" type="stmt"/>
-        <line num="497" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="492" count="1" type="stmt"/>
+        <line num="493" count="1" type="stmt"/>
+        <line num="497" count="1" type="stmt"/>
         <line num="498" count="1" type="stmt"/>
-        <line num="500" count="1" type="stmt"/>
-        <line num="506" count="10" type="stmt"/>
-        <line num="509" count="10" type="stmt"/>
-        <line num="512" count="1" type="stmt"/>
-        <line num="513" count="1" type="stmt"/>
-        <line num="517" count="9" type="stmt"/>
-        <line num="518" count="9" type="stmt"/>
-        <line num="529" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="530" count="1" type="stmt"/>
-        <line num="532" count="1" type="stmt"/>
-        <line num="537" count="1" type="stmt"/>
-        <line num="539" count="1" type="stmt"/>
-        <line num="553" count="10" type="stmt"/>
-        <line num="556" count="10" type="stmt"/>
-        <line num="559" count="10" type="stmt"/>
-        <line num="560" count="10" type="cond" truecount="2" falsecount="0"/>
-        <line num="561" count="9" type="stmt"/>
-        <line num="562" count="9" type="stmt"/>
-        <line num="563" count="9" type="stmt"/>
-        <line num="566" count="9" type="stmt"/>
+        <line num="507" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="508" count="1" type="stmt"/>
+        <line num="510" count="1" type="stmt"/>
+        <line num="516" count="13" type="stmt"/>
+        <line num="519" count="13" type="stmt"/>
+        <line num="522" count="1" type="stmt"/>
+        <line num="523" count="1" type="stmt"/>
+        <line num="527" count="13" type="stmt"/>
+        <line num="528" count="13" type="stmt"/>
+        <line num="540" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="541" count="1" type="stmt"/>
+        <line num="543" count="1" type="stmt"/>
+        <line num="548" count="1" type="stmt"/>
+        <line num="549" count="1" type="stmt"/>
+        <line num="551" count="1" type="stmt"/>
+        <line num="565" count="13" type="stmt"/>
+        <line num="568" count="13" type="stmt"/>
+        <line num="571" count="13" type="stmt"/>
+        <line num="572" count="13" type="cond" truecount="2" falsecount="0"/>
+        <line num="573" count="12" type="stmt"/>
+        <line num="574" count="12" type="stmt"/>
+        <line num="575" count="12" type="stmt"/>
+        <line num="578" count="12" type="stmt"/>
       </file>
       <file name="Attendance.vue" path="D:\Project\bliress-frontend\src\views\admin\batch\Attendance.vue">
         <metrics statements="17" coveredstatements="17" conditionals="2" coveredconditionals="2" methods="7" coveredmethods="7"/>
@@ -620,13 +631,13 @@
         <line num="304" count="1" type="stmt"/>
         <line num="308" count="3" type="stmt"/>
         <line num="309" count="3" type="stmt"/>
-        <line num="320" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="321" count="1" type="stmt"/>
-        <line num="323" count="1" type="stmt"/>
-        <line num="330" count="3" type="stmt"/>
-        <line num="333" count="3" type="stmt"/>
+        <line num="321" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="322" count="1" type="stmt"/>
+        <line num="324" count="1" type="stmt"/>
+        <line num="331" count="3" type="stmt"/>
         <line num="334" count="3" type="stmt"/>
-        <line num="337" count="3" type="stmt"/>
+        <line num="335" count="3" type="stmt"/>
+        <line num="338" count="3" type="stmt"/>
       </file>
       <file name="Batch.vue" path="D:\Project\bliress-frontend\src\views\admin\batch\Batch.vue">
         <metrics statements="28" coveredstatements="28" conditionals="8" coveredconditionals="8" methods="11" coveredmethods="11"/>
@@ -640,24 +651,24 @@
         <line num="253" count="1" type="stmt"/>
         <line num="257" count="7" type="stmt"/>
         <line num="258" count="7" type="stmt"/>
-        <line num="265" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="266" count="1" type="stmt"/>
-        <line num="268" count="1" type="stmt"/>
-        <line num="273" count="2" type="stmt"/>
-        <line num="308" count="2" type="cond" truecount="4" falsecount="0"/>
-        <line num="309" count="1" type="stmt"/>
-        <line num="311" count="1" type="stmt"/>
-        <line num="317" count="1" type="stmt"/>
-        <line num="320" count="1" type="stmt"/>
-        <line num="323" count="1" type="stmt"/>
+        <line num="266" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="267" count="1" type="stmt"/>
+        <line num="269" count="1" type="stmt"/>
+        <line num="274" count="2" type="stmt"/>
+        <line num="309" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="310" count="1" type="stmt"/>
+        <line num="312" count="1" type="stmt"/>
+        <line num="318" count="1" type="stmt"/>
+        <line num="321" count="1" type="stmt"/>
         <line num="324" count="1" type="stmt"/>
-        <line num="328" count="1" type="stmt"/>
+        <line num="325" count="1" type="stmt"/>
         <line num="329" count="1" type="stmt"/>
-        <line num="340" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="341" count="1" type="stmt"/>
+        <line num="330" count="1" type="stmt"/>
+        <line num="342" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="343" count="1" type="stmt"/>
-        <line num="350" count="7" type="stmt"/>
-        <line num="353" count="7" type="stmt"/>
+        <line num="345" count="1" type="stmt"/>
+        <line num="352" count="7" type="stmt"/>
+        <line num="355" count="7" type="stmt"/>
       </file>
       <file name="DetailBatch.vue" path="D:\Project\bliress-frontend\src\views\admin\batch\DetailBatch.vue">
         <metrics statements="40" coveredstatements="40" conditionals="8" coveredconditionals="8" methods="17" coveredmethods="17"/>
@@ -675,26 +686,26 @@
         <line num="485" count="1" type="stmt"/>
         <line num="489" count="1" type="stmt"/>
         <line num="490" count="1" type="stmt"/>
-        <line num="500" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="501" count="1" type="stmt"/>
-        <line num="503" count="1" type="stmt"/>
-        <line num="509" count="12" type="stmt"/>
-        <line num="512" count="12" type="stmt"/>
-        <line num="515" count="1" type="stmt"/>
+        <line num="501" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="502" count="1" type="stmt"/>
+        <line num="504" count="1" type="stmt"/>
+        <line num="510" count="12" type="stmt"/>
+        <line num="513" count="12" type="stmt"/>
         <line num="516" count="1" type="stmt"/>
-        <line num="520" count="12" type="stmt"/>
+        <line num="517" count="1" type="stmt"/>
         <line num="521" count="12" type="stmt"/>
-        <line num="531" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="533" count="1" type="stmt"/>
-        <line num="535" count="1" type="stmt"/>
-        <line num="541" count="12" type="stmt"/>
-        <line num="544" count="12" type="stmt"/>
-        <line num="547" count="1" type="stmt"/>
+        <line num="522" count="12" type="stmt"/>
+        <line num="533" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="534" count="1" type="stmt"/>
+        <line num="536" count="1" type="stmt"/>
+        <line num="542" count="12" type="stmt"/>
+        <line num="545" count="12" type="stmt"/>
         <line num="548" count="1" type="stmt"/>
-        <line num="552" count="12" type="stmt"/>
+        <line num="549" count="1" type="stmt"/>
         <line num="553" count="12" type="stmt"/>
-        <line num="563" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="564" count="1" type="stmt"/>
+        <line num="554" count="12" type="stmt"/>
+        <line num="565" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="566" count="1" type="stmt"/>
         <line num="567" count="1" type="stmt"/>
         <line num="569" count="1" type="stmt"/>
         <line num="576" count="11" type="stmt"/>
@@ -703,24 +714,23 @@
         <line num="583" count="11" type="stmt"/>
       </file>
       <file name="Employee.vue" path="D:\Project\bliress-frontend\src\views\admin\batch\Employee.vue">
-        <metrics statements="17" coveredstatements="17" conditionals="2" coveredconditionals="2" methods="6" coveredmethods="6"/>
+        <metrics statements="16" coveredstatements="16" conditionals="2" coveredconditionals="2" methods="6" coveredmethods="6"/>
         <line num="268" count="2" type="stmt"/>
         <line num="269" count="2" type="stmt"/>
         <line num="278" count="3" type="stmt"/>
-        <line num="300" count="4" type="stmt"/>
-        <line num="303" count="4" type="stmt"/>
+        <line num="299" count="4" type="stmt"/>
+        <line num="302" count="4" type="stmt"/>
+        <line num="305" count="1" type="stmt"/>
         <line num="306" count="1" type="stmt"/>
-        <line num="307" count="1" type="stmt"/>
+        <line num="310" count="3" type="stmt"/>
         <line num="311" count="3" type="stmt"/>
-        <line num="312" count="3" type="stmt"/>
         <line num="322" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="323" count="1" type="stmt"/>
+        <line num="324" count="1" type="stmt"/>
         <line num="326" count="1" type="stmt"/>
-        <line num="327" count="1" type="stmt"/>
-        <line num="329" count="1" type="stmt"/>
+        <line num="333" count="3" type="stmt"/>
         <line num="336" count="3" type="stmt"/>
         <line num="339" count="3" type="stmt"/>
-        <line num="342" count="3" type="stmt"/>
       </file>
       <file name="MaterialList.vue" path="D:\Project\bliress-frontend\src\views\admin\batch\MaterialList.vue">
         <metrics statements="29" coveredstatements="29" conditionals="6" coveredconditionals="6" methods="12" coveredmethods="12"/>
@@ -734,25 +744,25 @@
         <line num="289" count="1" type="stmt"/>
         <line num="293" count="7" type="stmt"/>
         <line num="294" count="7" type="stmt"/>
-        <line num="305" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="306" count="1" type="stmt"/>
-        <line num="308" count="1" type="stmt"/>
-        <line num="313" count="2" type="stmt"/>
-        <line num="318" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="319" count="1" type="stmt"/>
-        <line num="325" count="1" type="stmt"/>
-        <line num="328" count="1" type="stmt"/>
-        <line num="331" count="1" type="stmt"/>
+        <line num="306" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="307" count="1" type="stmt"/>
+        <line num="309" count="1" type="stmt"/>
+        <line num="314" count="2" type="stmt"/>
+        <line num="319" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="320" count="1" type="stmt"/>
+        <line num="326" count="1" type="stmt"/>
+        <line num="329" count="1" type="stmt"/>
         <line num="332" count="1" type="stmt"/>
-        <line num="336" count="1" type="stmt"/>
+        <line num="333" count="1" type="stmt"/>
         <line num="337" count="1" type="stmt"/>
-        <line num="349" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="350" count="1" type="stmt"/>
+        <line num="338" count="1" type="stmt"/>
+        <line num="351" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="352" count="1" type="stmt"/>
-        <line num="359" count="7" type="stmt"/>
-        <line num="362" count="7" type="stmt"/>
-        <line num="363" count="7" type="stmt"/>
-        <line num="366" count="7" type="stmt"/>
+        <line num="354" count="1" type="stmt"/>
+        <line num="361" count="7" type="stmt"/>
+        <line num="364" count="7" type="stmt"/>
+        <line num="365" count="7" type="stmt"/>
+        <line num="368" count="7" type="stmt"/>
       </file>
       <file name="Qrcode.vue" path="D:\Project\bliress-frontend\src\views\admin\batch\Qrcode.vue">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
@@ -765,39 +775,38 @@
         <line num="183" count="2" type="stmt"/>
       </file>
       <file name="Training.vue" path="D:\Project\bliress-frontend\src\views\admin\batch\Training.vue">
-        <metrics statements="32" coveredstatements="32" conditionals="6" coveredconditionals="6" methods="14" coveredmethods="14"/>
+        <metrics statements="31" coveredstatements="31" conditionals="6" coveredconditionals="6" methods="14" coveredmethods="14"/>
         <line num="503" count="2" type="stmt"/>
         <line num="504" count="2" type="stmt"/>
         <line num="513" count="10" type="stmt"/>
-        <line num="536" count="11" type="stmt"/>
-        <line num="539" count="11" type="stmt"/>
+        <line num="535" count="11" type="stmt"/>
+        <line num="538" count="11" type="stmt"/>
+        <line num="541" count="1" type="stmt"/>
         <line num="542" count="1" type="stmt"/>
-        <line num="543" count="1" type="stmt"/>
+        <line num="546" count="10" type="stmt"/>
         <line num="547" count="10" type="stmt"/>
-        <line num="548" count="10" type="stmt"/>
         <line num="558" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="559" count="1" type="stmt"/>
+        <line num="560" count="1" type="stmt"/>
         <line num="562" count="1" type="stmt"/>
-        <line num="563" count="1" type="stmt"/>
-        <line num="565" count="1" type="stmt"/>
-        <line num="570" count="2" type="stmt"/>
-        <line num="575" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="576" count="1" type="stmt"/>
+        <line num="567" count="2" type="stmt"/>
+        <line num="572" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="573" count="1" type="stmt"/>
+        <line num="579" count="1" type="stmt"/>
         <line num="582" count="1" type="stmt"/>
         <line num="585" count="1" type="stmt"/>
-        <line num="588" count="1" type="stmt"/>
-        <line num="589" count="1" type="stmt"/>
-        <line num="593" count="1" type="stmt"/>
-        <line num="594" count="1" type="stmt"/>
-        <line num="605" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="586" count="1" type="stmt"/>
+        <line num="590" count="1" type="stmt"/>
+        <line num="591" count="1" type="stmt"/>
+        <line num="603" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="604" count="1" type="stmt"/>
         <line num="606" count="1" type="stmt"/>
-        <line num="608" count="1" type="stmt"/>
-        <line num="613" count="1" type="stmt"/>
-        <line num="623" count="1" type="stmt"/>
-        <line num="633" count="1" type="stmt"/>
-        <line num="645" count="10" type="stmt"/>
-        <line num="648" count="10" type="stmt"/>
-        <line num="651" count="10" type="stmt"/>
+        <line num="611" count="1" type="stmt"/>
+        <line num="621" count="1" type="stmt"/>
+        <line num="631" count="1" type="stmt"/>
+        <line num="643" count="10" type="stmt"/>
+        <line num="646" count="10" type="stmt"/>
+        <line num="649" count="10" type="stmt"/>
       </file>
       <file name="UploadMaterial.vue" path="D:\Project\bliress-frontend\src\views\admin\batch\UploadMaterial.vue">
         <metrics statements="21" coveredstatements="21" conditionals="6" coveredconditionals="6" methods="9" coveredmethods="9"/>
@@ -816,12 +825,12 @@
         <line num="349" count="1" type="stmt"/>
         <line num="353" count="1" type="stmt"/>
         <line num="354" count="1" type="stmt"/>
-        <line num="366" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="367" count="1" type="stmt"/>
-        <line num="369" count="1" type="stmt"/>
-        <line num="376" count="6" type="stmt"/>
-        <line num="379" count="6" type="stmt"/>
+        <line num="367" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="368" count="1" type="stmt"/>
+        <line num="370" count="1" type="stmt"/>
+        <line num="377" count="6" type="stmt"/>
         <line num="380" count="6" type="stmt"/>
+        <line num="381" count="6" type="stmt"/>
       </file>
     </package>
     <package name="views.admin.notification">
@@ -1529,9 +1538,9 @@
       </file>
     </package>
     <package name="views.trainer.setting">
-      <metrics statements="33" coveredstatements="33" conditionals="8" coveredconditionals="8" methods="12" coveredmethods="12"/>
+      <metrics statements="34" coveredstatements="34" conditionals="8" coveredconditionals="8" methods="12" coveredmethods="12"/>
       <file name="Setting.vue" path="D:\Project\bliress-frontend\src\views\trainer\setting\Setting.vue">
-        <metrics statements="33" coveredstatements="33" conditionals="8" coveredconditionals="8" methods="12" coveredmethods="12"/>
+        <metrics statements="34" coveredstatements="34" conditionals="8" coveredconditionals="8" methods="12" coveredmethods="12"/>
         <line num="223" count="2" type="stmt"/>
         <line num="224" count="2" type="stmt"/>
         <line num="225" count="2" type="stmt"/>
@@ -1563,8 +1572,9 @@
         <line num="354" count="2" type="stmt"/>
         <line num="359" count="1" type="stmt"/>
         <line num="360" count="1" type="stmt"/>
-        <line num="366" count="9" type="stmt"/>
-        <line num="369" count="9" type="stmt"/>
+        <line num="361" count="1" type="stmt"/>
+        <line num="367" count="9" type="stmt"/>
+        <line num="370" count="9" type="stmt"/>
       </file>
     </package>
     <package name="views.trainer.test">
@@ -1710,42 +1720,50 @@
       </file>
     </package>
     <package name="views.trainer.training">
-      <metrics statements="87" coveredstatements="87" conditionals="16" coveredconditionals="16" methods="37" coveredmethods="37"/>
+      <metrics statements="95" coveredstatements="95" conditionals="18" coveredconditionals="18" methods="41" coveredmethods="41"/>
       <file name="DetailTraining.vue" path="D:\Project\bliress-frontend\src\views\trainer\training\DetailTraining.vue">
-        <metrics statements="33" coveredstatements="33" conditionals="6" coveredconditionals="6" methods="13" coveredmethods="13"/>
+        <metrics statements="41" coveredstatements="41" conditionals="8" coveredconditionals="8" methods="17" coveredmethods="17"/>
         <line num="466" count="2" type="stmt"/>
         <line num="467" count="2" type="stmt"/>
-        <line num="476" count="8" type="stmt"/>
-        <line num="493" count="8" type="stmt"/>
-        <line num="514" count="9" type="stmt"/>
-        <line num="517" count="9" type="stmt"/>
-        <line num="520" count="1" type="stmt"/>
-        <line num="521" count="1" type="stmt"/>
-        <line num="525" count="8" type="stmt"/>
-        <line num="526" count="8" type="stmt"/>
-        <line num="538" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="539" count="1" type="stmt"/>
-        <line num="542" count="1" type="stmt"/>
+        <line num="476" count="11" type="stmt"/>
+        <line num="496" count="11" type="stmt"/>
+        <line num="518" count="12" type="stmt"/>
+        <line num="521" count="12" type="stmt"/>
+        <line num="524" count="1" type="stmt"/>
+        <line num="525" count="1" type="stmt"/>
+        <line num="529" count="11" type="stmt"/>
+        <line num="530" count="11" type="stmt"/>
+        <line num="542" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="543" count="1" type="stmt"/>
-        <line num="544" count="1" type="stmt"/>
-        <line num="547" count="1" type="stmt"/>
-        <line num="552" count="1" type="stmt"/>
-        <line num="562" count="2" type="stmt"/>
-        <line num="567" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="568" count="1" type="stmt"/>
-        <line num="574" count="1" type="stmt"/>
-        <line num="577" count="1" type="stmt"/>
+        <line num="546" count="1" type="stmt"/>
+        <line num="551" count="1" type="stmt"/>
+        <line num="561" count="2" type="stmt"/>
+        <line num="566" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="567" count="1" type="stmt"/>
+        <line num="573" count="1" type="stmt"/>
+        <line num="576" count="1" type="stmt"/>
+        <line num="579" count="1" type="stmt"/>
         <line num="580" count="1" type="stmt"/>
-        <line num="581" count="1" type="stmt"/>
+        <line num="584" count="1" type="stmt"/>
         <line num="585" count="1" type="stmt"/>
-        <line num="586" count="1" type="stmt"/>
         <line num="598" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="599" count="1" type="stmt"/>
         <line num="601" count="1" type="stmt"/>
-        <line num="608" count="8" type="stmt"/>
-        <line num="611" count="8" type="stmt"/>
-        <line num="612" count="8" type="stmt"/>
-        <line num="615" count="8" type="stmt"/>
+        <line num="607" count="12" type="stmt"/>
+        <line num="610" count="12" type="stmt"/>
+        <line num="613" count="1" type="stmt"/>
+        <line num="614" count="1" type="stmt"/>
+        <line num="618" count="12" type="stmt"/>
+        <line num="619" count="12" type="stmt"/>
+        <line num="631" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="632" count="1" type="stmt"/>
+        <line num="633" count="1" type="stmt"/>
+        <line num="635" count="1" type="stmt"/>
+        <line num="642" count="11" type="stmt"/>
+        <line num="645" count="11" type="stmt"/>
+        <line num="646" count="11" type="stmt"/>
+        <line num="649" count="11" type="stmt"/>
+        <line num="650" count="11" type="stmt"/>
       </file>
       <file name="Qrcode.vue" path="D:\Project\bliress-frontend\src\views\trainer\training\Qrcode.vue">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
@@ -1769,22 +1787,22 @@
         <line num="297" count="1" type="stmt"/>
         <line num="301" count="6" type="stmt"/>
         <line num="302" count="6" type="stmt"/>
-        <line num="312" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="313" count="1" type="stmt"/>
-        <line num="315" count="1" type="stmt"/>
-        <line num="321" count="7" type="stmt"/>
-        <line num="324" count="7" type="stmt"/>
-        <line num="327" count="1" type="stmt"/>
+        <line num="313" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="314" count="1" type="stmt"/>
+        <line num="316" count="1" type="stmt"/>
+        <line num="322" count="7" type="stmt"/>
+        <line num="325" count="7" type="stmt"/>
         <line num="328" count="1" type="stmt"/>
-        <line num="332" count="6" type="stmt"/>
+        <line num="329" count="1" type="stmt"/>
         <line num="333" count="6" type="stmt"/>
-        <line num="343" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="344" count="1" type="stmt"/>
-        <line num="347" count="1" type="stmt"/>
-        <line num="352" count="1" type="stmt"/>
-        <line num="364" count="6" type="stmt"/>
-        <line num="367" count="6" type="stmt"/>
-        <line num="368" count="6" type="stmt"/>
+        <line num="334" count="6" type="stmt"/>
+        <line num="345" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="346" count="1" type="stmt"/>
+        <line num="349" count="1" type="stmt"/>
+        <line num="354" count="1" type="stmt"/>
+        <line num="366" count="6" type="stmt"/>
+        <line num="369" count="6" type="stmt"/>
+        <line num="370" count="6" type="stmt"/>
       </file>
       <file name="UploadMaterial.vue" path="D:\Project\bliress-frontend\src\views\trainer\training\UploadMaterial.vue">
         <metrics statements="21" coveredstatements="21" conditionals="6" coveredconditionals="6" methods="9" coveredmethods="9"/>
@@ -1803,12 +1821,12 @@
         <line num="349" count="1" type="stmt"/>
         <line num="353" count="1" type="stmt"/>
         <line num="354" count="1" type="stmt"/>
-        <line num="366" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="367" count="1" type="stmt"/>
-        <line num="369" count="1" type="stmt"/>
-        <line num="376" count="7" type="stmt"/>
-        <line num="379" count="7" type="stmt"/>
+        <line num="367" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="368" count="1" type="stmt"/>
+        <line num="370" count="1" type="stmt"/>
+        <line num="377" count="7" type="stmt"/>
         <line num="380" count="7" type="stmt"/>
+        <line num="381" count="7" type="stmt"/>
       </file>
     </package>
   </project>

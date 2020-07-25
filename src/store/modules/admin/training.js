@@ -44,6 +44,10 @@ const actions = {
       url: `${API}/admin/batch/training`,
       params: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         commit('setTrainings', res.data);
@@ -60,6 +64,10 @@ const actions = {
       url: `${API}/admin/batch/training/detail`,
       params: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         commit('setTrainingBy', res.data);
@@ -76,6 +84,10 @@ const actions = {
       url: `${API}/admin/batch/training`,
       data: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         console.log(commit);
@@ -92,6 +104,10 @@ const actions = {
       url: `${API}/admin/batch/training`,
       data: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         console.log(commit);
@@ -108,6 +124,10 @@ const actions = {
       url: `${API}/admin/batch/training`,
       params: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         console.log(commit);
@@ -124,6 +144,10 @@ const actions = {
       url: `${API}/admin/batch/training/attendance`,
       params: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         commit('setAttendance', res.data);

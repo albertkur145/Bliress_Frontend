@@ -27,6 +27,10 @@ const actions = {
       method: 'get',
       url: `${API}/admin/batch`,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         commit('setBatch', res.data);
@@ -43,6 +47,10 @@ const actions = {
       url: `${API}/admin/batch`,
       data: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         console.log(commit);
@@ -59,6 +67,10 @@ const actions = {
       url: `${API}/admin/batch`,
       params: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         console.log(commit);

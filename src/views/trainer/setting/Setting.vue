@@ -270,7 +270,7 @@ export default {
       return new Promise((resolve) => {
         this.getTriggerNotif({
           params: {
-            trainerId: this.$cookies.get('user').id,
+            trainerId: this.$cookies.get('user').userId,
           },
           resolve,
         });
@@ -317,7 +317,7 @@ export default {
         this.$func.popupError('Konfirmasi password baru salah!', 5000);
       } else {
         this.changePasswordUser({
-          trainerId: this.$cookies.get('user').id,
+          trainerId: this.$cookies.get('user').userId,
           oldPassword: res.value[0],
           currentPassword: res.value[2],
         });
@@ -357,13 +357,14 @@ export default {
 
     logout() {
       this.$cookies.remove('user');
+      this.$cookies.remove('token');
       this.$router.push({ name: 'Login' });
     },
   },
 
   created() {
     // check user auth
-    this.$func.userAuth('Trainer');
+    this.$func.userAuth('ROLE_TRAINER');
 
     // req api
     this.isHasNotif();

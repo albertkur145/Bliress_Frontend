@@ -25,17 +25,17 @@
       <div class="table">
         <table>
           <thead>
-            <th>ID</th>
             <th>Nama</th>
+            <th>Divisi</th>
             <th>Status</th>
           </thead>
 
           <tbody>
-            <tr v-for="(value) in attendanceList.data.employee" :key="value.id">
-              <td>{{ value.cardId }}</td>
-              <td>{{ value.name }}</td>
+            <tr v-for="(value) in attendanceList.data.employeeList" :key="value.userId">
+              <td>{{ value.username }}</td>
+              <td>{{ value.division }}</td>
               <td>
-                <font-awesome-icon v-if="value.status" icon="check" class="check-icon"></font-awesome-icon>
+                <font-awesome-icon v-if="value.status === '1'" icon="check" class="check-icon"></font-awesome-icon>
                 <font-awesome-icon v-else icon="times" class="remove-icon"></font-awesome-icon>
               </td>
             </tr>
@@ -312,6 +312,7 @@ export default {
             training: this.paramTraining,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -330,7 +331,7 @@ export default {
     this.$func.userAuth('ROLE_ADMIN');
 
     // get params
-    this.paramBatch = parseInt(this.$route.params.batch, 10);
+    this.paramBatch = this.$route.params.batch;
     this.paramTraining = this.$route.params.training;
 
     // req api

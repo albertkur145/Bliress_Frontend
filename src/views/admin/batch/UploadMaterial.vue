@@ -355,15 +355,16 @@ export default {
           params: {
             batchId: this.paramBatch,
             training: this.paramTraining,
-            material: this.form,
+            materialName: this.form.name,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
 
     afterAddMaterial(promise) {
-      if (promise === 200) {
+      if (promise === 202) {
         this.$func.popupSuccessfull('Berhasil simpan data', 5000, this.back);
       } else {
         this.$func.popupLostConnection();
@@ -376,7 +377,7 @@ export default {
     this.$func.userAuth('ROLE_ADMIN');
 
     // get params
-    this.paramBatch = parseInt(this.$route.params.batch, 10);
+    this.paramBatch = this.$route.params.batch;
     this.paramTraining = this.$route.params.training;
   },
 

@@ -46,7 +46,7 @@ describe('When created', () => {
         },
         $route: {
           params: {
-            batch: 202006,
+            batch: '123',
           },
         },
       },
@@ -89,14 +89,24 @@ describe('Method', () => {
     gettersAdminTrainer = {
       trainerList: jest.fn().mockReturnValue({
         data: {
-          training: {},
+          trainerList: {
+            filter: jest.fn().mockReturnValue([
+              {
+                username: '',
+              },
+            ]),
+          },
         },
       }),
     };
 
     gettersAdminTraining = {
       training: jest.fn().mockReturnValue({
-        data: {},
+        data: {
+          training: {
+            split: jest.fn(),
+          },
+        },
       }),
     };
 
@@ -126,8 +136,8 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
-            training: 2,
+            batch: '202006',
+            training: '2',
           },
         },
       },
@@ -151,6 +161,39 @@ describe('Method', () => {
   });
   // it get all trainer
 
+  // it promise get all trainer
+  it('Promise get all trainer', () => {
+    const wrapper = shallowMount(AddTraining, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+        },
+        $cookies: {
+          get: jest.fn(),
+        },
+        $route: {
+          params: {
+            batch: '202006',
+            training: '2',
+          },
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    const spy = jest.spyOn(wrapper.vm, 'getTrainers');
+    wrapper.vm.promiseGetAllTrainer();
+
+    // expect
+    expect(spy).toBeCalled();
+  });
+  // it promise get all trainer
+
   // it data ready
   it('Data ready', () => {
     const wrapper = shallowMount(AddTraining, {
@@ -161,8 +204,8 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
-            training: 2,
+            batch: '202006',
+            training: '2',
           },
         },
       },
@@ -205,8 +248,8 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
-            training: 2,
+            batch: '202006',
+            training: '2',
           },
         },
       },
@@ -218,6 +261,7 @@ describe('Method', () => {
       ],
     });
 
+    jest.spyOn(wrapper.vm, 'searchNameTrainer').mockImplementation(() => { return; });
     const spyReqApi = jest.spyOn(wrapper.vm, 'reqApi').mockImplementation(() => { return; });
     wrapper.vm.validateForm();
 
@@ -252,6 +296,32 @@ describe('Method', () => {
   });
   // it validate form
 
+  // it search name trainer
+  it('Search name trainer', () => {
+    const wrapper = shallowMount(AddTraining, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+        },
+        $route: {
+          params: {
+            batch: '202006',
+            training: '2',
+          },
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    wrapper.vm.searchNameTrainer();
+  });
+  // it search name trainer
+
   // it req api
   it('Req api', async () => {
     const wrapper = shallowMount(AddTraining, {
@@ -261,8 +331,8 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
-            training: 2,
+            batch: '202006',
+            training: '2',
           },
         },
       },
@@ -293,10 +363,13 @@ describe('Method', () => {
         $func: {
           userAuth: jest.fn(),
         },
+        $cookies: {
+          get: jest.fn(),
+        },
         $route: {
           params: {
-            batch: 202006,
-            training: 2,
+            batch: '202006',
+            training: '2',
           },
         },
       },
@@ -308,14 +381,11 @@ describe('Method', () => {
       ],
     });
 
-    const spyPutTraining = jest.spyOn(wrapper.vm, 'postTraining');
+    const spy = jest.spyOn(wrapper.vm, 'postTraining');
     wrapper.vm.promiseReqApi(wrapper.vm.postTraining);
 
     // expect
-    expect(spyPutTraining).toBeCalledWith({
-      params: wrapper.vm.form,
-      resolve: expect.any(Function),
-    })
+    expect(spy).toBeCalled();
   });
   // it promise req api
 
@@ -330,8 +400,8 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
-            training: 2,
+            batch: '202006',
+            training: '2',
           },
         },
       },
@@ -343,11 +413,10 @@ describe('Method', () => {
       ],
     });
 
-    wrapper.vm.afterReqApi(200);
+    wrapper.vm.afterReqApi(202);
 
     // expect
     expect(wrapper.vm.$func.popupSuccessfull).toBeCalled();
-    expect(wrapper.vm.$func.popupSuccessfull).toBeCalledWith('Berhasil simpan data', 5000, wrapper.vm.back);
 
     wrapper.vm.afterReqApi(404);
 
@@ -365,8 +434,8 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
-            training: 2,
+            batch: '202006',
+            training: '2',
           },
         },
       },
@@ -392,6 +461,39 @@ describe('Method', () => {
   });
   // it get training by training
 
+  // it promise get training by training
+  it('Promise get training by training', () => {
+    const wrapper = shallowMount(AddTraining, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+        },
+        $route: {
+          params: {
+            batch: '202006',
+            training: '2',
+          },
+        },
+        $cookies: {
+          get: jest.fn(),
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    const spy = jest.spyOn(wrapper.vm, 'getTrainingBy');
+    wrapper.vm.promiseGetTrainingByTraining();
+
+    // expect
+    expect(spy).toBeCalled();
+  });
+  // it promise get training by training
+
   // it afterGetTrainingByTraining
   it('After get training', () => {
     const wrapper = shallowMount(AddTraining, {
@@ -402,8 +504,8 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
-            training: 2,
+            batch: '202006',
+            training: '2',
           },
         },
       },
@@ -437,8 +539,8 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
-            training: 2,
+            batch: '202006',
+            training: '2',
           },
         },
       },
@@ -450,11 +552,14 @@ describe('Method', () => {
       ],
     });
 
-    const training = wrapper.vm.training.data;
+    let training = wrapper.vm.training.data;
+    training.date = {
+      split: jest.fn().mockReturnValue(['1', '2', '3']),
+    };
     const form = {
       batchId: wrapper.vm.paramBatch,
-      training: training.training,
-      date: training.date,
+      training: training.stage,
+      date: '3-2-1',
       location: training.location,
       timeStart: training.timeStart,
       timeFinish: training.timeFinish,

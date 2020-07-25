@@ -35,6 +35,10 @@ const actions = {
       url: `${API}/trainer/training`,
       params: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         commit('setTrainings', res.data);
@@ -51,6 +55,10 @@ const actions = {
       url: `${API}/trainer/training/detail`,
       params: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         commit('setTrainingBy', res.data);

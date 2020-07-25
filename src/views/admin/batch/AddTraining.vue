@@ -101,8 +101,8 @@
         <fieldset>
           <legend>Trainer</legend>
           <select class="input-text" v-model="form.trainerId">
-            <option v-for="(value) in trainerList.data"
-            :key="value.id" :value="value.id">{{ value.name }}</option>
+            <option v-for="(value) in trainerList.data.trainerList"
+            :key="value.userId" :value="value.userId">{{ value.username }}</option>
           </select>
         </fieldset>
       </div>
@@ -395,7 +395,8 @@ export default {
         location: '',
         timeStart: '06:00',
         timeFinish: '06:00',
-        trainerId: 1,
+        trainerId: '1',
+        trainerName: '',
       },
     };
   },
@@ -446,6 +447,7 @@ export default {
       return new Promise((resolve) => {
         this.getTrainers({
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -462,7 +464,10 @@ export default {
       if (this.form.location.length === 0) {
         this.$func.popupError('Form tidak lengkap!', 0);
       } else {
-        this.form.batchId = 202006;
+        const date = this.form.date.split('-');
+        this.form.batchId = this.paramBatch;
+        this.form.date = `${date[2]}-${date[1]}-${date[0]}`;
+        this.form.trainerName = this.searchNameTrainer();
 
         if (!this.paramTraining) {
           this.reqApi(this.postTraining);
@@ -470,6 +475,10 @@ export default {
           this.reqApi(this.putTraining);
         }
       }
+    },
+
+    searchNameTrainer() {
+      return this.trainerList.data.trainerList.filter((val) => val.userId === this.form.trainerId)[0].username;
     },
 
     async reqApi(action) {
@@ -489,12 +498,13 @@ export default {
         action({
           params: this.form,
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
 
     afterReqApi(promise) {
-      if (promise === 200) {
+      if (promise === 202) {
         this.$func.popupSuccessfull('Berhasil simpan data', 5000, this.back);
       } else {
         this.$func.popupLostConnection();
@@ -521,6 +531,7 @@ export default {
             training: this.paramTraining,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -535,14 +546,15 @@ export default {
 
     setForm() {
       const training = this.training.data;
+      const date = training.date.split('-');
 
       this.form = {
         batchId: this.paramBatch,
-        training: training.training,
-        date: training.date,
+        training: training.stage,
+        date: `${date[2]}-${date[1]}-${date[0]}`,
         location: training.location,
-        timeStart: training.timeStart,
-        timeFinish: training.timeFinish,
+        timeStart: training.startedAt,
+        timeFinish: training.endedAt,
         trainerId: training.trainerId,
       };
     },
@@ -556,7 +568,7 @@ export default {
     this.getAllTrainer();
 
     // get params
-    this.paramBatch = parseInt(this.$route.params.batch, 10);
+    this.paramBatch = this.$route.params.batch;
     if (this.$route.params.training) {
       this.paramTraining = this.$route.params.training;
       this.title = 'Ubah';

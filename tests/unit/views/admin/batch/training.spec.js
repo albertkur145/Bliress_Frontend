@@ -37,7 +37,9 @@ describe('When created', () => {
         },
         $route: {
           params: {
-            batch: 202006,
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -100,7 +102,9 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -137,7 +141,9 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -153,8 +159,7 @@ describe('Method', () => {
 
     // expect
     expect(wrapper.vm.apiReady).toBeTruthy();
-    expect(wrapper.vm.batch).toStrictEqual(wrapper.vm.trainingList.data.batch);
-    expect(wrapper.vm.training).toStrictEqual(wrapper.vm.trainingList.data.training);
+    expect(wrapper.vm.batch).toStrictEqual(wrapper.vm.trainingList.data.trainingList);
 
     wrapper.vm.dataReady(404);
 
@@ -177,7 +182,9 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -217,7 +224,9 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -248,9 +257,14 @@ describe('Method', () => {
         $func: {
           userAuth: jest.fn(),
         },
+        $cookies: {
+          get: jest.fn(),
+        },
         $route: {
           params: {
-            batch: 202006,
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -267,13 +281,6 @@ describe('Method', () => {
 
     // expect
     expect(spyDeleteTraining).toBeCalled();
-    expect(spyDeleteTraining).toBeCalledWith({
-      params: {
-        batchId: wrapper.vm.paramBatch,
-        training: 1,
-      },
-      resolve: expect.any(Function),
-    });
   });
   // it promise delete data
 
@@ -288,7 +295,9 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -322,7 +331,9 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
         $router: {
@@ -360,7 +371,9 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
         $router: {
@@ -398,7 +411,9 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
         $router: {

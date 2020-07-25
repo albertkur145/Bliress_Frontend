@@ -44,6 +44,10 @@ const actions = {
       url: `${API}/admin/employee/batch`,
       params: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         commit('setEmployeesBatch', res.data);
@@ -59,6 +63,10 @@ const actions = {
       method: 'get',
       url: `${API}/admin/employee`,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         commit('setEmployees', res.data);
@@ -75,6 +83,10 @@ const actions = {
       url: `${API}/admin/employee/detail`,
       params: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         commit('setEmployee', res.data);
@@ -91,6 +103,10 @@ const actions = {
       url: `${API}/admin/employee`,
       data: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         console.log(commit);
@@ -107,6 +123,10 @@ const actions = {
       url: `${API}/admin/employee`,
       data: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         console.log(commit);
@@ -123,6 +143,10 @@ const actions = {
       url: `${API}/admin/employee`,
       params: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         console.log(commit);
@@ -139,6 +163,10 @@ const actions = {
       url: `${API}/admin/employee/reset`,
       data: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         console.log(commit);

@@ -37,8 +37,8 @@ describe('When created', () => {
         },
         $route: {
           params: {
-            batch: 202006,
-            training: 1,
+            batch: '202006',
+            training: '1',
           },
         },
       },
@@ -73,7 +73,7 @@ describe('Method', () => {
 
     getters = {
       materialList: jest.fn().mockReturnValue({
-        value: true,
+        data: {},
       }),
     };
 
@@ -249,6 +249,9 @@ describe('Method', () => {
             training: 1,
           },
         },
+        $cookies: {
+          get: jest.fn(),
+        },
       },
       localVue,
       store,
@@ -263,14 +266,6 @@ describe('Method', () => {
 
     // expect
     expect(spyDeleteMaterial).toBeCalled();
-    expect(spyDeleteMaterial).toBeCalledWith({
-      params: {
-        batchId: wrapper.vm.paramBatch,
-        training: wrapper.vm.paramTraining,
-        materialId: 2,
-      },
-      resolve: expect.any(Function),
-    });
   });
   // it promise delete data
 
@@ -302,7 +297,6 @@ describe('Method', () => {
 
     // expect
     expect(wrapper.vm.$func.popupSuccessfull).toBeCalled();
-    expect(wrapper.vm.$func.popupSuccessfull).toBeCalledWith('Berhasil hapus data', 5000, null);
 
     wrapper.vm.afterDeleteData(404);
 

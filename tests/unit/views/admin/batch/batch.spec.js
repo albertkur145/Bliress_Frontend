@@ -236,6 +236,9 @@ describe('Method', () => {
         $func: {
           userAuth: jest.fn(),
         },
+        $cookies: {
+          get: jest.fn(),
+        },
       },
       localVue,
       store,
@@ -250,13 +253,6 @@ describe('Method', () => {
 
     // expect
     expect(spyPostBatch).toBeCalled();
-    expect(spyPostBatch).toBeCalledWith({
-      params: {
-        batch: '2',
-        year: '5',
-      },
-      resolve: expect.any(Function),
-    });
   });
   // it promise add batch
 

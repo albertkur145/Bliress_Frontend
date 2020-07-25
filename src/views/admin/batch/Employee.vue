@@ -20,7 +20,7 @@
       <!-- title -->
       <div class="title">
         <div class="txt-batch">(Batch)</div>
-        <div class="batch">{{ batch.batch }} {{ batch.year }}</div>
+        <div class="batch">{{ paramBatch.split('-')[0] }} {{ paramBatch.split('-')[1] }}</div>
       </div>
       <!-- title -->
 
@@ -28,15 +28,15 @@
       <div class="table">
         <table>
           <thead>
-            <th>ID</th>
             <th>Nama</th>
+            <th>Division</th>
             <!-- <th></th> -->
           </thead>
 
           <tbody>
             <tr v-for="(value) in employee" :key="value.id">
-              <td>{{ value.cardId }}</td>
-              <td>{{ value.name }}</td>
+              <td>{{ value.username }}</td>
+              <td>{{ value.division }}</td>
               <!-- <td><font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon></td> -->
             </tr>
           </tbody>
@@ -279,7 +279,6 @@ export default {
       paramBatch: '',
       animationLoaderDisplay: false,
       apiReady: false,
-      batch: {},
       employee: [],
     };
   },
@@ -314,6 +313,7 @@ export default {
             batchId: this.paramBatch,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -321,10 +321,7 @@ export default {
     dataReady(promise) {
       if (promise === 200) {
         this.apiReady = true;
-
-        // assignment split data
-        this.batch = this.batchEmployeeList.data.batch;
-        this.employee = this.batchEmployeeList.data.employee;
+        this.employee = this.batchEmployeeList.data.employeeList;
       } else {
         this.$func.popupLostConnection();
       }
@@ -336,7 +333,7 @@ export default {
     this.$func.userAuth('ROLE_ADMIN');
 
     // get params
-    this.paramBatch = parseInt(this.$route.params.batch, 10);
+    this.paramBatch = this.$route.params.batch;
 
     // req api
     this.getAllEmployees();

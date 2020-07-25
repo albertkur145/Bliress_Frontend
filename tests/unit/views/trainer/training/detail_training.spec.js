@@ -8,20 +8,29 @@ localVue.use(Vuex);
 
 // describe when create
 describe('When created', () => {
-  let actions;
+  let actionsTraining;
+  let actionsMaterial;
   let store;
 
   // before each
   beforeEach(() => {
-    actions = {
+    actionsTraining = {
       getTrainingBy: jest.fn(),
+    };
+
+    actionsMaterial = {
+      getMaterial: jest.fn(),
     };
 
     store = new Vuex.Store({
       modules: {
         trainerTraining: {
           namespaced: true,
-          actions,
+          actions: actionsTraining,
+        },
+        trainerMaterial: {
+          namespaced: true,
+          actions: actionsMaterial,
         },
       },
     });
@@ -40,8 +49,10 @@ describe('When created', () => {
         },
         $route: {
           params: {
-            training: 1,
-            batch: 1,
+            training: '1',
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -66,6 +77,7 @@ describe('Method', () => {
   let actionsTraining;
   let actionsMaterial;
   let gettersTraining;
+  let gettersMaterial;
   let store;
 
   // before each
@@ -77,16 +89,23 @@ describe('Method', () => {
     gettersTraining = {
       trainingBy: jest.fn().mockReturnValue({
         data: {
-          materials: {},
-          batch: {},
-          employees: {},
+          employee: {},
         },
       }),
     };
 
     actionsMaterial = {
       deleteMaterial: jest.fn(),
+      getMaterial: jest.fn(),
     };
+
+    gettersMaterial = {
+      materialList: jest.fn().mockReturnValue({
+        data: {
+          materialList: [],
+        },
+      }),
+    },
 
     store = new Vuex.Store({
       modules: {
@@ -97,6 +116,7 @@ describe('Method', () => {
         },
         trainerMaterial: {
           namespaced: true,
+          getters: gettersMaterial,
           actions: actionsMaterial,
         },
       },
@@ -104,8 +124,8 @@ describe('Method', () => {
   });
   // before each
 
-  // it data ready branch
-  it('Data ready - branch', () => {
+  // it afterGetTraining
+  it('After get training ', () => {
     const wrapper = shallowMount(DetailTraining, {
       mocks: {
         $func: {
@@ -117,8 +137,10 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            training: 1,
-            batch: 1,
+            training: '1',
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -130,20 +152,17 @@ describe('Method', () => {
       ],
     });
 
-    wrapper.vm.dataReady(200);
+    wrapper.vm.afterGetTraining(200);
 
     // expect
-    expect(wrapper.vm.apiReady).toBeTruthy();
-    expect(wrapper.vm.materials).toBe(wrapper.vm.trainingBy.data.materials);
-    expect(wrapper.vm.batch).toBe(wrapper.vm.trainingBy.data.batch);
-    expect(wrapper.vm.employees).toBe(wrapper.vm.trainingBy.data.employees);
+    expect(wrapper.vm.employee).toBe(wrapper.vm.trainingBy.data.employee);
 
-    wrapper.vm.dataReady(404);
+    wrapper.vm.afterGetTraining(404);
 
     // expect
     expect(wrapper.vm.$func.popupLostConnection).toBeCalled();
   });
-  // it data ready branch
+  // it afterGetTraining branch
 
   // it getTrainingById after promise
   it('After promise getTrainingById', async () => {
@@ -157,8 +176,10 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            training: 1,
-            batch: 1,
+            training: '1',
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -173,13 +194,13 @@ describe('Method', () => {
     jest.spyOn(wrapper.vm, 'promiseGetTrainingById').mockImplementation(() => {
       Promise.resolve(200);
     });
-    const spyDataReady = jest.spyOn(wrapper.vm, 'dataReady').mockImplementation(() => { return; });
+    const spy = jest.spyOn(wrapper.vm, 'afterGetTraining').mockImplementation(() => { return; });
 
     await wrapper.vm.getTrainingById();
 
     // expect
     expect(wrapper.vm.animationLoaderDisplay).toBeFalsy();
-    expect(spyDataReady).toBeCalled();
+    expect(spy).toBeCalled();
   });
   // it getTrainingById after promise
 
@@ -203,8 +224,10 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            training: 1,
-            batch: 1,
+            training: '1',
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -220,13 +243,6 @@ describe('Method', () => {
 
     // expect
     expect(wrapper.vm.$router.push).toBeCalled();
-    expect(wrapper.vm.$router.push).toBeCalledWith({
-      name: 'TrainerUploadMaterial',
-      params: {
-        training: wrapper.vm.paramTraining,
-        batch: wrapper.vm.paramBatch,
-      },
-    });
   });
   // it redirectToUpload
 
@@ -247,8 +263,10 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            training: 1,
-            batch: 1,
+            training: '1',
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -289,8 +307,10 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            training: 1,
-            batch: 1,
+            training: '1',
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -326,8 +346,10 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            training: 1,
-            batch: 1,
+            training: '1',
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -344,14 +366,6 @@ describe('Method', () => {
 
     // expect
     expect(spyDeleteMaterial).toBeCalled();
-    expect(spyDeleteMaterial).toBeCalledWith({
-      params: {
-        batchId: wrapper.vm.paramBatch,
-        training: wrapper.vm.paramTraining,
-        materialId: 2,
-      },
-      resolve: expect.any(Function),
-    });
   })
   // it promiseDeleteData
 
@@ -369,8 +383,10 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            training: 1,
-            batch: 1,
+            training: '1',
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
           },
         },
       },
@@ -393,5 +409,120 @@ describe('Method', () => {
     expect(wrapper.vm.$func.popupLostConnection).toBeCalled();
   })
   // it afterDeleteData
+
+  // it get material list
+  it('Get material list', async () => {
+    const wrapper = shallowMount(DetailTraining, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+        },
+        $cookies: {
+          get: jest.fn((user) => user),
+        },
+        $route: {
+          params: {
+            training: '1',
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
+          },
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    jest.spyOn(wrapper.vm, 'promiseGetMaterial').mockImplementation(() => {
+      Promise.resolve(200);
+    });
+    const spy = jest.spyOn(wrapper.vm, 'afterGetMaterial').mockImplementation(() => { return });
+    await wrapper.vm.getMaterialList();
+
+    // expect
+    expect(wrapper.vm.animationLoaderDisplay).toBeFalsy();
+    expect(spy).toBeCalled();
+  });
+  // it get material list
+
+  // it promiseGetMaterial
+  it('Promise get material', () => {
+    const wrapper = shallowMount(DetailTraining, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+        },
+        $cookies: {
+          get: jest.fn((user) => user),
+        },
+        $route: {
+          params: {
+            training: '1',
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
+          },
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    const spy = jest.spyOn(wrapper.vm, 'promiseGetMaterial');
+    wrapper.vm.promiseGetMaterial();
+
+    // expect
+    expect(spy).toBeCalled();
+  });
+  // it promiseGetMaterial
+
+  // it after get material
+  it('After get material', () => {
+    const wrapper = shallowMount(DetailTraining, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+          popupLostConnection: jest.fn(),
+        },
+        $cookies: {
+          get: jest.fn((user) => user),
+        },
+        $route: {
+          params: {
+            training: '1',
+            batch: {
+              split: jest.fn().mockReturnValue(['1', '2']),
+            },
+          },
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    wrapper.vm.afterGetMaterial(200);
+
+    // expect
+    expect(wrapper.vm.apiReady).toBeTruthy();
+    expect(wrapper.vm.materials).toBe(wrapper.vm.materialList.data.materialList);
+
+    wrapper.vm.afterGetMaterial(404);
+
+    // expect
+    expect(wrapper.vm.$func.popupLostConnection).toBeCalled();
+  });
+  // it after get material
 });
 // end describe method

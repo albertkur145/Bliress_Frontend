@@ -24,7 +24,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>32/32</span>
+                <span class='fraction'>31/31</span>
             </div>
         
             
@@ -45,7 +45,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>32/32</span>
+                <span class='fraction'>31/31</span>
             </div>
         
             
@@ -710,9 +710,7 @@
 <a name='L652'></a><a href='#L652'>652</a>
 <a name='L653'></a><a href='#L653'>653</a>
 <a name='L654'></a><a href='#L654'>654</a>
-<a name='L655'></a><a href='#L655'>655</a>
-<a name='L656'></a><a href='#L656'>656</a>
-<a name='L657'></a><a href='#L657'>657</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L655'></a><a href='#L655'>655</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1225,7 +1223,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1269,10 +1266,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1306,6 +1301,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1389,34 +1385,34 @@
       &lt;!-- title --&gt;
       &lt;div class="title"&gt;
         &lt;div class="txt-batch"&gt;(Batch)&lt;/div&gt;
-        &lt;div class="batch"&gt;{{ batch.batch }} {{ batch.year }}&lt;/div&gt;
+        &lt;div class="batch"&gt;{{ paramBatch.split('-')[0] }} {{ paramBatch.split('-')[1] }}&lt;/div&gt;
       &lt;/div&gt;
       &lt;!-- title --&gt;
 &nbsp;
       &lt;!-- list of training --&gt;
       &lt;div class="training-list"&gt;
-        &lt;div v-for="(value) in training" :key="value.id"&gt;
+        &lt;div v-for="(value) in training" :key="value.trainingId"&gt;
           &lt;div class="training"&gt;
             &lt;div class="num"&gt;
-              &lt;span class="txt"&gt;{{ value.training }}&lt;/span&gt;
+              &lt;span class="txt"&gt;{{ value.stage }}&lt;/span&gt;
             &lt;/div&gt;
 &nbsp;
             &lt;div class="info"&gt;
               &lt;p class="date"&gt;{{ value.date }}&lt;/p&gt;
-              &lt;p class="time"&gt;{{ value.timeStart }} - {{ value.timeFinish }} WIB&lt;/p&gt;
-              &lt;p class="trainer"&gt;Trainer: {{ value.trainer }}&lt;/p&gt;
+              &lt;p class="time"&gt;{{ value.startedAt }} - {{ value.endedAt }} WIB&lt;/p&gt;
+              &lt;p class="trainer"&gt;Trainer: {{ value.trainerName }}&lt;/p&gt;
               &lt;p class="location"&gt;{{ value.location }}&lt;/p&gt;
-              &lt;div class="btn-material" @click="redirectMaterial(`${value.training}`)"&gt;
+              &lt;div class="btn-material" @click="redirectMaterial(`${value.stage}`)"&gt;
                 &lt;span&gt;Material&lt;/span&gt;
                 &lt;font-awesome-icon icon="chevron-right" class="material-icon"&gt;&lt;/font-awesome-icon&gt;
               &lt;/div&gt;
-              &lt;button class="btn-attendance" @click="redirectAttendance(`${value.training}`)"&gt;Absensi&lt;/button&gt;
+              &lt;button class="btn-attendance" @click="redirectAttendance(`${value.stage}`)"&gt;Absensi&lt;/button&gt;
             &lt;/div&gt;
 &nbsp;
             &lt;div class="action"&gt;
               &lt;div&gt;
-                &lt;font-awesome-icon icon="pen" class="edit-icon" @click="redirectChangeTraining(`${value.training}`)"&gt;&lt;/font-awesome-icon&gt;
-                &lt;font-awesome-icon icon="times" class="remove-icon" @click="confirmDelete(`${value.training}`)"&gt;&lt;/font-awesome-icon&gt;
+                &lt;font-awesome-icon icon="pen" class="edit-icon" @click="redirectChangeTraining(`${value.stage}`)"&gt;&lt;/font-awesome-icon&gt;
+                &lt;font-awesome-icon icon="times" class="remove-icon" @click="confirmDelete(`${value.stage}`)"&gt;&lt;/font-awesome-icon&gt;
               &lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
@@ -1545,8 +1541,8 @@
 &nbsp;
             .trainer {
               color: #666;
-              margin-top: 0.4375rem;
-              font-size: 0.875em;
+              margin-top: 0.625rem;
+              font-size: 0.8125em;
             }
 &nbsp;
             .location {
@@ -1706,7 +1702,7 @@
               }
 &nbsp;
               .trainer {
-                font-size: 1em;
+                font-size: 0.9375em;
               }
 &nbsp;
               .location {
@@ -1817,7 +1813,7 @@
               }
 &nbsp;
               .trainer {
-                font-size: 1.0625em;
+                font-size: 1em;
               }
 &nbsp;
               .location {
@@ -1884,7 +1880,6 @@ export default {
       paramBatch: '',
       animationLoaderDisplay: false,
       apiReady: false,
-      batch: {},
       training: [],
     };
   },
@@ -1920,6 +1915,7 @@ export default {
             batchId: this.paramBatch,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -1927,10 +1923,7 @@ export default {
     dataReady(promise) {
       if (promise === 200) {
         this.apiReady = true;
-&nbsp;
-        // assignment split data response
-        this.batch = this.trainingList.data.batch;
-        this.training = this.trainingList.data.training;
+        this.training = this.trainingList.data.trainingList;
       } else {
         this.$func.popupLostConnection();
       }
@@ -1967,6 +1960,7 @@ export default {
             training,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -2015,7 +2009,7 @@ export default {
     this.$func.userAuth('ROLE_ADMIN');
 &nbsp;
     // get params
-    this.paramBatch = parseInt(this.$route.params.batch, 10);
+    this.paramBatch = this.$route.params.batch;
 &nbsp;
     // req api
     this.getAllTraining();
@@ -2031,7 +2025,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Jul 24 2020 11:25:42 GMT+0700 (GMT+07:00)
+                at Sat Jul 25 2020 11:55:28 GMT+0700 (GMT+07:00)
             </div>
         </div>
         <script src="..\..\..\prettify.js"></script>

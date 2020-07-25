@@ -10,10 +10,10 @@
     <!-- content -->
     <div class="content" v-if="apiReady">
       <div class="training-list">
-        <div class="training" v-for="(value, index) in trainingList.data"
-        :key="index" @click="redirectToDetail(value.training, value.batch.id)">
+        <div class="training" v-for="(value, index) in trainingList.data.trainingList"
+        :key="index" @click="redirectToDetail(value.training, value.batchId)">
           <div class="left">
-            <p class="txt-batch">Batch - {{ value.batch.batch }} {{ value.batch.year }}</p>
+            <p class="txt-batch">Batch - {{ value.batchId.split('-')[0] }} {{ value.batchId.split('-')[1] }}</p>
             <p class="txt-training">Training {{ value.training }}</p>
             <p class="date">{{ value.date }}</p>
             <p class="time">{{ value.timeStart }} - {{ value.timeFinish }} WIB</p>
@@ -301,9 +301,10 @@ export default {
       return new Promise((resolve) => {
         this.getTriggerNotif({
           params: {
-            trainerId: this.$cookies.get('user').id,
+            trainerId: this.$cookies.get('user').userId,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -332,9 +333,10 @@ export default {
       return new Promise((resolve) => {
         this.getTrainings({
           params: {
-            trainerId: this.$cookies.get('user').id,
+            trainerId: this.$cookies.get('user').userId,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -361,7 +363,7 @@ export default {
 
   created() {
     // check user auth
-    this.$func.userAuth('Trainer');
+    this.$func.userAuth('ROLE_TRAINER');
 
     // req api
     this.getAllTraining();

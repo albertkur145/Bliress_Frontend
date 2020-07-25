@@ -10,11 +10,11 @@
     <!-- content -->
     <div class="content" v-if="apiReady">
       <div class="training-list">
-        <div class="training" v-for="(value, index) in trainingList.data"
-        :key="index" @click="redirectToDetail(value.batch.id, value.training)">
+        <div class="training" v-for="(value, index) in trainingList.data.trainingList"
+        :key="index" @click="redirectToDetail(value.batchId, value.training)">
           <div>
             <div class="txt-training">Training {{ value.training }}</div>
-            <div class="txt-batch">Batch - {{ value.batch.batch }} {{ value.batch.year }}</div>
+            <div class="txt-batch">Batch - {{ value.batchId.split('-')[0] }} {{ value.batchId.split('-')[1] }}</div>
           </div>
           <font-awesome-icon icon="chevron-right"></font-awesome-icon>
         </div>
@@ -227,7 +227,7 @@ export default {
       return new Promise((resolve) => {
         this.getTriggerNotif({
           params: {
-            trainerId: this.$cookies.get('user').id,
+            trainerId: this.$cookies.get('user').userId,
           },
           resolve,
         });
@@ -258,7 +258,7 @@ export default {
       return new Promise((resolve) => {
         this.getTrainings({
           params: {
-            trainerId: this.$cookies.get('user').id,
+            trainerId: this.$cookies.get('user').userId,
           },
           resolve,
         });
@@ -287,7 +287,7 @@ export default {
 
   created() {
     // check user auth
-    this.$func.userAuth('Trainer');
+    this.$func.userAuth('ROLE_TRAINER');
 
     // req api
     this.getAllTraining();

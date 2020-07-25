@@ -37,8 +37,8 @@ describe('When created', () => {
         },
         $route: {
           params: {
-            batch: 1,
-            training: 2,
+            batch: '1',
+            training: '2',
           },
         },
       },
@@ -89,8 +89,8 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 1,
-            training: 2,
+            batch: '1',
+            training: '2',
           },
         },
       },
@@ -135,8 +135,8 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 1,
-            training: 2,
+            batch: '1',
+            training: '2',
           },
         },
       },
@@ -176,8 +176,8 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 1,
-            training: 2,
+            batch: '1',
+            training: '2',
           },
         },
       },
@@ -211,9 +211,12 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 1,
-            training: 2,
+            batch: '1',
+            training: '2',
           },
+        },
+        $cookies: {
+          get: jest.fn(),
         },
       },
       localVue,
@@ -224,19 +227,11 @@ describe('Method', () => {
       ],
     });
 
-    const spyPostMaterial = jest.spyOn(wrapper.vm, 'postMaterial');
+    const spy = jest.spyOn(wrapper.vm, 'postMaterial');
     wrapper.vm.promiseAPI();
 
     // expect
-    expect(spyPostMaterial).toBeCalled();
-    expect(spyPostMaterial).toBeCalledWith({
-      params: {
-        batchId: wrapper.vm.paramBatch,
-        training: wrapper.vm.paramTraining,
-        material: wrapper.vm.form,
-      },
-      resolve: expect.any(Function),
-    });
+    expect(spy).toBeCalled();
   });
   // it promise API
 
@@ -251,8 +246,8 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 1,
-            training: 2,
+            batch: '1',
+            training: '2',
           },
         },
       },
@@ -264,7 +259,7 @@ describe('Method', () => {
       ],
     });
 
-    wrapper.vm.afterAdd(200);
+    wrapper.vm.afterAdd(202);
 
     // expect
     expect(wrapper.vm.$func.popupSuccessfull).toBeCalled();

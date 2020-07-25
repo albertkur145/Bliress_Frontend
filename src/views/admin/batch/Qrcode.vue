@@ -179,7 +179,7 @@ export default {
     this.$func.userAuth('ROLE_ADMIN');
 
     // get params
-    this.paramBatch = parseInt(this.$route.params.batch, 10);
+    this.paramBatch = this.$route.params.batch;
     this.paramTraining = this.$route.params.training;
   },
 

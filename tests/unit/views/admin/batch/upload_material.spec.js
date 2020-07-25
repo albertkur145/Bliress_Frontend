@@ -153,7 +153,6 @@ describe('Method', () => {
 
     // expect
     expect(wrapper.vm.$func.popupError).toBeCalled();
-    expect(wrapper.vm.$func.popupError).toBeCalledWith('Form tidak lengkap!', 0);
 
     wrapper.setData({
       form: {
@@ -217,6 +216,9 @@ describe('Method', () => {
             training: 1,
           },
         },
+        $cookies: {
+          get: jest.fn(),
+        },
       },
       localVue,
       store,
@@ -231,14 +233,6 @@ describe('Method', () => {
 
     // expect
     expect(spyPostMaterial).toBeCalled();
-    expect(spyPostMaterial).toBeCalledWith({
-      params: {
-        batchId: wrapper.vm.paramBatch,
-        training: wrapper.vm.paramTraining,
-        material: wrapper.vm.form,
-      },
-      resolve: expect.any(Function),
-    });
   });
   // it promise add material
 
@@ -266,11 +260,10 @@ describe('Method', () => {
       ],
     });
 
-    wrapper.vm.afterAddMaterial(200);
+    wrapper.vm.afterAddMaterial(202);
 
     // expect
     expect(wrapper.vm.$func.popupSuccessfull).toBeCalled();
-    expect(wrapper.vm.$func.popupSuccessfull).toBeCalledWith('Berhasil simpan data', 5000, wrapper.vm.back);
 
     wrapper.vm.afterAddMaterial(404);
 

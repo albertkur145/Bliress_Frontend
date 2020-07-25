@@ -28,9 +28,9 @@
             </thead>
 
             <tbody>
-              <tr v-for="(value) in materialList.data" :key="value.id">
-                <td>{{ value.name }}</td>
-                <td><font-awesome-icon icon="times" class="times-icon" @click="confirmDelete(value.id)"></font-awesome-icon></td>
+              <tr v-for="(value) in materialList.data.materialList" :key="value.materialId">
+                <td>{{ value.materialName }}</td>
+                <td><font-awesome-icon icon="times" class="times-icon" @click="confirmDelete(value.materialId)"></font-awesome-icon></td>
               </tr>
             </tbody>
           </table>
@@ -297,6 +297,7 @@ export default {
             training: this.paramTraining,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -341,6 +342,7 @@ export default {
             materialId,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -359,7 +361,7 @@ export default {
     this.$func.userAuth('ROLE_ADMIN');
 
     // get params
-    this.paramBatch = parseInt(this.$route.params.batch, 10);
+    this.paramBatch = this.$route.params.batch;
     this.paramTraining = this.$route.params.training;
 
     // req api

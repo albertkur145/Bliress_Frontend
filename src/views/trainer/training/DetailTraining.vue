@@ -46,13 +46,13 @@
       </div>
       <!-- material list -->
 
-      <div class="txt-batch">Batch - {{ batch.batch }} {{ batch.year }}</div>
+      <div class="txt-batch">Batch - {{ paramBatch.split('-')[0] }} {{ paramBatch.split('-')[1] }}</div>
 
       <!-- participants -->
       <div class="participants">
         <div class="top">
           <div class="title">Peserta</div>
-          <div class="count">{{ employees.total }} orang</div>
+          <div class="count">{{ employee.total }} orang</div>
         </div>
 
         <div class="data">
@@ -64,10 +64,10 @@
             </thead>
 
             <tbody>
-              <tr v-for="(value) in employees.employee" :key="value.id">
+              <tr v-for="(value) in employee.employeeList" :key="value.id">
                 <td>{{ value.cardId }}</td>
                 <td>{{ value.name }}</td>
-                <td v-if="value.status"><font-awesome-icon icon="check" class="check-icon"></font-awesome-icon></td>
+                <td v-if="value.status === '1'"><font-awesome-icon icon="check" class="check-icon"></font-awesome-icon></td>
                 <td v-else><font-awesome-icon icon="times" class="times-icon"></font-awesome-icon></td>
               </tr>
             </tbody>
@@ -479,14 +479,17 @@ export default {
       animationLoaderDisplay: false,
       apiReady: false,
       materials: [],
-      batch: {},
-      employees: {},
+      employee: {},
     };
   },
 
   computed: {
     ...mapGetters('trainerTraining', [
       'trainingBy',
+    ]),
+
+    ...mapGetters('trainerMaterial', [
+      'materialList',
     ]),
 
     redirectToQrcode() {
@@ -506,6 +509,7 @@ export default {
     ]),
 
     ...mapActions('trainerMaterial', [
+      'getMaterial',
       'deleteMaterial',
     ]),
 
@@ -518,30 +522,25 @@ export default {
 
       // hide loader
       this.animationLoaderDisplay = false;
-      this.dataReady(promise);
+      this.afterGetTraining(promise);
     },
 
     promiseGetTrainingById() {
       return new Promise((resolve) => {
         this.getTrainingBy({
           params: {
-            trainerId: this.$cookies.get('user').id,
             training: this.paramTraining,
             batchId: this.paramBatch,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
 
-    dataReady(promise) {
+    afterGetTraining(promise) {
       if (promise === 200) {
-        this.apiReady = true;
-
-        // assingment split data response
-        this.materials = this.trainingBy.data.materials;
-        this.batch = this.trainingBy.data.batch;
-        this.employees = this.trainingBy.data.employees;
+        this.employee = this.trainingBy.data.employee;
       } else {
         // show popup error
         this.$func.popupLostConnection();
@@ -590,6 +589,7 @@ export default {
             materialId,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -601,18 +601,53 @@ export default {
         this.$func.popupLostConnection();
       }
     },
+
+    async getMaterialList() {
+      // show loader
+      this.animationLoaderDisplay = true;
+
+      // req api
+      const promise = await this.promiseGetMaterial();
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.afterGetMaterial(promise);
+    },
+
+    promiseGetMaterial() {
+      return new Promise((resolve) => {
+        this.getMaterial({
+          params: {
+            batchId: this.paramBatch,
+            training: this.paramTraining,
+          },
+          resolve,
+          token: this.$cookies.get('token'),
+        });
+      });
+    },
+
+    afterGetMaterial(promise) {
+      if (promise === 200) {
+        this.apiReady = true;
+        this.materials = this.materialList.data.materialList;
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
   },
 
   created() {
     // check user auth
-    this.$func.userAuth('Trainer');
+    this.$func.userAuth('ROLE_TRAINER');
 
     // get params
     this.paramTraining = this.$route.params.training;
-    this.paramBatch = parseInt(this.$route.params.batch, 10);
+    this.paramBatch = this.$route.params.batch;
 
     // req api
     this.getTrainingById();
+    this.getMaterialList();
   },
 
 };

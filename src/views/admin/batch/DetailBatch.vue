@@ -24,9 +24,9 @@
 
         <div class="list">
           <div class="train" v-for="(value) in filteredTraining" :key="value.id">
-            <p class="title">Training {{ value.training }}</p>
+            <p class="title">Training {{ value.stage }}</p>
             <p class="date">{{ value.date }}</p>
-            <p class="time">{{ value.timeStart }} - {{ value.timeFinish }} WIB</p>
+            <p class="time">{{ value.startedAt }} - {{ value.endedAt }} WIB</p>
           </div>
         </div>
       </div>
@@ -44,14 +44,14 @@
         <div class="table">
           <table>
             <thead>
-              <th>ID</th>
               <th>Nama</th>
+              <th>Divisi</th>
             </thead>
 
             <tbody>
               <tr v-for="(value) in filteredEmployee" :key="value.id">
-                <td>{{ value.cardId }}</td>
-                <td>{{ value.name }}</td>
+                <td>{{ value.username }}</td>
+                <td>{{ value.division }}</td>
               </tr>
             </tbody>
           </table>
@@ -492,6 +492,7 @@ export default {
             batchId: this.paramBatch,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -523,13 +524,13 @@ export default {
             batchId: this.paramBatch,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
 
     afterGetTraining(promise) {
       if (promise === 200) {
-        // assignment split response data
         this.training = this.trainingList.data.trainingList;
       } else {
         this.$func.popupLostConnection();
@@ -555,6 +556,7 @@ export default {
             batchId: this.paramBatch,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -562,8 +564,6 @@ export default {
     afterGetEmployee(promise) {
       if (promise === 200) {
         this.apiReady = true;
-
-        // assignment split response data
         this.employee = this.batchEmployeeList.data.employeeList;
       } else {
         this.$func.popupLostConnection();

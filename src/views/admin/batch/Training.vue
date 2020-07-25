@@ -19,34 +19,34 @@
       <!-- title -->
       <div class="title">
         <div class="txt-batch">(Batch)</div>
-        <div class="batch">{{ batch.batch }} {{ batch.year }}</div>
+        <div class="batch">{{ paramBatch.split('-')[0] }} {{ paramBatch.split('-')[1] }}</div>
       </div>
       <!-- title -->
 
       <!-- list of training -->
       <div class="training-list">
-        <div v-for="(value) in training" :key="value.id">
+        <div v-for="(value) in training" :key="value.trainingId">
           <div class="training">
             <div class="num">
-              <span class="txt">{{ value.training }}</span>
+              <span class="txt">{{ value.stage }}</span>
             </div>
 
             <div class="info">
               <p class="date">{{ value.date }}</p>
-              <p class="time">{{ value.timeStart }} - {{ value.timeFinish }} WIB</p>
-              <p class="trainer">Trainer: {{ value.trainer }}</p>
+              <p class="time">{{ value.startedAt }} - {{ value.endedAt }} WIB</p>
+              <p class="trainer">Trainer: {{ value.trainerName }}</p>
               <p class="location">{{ value.location }}</p>
-              <div class="btn-material" @click="redirectMaterial(`${value.training}`)">
+              <div class="btn-material" @click="redirectMaterial(`${value.stage}`)">
                 <span>Material</span>
                 <font-awesome-icon icon="chevron-right" class="material-icon"></font-awesome-icon>
               </div>
-              <button class="btn-attendance" @click="redirectAttendance(`${value.training}`)">Absensi</button>
+              <button class="btn-attendance" @click="redirectAttendance(`${value.stage}`)">Absensi</button>
             </div>
 
             <div class="action">
               <div>
-                <font-awesome-icon icon="pen" class="edit-icon" @click="redirectChangeTraining(`${value.training}`)"></font-awesome-icon>
-                <font-awesome-icon icon="times" class="remove-icon" @click="confirmDelete(`${value.training}`)"></font-awesome-icon>
+                <font-awesome-icon icon="pen" class="edit-icon" @click="redirectChangeTraining(`${value.stage}`)"></font-awesome-icon>
+                <font-awesome-icon icon="times" class="remove-icon" @click="confirmDelete(`${value.stage}`)"></font-awesome-icon>
               </div>
             </div>
           </div>
@@ -175,8 +175,8 @@
 
             .trainer {
               color: #666;
-              margin-top: 0.4375rem;
-              font-size: 0.875em;
+              margin-top: 0.625rem;
+              font-size: 0.8125em;
             }
 
             .location {
@@ -336,7 +336,7 @@
               }
 
               .trainer {
-                font-size: 1em;
+                font-size: 0.9375em;
               }
 
               .location {
@@ -447,7 +447,7 @@
               }
 
               .trainer {
-                font-size: 1.0625em;
+                font-size: 1em;
               }
 
               .location {
@@ -514,7 +514,6 @@ export default {
       paramBatch: '',
       animationLoaderDisplay: false,
       apiReady: false,
-      batch: {},
       training: [],
     };
   },
@@ -550,6 +549,7 @@ export default {
             batchId: this.paramBatch,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -557,10 +557,7 @@ export default {
     dataReady(promise) {
       if (promise === 200) {
         this.apiReady = true;
-
-        // assignment split data response
-        this.batch = this.trainingList.data.batch;
-        this.training = this.trainingList.data.training;
+        this.training = this.trainingList.data.trainingList;
       } else {
         this.$func.popupLostConnection();
       }
@@ -597,6 +594,7 @@ export default {
             training,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -645,7 +643,7 @@ export default {
     this.$func.userAuth('ROLE_ADMIN');
 
     // get params
-    this.paramBatch = parseInt(this.$route.params.batch, 10);
+    this.paramBatch = this.$route.params.batch;
 
     // req api
     this.getAllTraining();

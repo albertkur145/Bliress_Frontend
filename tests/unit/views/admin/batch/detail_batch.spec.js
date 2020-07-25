@@ -209,6 +209,9 @@ describe('Method', () => {
         $func: {
           userAuth: jest.fn(),
         },
+        $cookies: {
+          get: jest.fn(),
+        },
         $route: {
           params: {
             batch: {
@@ -230,12 +233,6 @@ describe('Method', () => {
 
     // expect
     expect(spyDeleteBatch).toBeCalled();
-    expect(spyDeleteBatch).toBeCalledWith({
-      params: {
-        batchId: wrapper.vm.paramBatch,
-      },
-      resolve: expect.any(Function),
-    });
   });
   // it promise delete
 
@@ -268,7 +265,6 @@ describe('Method', () => {
 
     // expect
     expect(wrapper.vm.$func.popupSuccessfull).toBeCalled();
-    expect(wrapper.vm.$func.popupSuccessfull).toBeCalledWith('Sukses hapus data', 5000, { name: 'AdminBatch' });
 
     wrapper.vm.afterDelete(404);
 
@@ -319,6 +315,9 @@ describe('Method', () => {
         $func: {
           userAuth: jest.fn(),
         },
+        $cookies: {
+          get: jest.fn(),
+        },
         $route: {
           params: {
             batch: {
@@ -339,12 +338,7 @@ describe('Method', () => {
     wrapper.vm.promiseGetTraining();
 
     // expect
-    expect(spy).toBeCalledWith({
-      params: {
-        batchId: wrapper.vm.paramBatch,
-      },
-      resolve: expect.any(Function),
-    });
+    expect(spy).toBeCalled();
   });
   // it promise get training
 
@@ -426,6 +420,9 @@ describe('Method', () => {
         $func: {
           userAuth: jest.fn(),
         },
+        $cookies: {
+          get: jest.fn(),
+        },
         $route: {
           params: {
             batch: {
@@ -446,12 +443,7 @@ describe('Method', () => {
     wrapper.vm.promiseGetEmployee();
 
     // expect
-    expect(spy).toBeCalledWith({
-      params: {
-        batchId: wrapper.vm.paramBatch,
-      },
-      resolve: expect.any(Function),
-    });
+    expect(spy).toBeCalled();
   });
   // it promise get employee
 

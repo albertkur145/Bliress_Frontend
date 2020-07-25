@@ -25,6 +25,10 @@ const actions = {
       method: 'get',
       url: `${API}/admin/notification`,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         commit('setNotifications', res.data);
@@ -41,6 +45,10 @@ const actions = {
       url: `${API}/admin/notification`,
       data: payload.params,
       responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${payload.token}`,
+      },
     })
       .then((res) => {
         console.log(commit);
