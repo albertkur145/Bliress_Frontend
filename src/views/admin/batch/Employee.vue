@@ -34,7 +34,7 @@
           </thead>
 
           <tbody>
-            <tr v-for="(value) in employee" :key="value.id">
+            <tr v-for="(value) in employee" :key="value.userId">
               <td>{{ value.username }}</td>
               <td>{{ value.division }}</td>
               <!-- <td><font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon></td> -->

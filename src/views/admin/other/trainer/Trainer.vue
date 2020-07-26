@@ -36,15 +36,15 @@
           </thead>
 
           <tbody>
-            <tr v-for="(value) in filteredTrainers" :key="value.id">
-              <td>{{ value.name }}</td>
+            <tr v-for="(value) in filteredTrainers" :key="value.userId">
+              <td>{{ value.username }}</td>
               <td>{{ value.division }}</td>
               <td>
                 <div class="justify-content">
                   <font-awesome-icon icon="pen" class="edit-icon"
-                  @click="redirectCreateTrainer(value.id)"></font-awesome-icon>
+                  @click="redirectCreateTrainer(value.userId)"></font-awesome-icon>
                   <font-awesome-icon icon="times" class="remove-icon"
-                  @click="confirmDelete(value.id)"></font-awesome-icon>
+                  @click="confirmDelete(value.userId)"></font-awesome-icon>
                 </div>
               </td>
             </tr>
@@ -323,7 +323,7 @@ export default {
     ]),
 
     filteredTrainers() {
-      return this.trainerList.data.filter((value) => value.name.toLowerCase().match(this.searchText.toLowerCase()));
+      return this.trainerList.data.trainerList.filter((value) => value.username.toLowerCase().match(this.searchText.toLowerCase()));
     },
   },
 
@@ -349,6 +349,7 @@ export default {
       return new Promise((resolve) => {
         this.getTrainers({
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -380,6 +381,7 @@ export default {
             id,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },

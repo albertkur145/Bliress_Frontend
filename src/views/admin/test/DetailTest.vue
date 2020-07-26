@@ -6,7 +6,7 @@
         <font-awesome-icon icon="arrow-left"></font-awesome-icon>
         <span class="text">Test</span>
       </router-link>
-      <div class="txt-batch">{{ batch.batch }} {{ batch.year }}</div>
+      <div class="txt-batch">{{ paramBatch }}</div>
     </div>
     <!-- end head -->
 
@@ -22,21 +22,21 @@
 
       <!-- list of material -->
       <div class="materials">
-        <div class="material" v-for="(value) in material" :key="value.id">
+        <div class="material" v-for="(value) in material" :key="value.materialId">
           <div class="information">
             <div class="left">
-              <p class="material-name">{{ value.name }}</p>
-              <p class="available-date"><span>(Dibuka)</span> {{ value.available }}</p>
-              <p class="expired-date"><span>(Ditutup)</span> {{ value.closed }}</p>
-              <p class="time-limit">Batas: {{ value.timeLimit }} <span v-if="value.timeLimit !== '-'">menit</span></p>
+              <p class="material-name">{{ value.materialName }}</p>
+              <p class="available-date"><span>(Dibuka)</span> {{ value.testAvailable }}</p>
+              <p class="expired-date"><span>(Ditutup)</span> {{ value.testClosed }}</p>
+              <p class="time-limit">Batas: {{ value.testTimeLimit }} <span v-if="value.testExist">menit</span></p>
             </div>
 
             <div class="right">
               <div>
                 <font-awesome-icon icon="pen" class="edit-icon"
-                @click="redirectToAddTest(value.id, `${value.available}`)"></font-awesome-icon>
-                <font-awesome-icon icon="eye" class="see-icon"
-                @click="redirectReviewTest(value.id)"></font-awesome-icon>
+                @click="redirectToAddTest(value.materialId, value.textExist, value.materialName)"></font-awesome-icon>
+                <font-awesome-icon icon="eye" class="see-icon" v-if="value.testExist"
+                @click="redirectReviewTest(value.materialId, value.materialName)"></font-awesome-icon>
               </div>
             </div>
           </div>
@@ -397,7 +397,6 @@ export default {
       paramTraining: '',
       apiReady: false,
       animationLoaderDisplay: false,
-      batch: {},
       material: [],
     };
   },
@@ -433,6 +432,7 @@ export default {
             training: this.paramTraining,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -440,17 +440,15 @@ export default {
     dataReady(promise) {
       if (promise === 200) {
         this.apiReady = true;
-
-        // assignment split data
-        this.batch = this.materialTestList.data.batch;
-        this.material = this.materialTestList.data.material;
+        this.material = this.materialTestList.data.materialList;
       } else {
         this.$func.popupLostConnection();
       }
     },
 
-    redirectToAddTest(id, available) {
-      if (available === '-') {
+    redirectToAddTest(id, exist, name) {
+      localStorage.setItem('materialName', name);
+      if (!exist) {
         this.$router.push({
           name: 'AdminAddTest',
           params: {
@@ -471,7 +469,8 @@ export default {
       }
     },
 
-    redirectReviewTest(id) {
+    redirectReviewTest(id, name) {
+      localStorage.setItem('materialName', name);
       this.$router.push({
         name: 'AdminReviewTest',
         params: {
@@ -488,7 +487,7 @@ export default {
     this.$func.userAuth('ROLE_ADMIN');
 
     // get params
-    this.paramBatch = parseInt(this.$route.params.batch, 10);
+    this.paramBatch = this.$route.params.batch;
     this.paramTraining = this.$route.params.training;
 
     // req api

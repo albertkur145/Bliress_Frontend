@@ -152,8 +152,7 @@ describe('Method', () => {
 
     // expect
     expect(wrapper.vm.apiReady).toBeTruthy();
-    expect(wrapper.vm.batch).toStrictEqual(wrapper.vm.materialTestList.data.batch);
-    expect(wrapper.vm.material).toStrictEqual(wrapper.vm.materialTestList.data.material);
+    expect(wrapper.vm.material).toStrictEqual(wrapper.vm.materialTestList.data.materialList);
 
     wrapper.vm.dataReady(404);
 
@@ -187,31 +186,15 @@ describe('Method', () => {
       ],
     });
 
-    wrapper.vm.redirectToAddTest(5, '-');
+    wrapper.vm.redirectToAddTest(5, false, '-');
 
     // expect
     expect(wrapper.vm.$router.push).toBeCalled();
-    expect(wrapper.vm.$router.push).toBeCalledWith({
-      name: 'AdminAddTest',
-      params: {
-        batch: wrapper.vm.paramBatch,
-        training: wrapper.vm.paramTraining,
-        material: 5,
-      },
-    });
 
-    wrapper.vm.redirectToAddTest(5, 'Av');
+    wrapper.vm.redirectToAddTest(5, true, 'Av');
 
     // expect
     expect(wrapper.vm.$router.push).toBeCalled();
-    expect(wrapper.vm.$router.push).toBeCalledWith({
-      name: 'AdminChangeTest',
-      params: {
-        batch: wrapper.vm.paramBatch,
-        training: wrapper.vm.paramTraining,
-        material: 5,
-      },
-    });
   });
   // it redirect to add test
 

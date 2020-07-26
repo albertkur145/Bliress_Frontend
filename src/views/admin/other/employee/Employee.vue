@@ -30,21 +30,21 @@
       <div class="data-employees">
         <table>
           <thead>
-            <th>ID Card</th>
             <th>Nama</th>
+            <th>Divisi</th>
             <th></th>
           </thead>
 
           <tbody>
-            <tr v-for="(value) in filteredEmployees" :key="value.id">
-              <td>{{ value.cardId }}</td>
-              <td>{{ value.name }}</td>
+            <tr v-for="(value) in filteredEmployees" :key="value.userId">
+              <td>{{ value.username }}</td>
+              <td>{{ value.division }}</td>
               <td>
                 <div class="justify-content">
                   <font-awesome-icon icon="pen" class="edit-icon"
-                  @click="redirectCreateEmployee(value.id)"></font-awesome-icon>
+                  @click="redirectCreateEmployee(value.userId)"></font-awesome-icon>
                   <font-awesome-icon icon="times" class="remove-icon"
-                  @click="confirmDelete(value.id)"></font-awesome-icon>
+                  @click="confirmDelete(value.userId)"></font-awesome-icon>
                 </div>
               </td>
             </tr>
@@ -323,7 +323,7 @@ export default {
     ]),
 
     filteredEmployees() {
-      return this.employeeList.data.filter((value) => value.name.toLowerCase().match(this.searchText.toLowerCase()));
+      return this.employeeList.data.employeeList.filter((value) => value.username.toLowerCase().match(this.searchText.toLowerCase()));
     },
   },
 
@@ -349,6 +349,7 @@ export default {
       return new Promise((resolve) => {
         this.getEmployees({
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -380,6 +381,7 @@ export default {
             id,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },

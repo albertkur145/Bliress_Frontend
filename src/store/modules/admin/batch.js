@@ -5,8 +5,6 @@ const { API } = config;
 
 const data = {
   batchs: {},
-  batchBy: {},
-  batchTrainings: {},
 };
 
 const getters = {

@@ -68,7 +68,9 @@ describe('Method', () => {
     getters = {
       trainerList: jest.fn().mockReturnValue({
         data: {
-          filter: jest.fn((value) => value),
+          trainerList: {
+            filter: jest.fn((value) => value),
+          },
         },
       }),
     };
@@ -120,6 +122,9 @@ describe('Method', () => {
         $func: {
           userAuth: jest.fn(),
         },
+        $cookies: {
+          get: jest.fn(),
+        },
       },
       localVue,
       store,
@@ -134,9 +139,6 @@ describe('Method', () => {
 
     // expect
     expect(spy).toBeCalled();
-    expect(spy).toBeCalledWith({
-      resolve: expect.any(Function),
-    });
   });
   // it promise get all trainer
 
@@ -204,6 +206,9 @@ describe('Method', () => {
         $func: {
           userAuth: jest.fn(),
         },
+        $cookies: {
+          get: jest.fn(),
+        },
       },
       localVue,
       store,
@@ -218,12 +223,6 @@ describe('Method', () => {
 
     // expect
     expect(spy).toBeCalled();
-    expect(spy).toBeCalledWith({
-      params: {
-        id: 52,
-      },
-      resolve: expect.any(Function),
-    });
   });
   // it promise delete
 

@@ -54,26 +54,35 @@ describe('When created', () => {
 
 // describe method
 describe('Method', () => {
-  let actions;
-  let getters;
+  let actionsTraining;
+  let actionsBatch;
+  let gettersTraining;
+  let gettersBatch;
   let store;
 
   // before each
   beforeEach(() => {
-    actions = {
-      getBatchTraining: jest.fn(),
+    actionsTraining = {
+      getTrainings: jest.fn(),
     };
 
-    getters = {
-      batchTrainingList: jest.fn().mockReturnValue({
-        data: [
-          {
-            id: 202006,
-            batch: 'Juni',
-            year: 2020,
-            training: [],
-          },
-        ],
+    gettersTraining = {
+      trainingList: jest.fn().mockReturnValue({
+        data: {
+          trainingList: [{ stage: '1', stage: '2' }],
+        },
+      }),
+    };
+
+    actionsBatch = {
+      getBatch: jest.fn(),
+    };
+
+    gettersBatch = {
+      batchList: jest.fn().mockReturnValue({
+        data: {
+          batchList: [],
+        },
       }),
     };
 
@@ -81,16 +90,21 @@ describe('Method', () => {
       modules: {
         adminBatch: {
           namespaced: true,
-          getters,
-          actions,
+          getters: gettersBatch,
+          actions: actionsBatch,
+        },
+        adminTraining: {
+          namespaced: true,
+          getters: gettersTraining,
+          actions: actionsTraining,
         },
       },
     });
   });
   // before each
 
-  // it get all batch training
-  it('Get all batch training', async () => {
+  // it get all batch
+  it('Get all batch', async () => {
     const wrapper = shallowMount(Test, {
       mocks: {
         $func: {
@@ -105,18 +119,18 @@ describe('Method', () => {
       ],
     });
 
-    jest.spyOn(wrapper.vm, 'promiseGetAll').mockImplementation(() => {
+    jest.spyOn(wrapper.vm, 'promiseGetAllBatch').mockImplementation(() => {
       Promise.resolve(200);
     });
-    const spyDataReady = jest.spyOn(wrapper.vm, 'dataReady').mockImplementation(() => { return; });
+    const spy = jest.spyOn(wrapper.vm, 'dataReady').mockImplementation(() => { return; });
 
-    await wrapper.vm.getAllBatchTraining();
+    await wrapper.vm.getAllBatch();
 
     // expect
     expect(wrapper.vm.animationLoaderDisplay).toBeFalsy();
-    expect(spyDataReady).toBeCalled();
+    expect(spy).toBeCalled();
   });
-  // it get all batch training
+  // it get all batch
 
   // it data ready
   it('Data ready', () => {
@@ -147,14 +161,9 @@ describe('Method', () => {
   });
   // it data ready
 
-  // it show detail training
-  it('Show detail training', async () => {
+  // it get all training
+  it('Get all training', async () => {
     const wrapper = shallowMount(Test, {
-      data() {
-        return {
-          apiReady: true,
-        };
-      },
       mocks: {
         $func: {
           userAuth: jest.fn(),
@@ -168,13 +177,131 @@ describe('Method', () => {
       ],
     });
 
-    const spyShow = jest.spyOn(wrapper.vm, 'showDetailTraining').mockImplementation();
-    wrapper.find('.batch-Juni .general').trigger('click');
+    jest.spyOn(wrapper.vm, 'promiseGetAllTraining').mockImplementation(() => {
+      Promise.resolve(200);
+    });
+    const spy = jest.spyOn(wrapper.vm, 'afterGetTraining').mockImplementation(() => { return; });
+
+    await wrapper.vm.getAllTraining();
 
     // expect
-    expect(spyShow).toBeCalled();
+    expect(wrapper.vm.animationLoaderDisplay).toBeFalsy();
+    expect(spy).toBeCalled();
   });
-  // it show detail training
+  // it get all training
+
+  // it promise get all training
+  it('Promise get all training', () => {
+    const wrapper = shallowMount(Test, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+        },
+        $cookies: {
+          get: jest.fn(),
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    const spy = jest.spyOn(wrapper.vm, 'getTrainings');
+    wrapper.vm.promiseGetAllTraining('1');
+
+    // expect
+    expect(spy).toBeCalled();
+  });
+  // it promise get all training
+
+  // it after get training
+  it('After get training', () => {
+    const wrapper = shallowMount(Test, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+          popupLostConnection: jest.fn(),
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    const spy = jest.spyOn(wrapper.vm, 'popupTraining').mockImplementation(() => { return });
+    wrapper.vm.afterGetTraining(200, '');
+
+    // expect
+    expect(spy).toBeCalled();
+
+    wrapper.vm.afterGetTraining(404, '');
+
+    // expect
+    expect(wrapper.vm.$func.popupLostConnection).toBeCalled();
+  });
+  // it after get training
+
+  // it popup training
+  it('Popup training', async () => {
+    const wrapper = shallowMount(Test, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+        },
+        $swal: {
+          fire: jest.fn().mockReturnValue({ value: true }),
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    jest.spyOn(wrapper.vm, 'getTrainingStage');
+    const spy = jest.spyOn(wrapper.vm, 'redirectToDetail').mockImplementation(() => { return });
+
+    await wrapper.vm.popupTraining();
+
+    // expect
+    expect(spy).toBeCalled();
+    spy.mockClear();
+
+    wrapper.vm.$swal.fire.mockReturnValue({ value: false });
+    await wrapper.vm.popupTraining();
+
+    // expect
+    expect(spy).not.toBeCalled();
+  });
+  // it popup training
+
+  // it get training stage
+  it('Get training stage', () => {
+    const wrapper = shallowMount(Test, {
+      mocks: {
+        $func: {
+          userAuth: jest.fn(),
+        },
+      },
+      localVue,
+      store,
+      stubs: [
+        'font-awesome-icon',
+        'router-link',
+      ],
+    });
+
+    wrapper.vm.getTrainingStage();
+  });
+  // it get training stage
 
   // it redirectToDetail
   it('Redirect to detail', () => {
@@ -195,17 +322,10 @@ describe('Method', () => {
       ],
     });
 
-    wrapper.vm.redirectToDetail(202006, '2');
+    wrapper.vm.redirectToDetail('202006', '2');
 
     // expect
     expect(wrapper.vm.$router.push).toBeCalled();
-    expect(wrapper.vm.$router.push).toBeCalledWith({
-      name: 'AdminDetailTest',
-      params: {
-        batch: 202006,
-        training: '2',
-      },
-    });
   });
   // it redirectToDetail
 });

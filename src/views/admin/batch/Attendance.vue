@@ -35,7 +35,7 @@
               <td>{{ value.username }}</td>
               <td>{{ value.division }}</td>
               <td>
-                <font-awesome-icon v-if="value.status === '1'" icon="check" class="check-icon"></font-awesome-icon>
+                <font-awesome-icon v-if="value.status" icon="check" class="check-icon"></font-awesome-icon>
                 <font-awesome-icon v-else icon="times" class="remove-icon"></font-awesome-icon>
               </td>
             </tr>

@@ -11,20 +11,12 @@
 
       <!-- batch -->
       <div class="batch-list">
-        <div :id="`batch-${batch.id}`"
-        :class="'batch batch-' + batch.batch" v-for="(batch) in batchTrainingList.data"
-        :key="batch.id">
-          <div class="general" @click="showDetailTraining(`batch-${batch.id}`)">
-            <div class="txt">{{ batch.batch }} ({{ batch.year }})</div>
-            <font-awesome-icon icon="chevron-down" class="chev-icon"></font-awesome-icon>
-          </div>
-
-          <div class="detail">
-            <div class="training" v-for="(training) in batch.training"
-            :key="training.id"
-            @click="redirectToDetail(batch.id, `${training.training}`)">
-              <span class="txt">Training {{ training.training }}</span>
-            </div>
+        <div class="batch"
+        v-for="(value) in batchList.data.batchList"
+        :key="value.batchId">
+          <div class="general" @click="getAllTraining(value.batchId)">
+            <div class="txt">{{ value.batchName }}</div>
+            <font-awesome-icon icon="forward" class="chev-icon"></font-awesome-icon>
           </div>
         </div>
       </div>
@@ -261,31 +253,40 @@ export default {
 
   computed: {
     ...mapGetters('adminBatch', [
-      'batchTrainingList',
+      'batchList',
+    ]),
+
+    ...mapGetters('adminTraining', [
+      'trainingList',
     ]),
   },
 
   methods: {
     ...mapActions('adminBatch', [
-      'getBatchTraining',
+      'getBatch',
     ]),
 
-    async getAllBatchTraining() {
+    ...mapActions('adminTraining', [
+      'getTrainings',
+    ]),
+
+    async getAllBatch() {
       // show loader
       this.animationLoaderDisplay = true;
 
       // req api
-      const promise = await this.promiseGetAll();
+      const promise = await this.promiseGetAllBatch();
 
       // show loader
       this.animationLoaderDisplay = false;
       this.dataReady(promise);
     },
 
-    promiseGetAll() {
+    promiseGetAllBatch() {
       return new Promise((resolve) => {
-        this.getBatchTraining({
+        this.getBatch({
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -298,15 +299,61 @@ export default {
       }
     },
 
-    showDetailTraining(el) {
-      const target = document.querySelector(`#${el}`);
-      const general = target.querySelector('.general');
-      const chevIcon = general.querySelector('.chev-icon');
-      const detail = target.querySelector('.detail');
+    async getAllTraining(batchId) {
+      // show loader
+      this.animationLoaderDisplay = true;
 
-      general.classList.toggle('general-active');
-      chevIcon.classList.toggle('chev-icon-rotate');
-      detail.classList.toggle('display-block');
+      // req api
+      const promise = await this.promiseGetAllTraining(batchId);
+
+      // show loader
+      this.animationLoaderDisplay = false;
+      this.afterGetTraining(promise, batchId);
+    },
+
+    promiseGetAllTraining(batchId) {
+      return new Promise((resolve) => {
+        this.getTrainings({
+          resolve,
+          params: {
+            batchId,
+          },
+          token: this.$cookies.get('token'),
+        });
+      });
+    },
+
+    afterGetTraining(promise, batchId) {
+      if (promise === 200) {
+        this.popupTraining(batchId);
+      } else {
+        this.$func.popupLostConnection();
+      }
+    },
+
+    async popupTraining(batchId) {
+      const training = this.getTrainingStage();
+
+      const res = await this.$swal.fire({
+        title: 'Test',
+        input: 'select',
+        inputOptions: training,
+        inputPlaceholder: 'Pilih training',
+      });
+
+      if (res.value) {
+        this.redirectToDetail(batchId, res.value);
+      }
+    },
+
+    getTrainingStage() {
+      const training = {};
+
+      this.trainingList.data.trainingList.forEach((val) => {
+        training[val.stage] = val.stage;
+      });
+
+      return training;
     },
 
     redirectToDetail(batchId, training) {
@@ -325,7 +372,7 @@ export default {
     this.$func.userAuth('ROLE_ADMIN');
 
     // req api
-    this.getAllBatchTraining();
+    this.getAllBatch();
   },
 
 };

@@ -12,16 +12,16 @@
 
     <!-- content -->
     <div class="content" v-if="apiReady">
-      <div class="material-name">{{ material.name }}</div>
+      <div class="material-name">{{ material }}</div>
 
       <!-- questions -->
       <div class="preview">
-        <div class="question" v-for="(value, index) in material.questions" :key="value.id">
+        <div class="question" v-for="(value, indexI) in questions" :key="indexI">
           <div class="question-text">{{ value.questionText }}</div>
           <div class="choices-list">
-            <label class="radio" v-for="(choice, key) in value.choices" :key="key">
-              <input type="radio" :value="choice.choice" :name="`choice-${index}`"><span></span>
-              <div class="answer">{{ choice.answer }}</div>
+            <label class="radio" v-for="(choice, indexJ) in value.choices" :key="indexJ">
+              <input type="radio" :value="indexJ" :name="`choice-${indexI}`"><span></span>
+              <div class="answer">{{ choice }}</div>
             </label>
           </div>
         </div>
@@ -323,7 +323,8 @@ export default {
       paramMaterial: '',
       apiReady: false,
       animationLoaderDisplay: false,
-      material: {},
+      questions: [],
+      material: '',
     };
   },
 
@@ -369,6 +370,7 @@ export default {
             materialId: this.paramMaterial,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -376,7 +378,8 @@ export default {
     dataReady(promise) {
       if (promise === 200) {
         this.apiReady = true;
-        this.material = this.questionTest.data.material;
+        this.material = localStorage.getItem('materialName');
+        this.questions = this.questionTest.data.questions;
       } else {
         this.$func.popupLostConnection();
       }
@@ -388,9 +391,9 @@ export default {
     this.$func.userAuth('ROLE_ADMIN');
 
     // get params
-    this.paramBatch = parseInt(this.$route.params.batch, 10);
+    this.paramBatch = this.$route.params.batch;
     this.paramTraining = this.$route.params.training;
-    this.paramMaterial = parseInt(this.$route.params.material, 10);
+    this.paramMaterial = this.$route.params.material;
 
     // req api
     this.getQuestions();

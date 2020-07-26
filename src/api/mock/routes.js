@@ -901,139 +901,139 @@ export default [
             userId: '1',
             username: 'Albert Kurniawan',
             division: 'Operation',
-            status: '1',
+            status: true,
           },
           {
             userId: '2',
             username: 'Muhammad Taufan Okka',
             division: 'Operation',
-            status: '1',
+            status: true,
           },
           {
             userId: '3',
             username: 'Simon Samosir',
             division: 'Operation',
-            status: '0',
+            status: false,
           },
           {
             userId: '4',
             username: 'Felix Alvin',
             division: 'Operation',
-            status: '1',
+            status: true,
           },
           {
             userId: '5',
             username: 'Tari Swaswati',
             division: 'Operation',
-            status: '1',
+            status: true,
           },
           {
             userId: '6',
             username: 'Esra Targian',
             division: 'Operation',
-            status: '0',
+            status: false,
           },
           {
             userId: '7',
             username: 'Timotius Nugroho',
             division: 'Operation',
-            status: '0',
+            status: false,
           },
           {
             userId: '8',
             username: 'Lia Ernita',
             division: 'Operation',
-            status: '1',
+            status: true,
           },
           {
             userId: '9',
             username: 'Devayani Dinda',
             division: 'Finance',
-            status: '0',
+            status: false,
           },
           {
             userId: '10',
             username: 'Kelvin',
             division: 'Finance',
-            status: '0',
+            status: false,
           },
           {
             userId: '11',
             username: 'Maudy Hana',
             division: 'Finance',
-            status: '1',
+            status: true,
           },
           {
             userId: '12',
             username: 'Angelia Yohana',
             division: 'Finance',
-            status: '1',
+            status: true,
           },
           {
             userId: '13',
             username: 'Rio Martin',
             division: 'Finance',
-            status: '0',
+            status: false,
           },
           {
             userId: '14',
             username: 'Maria Rosaria',
             division: 'Software Developer',
-            status: '0',
+            status: false,
           },
           {
             userId: '15',
             username: 'Spencer Lonhou',
             division: 'Software Developer',
-            status: '1',
+            status: true,
           },
           {
             userId: '16',
             username: 'Roni Simanjuntak',
             division: 'Software Developer',
-            status: '1',
+            status: true,
           },
           {
             userId: '17',
             username: 'Julio Cesar',
             division: 'Software Developer',
-            status: '1',
+            status: true,
           },
           {
             userId: '18',
             username: 'Fifin Andriani',
             division: 'Software Developer',
-            status: '1',
+            status: true,
           },
           {
             userId: '19',
             username: 'Kimmy',
             division: 'Software Developer',
-            status: '0',
+            status: false,
           },
           {
             userId: '20',
             username: 'Andi Wijaya',
             division: 'UI/UX Designer',
-            status: '1',
+            status: true,
           },
           {
             userId: '21',
             username: 'Lorencia Agnes',
             division: 'UI/UX Designer',
-            status: '0',
+            status: false,
           },
           {
             userId: '22',
             username: 'Algi Nosi',
             division: 'UI/UX Designer',
-            status: '0',
+            status: false,
           },
           {
             userId: '23',
             username: 'Jessica Natalia',
             division: 'UI/UX Designer',
-            status: '1',
+            status: true,
           },
         ],
       },
@@ -1122,7 +1122,7 @@ export default [
     method: 'GET',
     params: {
       params: {
-        batchId: 202006,
+        batchId: 'FEB-2020',
         training: '1',
       },
     },
@@ -1131,33 +1131,30 @@ export default [
       code: 200,
       status: 'OK',
       data: {
-        batch: {
-          id: 202006,
-          batch: 'Juni',
-          year: 2020,
-        },
-        training: '1',
-        material: [
+        materialList: [
           {
-            id: 1,
-            name: 'Private Victory',
-            available: '12 September 2020',
-            closed: '15 September 2020',
-            timeLimit: 20,
+            materialId: '1',
+            materialName: 'Private Victory',
+            testExist: true,
+            testAvailable: '12 September 2020',
+            testClosed: '15 September 2020',
+            testTimeLimit: 20,
           },
           {
-            id: 2,
-            name: 'Emotional Banking',
-            available: '20 September 2020',
-            closed: '22 September 2020',
-            timeLimit: 60,
+            materialId: '2',
+            materialName: 'Emotional Banking',
+            testExist: true,
+            testAvailable: '20 September 2020',
+            testClosed: '22 September 2020',
+            testTimeLimit: 60,
           },
           {
-            id: 3,
-            name: 'Public Victory',
-            available: '-',
-            closed: '-',
-            timeLimit: '-',
+            materialId: '3',
+            materialName: 'Public Victory',
+            testExist: false,
+            testAvailable: null,
+            testClosed: null,
+            testTimeLimit: null,
           },
         ],
       },
@@ -1170,9 +1167,9 @@ export default [
     method: 'GET',
     params: {
       params: {
-        batchId: 202006,
+        batchId: 'FEB-2020',
         training: '1',
-        materialId: 1,
+        materialId: '1',
       },
     },
     status: 200,
@@ -1180,125 +1177,65 @@ export default [
       code: 200,
       status: 'OK',
       data: {
-        available: '2020-01-15',
-        closed: '2020-01-18',
-        timeLimit: 20,
-        material: {
-          id: 1,
-          name: 'Think Win Win',
-          questions: [
-            {
-              questionText: 'Semua mahasiswa Perguruan Tinggi memiliki Nomor Induk Mahasiswa. Budi seorang mahasiswa. Jadi,',
-              choices: [
-                {
-                  choice: '1',
-                  answer: 'Budi mungkin memiliki nomor induk mahasiswa.',
-                },
-                {
-                  choice: '2',
-                  answer: 'Belum tentu Budi memiliki nomor induk mahasiswa.',
-                },
-                {
-                  choice: '3',
-                  answer: 'Budi memiliki nomor induk mahasiswa.',
-                },
-                {
-                  choice: '4',
-                  answer: 'Budi tidak memiliki nomor induk mahasiswa.',
-                },
-              ],
-              correctAnswer: '3',
-            },
-            {
-              questionText: 'Sebagian pedagang pecel lele mengeluhkan harga cabe naik. Pak Rudi seorang pedagang pecel lele.',
-              choices: [
-                {
-                  choice: '1',
-                  answer: 'Pak Rudi pasti mengeluhkan harga cabe naik.',
-                },
-                {
-                  choice: '2',
-                  answer: 'Pak Rudi tidak mengeluhkan harga cabe naik.',
-                },
-                {
-                  choice: '3',
-                  answer: 'Harga cabe bukanlah keluhan Pak Rudi.',
-                },
-                {
-                  choice: '4',
-                  answer: 'Pak Rudi mungkin ikut mengeluhkan harga cabe naik.',
-                },
-              ],
-              correctAnswer: '4',
-            },
-            {
-              questionText: 'Semua pemain sepakbola yang berkebangsaan Itali berwajah tampan. David Beckham adalah pemain sepakbola berkebangsaan Inggris.',
-              choices: [
-                {
-                  choice: '1',
-                  answer: 'David Beckham bukanlah pemain sepakbola yang tampan.',
-                },
-                {
-                  choice: '2',
-                  answer: 'David Beckham adalah pemain sepakbola yang tampan.',
-                },
-                {
-                  choice: '3',
-                  answer: 'Meskipun bukan berkebangsaan Italia, David Beckham pasti berwajah tampan.',
-                },
-                {
-                  choice: '4',
-                  answer: 'Tidak dapat ditarik kesimpulan.',
-                },
-              ],
-              correctAnswer: '4',
-            },
-            {
-              questionText: 'Sebagian orang yang berminat menjadi pejabat hanya menginginkan harta dan tahta. Budi tidak berminat menjadi pejabat.',
-              choices: [
-                {
-                  choice: '1',
-                  answer: 'Budi tidak menginginkan harta dan tahta.',
-                },
-                {
-                  choice: '2',
-                  answer: 'Tahta bukanlah keinginan Budi, tapi harta mungkin ya.',
-                },
-                {
-                  choice: '3',
-                  answer: 'Budi menginginkan tahta tapi tidak berminat menjadi pejabat.',
-                },
-                {
-                  choice: '4',
-                  answer: 'Tidak dapat ditarik kesimpulan.',
-                },
-              ],
-              correctAnswer: '1',
-            },
-            {
-              questionText: 'Coklat yang dibungkus dalam kemasan menarik sangat laris terjual. Coklat Jago dibungkus dalam kemasan berwarna merah menyala. Menurut anak-anak, warna merah menyala sangatlah menarik.',
-              choices: [
-                {
-                  choice: '1',
-                  answer: 'Coklat Jago kurang laris terjual di kalangan anak-anak.',
-                },
-                {
-                  choice: '2',
-                  answer: 'Coklat Jago tidak laku terjual di kalangan orang dewasa.',
-                },
-                {
-                  choice: '3',
-                  answer: 'Coklat Jago laris terjual.',
-                },
-                {
-                  choice: '4',
-                  answer: 'Coklat Jago laris terjual di kalangan anak-anak.',
-                },
-              ],
-              correctAnswer: '4',
-            },
-          ],
-        },
+        testId: '5ced6134-42db-4e6c-832b-26f06f30bd3e',
+        batchId: 'FEB-2020',
+        stage: '1',
+        materialId: '1',
+        available: '15-01-2020',
+        closed: '18-01-2020',
+        timeLimit: '20',
+        questions: [
+          {
+            questionText: 'Semua mahasiswa Perguruan Tinggi memiliki Nomor Induk Mahasiswa. Budi seorang mahasiswa. Jadi,',
+            choices: [
+              'Budi mungkin memiliki nomor induk mahasiswa.',
+              'Belum tentu Budi memiliki nomor induk mahasiswa.',
+              'Budi memiliki nomor induk mahasiswa.',
+              'Budi tidak memiliki nomor induk mahasiswa.',
+            ],
+            correctAnswer: '2',
+          },
+          {
+            questionText: 'Sebagian pedagang pecel lele mengeluhkan harga cabe naik. Pak Rudi seorang pedagang pecel lele.',
+            choices: [
+              'Pak Rudi pasti mengeluhkan harga cabe naik.',
+              'Pak Rudi tidak mengeluhkan harga cabe naik.',
+              'Harga cabe bukanlah keluhan Pak Rudi.',
+              'Pak Rudi mungkin ikut mengeluhkan harga cabe naik.',
+            ],
+            correctAnswer: '3',
+          },
+          {
+            questionText: 'Semua pemain sepakbola yang berkebangsaan Itali berwajah tampan. David Beckham adalah pemain sepakbola berkebangsaan Inggris.',
+            choices: [
+              'David Beckham bukanlah pemain sepakbola yang tampan.',
+              'David Beckham adalah pemain sepakbola yang tampan.',
+              'Meskipun bukan berkebangsaan Italia, David Beckham pasti berwajah tampan.',
+              'Tidak dapat ditarik kesimpulan.',
+            ],
+            correctAnswer: '3',
+          },
+          {
+            questionText: 'Sebagian orang yang berminat menjadi pejabat hanya menginginkan harta dan tahta. Budi tidak berminat menjadi pejabat.',
+            choices: [
+              'Budi tidak menginginkan harta dan tahta.',
+              'Tahta bukanlah keinginan Budi, tapi harta mungkin ya.',
+              'Budi menginginkan tahta tapi tidak berminat menjadi pejabat.',
+              'Tidak dapat ditarik kesimpulan.',
+            ],
+            correctAnswer: '0',
+          },
+          {
+            questionText: 'Coklat yang dibungkus dalam kemasan menarik sangat laris terjual. Coklat Jago dibungkus dalam kemasan berwarna merah menyala. Menurut anak-anak, warna merah menyala sangatlah menarik.',
+            choices: [
+              'Coklat Jago kurang laris terjual di kalangan anak-anak.',
+              'Coklat Jago tidak laku terjual di kalangan orang dewasa.',
+              'Coklat Jago laris terjual.',
+              'Coklat Jago laris terjual di kalangan anak-anak.',
+            ],
+            correctAnswer: '3',
+          },
+        ],
       },
       paging: null,
       errors: null,
@@ -1309,9 +1246,9 @@ export default [
     method: 'GET',
     params: {
       params: {
-        batchId: 202006,
+        batchId: 'FEB-2020',
         training: '1',
-        materialId: 3,
+        materialId: '3',
       },
     },
     status: 200,
@@ -1319,14 +1256,7 @@ export default [
       code: 200,
       status: 'OK',
       data: {
-        available: null,
-        closed: null,
-        timeLimit: null,
-        material: {
-          id: 1,
-          name: 'Public Victory',
-          questions: null,
-        },
+        testId: null,
       },
       paging: null,
       errors: null,
@@ -1336,132 +1266,73 @@ export default [
     url: `${API}/admin/test`,
     method: 'POST',
     params: {
-      batchId: 202006,
+      batchId: 'FEB-2020',
       training: '1',
-      materialId: 3,
-      test: {
-        available: '2020-01-15',
-        closed: '2020-01-18',
-        timeLimit: 20,
-        questions: [
-          {
-            questionText: 'Semua mahasiswa Perguruan Tinggi memiliki Nomor Induk Mahasiswa. Budi seorang mahasiswa. Jadi,',
-            choices: [
-              {
-                choice: '1',
-                answer: 'Budi mungkin memiliki nomor induk mahasiswa.',
-              },
-              {
-                choice: '2',
-                answer: 'Belum tentu Budi memiliki nomor induk mahasiswa.',
-              },
-              {
-                choice: '3',
-                answer: 'Budi memiliki nomor induk mahasiswa.',
-              },
-              {
-                choice: '4',
-                answer: 'Budi tidak memiliki nomor induk mahasiswa.',
-              },
-            ],
-            correctAnswer: '3',
-          },
-          {
-            questionText: 'Sebagian pedagang pecel lele mengeluhkan harga cabe naik. Pak Rudi seorang pedagang pecel lele.',
-            choices: [
-              {
-                choice: '1',
-                answer: 'Pak Rudi pasti mengeluhkan harga cabe naik.',
-              },
-              {
-                choice: '2',
-                answer: 'Pak Rudi tidak mengeluhkan harga cabe naik.',
-              },
-              {
-                choice: '3',
-                answer: 'Harga cabe bukanlah keluhan Pak Rudi.',
-              },
-              {
-                choice: '4',
-                answer: 'Pak Rudi mungkin ikut mengeluhkan harga cabe naik.',
-              },
-            ],
-            correctAnswer: '4',
-          },
-          {
-            questionText: 'Semua pemain sepakbola yang berkebangsaan Itali berwajah tampan. David Beckham adalah pemain sepakbola berkebangsaan Inggris.',
-            choices: [
-              {
-                choice: '1',
-                answer: 'David Beckham bukanlah pemain sepakbola yang tampan.',
-              },
-              {
-                choice: '2',
-                answer: 'David Beckham adalah pemain sepakbola yang tampan.',
-              },
-              {
-                choice: '3',
-                answer: 'Meskipun bukan berkebangsaan Italia, David Beckham pasti berwajah tampan.',
-              },
-              {
-                choice: '4',
-                answer: 'Tidak dapat ditarik kesimpulan.',
-              },
-            ],
-            correctAnswer: '4',
-          },
-          {
-            questionText: 'Sebagian orang yang berminat menjadi pejabat hanya menginginkan harta dan tahta. Budi tidak berminat menjadi pejabat.',
-            choices: [
-              {
-                choice: '1',
-                answer: 'Budi tidak menginginkan harta dan tahta.',
-              },
-              {
-                choice: '2',
-                answer: 'Tahta bukanlah keinginan Budi, tapi harta mungkin ya.',
-              },
-              {
-                choice: '3',
-                answer: 'Budi menginginkan tahta tapi tidak berminat menjadi pejabat.',
-              },
-              {
-                choice: '4',
-                answer: 'Tidak dapat ditarik kesimpulan.',
-              },
-            ],
-            correctAnswer: '1',
-          },
-          {
-            questionText: 'Coklat yang dibungkus dalam kemasan menarik sangat laris terjual. Coklat Jago dibungkus dalam kemasan berwarna merah menyala. Menurut anak-anak, warna merah menyala sangatlah menarik.',
-            choices: [
-              {
-                choice: '1',
-                answer: 'Coklat Jago kurang laris terjual di kalangan anak-anak.',
-              },
-              {
-                choice: '2',
-                answer: 'Coklat Jago tidak laku terjual di kalangan orang dewasa.',
-              },
-              {
-                choice: '3',
-                answer: 'Coklat Jago laris terjual.',
-              },
-              {
-                choice: '4',
-                answer: 'Coklat Jago laris terjual di kalangan anak-anak.',
-              },
-            ],
-            correctAnswer: '4',
-          },
-        ],
-      },
+      materialId: '3',
+      available: '2020-01-15',
+      closed: '2020-01-18',
+      timeLimit: '20',
+      questions: [
+        {
+          questionText: 'Semua mahasiswa Perguruan Tinggi memiliki Nomor Induk Mahasiswa. Budi seorang mahasiswa. Jadi,',
+          choices: [
+            'Budi mungkin memiliki nomor induk mahasiswa.',
+            'Belum tentu Budi memiliki nomor induk mahasiswa.',
+            'Budi memiliki nomor induk mahasiswa.',
+            'Budi tidak memiliki nomor induk mahasiswa.',
+          ],
+          correctAnswer: '2',
+        },
+        {
+          questionText: 'Sebagian pedagang pecel lele mengeluhkan harga cabe naik. Pak Rudi seorang pedagang pecel lele.',
+          choices: [
+            'Pak Rudi pasti mengeluhkan harga cabe naik.',
+            'Pak Rudi tidak mengeluhkan harga cabe naik.',
+            'Harga cabe bukanlah keluhan Pak Rudi.',
+            'Pak Rudi mungkin ikut mengeluhkan harga cabe naik.',
+          ],
+          correctAnswer: '3',
+        },
+        {
+          questionText: 'Semua pemain sepakbola yang berkebangsaan Itali berwajah tampan. David Beckham adalah pemain sepakbola berkebangsaan Inggris.',
+          choices: [
+            'David Beckham bukanlah pemain sepakbola yang tampan.',
+            'David Beckham adalah pemain sepakbola yang tampan.',
+            'Meskipun bukan berkebangsaan Italia, David Beckham pasti berwajah tampan.',
+            'Tidak dapat ditarik kesimpulan.',
+          ],
+          correctAnswer: '3',
+        },
+        {
+          questionText: 'Sebagian orang yang berminat menjadi pejabat hanya menginginkan harta dan tahta. Budi tidak berminat menjadi pejabat.',
+          choices: [
+            'Budi tidak menginginkan harta dan tahta.',
+            'Tahta bukanlah keinginan Budi, tapi harta mungkin ya.',
+            'Budi menginginkan tahta tapi tidak berminat menjadi pejabat.',
+            'Tidak dapat ditarik kesimpulan.',
+          ],
+          correctAnswer: '0',
+        },
+        {
+          questionText: 'Coklat yang dibungkus dalam kemasan menarik sangat laris terjual. Coklat Jago dibungkus dalam kemasan berwarna merah menyala. Menurut anak-anak, warna merah menyala sangatlah menarik.',
+          choices: [
+            'Coklat Jago kurang laris terjual di kalangan anak-anak.',
+            'Coklat Jago tidak laku terjual di kalangan orang dewasa.',
+            'Coklat Jago laris terjual.',
+            'Coklat Jago laris terjual di kalangan anak-anak.',
+          ],
+          correctAnswer: '3',
+        },
+      ],
     },
     status: 200,
     response: {
-      code: 200,
-      status: 'OK',
-      data: null,
+      code: 202,
+      status: 'ACCEPTED',
+      data: {
+        status: 'ACCEPTED',
+        message: 'Test has been created',
+      },
       paging: null,
       errors: null,
     },
@@ -1470,132 +1341,73 @@ export default [
     url: `${API}/admin/test`,
     method: 'PUT',
     params: {
-      batchId: 202006,
+      batchId: 'FEB-2020',
       training: '1',
-      materialId: 1,
-      test: {
-        available: '2020-01-15',
-        closed: '2020-01-18',
-        timeLimit: 20,
-        questions: [
-          {
-            questionText: 'Semua mahasiswa Perguruan Tinggi memiliki Nomor Induk Mahasiswa. Budi seorang mahasiswa. Jadi,',
-            choices: [
-              {
-                choice: '1',
-                answer: 'Budi mungkin memiliki nomor induk mahasiswa.',
-              },
-              {
-                choice: '2',
-                answer: 'Belum tentu Budi memiliki nomor induk mahasiswa.',
-              },
-              {
-                choice: '3',
-                answer: 'Budi memiliki nomor induk mahasiswa.',
-              },
-              {
-                choice: '4',
-                answer: 'Budi tidak memiliki nomor induk mahasiswa.',
-              },
-            ],
-            correctAnswer: '3',
-          },
-          {
-            questionText: 'Sebagian pedagang pecel lele mengeluhkan harga cabe naik. Pak Rudi seorang pedagang pecel lele.',
-            choices: [
-              {
-                choice: '1',
-                answer: 'Pak Rudi pasti mengeluhkan harga cabe naik.',
-              },
-              {
-                choice: '2',
-                answer: 'Pak Rudi tidak mengeluhkan harga cabe naik.',
-              },
-              {
-                choice: '3',
-                answer: 'Harga cabe bukanlah keluhan Pak Rudi.',
-              },
-              {
-                choice: '4',
-                answer: 'Pak Rudi mungkin ikut mengeluhkan harga cabe naik.',
-              },
-            ],
-            correctAnswer: '4',
-          },
-          {
-            questionText: 'Semua pemain sepakbola yang berkebangsaan Itali berwajah tampan. David Beckham adalah pemain sepakbola berkebangsaan Inggris.',
-            choices: [
-              {
-                choice: '1',
-                answer: 'David Beckham bukanlah pemain sepakbola yang tampan.',
-              },
-              {
-                choice: '2',
-                answer: 'David Beckham adalah pemain sepakbola yang tampan.',
-              },
-              {
-                choice: '3',
-                answer: 'Meskipun bukan berkebangsaan Italia, David Beckham pasti berwajah tampan.',
-              },
-              {
-                choice: '4',
-                answer: 'Tidak dapat ditarik kesimpulan.',
-              },
-            ],
-            correctAnswer: '4',
-          },
-          {
-            questionText: 'Sebagian orang yang berminat menjadi pejabat hanya menginginkan harta dan tahta. Budi tidak berminat menjadi pejabat.',
-            choices: [
-              {
-                choice: '1',
-                answer: 'Budi tidak menginginkan harta dan tahta.',
-              },
-              {
-                choice: '2',
-                answer: 'Tahta bukanlah keinginan Budi, tapi harta mungkin ya.',
-              },
-              {
-                choice: '3',
-                answer: 'Budi menginginkan tahta tapi tidak berminat menjadi pejabat.',
-              },
-              {
-                choice: '4',
-                answer: 'Tidak dapat ditarik kesimpulan.',
-              },
-            ],
-            correctAnswer: '1',
-          },
-          {
-            questionText: 'Coklat yang dibungkus dalam kemasan menarik sangat laris terjual. Coklat Jago dibungkus dalam kemasan berwarna merah menyala. Menurut anak-anak, warna merah menyala sangatlah menarik.',
-            choices: [
-              {
-                choice: '1',
-                answer: 'Coklat Jago kurang laris terjual di kalangan anak-anak.',
-              },
-              {
-                choice: '2',
-                answer: 'Coklat Jago tidak laku terjual di kalangan orang dewasa.',
-              },
-              {
-                choice: '3',
-                answer: 'Coklat Jago laris terjual.',
-              },
-              {
-                choice: '4',
-                answer: 'Coklat Jago laris terjual di kalangan anak-anak.',
-              },
-            ],
-            correctAnswer: '4',
-          },
-        ],
-      },
+      materialId: '1',
+      available: '2020-01-15',
+      closed: '2020-01-18',
+      timeLimit: '20',
+      questions: [
+        {
+          questionText: 'Semua mahasiswa Perguruan Tinggi memiliki Nomor Induk Mahasiswa. Budi seorang mahasiswa. Jadi,',
+          choices: [
+            'Budi mungkin memiliki nomor induk mahasiswa.',
+            'Belum tentu Budi memiliki nomor induk mahasiswa.',
+            'Budi memiliki nomor induk mahasiswa.',
+            'Budi tidak memiliki nomor induk mahasiswa.',
+          ],
+          correctAnswer: '2',
+        },
+        {
+          questionText: 'Sebagian pedagang pecel lele mengeluhkan harga cabe naik. Pak Rudi seorang pedagang pecel lele.',
+          choices: [
+            'Pak Rudi pasti mengeluhkan harga cabe naik.',
+            'Pak Rudi tidak mengeluhkan harga cabe naik.',
+            'Harga cabe bukanlah keluhan Pak Rudi.',
+            'Pak Rudi mungkin ikut mengeluhkan harga cabe naik.',
+          ],
+          correctAnswer: '3',
+        },
+        {
+          questionText: 'Semua pemain sepakbola yang berkebangsaan Itali berwajah tampan. David Beckham adalah pemain sepakbola berkebangsaan Inggris.',
+          choices: [
+            'David Beckham bukanlah pemain sepakbola yang tampan.',
+            'David Beckham adalah pemain sepakbola yang tampan.',
+            'Meskipun bukan berkebangsaan Italia, David Beckham pasti berwajah tampan.',
+            'Tidak dapat ditarik kesimpulan.',
+          ],
+          correctAnswer: '3',
+        },
+        {
+          questionText: 'Sebagian orang yang berminat menjadi pejabat hanya menginginkan harta dan tahta. Budi tidak berminat menjadi pejabat.',
+          choices: [
+            'Budi tidak menginginkan harta dan tahta.',
+            'Tahta bukanlah keinginan Budi, tapi harta mungkin ya.',
+            'Budi menginginkan tahta tapi tidak berminat menjadi pejabat.',
+            'Tidak dapat ditarik kesimpulan.',
+          ],
+          correctAnswer: '0',
+        },
+        {
+          questionText: 'Coklat yang dibungkus dalam kemasan menarik sangat laris terjual. Coklat Jago dibungkus dalam kemasan berwarna merah menyala. Menurut anak-anak, warna merah menyala sangatlah menarik.',
+          choices: [
+            'Coklat Jago kurang laris terjual di kalangan anak-anak.',
+            'Coklat Jago tidak laku terjual di kalangan orang dewasa.',
+            'Coklat Jago laris terjual.',
+            'Coklat Jago laris terjual di kalangan anak-anak.',
+          ],
+          correctAnswer: '3',
+        },
+      ],
     },
     status: 200,
     response: {
-      code: 200,
-      status: 'OK',
-      data: null,
+      code: 202,
+      status: 'ACCEPTED',
+      data: {
+        status: 'ACCEPTED',
+        message: 'Test has been created',
+      },
       paging: null,
       errors: null,
     },
@@ -1651,83 +1463,85 @@ export default [
     response: {
       code: 200,
       status: 'OK',
-      data: [
-        {
-          id: 1,
-          cardId: 'BLI-1153AD',
-          name: 'Albert Kurniawan',
-        },
-        {
-          id: 2,
-          cardId: 'BLI-1953OP',
-          name: 'Simon Samosir',
-        },
-        {
-          id: 3,
-          cardId: 'BLI-D885A1',
-          name: 'Maudy Hana',
-        },
-        {
-          id: 4,
-          cardId: 'BLI-B95AAC',
-          name: 'Angelia Yohana',
-        },
-        {
-          id: 5,
-          cardId: 'BLI-15A9DS',
-          name: 'Rio Martin',
-        },
-        {
-          id: 6,
-          cardId: 'BLI-HG9563',
-          name: 'Maria Rosaria',
-        },
-        {
-          id: 7,
-          cardId: 'BLI-PO956E',
-          name: 'Spencer Lonhou',
-        },
-        {
-          id: 8,
-          cardId: 'BLI-D89ADC',
-          name: 'Roni Simanjuntak',
-        },
-        {
-          id: 9,
-          cardId: 'BLI-55D23A',
-          name: 'Julio Cesar',
-        },
-        {
-          id: 10,
-          cardId: 'BLI-PE7SL6',
-          name: 'Fifin Andriani',
-        },
-        {
-          id: 11,
-          cardId: 'BLI-S6DD92',
-          name: 'Kimmy',
-        },
-        {
-          id: 12,
-          cardId: 'BLI-I7AALS',
-          name: 'Andi Wijaya',
-        },
-        {
-          id: 13,
-          cardId: 'BLI-N8UDOP',
-          name: 'Lorencia Agnes',
-        },
-        {
-          id: 14,
-          cardId: 'BLI-L5SSPA',
-          name: 'Algi Nosi',
-        },
-        {
-          id: 15,
-          cardId: 'BLI-K96DS1',
-          name: 'Jessica Natalia',
-        },
-      ],
+      data: {
+        employeeList: [
+          {
+            userId: '1',
+            username: 'Albert Kurniawan',
+            division: 'Operation',
+          },
+          {
+            userId: '2',
+            username: 'Simon Samosir',
+            division: 'Operation',
+          },
+          {
+            userId: '3',
+            username: 'Maudy Hana',
+            division: 'Operation',
+          },
+          {
+            userId: '4',
+            username: 'Angelia Yohana',
+            division: 'Operation',
+          },
+          {
+            userId: '5',
+            username: 'Rio Martin',
+            division: 'Software Developer',
+          },
+          {
+            userId: '6',
+            username: 'Maria Rosaria',
+            division: 'Software Developer',
+          },
+          {
+            userId: '7',
+            username: 'Spencer Lonhou',
+            division: 'Software Developer',
+          },
+          {
+            userId: '8',
+            username: 'Roni Simanjuntak',
+            division: 'Software Developer',
+          },
+          {
+            userId: '9',
+            username: 'Julio Cesar',
+            division: 'Software Developer',
+          },
+          {
+            userId: '10',
+            username: 'Fifin Andriani',
+            division: 'UI/UX Designer',
+          },
+          {
+            userId: '11',
+            username: 'Kimmy',
+            division: 'UI/UX Designer',
+          },
+          {
+            userId: '12',
+            username: 'Andi Wijaya',
+            division: 'UI/UX Designer',
+          },
+          {
+            userId: '13',
+            username: 'Lorencia Agnes',
+            division: 'UI/UX Designer',
+          },
+          {
+            userId: '14',
+            username: 'Algi Nosi',
+            division: 'Finance',
+          },
+          {
+            userId: '15',
+            username: 'Jessica Natalia',
+            division: 'Finance',
+          },
+        ],
+      },
       paging: null,
       errors: null,
     },
@@ -1737,7 +1551,7 @@ export default [
     method: 'GET',
     params: {
       params: {
-        id: 1,
+        id: '1',
       },
     },
     status: 200,
@@ -1745,16 +1559,14 @@ export default [
       code: 200,
       status: 'OK',
       data: {
-        id: 1,
-        cardId: 'BLI-1153AD',
-        name: 'Albert Kurniawan',
-        email: 'albertkur@gmail.com',
-        password: '123456',
+        userId: '1',
+        username: 'Albert Kurniawan',
+        usermail: 'albertkur@gmail.com',
         phoneNumber: '081392290882',
         division: 'Software Engineer',
-        birthdate: '1990-11-03',
+        birthdate: '19-11-2020',
         gender: 'Pria',
-        batchId: 202009,
+        batchId: 'JAN-2020',
       },
       paging: null,
       errors: null,
@@ -1769,15 +1581,18 @@ export default [
       password: '123456',
       phoneNumber: '081392290882',
       division: 'Operation',
-      birthdate: '2020-01-25',
+      birthdate: '25-01-2020',
       gender: 'Pria',
-      batchId: 202101,
+      batchId: 'JAN-2020',
     },
     status: 200,
     response: {
-      code: 200,
-      status: 'OK',
-      data: null,
+      code: 202,
+      status: 'ACCEPTED',
+      data: {
+        status: 'ACCEPTED',
+        message: 'Employee has been created',
+      },
       paging: null,
       errors: null,
     },
@@ -1786,20 +1601,23 @@ export default [
     url: `${API}/admin/employee`,
     method: 'PUT',
     params: {
-      id: 1,
+      id: '1',
       name: 'Albert Kurniawan',
       email: 'albertkur@gmail.com',
       phoneNumber: '081392290882',
       division: 'Operation',
-      birthdate: '1990-11-03',
+      birthdate: '19-11-2020',
       gender: 'Pria',
-      batchId: 202009,
+      batchId: 'JAN-2020',
     },
     status: 200,
     response: {
-      code: 200,
-      status: 'OK',
-      data: null,
+      code: 202,
+      status: 'ACCEPTED',
+      data: {
+        status: 'ACCEPTED',
+        message: 'Employee has been created',
+      },
       paging: null,
       errors: null,
     },
@@ -1819,117 +1637,117 @@ export default [
       data: {
         employeeList: [
           {
-            id: '1',
+            userId: '1',
             username: 'Albert Kurniawan',
             division: 'Operation',
           },
           {
-            id: '2',
+            userId: '2',
             username: 'Muhammad Taufan Okka',
             division: 'Operation',
           },
           {
-            id: '3',
+            userId: '3',
             username: 'Simon Samosir',
             division: 'Operation',
           },
           {
-            id: '4',
+            userId: '4',
             username: 'Felix Alvin',
             division: 'Operation',
           },
           {
-            id: '5',
+            userId: '5',
             username: 'Tari Swaswati',
             division: 'Operation',
           },
           {
-            id: '6',
+            userId: '6',
             username: 'Esra Targian',
             division: 'Software Engineer',
           },
           {
-            id: '7',
+            userId: '7',
             username: 'Timotius Nugroho',
             division: 'Software Engineer',
           },
           {
-            id: '8',
+            userId: '8',
             username: 'Lia Ernita',
             division: 'Software Engineer',
           },
           {
-            id: '9',
+            userId: '9',
             username: 'Devayani Dinda',
             division: 'Software Engineer',
           },
           {
-            id: '10',
+            userId: '10',
             username: 'Kelvin',
             division: 'Software Engineer',
           },
           {
-            id: '11',
+            userId: '11',
             username: 'Maudy Hana',
             division: 'Finance',
           },
           {
-            id: '12',
+            userId: '12',
             username: 'Angelia Yohana',
             division: 'Finance',
           },
           {
-            id: '13',
+            userId: '13',
             username: 'Rio Martin',
             division: 'Finance',
           },
           {
-            id: '14',
+            userId: '14',
             username: 'Maria Rosaria',
             division: 'Finance',
           },
           {
-            id: '15',
+            userId: '15',
             username: 'Spencer Lonhou',
             division: 'UI/UX Designer',
           },
           {
-            id: '16',
+            userId: '16',
             username: 'Roni Simanjuntak',
             division: 'UI/UX Designer',
           },
           {
-            id: '17',
+            userId: '17',
             username: 'Julio Cesar',
             division: 'UI/UX Designer',
           },
           {
-            id: '18',
+            userId: '18',
             username: 'Fifin Andriani',
             division: 'UI/UX Designer',
           },
           {
-            id: '19',
+            userId: '19',
             username: 'Kimmy',
             division: 'UI/UX Designer',
           },
           {
-            id: '20',
+            userId: '20',
             username: 'Andi Wijaya',
             division: 'UI/UX Designer',
           },
           {
-            id: '21',
+            userId: '21',
             username: 'Lorencia Agnes',
             division: 'Accountant',
           },
           {
-            id: '22',
+            userId: '22',
             username: 'Algi Nosi',
             division: 'Accountant',
           },
           {
-            id: '23',
+            userId: '23',
             username: 'Jessica Natalia',
             division: 'Accountant',
           },
@@ -1943,11 +1761,11 @@ export default [
     url: `${API}/admin/employee/reset`,
     method: 'PUT',
     params: {
-      id: 1,
+      id: '1',
     },
     status: 200,
     response: {
-      code: 200,
+      code: 202,
       status: 'OK',
       data: null,
       paging: null,
@@ -1959,7 +1777,7 @@ export default [
     method: 'DELETE',
     params: {
       params: {
-        id: 1,
+        id: '1',
       },
     },
     status: 200,
@@ -2011,7 +1829,7 @@ export default [
     method: 'GET',
     params: {
       params: {
-        id: 1,
+        id: '1',
       },
     },
     status: 200,
@@ -2019,10 +1837,9 @@ export default [
       code: 200,
       status: 'OK',
       data: {
-        id: 1,
-        name: 'Alfonsus Nugroho',
-        email: 'alfon@gmail.com',
-        password: '123456',
+        userId: 1,
+        username: 'Alfonsus Nugroho',
+        usermail: 'alfon@gmail.com',
         division: 'Software Engineer',
       },
       paging: null,
@@ -2040,9 +1857,12 @@ export default [
     },
     status: 200,
     response: {
-      code: 200,
+      code: 202,
       status: 'OK',
-      data: null,
+      data: {
+        status: 'ACCEPTED',
+        message: 'Trainer data has been created',
+      },
       paging: null,
       errors: null,
     },
@@ -2051,16 +1871,19 @@ export default [
     url: `${API}/admin/trainer`,
     method: 'PUT',
     params: {
-      id: 1,
+      id: '1',
       name: 'Alfonsus Nugroho',
       email: 'alfon@gmail.com',
       division: 'Operation',
     },
     status: 200,
     response: {
-      code: 200,
+      code: 202,
       status: 'OK',
-      data: null,
+      data: {
+        status: 'ACCEPTED',
+        message: 'Trainer data has been created',
+      },
       paging: null,
       errors: null,
     },
@@ -2069,13 +1892,16 @@ export default [
     url: `${API}/admin/trainer/reset`,
     method: 'PUT',
     params: {
-      id: 1,
+      id: '1',
     },
     status: 200,
     response: {
-      code: 200,
+      code: 202,
       status: 'OK',
-      data: null,
+      data: {
+        status: 'ACCEPTED',
+        message: 'Trainer data has been created',
+      },
       paging: null,
       errors: null,
     },
@@ -2085,7 +1911,7 @@ export default [
     method: 'DELETE',
     params: {
       params: {
-        id: 1,
+        id: '1',
       },
     },
     status: 200,

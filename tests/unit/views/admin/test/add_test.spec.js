@@ -166,13 +166,12 @@ describe('Method', () => {
 
     // expect
     expect(wrapper.vm.apiReady).toBeTruthy();
-    expect(wrapper.vm.material).toStrictEqual(wrapper.vm.questionTest.data.material);
     expect(spySetForm).toBeCalled();
 
     spySetForm.mockClear();
     wrapper.setData({
       material: {
-        questions: null,
+        testId: null,
       },
     });
     wrapper.vm.dataReady(200);
@@ -211,21 +210,23 @@ describe('Method', () => {
     });
 
     const data = {
-      available: 'a',
-      closed: 'b',
-      timeLimit: 'c',
-      material: {
-        questions: {},
+      available: {
+        split: jest.fn().mockReturnValue(['1', '2', '3']),
       },
+      closed: {
+        split: jest.fn().mockReturnValue(['1', '2', '3']),
+      },
+      timeLimit: 'c',
+      questions: 'c',
     };
     wrapper.vm.setform(data);
 
     // expect
     expect(wrapper.vm.form).toStrictEqual({
-      available: data.available,
-      closed: data.closed,
+      available: '3-2-1',
+      closed: '3-2-1',
       timeLimit: data.timeLimit,
-      questions: data.material.questions,
+      questions: data.questions,
     });
   });
   // it set form
@@ -272,7 +273,7 @@ describe('Method', () => {
       data() {
         return {
           material: {
-            quetions: 'a',
+            testId: 'a',
           },
         };
       },
@@ -286,6 +287,9 @@ describe('Method', () => {
             training: '2',
             material: 1,
           },
+        },
+        $cookies: {
+          get: jest.fn(),
         },
       },
       localVue,
@@ -307,7 +311,7 @@ describe('Method', () => {
     spyReqApi.mockClear();
     wrapper.setData({
       material: {
-        questions: null,
+        testId: null,
       },
     });
     wrapper.vm.save();
@@ -370,6 +374,9 @@ describe('Method', () => {
             material: 1,
           },
         },
+        $cookies: {
+          get: jest.fn(),
+        },
       },
       localVue,
       store,
@@ -384,15 +391,6 @@ describe('Method', () => {
 
     // expect
     expect(spyPutTest).toBeCalled();
-    expect(spyPutTest).toBeCalledWith({
-      params: {
-        batchId: wrapper.vm.paramBatch,
-        training: wrapper.vm.paramTraining,
-        materialId: wrapper.vm.paramMaterial,
-        test: wrapper.vm.form,
-      },
-      resolve: expect.any(Function),
-    });
   });
   // it promise req api
 
@@ -421,11 +419,10 @@ describe('Method', () => {
       ],
     });
 
-    wrapper.vm.afterReqApi(200);
+    wrapper.vm.afterReqApi(202);
 
     // expect
     expect(wrapper.vm.$func.popupSuccessfull).toBeCalled();
-    expect(wrapper.vm.$func.popupSuccessfull).toBeCalledWith('Berhasil simpan data', 5000, wrapper.vm.back);
 
     wrapper.vm.afterReqApi(404);
 
@@ -451,7 +448,7 @@ describe('Method', () => {
         },
         $route: {
           params: {
-            batch: 202006,
+            batch: '202006',
             training: '2',
             material: 1,
           },
@@ -482,10 +479,7 @@ describe('Method', () => {
             },
             choices: [
               {
-                length: 1,
-                answer: {
-                  length: 0,
-                },
+                length: 0,
               },
             ],
           },
@@ -508,10 +502,7 @@ describe('Method', () => {
             },
             choices: [
               {
-                length: 1,
-                answer: {
-                  length: 0,
-                },
+                length: 0,
               },
             ],
           },
@@ -534,10 +525,7 @@ describe('Method', () => {
             },
             choices: [
               {
-                length: 1,
-                answer: {
-                  length: 3,
-                },
+                length: 3,
               },
             ],
           },

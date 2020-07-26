@@ -154,7 +154,6 @@ describe('Method', () => {
 
     // expect
     expect(wrapper.vm.apiReady).toBeTruthy();
-    expect(wrapper.vm.material).toStrictEqual(wrapper.vm.questionTest.data.material);
 
     wrapper.vm.dataReady(404);
 

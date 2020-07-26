@@ -408,6 +408,7 @@ export default {
             id: this.paramId,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -422,9 +423,9 @@ export default {
 
     setForm(data) {
       this.form = {
-        name: data.name,
-        email: data.email,
-        password: data.password,
+        name: data.username,
+        email: data.usermail,
+        password: 'blibliprobation',
         division: data.division,
       };
     },
@@ -456,12 +457,13 @@ export default {
         action({
           params: this.form,
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
 
     afterReqApi(promise) {
-      if (promise === 200) {
+      if (promise === 202) {
         this.$func.popupSuccessfull('Berhasil simpan data', 5000, { name: 'AdminTrainer' });
       } else {
         this.$func.popupLostConnection();
@@ -485,7 +487,7 @@ export default {
     async confirmReset() {
       const res = await this.$func.popupConfirmDialog(
         'Kamu yakin?',
-        'Password akan di reset menjadi 12345',
+        'Password akan di reset menjadi blibliprobation',
       );
 
       if (res.value) {
@@ -512,12 +514,13 @@ export default {
             id: this.paramId,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
 
     afterResetPassword(promise) {
-      if (promise === 200) {
+      if (promise === 202) {
         this.$func.popupSuccessfull('Berhasil reset password', 5000, { name: 'AdminTrainer' });
       } else {
         this.$func.popupLostConnection();
@@ -530,7 +533,7 @@ export default {
     this.$func.userAuth('ROLE_ADMIN');
 
     // get params
-    this.paramId = parseInt(this.$route.params.id, 10);
+    this.paramId = this.$route.params.id;
 
     // req api
     if (this.paramId) {

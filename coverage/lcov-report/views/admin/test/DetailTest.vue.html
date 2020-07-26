@@ -24,7 +24,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>22/22</span>
+                <span class='fraction'>23/23</span>
             </div>
         
             
@@ -45,7 +45,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>22/22</span>
+                <span class='fraction'>23/23</span>
             </div>
         
             
@@ -555,8 +555,7 @@
 <a name='L497'></a><a href='#L497'>497</a>
 <a name='L498'></a><a href='#L498'>498</a>
 <a name='L499'></a><a href='#L499'>499</a>
-<a name='L500'></a><a href='#L500'>500</a>
-<a name='L501'></a><a href='#L501'>501</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L500'></a><a href='#L500'>500</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -951,7 +950,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -996,10 +994,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1009,6 +1005,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1030,6 +1027,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1064,7 +1062,7 @@
         &lt;font-awesome-icon icon="arrow-left"&gt;&lt;/font-awesome-icon&gt;
         &lt;span class="text"&gt;Test&lt;/span&gt;
       &lt;/router-link&gt;
-      &lt;div class="txt-batch"&gt;{{ batch.batch }} {{ batch.year }}&lt;/div&gt;
+      &lt;div class="txt-batch"&gt;{{ paramBatch }}&lt;/div&gt;
     &lt;/div&gt;
     &lt;!-- end head --&gt;
 &nbsp;
@@ -1080,21 +1078,21 @@
 &nbsp;
       &lt;!-- list of material --&gt;
       &lt;div class="materials"&gt;
-        &lt;div class="material" v-for="(value) in material" :key="value.id"&gt;
+        &lt;div class="material" v-for="(value) in material" :key="value.materialId"&gt;
           &lt;div class="information"&gt;
             &lt;div class="left"&gt;
-              &lt;p class="material-name"&gt;{{ value.name }}&lt;/p&gt;
-              &lt;p class="available-date"&gt;&lt;span&gt;(Dibuka)&lt;/span&gt; {{ value.available }}&lt;/p&gt;
-              &lt;p class="expired-date"&gt;&lt;span&gt;(Ditutup)&lt;/span&gt; {{ value.closed }}&lt;/p&gt;
-              &lt;p class="time-limit"&gt;Batas: {{ value.timeLimit }} &lt;span v-if="value.timeLimit !== '-'"&gt;menit&lt;/span&gt;&lt;/p&gt;
+              &lt;p class="material-name"&gt;{{ value.materialName }}&lt;/p&gt;
+              &lt;p class="available-date"&gt;&lt;span&gt;(Dibuka)&lt;/span&gt; {{ value.testAvailable }}&lt;/p&gt;
+              &lt;p class="expired-date"&gt;&lt;span&gt;(Ditutup)&lt;/span&gt; {{ value.testClosed }}&lt;/p&gt;
+              &lt;p class="time-limit"&gt;Batas: {{ value.testTimeLimit }} &lt;span v-if="value.testExist"&gt;menit&lt;/span&gt;&lt;/p&gt;
             &lt;/div&gt;
 &nbsp;
             &lt;div class="right"&gt;
               &lt;div&gt;
                 &lt;font-awesome-icon icon="pen" class="edit-icon"
-                @click="redirectToAddTest(value.id, `${value.available}`)"&gt;&lt;/font-awesome-icon&gt;
-                &lt;font-awesome-icon icon="eye" class="see-icon"
-                @click="redirectReviewTest(value.id)"&gt;&lt;/font-awesome-icon&gt;
+                @click="redirectToAddTest(value.materialId, value.textExist, value.materialName)"&gt;&lt;/font-awesome-icon&gt;
+                &lt;font-awesome-icon icon="eye" class="see-icon" v-if="value.testExist"
+                @click="redirectReviewTest(value.materialId, value.materialName)"&gt;&lt;/font-awesome-icon&gt;
               &lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
@@ -1455,7 +1453,6 @@ export default {
       paramTraining: '',
       apiReady: false,
       animationLoaderDisplay: false,
-      batch: {},
       material: [],
     };
   },
@@ -1491,6 +1488,7 @@ export default {
             training: this.paramTraining,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -1498,17 +1496,15 @@ export default {
     dataReady(promise) {
       if (promise === 200) {
         this.apiReady = true;
-&nbsp;
-        // assignment split data
-        this.batch = this.materialTestList.data.batch;
-        this.material = this.materialTestList.data.material;
+        this.material = this.materialTestList.data.materialList;
       } else {
         this.$func.popupLostConnection();
       }
     },
 &nbsp;
-    redirectToAddTest(id, available) {
-      if (available === '-') {
+    redirectToAddTest(id, exist, name) {
+      localStorage.setItem('materialName', name);
+      if (!exist) {
         this.$router.push({
           name: 'AdminAddTest',
           params: {
@@ -1529,7 +1525,8 @@ export default {
       }
     },
 &nbsp;
-    redirectReviewTest(id) {
+    redirectReviewTest(id, name) {
+      localStorage.setItem('materialName', name);
       this.$router.push({
         name: 'AdminReviewTest',
         params: {
@@ -1546,7 +1543,7 @@ export default {
     this.$func.userAuth('ROLE_ADMIN');
 &nbsp;
     // get params
-    this.paramBatch = parseInt(this.$route.params.batch, 10);
+    this.paramBatch = this.$route.params.batch;
     this.paramTraining = this.$route.params.training;
 &nbsp;
     // req api
@@ -1563,7 +1560,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Jul 25 2020 11:55:28 GMT+0700 (GMT+07:00)
+                at Sun Jul 26 2020 23:39:50 GMT+0700 (GMT+07:00)
             </div>
         </div>
         <script src="..\..\..\prettify.js"></script>

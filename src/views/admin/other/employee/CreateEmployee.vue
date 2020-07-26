@@ -81,9 +81,9 @@
             <legend>Batch</legend>
             <select class="input-text" v-model="form.batchId">
               <option value="" disabled>Pilih batch</option>
-              <option v-for="(value) in batchList.data"
-              :key="value.id"
-              :value="value.id">{{ value.batch }} - {{ value.year }}
+              <option v-for="(value) in batchList.data.batchList"
+              :key="value.batchId"
+              :value="value.batchId">{{ value.batchName }}
               </option>
             </select>
           </fieldset>
@@ -445,6 +445,7 @@ export default {
       return new Promise((resolve) => {
         this.getBatch({
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -476,6 +477,7 @@ export default {
             id: this.paramId,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -489,13 +491,15 @@ export default {
     },
 
     setForm(data) {
+      const date = data.birthdate.split('-');
+
       this.form = {
-        name: data.name,
-        email: data.email,
-        password: data.password,
+        name: data.username,
+        email: data.usermail,
+        password: 'blibliprobation',
         phoneNumber: data.phoneNumber,
         division: data.division,
-        birthdate: data.birthdate,
+        birthdate: `${date[2]}-${date[1]}-${date[0]}`,
         gender: data.gender,
         batchId: data.batchId,
       };
@@ -518,12 +522,13 @@ export default {
         action({
           params: this.form,
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
 
     afterReqApi(promise) {
-      if (promise === 200) {
+      if (promise === 202) {
         this.$func.popupSuccessfull('Berhasil simpan data', 5000, { name: 'AdminMenuEmployee' });
       } else {
         this.$func.popupLostConnection();
@@ -541,6 +546,9 @@ export default {
     },
 
     save() {
+      const date = this.form.birthdate.split('-');
+      this.form.birthdate = `${date[2]}-${date[1]}-${date[0]}`;
+
       if (!this.paramId) {
         this.reqApi(this.postEmployee);
       } else {
@@ -571,7 +579,7 @@ export default {
     async confirmReset() {
       const res = await this.$func.popupConfirmDialog(
         'Kamu yakin?',
-        'Password akan di reset menjadi 12345',
+        'Password akan di reset menjadi blibliprobation',
       );
 
       if (res.value) {
@@ -598,12 +606,13 @@ export default {
             id: this.paramId,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
 
     afterResetPassword(promise) {
-      if (promise === 200) {
+      if (promise === 202) {
         this.$func.popupSuccessfull('Berhasil reset password', 5000, { name: 'AdminMenuEmployee' });
       } else {
         this.$func.popupLostConnection();
@@ -616,7 +625,7 @@ export default {
     this.$func.userAuth('ROLE_ADMIN');
 
     // get params
-    this.paramId = parseInt(this.$route.params.id, 10);
+    this.paramId = this.$route.params.id;
 
     // req api
     this.getAllBatch();

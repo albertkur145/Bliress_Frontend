@@ -12,7 +12,7 @@
 
     <!-- content -->
     <div class="content" v-if="apiReady">
-      <div class="material-name">{{ material.name }}</div>
+      <div class="material-name">{{ materialName }}</div>
 
       <!-- form -->
       <div class="form">
@@ -50,12 +50,11 @@
           <div class="form-group">
             <fieldset class="text-area choices" v-for="i in 4" :key="i">
               <legend>Pilihan {{ i }}</legend>
-              <textarea class="input-area" v-model="form.questions[n-1].choices[i-1].answer"></textarea>
+              <textarea class="input-area" v-model="form.questions[n-1].choices[i-1]"></textarea>
               <label class="radio">
                 <input type="radio"
-                :value="`${i}`"
+                :value="`${i - 1}`"
                 :name="`question-${n}`"
-                :checked="`${i}` === form.questions[n-1].correctAnswer ? true : false"
                 v-model="form.questions[n-1].correctAnswer">
                 <span></span>
               </label>
@@ -478,6 +477,7 @@ export default {
       paramBatch: '',
       paramTraining: '',
       paramMaterial: '',
+      materialName: '',
       animationLoaderDisplay: false,
       apiReady: false,
       material: {},
@@ -534,6 +534,7 @@ export default {
             materialId: this.paramMaterial,
           },
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -541,9 +542,9 @@ export default {
     dataReady(promise) {
       if (promise === 200) {
         this.apiReady = true;
-        this.material = this.questionTest.data.material;
+        this.material = this.questionTest.data;
 
-        if (this.material.questions !== null) {
+        if (this.material.testId !== null) {
           this.setform(this.questionTest.data);
         }
       } else {
@@ -552,11 +553,14 @@ export default {
     },
 
     setform(data) {
+      const dateAvailable = data.available.split('-');
+      const dateClosed = data.closed.split('-');
+
       this.form = {
-        available: data.available,
-        closed: data.closed,
+        available: `${dateAvailable[2]}-${dateAvailable[1]}-${dateAvailable[0]}`,
+        closed: `${dateClosed[2]}-${dateClosed[1]}-${dateClosed[0]}`,
         timeLimit: data.timeLimit,
-        questions: data.material.questions,
+        questions: data.questions,
       };
     },
 
@@ -565,34 +569,25 @@ export default {
         this.form.questions.push({
           questionText: '',
           choices: [
-            {
-              choice: '1',
-              answer: '',
-            },
-            {
-              choice: '2',
-              answer: '',
-            },
-            {
-              choice: '3',
-              answer: '',
-            },
-            {
-              choice: '4',
-              answer: '',
-            },
+            '',
+            '',
+            '',
+            '',
           ],
-          correctAnswer: '1',
+          correctAnswer: '0',
         });
       }
     },
 
     save() {
       if (this.validateForm()) {
-        if (this.material.questions !== null) {
+        this.form.batchId = this.paramBatch;
+        this.form.training = this.paramTraining;
+        this.form.materialId = this.paramMaterial;
+
+        if (this.material.testId !== null) {
           this.reqApi(this.putTest);
         } else {
-          this.form.timeLimit = parseInt(this.form.timeLimit, 10);
           this.reqApi(this.postTest);
         }
       }
@@ -613,19 +608,15 @@ export default {
     promiseReqApi(action) {
       return new Promise((resolve) => {
         action({
-          params: {
-            batchId: this.paramBatch,
-            training: this.paramTraining,
-            materialId: this.paramMaterial,
-            test: this.form,
-          },
+          params: this.form,
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
 
     afterReqApi(promise) {
-      if (promise === 200) {
+      if (promise === 202) {
         this.$func.popupSuccessfull('Berhasil simpan data', 5000, this.back);
       } else {
         this.$func.popupLostConnection();
@@ -651,7 +642,7 @@ export default {
 
       for (let i = 0; i < this.form.questions.length; i += 1) {
         for (let j = 0; j < this.form.questions[i].choices.length; j += 1) {
-          if (this.form.questions[i].choices[j].answer.length === 0) {
+          if (this.form.questions[i].choices[j].length === 0) {
             this.$func.popupError('Pilihan soal tidak lengkap!', 0);
             choices -= 1;
             break;
@@ -676,9 +667,10 @@ export default {
     this.$func.userAuth('ROLE_ADMIN');
 
     // get params
-    this.paramBatch = parseInt(this.$route.params.batch, 10);
+    this.paramBatch = this.$route.params.batch;
     this.paramTraining = this.$route.params.training;
-    this.paramMaterial = parseInt(this.$route.params.material, 10);
+    this.paramMaterial = this.$route.params.material;
+    this.materialName = localStorage.getItem('materialName');
 
     // set form array
     this.setFormQuestion();

@@ -221,15 +221,20 @@ describe('Method', () => {
     });
 
     const data = {
-      name: 'a',
-      email: 'b',
-      password: 'c',
+      username: 'a',
+      usermail: 'b',
+      password: 'blibliprobation',
       division: 'd',
     };
     wrapper.vm.setForm(data);
 
     // expect
-    expect(wrapper.vm.form).toStrictEqual(data);
+    expect(wrapper.vm.form).toStrictEqual({
+      name: data.username,
+      email: data.usermail,
+      password: 'blibliprobation',
+      division: data.division,
+    });
   });
   // it set form
 
@@ -318,6 +323,9 @@ describe('Method', () => {
             id: null,
           },
         },
+        $cookies: {
+          get: jest.fn(),
+        },
       },
       localVue,
       store,
@@ -332,10 +340,6 @@ describe('Method', () => {
 
     // expect
     expect(spy).toBeCalled();
-    expect(spy).toBeCalledWith({
-      params: wrapper.vm.form,
-      resolve: expect.any(Function),
-    });
   });
   // it promise req api
 
@@ -362,7 +366,7 @@ describe('Method', () => {
       ],
     });
 
-    wrapper.vm.afterReqApi(200);
+    wrapper.vm.afterReqApi(202);
 
     // expect
     expect(wrapper.vm.$func.popupSuccessfull).toBeCalled();
@@ -518,6 +522,9 @@ describe('Method', () => {
             id: 5,
           },
         },
+        $cookies: {
+          get: jest.fn(),
+        },
       },
       localVue,
       store,
@@ -532,12 +539,6 @@ describe('Method', () => {
 
     // expect
     expect(spy).toBeCalled();
-    expect(spy).toBeCalledWith({
-      params: {
-        id: wrapper.vm.paramId,
-      },
-      resolve: expect.any(Function),
-    });
   });
   // it promise reset password
 
@@ -564,7 +565,7 @@ describe('Method', () => {
       ],
     });
 
-    wrapper.vm.afterResetPassword(200);
+    wrapper.vm.afterResetPassword(202);
 
     // expect
     expect(wrapper.vm.$func.popupSuccessfull).toBeCalled();
