@@ -266,6 +266,9 @@ describe('Method', () => {
         $func: {
           userAuth: jest.fn(),
         },
+        $cookies: {
+          get: jest.fn(),
+        },
       },
       localVue,
       store,
@@ -280,10 +283,6 @@ describe('Method', () => {
 
     // expect
     expect(spy).toBeCalled();
-    expect(spy).toBeCalledWith({
-      params: wrapper.vm.form,
-      resolve: expect.any(Function),
-    });
   });
   // it promise send notif
 

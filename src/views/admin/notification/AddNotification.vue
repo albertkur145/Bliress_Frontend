@@ -17,9 +17,9 @@
           <legend>Ditujukan ke batch</legend>
           <select class="input-text" v-model="form.batchId">
             <option value="" disabled>Pilih batch</option>
-            <option v-for="(value) in batchList.data"
-            :key="value.id"
-            :value="value.id">{{ value.batch }} - {{ value.year }}
+            <option v-for="(value) in batchList.data.batchList"
+            :key="value.batchId"
+            :value="value.batchId">{{ value.batchName }}
             </option>
           </select>
         </fieldset>
@@ -337,6 +337,7 @@ export default {
       return new Promise((resolve) => {
         this.getBatch({
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -384,6 +385,7 @@ export default {
         this.postNotification({
           params: this.form,
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },

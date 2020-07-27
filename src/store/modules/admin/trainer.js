@@ -38,6 +38,7 @@ const actions = {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${payload.token}`,
       },
+      data: {},
     })
       .then((res) => {
         commit('setTrainers', res.data);
@@ -58,6 +59,7 @@ const actions = {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${payload.token}`,
       },
+      data: {},
     })
       .then((res) => {
         commit('setTrainer', res.data);
@@ -118,6 +120,7 @@ const actions = {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${payload.token}`,
       },
+      data: {},
     })
       .then((res) => {
         console.log(commit);
@@ -132,12 +135,13 @@ const actions = {
     return axios({
       method: 'put',
       url: `${API}/admin/trainer/reset`,
-      data: payload.params,
+      params: payload.params,
       responseType: 'json',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${payload.token}`,
       },
+      data: {},
     })
       .then((res) => {
         console.log(commit);

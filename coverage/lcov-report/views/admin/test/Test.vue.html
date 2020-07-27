@@ -24,7 +24,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>33/33</span>
+                <span class='fraction'>34/34</span>
             </div>
         
             
@@ -45,7 +45,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>33/33</span>
+                <span class='fraction'>34/34</span>
             </div>
         
             
@@ -435,7 +435,61 @@
 <a name='L377'></a><a href='#L377'>377</a>
 <a name='L378'></a><a href='#L378'>378</a>
 <a name='L379'></a><a href='#L379'>379</a>
-<a name='L380'></a><a href='#L380'>380</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L380'></a><a href='#L380'>380</a>
+<a name='L381'></a><a href='#L381'>381</a>
+<a name='L382'></a><a href='#L382'>382</a>
+<a name='L383'></a><a href='#L383'>383</a>
+<a name='L384'></a><a href='#L384'>384</a>
+<a name='L385'></a><a href='#L385'>385</a>
+<a name='L386'></a><a href='#L386'>386</a>
+<a name='L387'></a><a href='#L387'>387</a>
+<a name='L388'></a><a href='#L388'>388</a>
+<a name='L389'></a><a href='#L389'>389</a>
+<a name='L390'></a><a href='#L390'>390</a>
+<a name='L391'></a><a href='#L391'>391</a>
+<a name='L392'></a><a href='#L392'>392</a>
+<a name='L393'></a><a href='#L393'>393</a>
+<a name='L394'></a><a href='#L394'>394</a>
+<a name='L395'></a><a href='#L395'>395</a>
+<a name='L396'></a><a href='#L396'>396</a>
+<a name='L397'></a><a href='#L397'>397</a>
+<a name='L398'></a><a href='#L398'>398</a>
+<a name='L399'></a><a href='#L399'>399</a>
+<a name='L400'></a><a href='#L400'>400</a>
+<a name='L401'></a><a href='#L401'>401</a>
+<a name='L402'></a><a href='#L402'>402</a>
+<a name='L403'></a><a href='#L403'>403</a>
+<a name='L404'></a><a href='#L404'>404</a>
+<a name='L405'></a><a href='#L405'>405</a>
+<a name='L406'></a><a href='#L406'>406</a>
+<a name='L407'></a><a href='#L407'>407</a>
+<a name='L408'></a><a href='#L408'>408</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -683,6 +737,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -730,6 +785,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -826,9 +882,9 @@
     &lt;div class="content" v-if="apiReady"&gt;
 &nbsp;
       &lt;!-- batch --&gt;
-      &lt;div class="batch-list"&gt;
+      &lt;div class="batch-list" v-if="batchs.length &gt; 0"&gt;
         &lt;div class="batch"
-        v-for="(value) in batchList.data.batchList"
+        v-for="(value) in batchs"
         :key="value.batchId"&gt;
           &lt;div class="general" @click="getAllTraining(value.batchId)"&gt;
             &lt;div class="txt"&gt;{{ value.batchName }}&lt;/div&gt;
@@ -838,6 +894,9 @@
       &lt;/div&gt;
       &lt;!-- batch --&gt;
 &nbsp;
+      &lt;div v-else style="padding: 1rem"&gt;
+        &lt;div class="empty-data"&gt;Belum ada batch &lt;font-awesome-icon class="warning-icon" icon="exclamation"&gt;&lt;/font-awesome-icon&gt;&lt;/div&gt;
+      &lt;/div&gt;
     &lt;/div&gt;
     &lt;!-- end content --&gt;
 &nbsp;
@@ -937,6 +996,19 @@
           }
         }
       }
+&nbsp;
+      .empty-data {
+        border: 0.0625rem dashed #EA2027;
+        color: #EA2027;
+        border-radius: 0.25rem;
+        text-align: center;
+        padding: 0.875rem;
+        font-size: 0.875em;
+&nbsp;
+        .warning-icon {
+          margin-left: 0.25rem;
+        }
+      }
     }
 &nbsp;
     .display-flex {
@@ -987,6 +1059,11 @@
               }
             }
           }
+        }
+&nbsp;
+        .empty-data {
+          padding: 0.9375rem;
+          font-size: 0.9375em;
         }
       }
     }
@@ -1040,6 +1117,11 @@
             }
           }
         }
+&nbsp;
+        .empty-data {
+          padding: 1rem;
+          font-size: 1em;
+        }
       }
     }
   }
@@ -1064,6 +1146,7 @@ export default {
     return {
       animationLoaderDisplay: false,
       apiReady: false,
+      batchs: [],
     };
   },
 &nbsp;
@@ -1110,6 +1193,7 @@ export default {
     dataReady(promise) {
       if (promise === 200) {
         this.apiReady = true;
+        this.batchs = this.batchList.data.batchList;
       } else {
         this.$func.popupLostConnection();
       }
@@ -1200,7 +1284,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sun Jul 26 2020 23:39:50 GMT+0700 (GMT+07:00)
+                at Mon Jul 27 2020 17:56:46 GMT+0700 (GMT+07:00)
             </div>
         </div>
         <script src="..\..\..\prettify.js"></script>

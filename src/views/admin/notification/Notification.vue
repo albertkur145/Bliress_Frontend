@@ -14,8 +14,8 @@
     <div class="content" v-if="apiReady">
 
       <!-- list of notification -->
-      <div class="notification-list">
-        <div class="notification" v-for="(value) in notificationList.data" :key="value.id">
+      <div class="notification-list" v-if="notifications.length > 0">
+        <div class="notification" v-for="(value) in notifications" :key="value.id">
           <div class="title">{{ value.title }}</div>
           <div class="message">{{ value.message }}</div>
           <div class="batch">Batch - {{ value.batch }}</div>
@@ -24,6 +24,9 @@
       </div>
       <!-- list of notification -->
 
+      <div v-else style="padding: 1.25rem">
+        <div class="empty-data">Belum ada notifikasi yang terkirim <font-awesome-icon class="warning-icon" icon="exclamation"></font-awesome-icon></div>
+      </div>
     </div>
     <!-- end content -->
 
@@ -104,6 +107,19 @@
           }
         }
       }
+
+      .empty-data {
+        border: 0.0625rem dashed #EA2027;
+        color: #EA2027;
+        border-radius: 0.25rem;
+        text-align: center;
+        padding: 0.875rem;
+        font-size: 0.875em;
+
+        .warning-icon {
+          margin-left: 0.25rem;
+        }
+      }
     }
 
     .display-flex {
@@ -157,6 +173,11 @@
             }
           }
         }
+
+        .empty-data {
+          padding: 0.9375rem;
+          font-size: 0.9375em;
+        }
       }
     }
   }
@@ -209,6 +230,11 @@
             }
           }
         }
+
+        .empty-data {
+          padding: 1rem;
+          font-size: 1em;
+        }
       }
     }
   }
@@ -233,6 +259,7 @@ export default {
     return {
       animationLoaderDisplay: false,
       apiReady: false,
+      notifications: [],
     };
   },
 
@@ -263,6 +290,7 @@ export default {
       return new Promise((resolve) => {
         this.getNotifications({
           resolve,
+          token: this.$cookies.get('token'),
         });
       });
     },
@@ -270,6 +298,7 @@ export default {
     dataReady(promise) {
       if (promise === 200) {
         this.apiReady = true;
+        this.notifications = this.notificationList.data.notificationList;
       } else {
         this.$func.popupLostConnection();
       }

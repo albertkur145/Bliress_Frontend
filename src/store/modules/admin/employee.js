@@ -48,6 +48,7 @@ const actions = {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${payload.token}`,
       },
+      data: {},
     })
       .then((res) => {
         commit('setEmployeesBatch', res.data);
@@ -67,6 +68,7 @@ const actions = {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${payload.token}`,
       },
+      data: {},
     })
       .then((res) => {
         commit('setEmployees', res.data);
@@ -87,6 +89,7 @@ const actions = {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${payload.token}`,
       },
+      data: {},
     })
       .then((res) => {
         commit('setEmployee', res.data);
@@ -121,12 +124,13 @@ const actions = {
     return axios({
       method: 'put',
       url: `${API}/admin/employee`,
-      data: payload.params,
+      params: payload.params,
       responseType: 'json',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${payload.token}`,
       },
+      data: {},
     })
       .then((res) => {
         console.log(commit);
@@ -147,6 +151,7 @@ const actions = {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${payload.token}`,
       },
+      data: {},
     })
       .then((res) => {
         console.log(commit);

@@ -66,7 +66,9 @@ describe('Method', () => {
 
     getters = {
       notificationList: jest.fn().mockReturnValue({
-        data: {},
+        data: {
+          notificationList: [],
+        },
       }),
     };
 

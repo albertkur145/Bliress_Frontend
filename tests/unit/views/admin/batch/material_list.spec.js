@@ -73,7 +73,9 @@ describe('Method', () => {
 
     getters = {
       materialList: jest.fn().mockReturnValue({
-        data: {},
+        data: {
+          materialList: [],
+        },
       }),
     };
 
@@ -275,7 +277,7 @@ describe('Method', () => {
       mocks: {
         $func: {
           userAuth: jest.fn(),
-          popupSuccessfull: jest.fn(),
+          popupSuccess: jest.fn(),
           popupLostConnection: jest.fn(),
         },
         $route: {
@@ -296,7 +298,7 @@ describe('Method', () => {
     wrapper.vm.afterDeleteData(200);
 
     // expect
-    expect(wrapper.vm.$func.popupSuccessfull).toBeCalled();
+    expect(wrapper.vm.$func.popupSuccess).toBeCalled();
 
     wrapper.vm.afterDeleteData(404);
 

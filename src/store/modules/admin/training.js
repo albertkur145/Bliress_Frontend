@@ -48,6 +48,7 @@ const actions = {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${payload.token}`,
       },
+      data: {},
     })
       .then((res) => {
         commit('setTrainings', res.data);
@@ -68,6 +69,7 @@ const actions = {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${payload.token}`,
       },
+      data: {},
     })
       .then((res) => {
         commit('setTrainingBy', res.data);
@@ -128,6 +130,7 @@ const actions = {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${payload.token}`,
       },
+      data: {},
     })
       .then((res) => {
         console.log(commit);
@@ -148,6 +151,7 @@ const actions = {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${payload.token}`,
       },
+      data: {},
     })
       .then((res) => {
         commit('setAttendance', res.data);

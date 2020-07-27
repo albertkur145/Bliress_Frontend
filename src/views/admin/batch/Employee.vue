@@ -33,11 +33,17 @@
             <!-- <th></th> -->
           </thead>
 
-          <tbody>
+          <tbody v-if="employee.length > 0">
             <tr v-for="(value) in employee" :key="value.userId">
               <td>{{ value.username }}</td>
               <td>{{ value.division }}</td>
               <!-- <td><font-awesome-icon icon="times" class="remove-icon"></font-awesome-icon></td> -->
+            </tr>
+          </tbody>
+
+          <tbody v-else>
+            <tr>
+              <td colspan="2"><div class="empty-data">Belum ada pegawai <font-awesome-icon class="warning-icon" icon="exclamation"></font-awesome-icon></div></td>
             </tr>
           </tbody>
         </table>
@@ -141,6 +147,19 @@
               color: #D63031;
             }
           }
+
+          .empty-data {
+            border: 0.0625rem dashed #EA2027;
+            color: #EA2027;
+            border-radius: 0.25rem;
+            text-align: center;
+            padding: 0.875rem;
+            font-size: 0.875em;
+
+            .warning-icon {
+              margin-left: 0.25rem;
+            }
+          }
         }
       }
     }
@@ -198,6 +217,11 @@
             .remove-icon {
               font-size: 1.0625em;
             }
+
+            .empty-data {
+              padding: 0.9375rem;
+              font-size: 0.9375em;
+            }
           }
         }
       }
@@ -253,6 +277,11 @@
 
             .remove-icon {
               font-size: 1.125em;
+            }
+
+            .empty-data {
+              padding: 1rem;
+              font-size: 1em;
             }
           }
         }

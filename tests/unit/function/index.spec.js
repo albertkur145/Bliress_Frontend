@@ -35,6 +35,18 @@ describe('Method', () => {
   });
   // it user auth
 
+  // it popupsuccess
+  it('Popup successfull', async () => {
+    const spySwal = jest.spyOn(swal, 'fire').mockImplementation(() => {
+      Promise.resolve();
+    });;
+    await Func.popupSuccess('Sukses', 2000);
+
+    // expect
+    expect(spySwal).toBeCalled();
+  });
+  // it popupsuccess
+
   // it popupsuccessfull
   it('Popup successfull', async () => {
     const spySwal = jest.spyOn(swal, 'fire').mockImplementation(() => {

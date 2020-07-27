@@ -22,13 +22,15 @@
           </router-link>
         </div>
 
-        <div class="list">
+        <div class="list" v-if="filteredTraining.length > 0">
           <div class="train" v-for="(value) in filteredTraining" :key="value.id">
             <p class="title">Training {{ value.stage }}</p>
             <p class="date">{{ value.date }}</p>
             <p class="time">{{ value.startedAt }} - {{ value.endedAt }} WIB</p>
           </div>
         </div>
+
+        <div class="empty-data" v-else>Belum ada training <font-awesome-icon class="warning-icon" icon="exclamation"></font-awesome-icon></div>
       </div>
       <!-- training list -->
 
@@ -41,7 +43,7 @@
           </router-link>
         </div>
 
-        <div class="table">
+        <div class="table" v-if="filteredEmployee.length > 0">
           <table>
             <thead>
               <th>Nama</th>
@@ -56,6 +58,8 @@
             </tbody>
           </table>
         </div>
+
+        <div class="empty-data" v-else>Belum ada pegawai <font-awesome-icon class="warning-icon" icon="exclamation"></font-awesome-icon></div>
       </div>
       <!-- employee table -->
 
@@ -214,6 +218,20 @@
           }
         }
       }
+
+      .empty-data {
+        border: 0.0625rem dashed #EA2027;
+        color: #EA2027;
+        border-radius: 0.25rem;
+        text-align: center;
+        margin-top: 0.875rem;
+        padding: 0.875rem;
+        font-size: 0.875em;
+
+        .warning-icon {
+          margin-left: 0.25rem;
+        }
+      }
     }
 
     .display-flex {
@@ -309,6 +327,11 @@
             }
           }
         }
+
+        .empty-data {
+          padding: 0.9375rem;
+          font-size: 0.9375em;
+        }
       }
     }
   }
@@ -402,6 +425,11 @@
               }
             }
           }
+        }
+
+        .empty-data {
+          padding: 1rem;
+          font-size: 1em;
         }
       }
     }

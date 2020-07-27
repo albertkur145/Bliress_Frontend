@@ -507,7 +507,7 @@ export default {
       if (promise === 202) {
         this.$func.popupSuccessfull('Berhasil simpan data', 5000, this.back);
       } else {
-        this.$func.popupLostConnection();
+        this.$func.popupError('Training sudah ada!', 5000);
       }
     },
 

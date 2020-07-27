@@ -10,18 +10,20 @@
     <!-- content -->
     <div class="content" v-if="apiReady">
       <!-- list of batch -->
-      <div class="batch-list">
-        <router-link v-for="(value) in batchList.data.batchList" :key="value.id"
+      <div class="batch-list" v-if="batchs.length > 0">
+        <router-link v-for="(value) in batchs" :key="value.id"
         :to="{ name: 'AdminDetailBatch', params: { batch: value.batchId } }"
         class="batch">
           <div>
-            <div class="txt">{{ value.batchName.split(' - ')[0] }}</div>
+            <div class="txt">{{ value.batchId.split('-')[0] }}</div>
             <div class="year">{{ value.year }}</div>
           </div>
           <font-awesome-icon icon="arrow-right" class="right-icon"></font-awesome-icon>
         </router-link>
       </div>
       <!-- list of batch -->
+
+      <div class="empty-data" v-else>Belum ada batch <font-awesome-icon class="warning-icon" icon="exclamation"></font-awesome-icon></div>
     </div>
     <!-- end content -->
 
@@ -108,6 +110,19 @@
           }
         }
       }
+
+      .empty-data {
+        border: 0.0625rem dashed #EA2027;
+        color: #EA2027;
+        border-radius: 0.25rem;
+        text-align: center;
+        padding: 0.875rem;
+        font-size: 0.875em;
+
+        .warning-icon {
+          margin-left: 0.25rem;
+        }
+      }
     }
 
     .display-flex {
@@ -156,6 +171,11 @@
             }
           }
         }
+
+        .empty-data {
+          padding: 0.9375rem;
+          font-size: 0.9375em;
+        }
       }
     }
   }
@@ -203,6 +223,11 @@
             }
           }
         }
+
+        .empty-data {
+          padding: 1rem;
+          font-size: 1em;
+        }
       }
     }
   }
@@ -226,6 +251,7 @@ export default {
     return {
       animationLoaderDisplay: false,
       apiReady: false,
+      batchs: [],
     };
   },
 
@@ -265,6 +291,7 @@ export default {
     dataReady(promise) {
       if (promise === 200) {
         this.apiReady = true;
+        this.batchs = this.batchList.data.batchList;
       } else {
         this.$func.popupLostConnection();
       }
@@ -340,9 +367,10 @@ export default {
 
     afterAddBatch(promise) {
       if (promise === 202) {
-        this.$func.popupSuccessfull('Berhasil tambah batch baru', 5000, { name: 'AdminBatch' });
+        this.getAllBatch();
+        this.$func.popupSuccess('Berhasil tambah batch baru', 5000);
       } else {
-        this.$func.popupLostConnection();
+        this.$func.popupError('Batch sudah ada!', 5000);
       }
     },
   },

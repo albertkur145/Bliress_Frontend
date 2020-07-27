@@ -35,7 +35,7 @@
             <th></th>
           </thead>
 
-          <tbody>
+          <tbody v-if="filteredEmployees.length > 0">
             <tr v-for="(value) in filteredEmployees" :key="value.userId">
               <td>{{ value.username }}</td>
               <td>{{ value.division }}</td>
@@ -47,6 +47,12 @@
                   @click="confirmDelete(value.userId)"></font-awesome-icon>
                 </div>
               </td>
+            </tr>
+          </tbody>
+
+          <tbody v-else>
+            <tr>
+              <td colspan="3"><div class="empty-data">Pegawai tidak ditemukan <font-awesome-icon class="warning-icon" icon="exclamation"></font-awesome-icon></div></td>
             </tr>
           </tbody>
         </table>
@@ -158,6 +164,19 @@
               font-size: 1em;
             }
           }
+
+          .empty-data {
+            border: 0.0625rem dashed #EA2027;
+            color: #EA2027;
+            border-radius: 0.25rem;
+            text-align: center;
+            padding: 0.875rem;
+            font-size: 0.875em;
+
+            .warning-icon {
+              margin-left: 0.25rem;
+            }
+          }
         }
       }
     }
@@ -224,6 +243,11 @@
                 font-size: 1.0625em;
               }
             }
+
+            .empty-data {
+              padding: 0.9375rem;
+              font-size: 0.9375em;
+            }
           }
         }
       }
@@ -288,6 +312,11 @@
               .remove-icon {
                 font-size: 1.25em;
               }
+            }
+
+            .empty-data {
+              padding: 1rem;
+              font-size: 1em;
             }
           }
         }
@@ -388,7 +417,8 @@ export default {
 
     afterDelete(promise) {
       if (promise === 200) {
-        this.$func.popupSuccessfull('Berhasil hapus data', 5000, null);
+        this.getAllEmployee();
+        this.$func.popupSuccess('Berhasil hapus data', 5000);
       } else {
         this.$func.popupLostConnection();
       }

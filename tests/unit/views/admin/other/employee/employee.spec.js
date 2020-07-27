@@ -68,9 +68,7 @@ describe('Method', () => {
     getters = {
       employeeList: jest.fn().mockReturnValue({
         data: {
-          employeeList: {
-            filter: jest.fn(),
-          },
+          employeeList: [],
         },
       }),
     };
@@ -232,7 +230,7 @@ describe('Method', () => {
       mocks: {
         $func: {
           userAuth: jest.fn(),
-          popupSuccessfull: jest.fn(),
+          popupSuccess: jest.fn(),
           popupLostConnection: jest.fn(),
         },
       },
@@ -247,8 +245,7 @@ describe('Method', () => {
     wrapper.vm.afterDelete(200);
 
     // expect
-    expect(wrapper.vm.$func.popupSuccessfull).toBeCalled();
-    expect(wrapper.vm.$func.popupSuccessfull).toBeCalledWith('Berhasil hapus data', 5000, null);
+    expect(wrapper.vm.$func.popupSuccess).toBeCalled();
 
     wrapper.vm.afterDelete(404);
 

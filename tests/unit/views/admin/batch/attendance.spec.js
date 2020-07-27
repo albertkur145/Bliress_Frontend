@@ -72,7 +72,9 @@ describe('Method', () => {
 
     getters = {
       attendanceList: jest.fn().mockReturnValue({
-        data: {},
+        data: {
+          employeeList: [],
+        },
       }),
     };
 

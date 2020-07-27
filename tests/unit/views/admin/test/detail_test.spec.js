@@ -73,8 +73,7 @@ describe('Method', () => {
     getters = {
       materialTestList: jest.fn().mockReturnValue({
         data: {
-          batch: {},
-          material: {},
+          materialList: [],
         },
       }),
     };

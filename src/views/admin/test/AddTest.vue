@@ -585,6 +585,12 @@ export default {
         this.form.training = this.paramTraining;
         this.form.materialId = this.paramMaterial;
 
+        const dateAvailable = this.form.available.split('-');
+        this.form.available = `${dateAvailable[2]}-${dateAvailable[1]}-${dateAvailable[0]}`;
+
+        const dateClosed = this.form.closed.split('-');
+        this.form.closed = `${dateClosed[2]}-${dateClosed[1]}-${dateClosed[0]}`;
+
         if (this.material.testId !== null) {
           this.reqApi(this.putTest);
         } else {

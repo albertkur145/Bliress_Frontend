@@ -396,7 +396,7 @@ describe('Method', () => {
         $func: {
           userAuth: jest.fn(),
           popupSuccessfull: jest.fn(),
-          popupLostConnection: jest.fn(),
+          popupError: jest.fn(),
         },
         $route: {
           params: {
@@ -421,7 +421,7 @@ describe('Method', () => {
     wrapper.vm.afterReqApi(404);
 
     // expect
-    expect(wrapper.vm.$func.popupLostConnection).toBeCalled();
+    expect(wrapper.vm.$func.popupError).toBeCalled();
   });
   // it after req api
 

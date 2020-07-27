@@ -30,14 +30,20 @@
             <th>Status</th>
           </thead>
 
-          <tbody>
-            <tr v-for="(value) in attendanceList.data.employeeList" :key="value.userId">
+          <tbody v-if="employees.length > 0">
+            <tr v-for="(value) in employees" :key="value.userId">
               <td>{{ value.username }}</td>
               <td>{{ value.division }}</td>
               <td>
                 <font-awesome-icon v-if="value.status" icon="check" class="check-icon"></font-awesome-icon>
                 <font-awesome-icon v-else icon="times" class="remove-icon"></font-awesome-icon>
               </td>
+            </tr>
+          </tbody>
+
+          <tbody v-else>
+            <tr>
+              <td colspan="3"><div class="empty-data">Belum ada pegawai yang terdaftar <font-awesome-icon class="warning-icon" icon="exclamation"></font-awesome-icon></div></td>
             </tr>
           </tbody>
         </table>
@@ -135,6 +141,19 @@
             color: #20BF6B;
             font-size: 1em;
           }
+
+          .empty-data {
+            border: 0.0625rem dashed #EA2027;
+            color: #EA2027;
+            border-radius: 0.25rem;
+            text-align: center;
+            padding: 0.875rem;
+            font-size: 0.875em;
+
+            .warning-icon {
+              margin-left: 0.25rem;
+            }
+          }
         }
       }
     }
@@ -189,6 +208,11 @@
             .check-icon {
               font-size: 1.0625em;
             }
+
+            .empty-data {
+              padding: 0.9375rem;
+              font-size: 0.9375em;
+            }
           }
         }
       }
@@ -242,6 +266,11 @@
             .check-icon {
               font-size: 1.125em;
             }
+
+            .empty-data {
+              padding: 1rem;
+              font-size: 1em;
+            }
           }
         }
       }
@@ -268,6 +297,7 @@ export default {
       paramTraining: '',
       apiReady: false,
       animationLoaderDisplay: false,
+      employees: [],
     };
   },
 
@@ -320,6 +350,7 @@ export default {
     dataReady(promise) {
       if (promise === 200) {
         this.apiReady = true;
+        this.employees = this.attendanceList.data.employeeList;
       } else {
         this.$func.popupLostConnection();
       }

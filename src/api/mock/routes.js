@@ -1,4 +1,4 @@
-const API = 'http://localhost:8080/api';
+const API = 'http://192.168.18.6:8081/api';
 
 export default [
   {
@@ -1419,22 +1419,24 @@ export default [
     response: {
       code: 200,
       status: 'OK',
-      data: [
-        {
-          id: 1,
-          title: 'PENGUMUMAN',
-          batch: 'Juni 2020',
-          message: 'Dalam mengikuti training 2, diharapkan setiap peserta training membawa kebutuhan masing-masing seperti alat tulis, laptop, ataupun peralatan mandi lainnya. Terimakasih.',
-          date: '12/07/2020, 09.45',
-        },
-        {
-          id: 2,
-          title: 'PENGUMUMAN',
-          batch: 'Januari 2021',
-          message: 'Dalam mengikuti training 4, diharapkan setiap peserta training pas foto 3x4 sebanyak 2 lembar dan 6x4 sebanyak 4 lembar. Terimakasih.',
-          date: '24/08/2021, 10.20',
-        },
-      ],
+      data: {
+        notificationList: [
+          {
+            id: '1',
+            title: 'PENGUMUMAN',
+            batch: 'Juni 2020',
+            message: 'Dalam mengikuti training 2, diharapkan setiap peserta training membawa kebutuhan masing-masing seperti alat tulis, laptop, ataupun peralatan mandi lainnya. Terimakasih.',
+            date: '12/07/2020, 09.45',
+          },
+          {
+            id: '2',
+            title: 'PENGUMUMAN',
+            batch: 'Januari 2021',
+            message: 'Dalam mengikuti training 4, diharapkan setiap peserta training pas foto 3x4 sebanyak 2 lembar dan 6x4 sebanyak 4 lembar. Terimakasih.',
+            date: '24/08/2021, 10.20',
+          },
+        ],
+      },
       paging: null,
       errors: null,
     },
@@ -1443,7 +1445,7 @@ export default [
     url: `${API}/admin/notification`,
     method: 'POST',
     params: {
-      batchId: 202006,
+      batchId: 'JAN-2020',
       title: 'PENGUMUMAN',
       message: 'Dalam mengikuti training 2, diharapkan setiap peserta training membawa kebutuhan masing-masing seperti alat tulis, laptop, ataupun peralatan mandi lainnya. Terimakasih.',
     },
@@ -1564,9 +1566,9 @@ export default [
         usermail: 'albertkur@gmail.com',
         phoneNumber: '081392290882',
         division: 'Software Engineer',
-        birthdate: '19-11-2020',
-        gender: 'Pria',
-        batchId: 'JAN-2020',
+        birthDate: '19-11-2020',
+        gender: 'PRIA',
+        batch: 'JAN-2020',
       },
       paging: null,
       errors: null,

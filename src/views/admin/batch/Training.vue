@@ -24,7 +24,7 @@
       <!-- title -->
 
       <!-- list of training -->
-      <div class="training-list">
+      <div class="training-list" v-if="training.length > 0">
         <div v-for="(value) in training" :key="value.trainingId">
           <div class="training">
             <div class="num">
@@ -53,6 +53,10 @@
 
           <div class="line"><hr></div>
         </div>
+      </div>
+
+      <div v-else style="padding: 0 0.75rem;">
+        <div class="empty-data">Belum ada training <font-awesome-icon class="warning-icon" icon="exclamation"></font-awesome-icon></div>
       </div>
       <!-- list of training -->
 
@@ -268,6 +272,20 @@
           }
         }
       }
+
+      .empty-data {
+        border: 0.0625rem dashed #EA2027;
+        color: #EA2027;
+        border-radius: 0.25rem;
+        text-align: center;
+        margin-top: 0.75rem;
+        padding: 0.875rem;
+        font-size: 0.875em;
+
+        .warning-icon {
+          margin-left: 0.25rem;
+        }
+      }
     }
 
     .display-flex {
@@ -380,6 +398,11 @@
             padding: 0 1.25rem;
           }
         }
+
+        .empty-data {
+          padding: 0.9375rem;
+          font-size: 0.9375em;
+        }
       }
     }
   }
@@ -491,6 +514,11 @@
             padding: 0 1.5rem;
           }
         }
+
+        .empty-data {
+          padding: 1rem;
+          font-size: 1em;
+        }
       }
     }
   }
@@ -601,7 +629,8 @@ export default {
 
     afterDeleteData(promise) {
       if (promise === 200) {
-        this.$func.popupSuccessfull('Berhasil hapus data', 5000, null);
+        this.getAllTraining();
+        this.$func.popupSuccess('Berhasil hapus data');
       } else {
         this.$func.popupLostConnection();
       }

@@ -21,7 +21,7 @@
       <!-- top -->
 
       <!-- list of material -->
-      <div class="materials">
+      <div class="materials" v-if="material.length > 0">
         <div class="material" v-for="(value) in material" :key="value.materialId">
           <div class="information">
             <div class="left">
@@ -45,6 +45,10 @@
         </div>
       </div>
       <!-- list of material -->
+
+      <div v-else style="padding: 1rem">
+        <div class="empty-data">Belum ada materi <font-awesome-icon class="warning-icon" icon="exclamation"></font-awesome-icon></div>
+      </div>
 
     </div>
     <!-- end content -->
@@ -200,6 +204,19 @@
           }
         }
       }
+
+      .empty-data {
+        border: 0.0625rem dashed #EA2027;
+        color: #EA2027;
+        border-radius: 0.25rem;
+        text-align: center;
+        padding: 0.875rem;
+        font-size: 0.875em;
+
+        .warning-icon {
+          margin-left: 0.25rem;
+        }
+      }
     }
 
     .display-flex {
@@ -287,6 +304,11 @@
             }
           }
         }
+
+        .empty-data {
+          padding: 0.9375rem;
+          font-size: 0.9375em;
+        }
       }
     }
   }
@@ -372,6 +394,11 @@
               margin: 1.5rem 0;
             }
           }
+        }
+
+        .empty-data {
+          padding: 1rem;
+          font-size: 1em;
         }
       }
     }

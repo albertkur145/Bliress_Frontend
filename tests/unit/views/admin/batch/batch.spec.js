@@ -67,7 +67,9 @@ describe('Method', () => {
 
     getters = {
       batchList: jest.fn().mockReturnValue({
-        data: {},
+        data: {
+          batchList: [],
+        },
       }),
     };
 
@@ -262,8 +264,8 @@ describe('Method', () => {
       mocks: {
         $func: {
           userAuth: jest.fn(),
-          popupSuccessfull: jest.fn(),
-          popupLostConnection: jest.fn(),
+          popupSuccess: jest.fn(),
+          popupError: jest.fn(),
         },
       },
       localVue,
@@ -277,13 +279,12 @@ describe('Method', () => {
     wrapper.vm.afterAddBatch(202);
 
     // expect
-    expect(wrapper.vm.$func.popupSuccessfull).toBeCalled();
-    expect(wrapper.vm.$func.popupSuccessfull).toBeCalledWith('Berhasil tambah batch baru', 5000, { name: 'AdminBatch' });
+    expect(wrapper.vm.$func.popupSuccess).toBeCalled();
 
     wrapper.vm.afterAddBatch(404);
 
     // expect
-    expect(wrapper.vm.$func.popupLostConnection).toBeCalled();
+    expect(wrapper.vm.$func.popupError).toBeCalled();
   });
   // it after add batch
 });

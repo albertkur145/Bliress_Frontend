@@ -70,8 +70,8 @@
           <fieldset>
             <legend>Jenis kelamin</legend>
             <select class="input-text" v-model="form.gender">
-              <option value="Pria">Pria</option>
-              <option value="Wanita">Wanita</option>
+              <option value="PRIA">Pria</option>
+              <option value="WANITA">Wanita</option>
             </select>
           </fieldset>
         </div>
@@ -79,11 +79,14 @@
         <div class="form-group">
           <fieldset>
             <legend>Batch</legend>
-            <select class="input-text" v-model="form.batchId">
+            <select
+            :class="{ 'fieldset-disabled': inputDisabled }"
+            :disabled="inputDisabled"
+            class="input-text" v-model="form.batchId">
               <option value="" disabled>Pilih batch</option>
               <option v-for="(value) in batchList.data.batchList"
               :key="value.batchId"
-              :value="value.batchId">{{ value.batchName }}
+              :value="value.batchId">{{ value.batchId }}
               </option>
             </select>
           </fieldset>
@@ -491,7 +494,7 @@ export default {
     },
 
     setForm(data) {
-      const date = data.birthdate.split('-');
+      const date = data.birthDate.split('-');
 
       this.form = {
         name: data.username,
@@ -501,7 +504,7 @@ export default {
         division: data.division,
         birthdate: `${date[2]}-${date[1]}-${date[0]}`,
         gender: data.gender,
-        batchId: data.batchId,
+        batchId: data.batch,
       };
     },
 

@@ -27,10 +27,16 @@
               <th></th>
             </thead>
 
-            <tbody>
-              <tr v-for="(value) in materialList.data.materialList" :key="value.materialId">
+            <tbody v-if="materials.length > 0">
+              <tr v-for="(value) in materials" :key="value.materialId">
                 <td>{{ value.materialName }}</td>
                 <td><font-awesome-icon icon="times" class="times-icon" @click="confirmDelete(value.materialId)"></font-awesome-icon></td>
+              </tr>
+            </tbody>
+
+            <tbody v-else>
+              <tr>
+                <td colspan="2"><div class="empty-data">Belum ada materi <font-awesome-icon class="warning-icon" icon="exclamation"></font-awesome-icon></div></td>
               </tr>
             </tbody>
           </table>
@@ -120,6 +126,19 @@
               color: #E74C3C;
               font-size: 1em;
             }
+
+            .empty-data {
+              border: 0.0625rem dashed #EA2027;
+              color: #EA2027;
+              border-radius: 0.25rem;
+              text-align: center;
+              padding: 0.875rem;
+              font-size: 0.875em;
+
+              .warning-icon {
+                margin-left: 0.25rem;
+              }
+            }
           }
         }
       }
@@ -173,6 +192,11 @@
               .times-icon {
                 font-size: 1.0625em;
               }
+
+              .empty-data {
+                padding: 0.9375rem;
+                font-size: 0.9375em;
+              }
             }
           }
         }
@@ -225,6 +249,11 @@
               .times-icon {
                 font-size: 1.125em;
               }
+
+              .empty-data {
+                padding: 1rem;
+                font-size: 1em;
+              }
             }
           }
         }
@@ -252,6 +281,7 @@ export default {
       paramTraining: '',
       animationLoaderDisplay: false,
       apiReady: false,
+      materials: [],
     };
   },
 
@@ -305,6 +335,7 @@ export default {
     dataReady(promise) {
       if (promise === 200) {
         this.apiReady = true;
+        this.materials = this.materialList.data.materialList;
       } else {
         this.$func.popupLostConnection();
       }
@@ -349,7 +380,8 @@ export default {
 
     afterDeleteData(promise) {
       if (promise === 200) {
-        this.$func.popupSuccessfull('Berhasil hapus data', 5000, null);
+        this.getAllMaterial();
+        this.$func.popupSuccess('Berhasil hapus data');
       } else {
         this.$func.popupLostConnection();
       }

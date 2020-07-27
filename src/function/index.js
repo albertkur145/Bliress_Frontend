@@ -24,6 +24,18 @@ export default {
     router.push(route);
   },
 
+  popupSuccess: async (msg, timer) => {
+    await swal.fire({
+      text: msg,
+      icon: 'success',
+      timer,
+      backdrop: false,
+      allowEscapeKey: false,
+      timerProgressBar: true,
+      showCloseButton: true,
+    });
+  },
+
   popupLostConnection: () => {
     swal.fire({
       text: 'Internet kamu sudah hidup?',

@@ -39,6 +39,7 @@ const actions = {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${payload.token}`,
       },
+      data: {},
     })
       .then((res) => {
         commit('setMaterialTest', res.data);
@@ -59,6 +60,7 @@ const actions = {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${payload.token}`,
       },
+      data: {},
     })
       .then((res) => {
         commit('setTest', res.data);

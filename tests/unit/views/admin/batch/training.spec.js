@@ -75,8 +75,7 @@ describe('Method', () => {
     getters = {
       trainingList: jest.fn().mockReturnValue({
         data: {
-          batch: {},
-          training: {},
+          trainingList: [],
         },
       }),
     };
@@ -159,7 +158,6 @@ describe('Method', () => {
 
     // expect
     expect(wrapper.vm.apiReady).toBeTruthy();
-    expect(wrapper.vm.batch).toStrictEqual(wrapper.vm.trainingList.data.trainingList);
 
     wrapper.vm.dataReady(404);
 
@@ -290,7 +288,7 @@ describe('Method', () => {
       mocks: {
         $func: {
           userAuth: jest.fn(),
-          popupSuccessfull: jest.fn(),
+          popupSuccess: jest.fn(),
           popupLostConnection: jest.fn(),
         },
         $route: {
@@ -312,8 +310,7 @@ describe('Method', () => {
     wrapper.vm.afterDeleteData(200);
 
     // expect
-    expect(wrapper.vm.$func.popupSuccessfull).toBeCalled();
-    expect(wrapper.vm.$func.popupSuccessfull).toBeCalledWith('Berhasil hapus data', 5000, null);
+    expect(wrapper.vm.$func.popupSuccess).toBeCalled();
 
     wrapper.vm.afterDeleteData(404);
 
