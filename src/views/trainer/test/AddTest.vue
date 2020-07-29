@@ -484,7 +484,7 @@ export default {
       form: {
         available: '2020-01-01',
         closed: '2020-01-01',
-        timeLimit: 0,
+        timeLimit: '0',
         questions: [],
       },
     };
@@ -592,7 +592,6 @@ export default {
         if (this.material.questions !== null) {
           this.reqApi(this.putTest);
         } else {
-          this.form.timeLimit = parseInt(this.form.timeLimit, 10);
           this.reqApi(this.postTest);
         }
       }

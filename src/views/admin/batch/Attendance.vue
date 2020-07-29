@@ -43,7 +43,7 @@
 
           <tbody v-else>
             <tr>
-              <td colspan="3"><div class="empty-data">Belum ada pegawai yang terdaftar <font-awesome-icon class="warning-icon" icon="exclamation"></font-awesome-icon></div></td>
+              <td colspan="3"><div class="empty-data">Belum ada pegawai yang presensi <font-awesome-icon class="warning-icon" icon="exclamation"></font-awesome-icon></div></td>
             </tr>
           </tbody>
         </table>

@@ -304,7 +304,7 @@ describe('Method', () => {
       ],
     });
 
-    wrapper.vm.afterSendNotif(200);
+    wrapper.vm.afterSendNotif(202);
 
     // expect
     expect(wrapper.vm.$func.popupSuccessfull).toBeCalled();

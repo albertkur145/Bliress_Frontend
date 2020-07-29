@@ -21,7 +21,11 @@
           <div class="choices-list">
             <label class="radio" v-for="(choice, indexJ) in value.choices" :key="indexJ">
               <input type="radio" :value="indexJ" :name="`choice-${indexI}`"><span></span>
-              <div class="answer">{{ choice }}</div>
+              <div class="answer">{{ choice }}
+                <div class="correct-answer" v-if="value.correctAnswer === indexJ">
+                  <font-awesome-icon icon="check"></font-awesome-icon>
+                </div>
+              </div>
             </label>
           </div>
         </div>
@@ -150,6 +154,12 @@
                 margin-left: 0.75rem;
                 line-height: 1.125rem;
                 font-size: 0.875em;
+
+                .correct-answer {
+                  display: inline-block;
+                  margin-left: 0.25rem;
+                  color: #2ECC71;
+                }
               }
             }
           }

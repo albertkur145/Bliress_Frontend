@@ -21,11 +21,11 @@
           </fieldset>
         </div>
 
-        <label for="file-input" class="upload-file">
+        <!-- <label for="file-input" class="upload-file">
           <input type="file" id="file-input" @change="onFileChange">
           <span class="upload-custom">Upload file</span>
           <span class="file-name">{{ fileName }}</span>
-        </label>
+        </label> -->
       </div>
     </div>
     <!-- end content -->
@@ -330,7 +330,7 @@ export default {
     },
 
     validateForm() {
-      if (this.form.name && this.form.file) {
+      if (this.form.name) {
         this.addMaterial();
       } else {
         this.$func.popupError('Form tidak lengkap!', 0);

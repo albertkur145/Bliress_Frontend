@@ -1,4 +1,4 @@
-const API = 'http://192.168.18.6:8081/api';
+const API = 'http://localhost:8081/api';
 
 export default [
   {
@@ -1424,16 +1424,16 @@ export default [
           {
             id: '1',
             title: 'PENGUMUMAN',
-            batch: 'Juni 2020',
+            batch: 'Juni-2020',
             message: 'Dalam mengikuti training 2, diharapkan setiap peserta training membawa kebutuhan masing-masing seperti alat tulis, laptop, ataupun peralatan mandi lainnya. Terimakasih.',
-            date: '12/07/2020, 09.45',
+            createdAt: '12/07/2020, 09.45',
           },
           {
             id: '2',
             title: 'PENGUMUMAN',
-            batch: 'Januari 2021',
+            batch: 'Januari-2021',
             message: 'Dalam mengikuti training 4, diharapkan setiap peserta training pas foto 3x4 sebanyak 2 lembar dan 6x4 sebanyak 4 lembar. Terimakasih.',
-            date: '24/08/2021, 10.20',
+            createdAt: '24/08/2021, 10.20',
           },
         ],
       },
@@ -2207,9 +2207,9 @@ export default [
     method: 'GET',
     params: {
       params: {
-        batchId: 202006,
+        batchId: 'JUN-2020',
         training: '1',
-        materialId: 1,
+        materialId: '1',
       },
     },
     status: 200,
@@ -2219,7 +2219,7 @@ export default [
       data: {
         available: '2020-01-15',
         closed: '2020-01-18',
-        timeLimit: 20,
+        timeLimit: '20',
         material: {
           id: 1,
           name: 'Think Win Win',
@@ -2346,9 +2346,9 @@ export default [
     method: 'GET',
     params: {
       params: {
-        batchId: 202006,
+        batchId: 'JUN-2020',
         training: '1',
-        materialId: 3,
+        materialId: '3',
       },
     },
     status: 200,
@@ -2373,13 +2373,13 @@ export default [
     url: `${API}/trainer/test`,
     method: 'POST',
     params: {
-      batchId: 202006,
+      batchId: 'JUN-2020',
       training: '1',
-      materialId: 3,
+      materialId: '3',
       test: {
         available: '2020-01-15',
         closed: '2020-01-18',
-        timeLimit: 20,
+        timeLimit: '20',
         questions: [
           {
             questionText: 'Semua mahasiswa Perguruan Tinggi memiliki Nomor Induk Mahasiswa. Budi seorang mahasiswa. Jadi,',
@@ -2708,7 +2708,7 @@ export default [
     url: `${API}/trainer/password`,
     method: 'PUT',
     params: {
-      trainerId: 1,
+      trainerId: '1',
       oldPassword: '123',
       currentPassword: '456',
     },

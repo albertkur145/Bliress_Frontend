@@ -391,7 +391,7 @@ export default {
     },
 
     afterSendNotif(promise) {
-      if (promise === 200) {
+      if (promise === 202) {
         this.$func.popupSuccessfull('Berhasil kirim notifikasi', 5000, { name: 'AdminNotification' });
       } else {
         this.$func.popupLostConnection();

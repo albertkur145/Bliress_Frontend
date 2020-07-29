@@ -18,8 +18,8 @@
         <div class="notification" v-for="(value) in notifications" :key="value.id">
           <div class="title">{{ value.title }}</div>
           <div class="message">{{ value.message }}</div>
-          <div class="batch">Batch - {{ value.batch }}</div>
-          <div class="time">{{ value.date }} WIB</div>
+          <div class="batch">Batch - {{ value.batch.split('-')[0] }} {{ value.batch.split('-')[1] }}</div>
+          <!-- <div class="time">{{ value.createdAt.split('T')[0] }}, {{ value.createdAt.split('T')[1].split('.')[0] }} WIB</div> -->
         </div>
       </div>
       <!-- list of notification -->
